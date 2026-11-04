@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Laboratorio de personajes · Puente Grande</title>
+  <style>
+    :root{color-scheme:dark;font:15px/1.5 system-ui,sans-serif;background:#111714;color:#e9eee9;--muted:#a4b2a8;--line:#35483b;--accent:#a6e39a;--orange:#ffae74}
+    *{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,select,input{color:inherit;background:#1b2820;border:1px solid #4b6051;border-radius:6px;padding:8px 10px}button{cursor:pointer}button:hover{border-color:var(--accent)}button:disabled{opacity:.45;cursor:default}a{color:var(--accent)}input[type=checkbox]{accent-color:var(--accent)}input[type=range]{accent-color:var(--accent);padding:0;width:100%}:focus-visible{outline:3px solid var(--orange);outline-offset:3px}[hidden]{display:none!important}
+    main{max-width:1520px;margin:auto;padding:30px 24px 50px}header{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:20px}.eyebrow{font-size:12px;letter-spacing:.15em;font-weight:700;color:var(--accent);text-transform:uppercase}h1{font-size:clamp(25px,3vw,38px);line-height:1.12;margin:9px 0 12px;letter-spacing:-.035em}p{margin:8px 0}.lead{max-width:850px;color:var(--muted)}.meta{font-size:12px;white-space:nowrap;color:var(--muted)}.note{border-left:3px solid var(--orange);padding:10px 14px;background:#2b251d;color:#eed4bb;margin:0 0 20px}.error{border:1px solid #a75c4a;background:#38221f;border-radius:8px;padding:20px}.error code{display:block;overflow:auto;margin-top:10px;color:#fff}
+    .layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:20px;align-items:start}.panel{background:#172019;border:1px solid var(--line);border-radius:10px;padding:18px;min-width:0}h2{font-size:16px;margin:0 0 14px;font-weight:650}h3{font-size:13px;margin:18px 0 8px;color:var(--muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase}.field{display:grid;gap:5px;margin-bottom:13px}.field>span,.label{font-size:12px;color:var(--muted)}select{max-width:100%;width:100%}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.two input{width:100%;min-width:0}.checks{display:flex;gap:10px;flex-wrap:wrap}.checks label{font-size:12px;display:flex;align-items:center;gap:4px}.badge{display:inline-block;font-size:11px;padding:2px 7px;background:#2e4031;color:#c4e8b9;border:1px solid #486447;border-radius:10px}.badge.warn{background:#443121;color:#ffe0b8;border-color:#77553a}.help{font-size:12px;color:var(--muted);margin:8px 0 14px}.inspector{display:grid;gap:18px}.stage{position:relative;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#121714}.stage canvas{display:block;width:100%;height:auto}.stage-head{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px 13px;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted)}.stage-head strong{color:#e9eee9;font-weight:600}.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:8px}.legend span:before{content:"";display:inline-block;width:9px;height:9px;margin-right:5px;background:var(--key);border-radius:2px}.transport{display:grid;grid-template-columns:auto auto auto 1fr auto;align-items:center;gap:8px;margin:14px 0 6px}.transport output{font:12px ui-monospace,monospace;min-width:86px;text-align:right}.transport button{font-size:13px}.time-row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted)}.details{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:7px;overflow:hidden;margin-top:15px}.details div{background:#172019;padding:10px 12px;min-width:0}.details dt{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.details dd{font:12px/1.6 ui-monospace,monospace;margin:3px 0 0;overflow-wrap:anywhere}.atlas-scroll{overflow:auto;max-height:580px;background:#101612;border-radius:6px;border:1px solid var(--line)}#atlas-canvas{display:block;max-width:100%;height:auto;cursor:crosshair}.atlas-caption{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;font-size:12px;color:var(--muted)}.fineprint{font-size:12px;color:var(--muted);margin-top:20px}.manual{border:1px dashed #80603c;border-radius:6px;padding:10px;margin-bottom:13px}.manual p{font-size:12px;color:#eed4bb;margin:0 0 10px}.manual button{font-size:12px;width:100%}#frame-status{color:var(--orange)}kbd{font:11px ui-monospace,monospace;background:#26342a;border:1px solid #4a5c4e;border-radius:3px;padding:1px 4px}
+    @media(max-width:1000px){.layout{grid-template-columns:250px minmax(0,1fr)}main{padding:20px 14px}.panel{padding:13px}.details{grid-template-columns:repeat(2,minmax(0,1fr))}.transport{grid-template-columns:auto auto auto 1fr}.transport output{grid-column:1/-1;text-align:left}.stage-head{flex-wrap:wrap;gap:4px}}
+    @media(max-width:720px){header{display:block}.meta{margin-top:12px}.layout{grid-template-columns:1fr}.controls{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.controls h2,.controls h3,.controls .full{grid-column:1/-1}.controls .checks{align-items:flex-start}.details{grid-template-columns:1fr 1fr}.transport{grid-template-columns:auto auto auto}.transport input{grid-column:1/-1}.transport output{grid-column:auto}.note{font-size:13px}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div><div class="eyebrow">Puente Grande · herramientas de desarrollo</div><h1>Laboratorio de personajes</h1><p class="lead">Inspecciona los atlas, sus cuadros y la posición que aplica el renderer actual. El visor conserva los recursos originales y no cambia la partida.</p></div>
+    <div class="meta" id="summary">Cargando inventario…</div>
+  </header>
+  <p class="note"><strong>La inferencia visual no valida acciones.</strong> Los nombres de animación provienen del catálogo y siguen siendo inferidos. El pivote mostrado reproduce la fórmula del renderer; no acredita un pivote original ni una ventana de impacto del combate.</p>
+  <section id="load-error" class="error" hidden role="alert"><strong>No se pudo abrir el inventario de auditoría.</strong><p id="error-detail"></p><p>Desde la raíz del repositorio, genera los datos y recarga esta página:</p><code>python3 scripts/audit-characters.py</code><p>Este visor se sirve con Vite en <code style="display:inline">/tools/fighter-audit.html</code>.</p></section>
+  <div class="layout" id="workspace" hidden>
+    <aside class="panel controls" aria-label="Selección e inspección">
+      <h2>Selección</h2>
+      <label class="field"><span>Personaje · inventario completo</span><select id="character"></select></label>
+      <label class="field"><span>Atlas</span><select id="atlas"></select></label>
+      <div class="full"><span class="badge" id="roster-status"></span> <span class="badge warn" id="grid-status"></span><p class="help" id="grid-description"></p></div>
+      <div class="manual full" id="manual-grid" hidden><p>Sin cuadrícula establecida. Las dimensiones introducidas aquí son una hipótesis local del visor.</p><div class="two"><label class="field"><span>Ancho de celda</span><input id="manual-width" type="number" min="1" value="160"></label><label class="field"><span>Alto de celda</span><input id="manual-height" type="number" min="1" value="144"></label></div><button id="apply-grid" type="button">Inspeccionar esta hipótesis</button></div>
+      <label class="field full"><span>Secuencia del catálogo</span><select id="action"><option value="">Todos los cuadros · manual</option></select></label>
+      <div class="two full"><label class="field"><span>Fila · desde 0</span><input id="row" type="number" min="0" value="0"></label><label class="field"><span>Columna · desde 0</span><input id="column" type="number" min="0" value="0"></label></div>
+      <h3>Vista del cuadro</h3>
+      <label class="field"><span>Ampliación del renderer</span><select id="zoom"><option value="1">1×</option><option value="1.5" selected>1,5×</option><option value="2">2×</option><option value="2.5">2,5×</option></select></label>
+      <label class="field"><span>Fondo</span><select id="background"><option value="checker">Transparencia</option><option value="dark">Oscuro</option><option value="light">Claro</option></select></label>
+      <div class="checks full"><label><input id="mirror" type="checkbox">Espejo · facing −1</label><label><input id="show-bounds" type="checkbox" checked>Límites alfa</label><label><input id="show-cell" type="checkbox" checked>Celda</label></div>
+      <h3>Reproducción del visor</h3>
+      <label class="field"><span>Cuadros por segundo</span><select id="fps"><option>1</option><option>3</option><option>7</option><option selected>15</option><option>30</option><option>60</option></select></label>
+      <p class="help full">No simula ataques, cancelaciones ni hitboxes. <kbd>←</kbd> <kbd>→</kbd> cambian de cuadro fuera de los campos; <kbd>Espacio</kbd> reproduce o pausa.</p>
+    </aside>
+    <div class="inspector">
+      <section class="panel" aria-label="Cuadro ampliado">
+        <div class="stage"><div class="stage-head"><strong id="frame-title">Cuadro</strong><span id="frame-status" role="status"></span></div><canvas id="frame-canvas" width="1080" height="650" tabindex="0" aria-label="Cuadro ampliado con pivote y línea del suelo"></canvas></div>
+        <div class="legend"><span style="--key:#8cceef">Origen vertical</span><span style="--key:#ffb86d">Pivote según fórmula</span><span style="--key:#b8ef9c">Límites alfa</span><span style="--key:#b9bec8">Límite de celda</span></div>
+        <div class="transport"><button id="previous" type="button" aria-label="Cuadro anterior">←</button><button id="play" type="button" aria-pressed="false">Reproducir</button><button id="next" type="button" aria-label="Cuadro siguiente">→</button><input id="scrub" type="range" min="0" max="0" value="0" aria-label="Cuadro de la secuencia"><output id="frame-counter" for="scrub"></output></div>
+        <div class="time-row"><span id="sequence-description"></span><span id="frame-time"></span></div>
+        <dl class="details"><div><dt>Celda original</dt><dd id="cell-detail"></dd></div><div><dt id="pivot-label">Pivote · px del atlas</dt><dd id="pivot-detail"></dd></div><div><dt>Alfa · x, y, ancho, alto</dt><dd id="bounds-detail"></dd></div><div><dt>Píxeles / huella RGBA</dt><dd id="hash-detail"></dd></div><div><dt id="scale-label">Escala según fórmula</dt><dd id="scale-detail"></dd></div><div><dt>Distancia del alfa al origen</dt><dd id="floor-detail"></dd></div></dl>
+      </section>
+      <section class="panel" aria-label="Atlas completo">
+        <h2>Mapa del atlas</h2><p class="atlas-caption"><span id="atlas-caption"></span><span>Haz clic en una celda para inspeccionarla.</span></p><div class="atlas-scroll"><canvas id="atlas-canvas" aria-label="Atlas con filas y columnas; selección con clic"></canvas></div><p class="help" id="atlas-path"></p>
+      </section>
+    </div>
+  </div>
+  <p class="fineprint">Las coordenadas de fila y columna empiezan en cero. Los límites alfa describen píxeles visibles, no hitboxes ni apoyo anatómico. Una animación de salto o ataque puede alejarse del suelo de forma intencional. La reproducción se reinicia en el visor; el juego actual usa un reloj global y se audita por separado.</p>
+</main>
+<script type="module">
+const $ = id => document.getElementById(id);
+const controls = Object.fromEntries(['character','atlas','action','row','column','zoom','background','mirror','show-bounds','show-cell','fps','scrub'].map(id=>[id,$(id)]));
+const state = {characters:[], character:null, atlas:null, image:null, sequence:[], index:0, playing:false, lastTick:0, imageRequest:0, localGrid:false};
+const clamp = (value,min,max)=>Math.max(min,Math.min(max,value));
+const number = value=>Number.isFinite(Number(value))?Number(value):0;
+const rounded = value=>Number(value.toFixed(2));
+const normalizedPath = value=>String(value||'').replace(/^\/?public\//,'').replace(/^\//,'');
+const assetSource = path=>'/' + normalizedPath(path);
+const currentCell = ()=>state.sequence[state.index] || {row:0,column:0};
+function option(select,label,value){const item=document.createElement('option');item.textContent=label;item.value=value;select.append(item);}
+function setPlaying(value){state.playing=value;state.lastTick=0;$('play').textContent=value?'Pausar':'Reproducir';$('play').setAttribute('aria-pressed',String(value));}
+function gridReady(){return Boolean(state.atlas?.frameWidth>0&&state.atlas?.frameHeight>0&&state.atlas?.columns>0&&state.atlas?.rows>0);}
+function scale(){return state.atlas?.frameHeight===120?1.92:1.72;}
+function runtimeAtlas(){return !state.localGrid&&Boolean(state.character?.catalog)&&normalizedPath(state.character.catalog.path)===normalizedPath(state.atlas?.path);}
+function getFrame(row,column){return (state.atlas?.frames||[]).find(frame=>frame.row===row&&frame.column===column)||null;}
+function chooseCharacter(){setPlaying(false);state.character=state.characters[number(controls.character.value)];controls.atlas.replaceChildren();for(const [index,atlas] of state.character.atlases.entries())option(controls.atlas,atlas.path.split('/').at(-1),index);$('roster-status').textContent=state.character.playable?'Jugable en el catálogo':'Recurso sin personaje jugable';chooseAtlas();}
+async function chooseAtlas(){
+  setPlaying(false);state.atlas={...state.character.atlases[number(controls.atlas.value)]};state.localGrid=false;state.image=null;state.index=0;
+  const request=++state.imageRequest;controls.action.replaceChildren();option(controls.action,'Todos los cuadros · manual','');
+  const catalog=state.character.catalog;
+  if(catalog&&normalizedPath(catalog.path)===normalizedPath(state.atlas.path))for(const [action,mapping] of Object.entries(catalog.animations||{}))option(controls.action,`${action} · ${mapping.frames} cuadros${mapping.inferred?' · inferida':''}`,action);
+  $('manual-grid').hidden=gridReady();$('manual-width').value=state.atlas.frameWidth||160;$('manual-height').value=state.atlas.frameHeight||144;
+  configureGrid();
+  try{const image=new Image();image.src=assetSource(state.atlas.path);await image.decode();if(request!==state.imageRequest)return;state.image=image;state.atlas.width??=image.naturalWidth;state.atlas.height??=image.naturalHeight;draw();}catch(error){if(request===state.imageRequest){$('frame-status').textContent='No se pudo cargar el atlas';console.error(error);}}
+}
+function configureGrid(){
+  const ready=gridReady();const confidence=state.localGrid?'hipótesis local':state.atlas.gridConfidence||'no indicada';
+  $('grid-status').textContent=`Cuadrícula: ${confidence}`;$('grid-description').textContent=ready?`${state.atlas.columns} columnas × ${state.atlas.rows} filas · celdas de ${state.atlas.frameWidth} × ${state.atlas.frameHeight} px.`:'No hay una cuadrícula disponible para este atlas; inspección de celda pendiente.';
+  for(const id of ['row','column','action','scrub'])controls[id].disabled=!ready;
+  controls.row.max=Math.max(0,(state.atlas.rows||1)-1);controls.column.max=Math.max(0,(state.atlas.columns||1)-1);
+  for(const id of ['previous','next','play'])$(id).disabled=!ready;
+  chooseSequence();
+}
+function chooseSequence(){
+  const atlas=state.atlas;const mapping=state.character.catalog?.animations?.[controls.action.value];state.sequence=[];state.index=0;
+  if(gridReady()){
+    if(controls.action.value&&mapping)for(let index=0;index<mapping.frames;index++)state.sequence.push({row:mapping.row,column:mapping.startColumn+index});
+    else for(let row=0;row<atlas.rows;row++)for(let column=0;column<atlas.columns;column++)state.sequence.push({row,column});
+  }
+  controls.scrub.max=Math.max(0,state.sequence.length-1);controls.scrub.value=0;draw();
+}
+function chooseCell(row,column){if(!gridReady())return;controls.action.value='';chooseSequence();state.index=clamp(Math.trunc(row),0,state.atlas.rows-1)*state.atlas.columns+clamp(Math.trunc(column),0,state.atlas.columns-1);draw();}
+function advance(amount){if(!state.sequence.length)return;state.index=(state.index+amount+state.sequence.length)%state.sequence.length;draw();}
+function draw(){
+  if(!state.atlas)return;
+  const atlas=state.atlas;const {row,column}=currentCell();const info=getFrame(row,column);const bounds=info?.bounds??info?.alphaBounds??null;const fw=atlas.frameWidth||0,fh=atlas.frameHeight||0;const pivot={x:fw/2,y:fh-12/scale()};
+  controls.row.value=row;controls.column.value=column;controls.scrub.value=state.index;
+  $('frame-title').textContent=`${state.character.id} · ${atlas.path.split('/').at(-1)} · fila ${row}, columna ${column}`;
+  $('frame-status').textContent=!gridReady()?'Rejilla pendiente':info?(bounds?'Cuadro poblado':'Cuadro vacío'):'Sin medición alfa';
+  $('frame-counter').textContent=state.sequence.length?`${state.index+1} / ${state.sequence.length}`:'—';
+  $('sequence-description').textContent=(controls.action.value?`${controls.action.value}: secuencia del catálogo, significado inferido`:'Recorrido manual de todas las celdas')+(runtimeAtlas()?'':' · este atlas no se renderiza en el juego; vista hipotética');
+  $('frame-time').textContent=state.sequence.length?`Visor: ${rounded(state.index/number(controls.fps.value))} s · ${controls.fps.value} fps`:'';
+  $('cell-detail').textContent=gridReady()?`${fw} × ${fh} · origen ${column*fw}, ${row*fh}`:'Sin cuadrícula';
+  $('pivot-detail').textContent=gridReady()?`(${rounded(pivot.x)}, ${rounded(pivot.y)})`:'Sin cálculo';
+  $('pivot-label').textContent=runtimeAtlas()?'Pivote actual · px del atlas':'Pivote hipotético · no runtime';
+  $('scale-label').textContent=runtimeAtlas()?'Escala actual de juego':'Escala hipotética · no runtime';
+  $('bounds-detail').textContent=bounds?`${bounds.x}, ${bounds.y}, ${bounds.width}, ${bounds.height}`:info?'Sin alfa visible':'Sin medición';
+  const hash=info?.hash??info?.rgbaHash??'';const pixels=info?.pixels??info?.opaquePixels??info?.pixelCount;
+  $('hash-detail').textContent=info?`${pixels??'—'} px · ${hash?hash.slice(0,16)+'…':'sin huella'}`:'Sin medición';
+  $('scale-detail').textContent=gridReady()?`${scale()}× · visor ${controls.zoom.value}× · facing ${controls.mirror.checked?'−1':'+1'}`:'—';
+  $('floor-detail').textContent=bounds?`${rounded((pivot.y-(bounds.y+bounds.height))*scale())} px de juego (borde inferior)`:'—';
+  $('atlas-caption').textContent=`${atlas.width??'?'} × ${atlas.height??'?'} px${gridReady()?` · ${atlas.columns*atlas.rows} celdas`:''}`;
+  $('atlas-path').textContent=atlas.path;
+  drawFrame(bounds,pivot);drawAtlas();
+}
+function drawFrame(bounds,pivot){
+  const canvas=$('frame-canvas'),atlas=state.atlas,zoom=number(controls.zoom.value),factor=scale()*zoom;
+  const ground=gridReady()?Math.max(520,Math.ceil(pivot.y*factor+60)):520;
+  canvas.width=gridReady()?Math.max(1080,Math.ceil(atlas.frameWidth*factor+100)):1080;
+  canvas.height=gridReady()?Math.max(650,Math.ceil(ground+(atlas.frameHeight-pivot.y)*factor+80)):650;
+  const ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height;
+  const background=controls.background.value;
+  ctx.fillStyle=background==='light'?'#d8ded7':'#101713';ctx.fillRect(0,0,w,h);
+  if(background==='checker'){for(let y=0;y<h;y+=24)for(let x=0;x<w;x+=24){ctx.fillStyle=(x/24+y/24)%2?'#18221b':'#202d24';ctx.fillRect(x,y,24,24);}}
+  if(!gridReady()){ctx.fillStyle='#bcc7bd';ctx.textAlign='center';ctx.font='19px system-ui';ctx.fillText('Cuadrícula pendiente · introduce una hipótesis para inspeccionar',w/2,h/2);return;}
+  const {row,column}=currentCell(),anchorX=w/2;
+  ctx.strokeStyle='#8cceef';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(0,ground);ctx.lineTo(w,ground);ctx.stroke();
+  ctx.setLineDash([5,6]);ctx.strokeStyle='#8cceef66';ctx.beginPath();ctx.moveTo(anchorX,25);ctx.lineTo(anchorX,h-25);ctx.stroke();ctx.setLineDash([]);
+  ctx.save();ctx.translate(anchorX,ground);ctx.scale((controls.mirror.checked?-1:1)*factor,factor);
+  if(state.image)ctx.drawImage(state.image,column*atlas.frameWidth,row*atlas.frameHeight,atlas.frameWidth,atlas.frameHeight,-pivot.x,-pivot.y,atlas.frameWidth,atlas.frameHeight);
+  if(controls['show-cell'].checked){ctx.strokeStyle='#b9bec8';ctx.lineWidth=1/factor;ctx.setLineDash([5/factor,4/factor]);ctx.strokeRect(-pivot.x,-pivot.y,atlas.frameWidth,atlas.frameHeight);ctx.setLineDash([]);}
+  if(bounds&&controls['show-bounds'].checked){ctx.strokeStyle='#b8ef9c';ctx.lineWidth=2/factor;ctx.strokeRect(bounds.x-pivot.x,bounds.y-pivot.y,bounds.width,bounds.height);}
+  ctx.restore();ctx.strokeStyle='#ffb86d';ctx.lineWidth=2;ctx.beginPath();ctx.arc(anchorX,ground,7,0,Math.PI*2);ctx.moveTo(anchorX-16,ground);ctx.lineTo(anchorX+16,ground);ctx.moveTo(anchorX,ground-16);ctx.lineTo(anchorX,ground+16);ctx.stroke();
+  ctx.fillStyle=background==='light'?'#223327':'#c4d2c5';ctx.font='13px ui-monospace,monospace';ctx.textAlign='left';ctx.fillText(`Pivote = (ancho / 2, alto − 12 / ${scale()})${runtimeAtlas()?'':' · hipótesis, no runtime'}`,20,29);ctx.fillText(runtimeAtlas()?'Suelo: origen vertical del renderer':'Origen vertical hipotético para inspección',20,ground+28);
+}
+function drawAtlas(){
+  const canvas=$('atlas-canvas'),atlas=state.atlas;if(!state.image){canvas.width=800;canvas.height=80;const ctx=canvas.getContext('2d');ctx.fillStyle='#101612';ctx.fillRect(0,0,800,80);return;}
+  const factor=Math.min(1,1280/state.image.naturalWidth);canvas.width=Math.round(state.image.naturalWidth*factor);canvas.height=Math.round(state.image.naturalHeight*factor);const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#202b23';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(state.image,0,0,canvas.width,canvas.height);if(!gridReady())return;
+  const fw=atlas.frameWidth*factor,fh=atlas.frameHeight*factor;ctx.strokeStyle='#d9e5da55';ctx.lineWidth=1;
+  for(let column=0;column<=atlas.columns;column++){ctx.beginPath();ctx.moveTo(column*fw,0);ctx.lineTo(column*fw,atlas.rows*fh);ctx.stroke();}
+  for(let row=0;row<=atlas.rows;row++){ctx.beginPath();ctx.moveTo(0,row*fh);ctx.lineTo(atlas.columns*fw,row*fh);ctx.stroke();}
+  if(controls.action.value){ctx.fillStyle='#b8ef9c1c';for(const frame of state.sequence)ctx.fillRect(frame.column*fw,frame.row*fh,fw,fh);}
+  const {row,column}=currentCell();ctx.fillStyle='#ffb86d22';ctx.fillRect(column*fw,row*fh,fw,fh);ctx.strokeStyle='#ffb86d';ctx.lineWidth=3;ctx.strokeRect(column*fw+1.5,row*fh+1.5,fw-3,fh-3);
+  ctx.font='11px ui-monospace,monospace';ctx.fillStyle='#eff7ee';ctx.shadowColor='#000';ctx.shadowBlur=3;
+  for(let r=0;r<atlas.rows;r++)for(let c=0;c<atlas.columns;c++)ctx.fillText(`${r}:${c}`,c*fw+4,r*fh+13);ctx.shadowBlur=0;
+}
+controls.character.addEventListener('change',chooseCharacter);controls.atlas.addEventListener('change',chooseAtlas);controls.action.addEventListener('change',()=>{setPlaying(false);chooseSequence();});
+controls.row.addEventListener('change',()=>{setPlaying(false);chooseCell(number(controls.row.value),number(controls.column.value));});controls.column.addEventListener('change',()=>{setPlaying(false);chooseCell(number(controls.row.value),number(controls.column.value));});
+for(const id of ['zoom','background','mirror','show-bounds','show-cell','fps'])controls[id].addEventListener('change',draw);
+controls.scrub.addEventListener('input',()=>{setPlaying(false);state.index=number(controls.scrub.value);draw();});
+$('previous').addEventListener('click',()=>{setPlaying(false);advance(-1);});$('next').addEventListener('click',()=>{setPlaying(false);advance(1);});$('play').addEventListener('click',()=>setPlaying(!state.playing));
+$('apply-grid').addEventListener('click',()=>{
+  const fw=Math.trunc(number($('manual-width').value)),fh=Math.trunc(number($('manual-height').value));if(fw<1||fh<1||!state.atlas.width||!state.atlas.height)return;
+  if(state.atlas.width%fw||state.atlas.height%fh){$('grid-description').textContent='La hipótesis debe dividir exactamente el ancho y el alto del atlas.';return;}
+  if((state.atlas.width/fw)*(state.atlas.height/fh)>10000){$('grid-description').textContent='La hipótesis supera 10.000 celdas. Usa celdas más grandes para mantener el visor operativo.';return;}
+  state.atlas={...state.atlas,frameWidth:fw,frameHeight:fh,columns:state.atlas.width/fw,rows:state.atlas.height/fh,frames:[]};state.localGrid=true;configureGrid();
+});
+$('atlas-canvas').addEventListener('click',event=>{if(!gridReady()||!state.image)return;const rect=event.currentTarget.getBoundingClientRect();const x=(event.clientX-rect.left)*state.image.naturalWidth/rect.width;const y=(event.clientY-rect.top)*state.image.naturalHeight/rect.height;setPlaying(false);chooseCell(Math.floor(y/state.atlas.frameHeight),Math.floor(x/state.atlas.frameWidth));});
+document.addEventListener('keydown',event=>{if(/INPUT|SELECT|TEXTAREA|BUTTON/.test(event.target.tagName)||!gridReady())return;if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();setPlaying(false);advance(event.key==='ArrowRight'?1:-1);}else if(event.code==='Space'){event.preventDefault();setPlaying(!state.playing);}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)setPlaying(false);});
+function tick(now){if(state.playing){if(!state.lastTick)state.lastTick=now;const interval=1000/number(controls.fps.value);if(now-state.lastTick>=interval){const count=Math.floor((now-state.lastTick)/interval);state.lastTick+=count*interval;advance(count);}}requestAnimationFrame(tick);}
+async function init(){try{
+  const response=await fetch('/audit-output/characters.json');if(!response.ok)throw new Error(`HTTP ${response.status} al cargar audit-output/characters.json`);const report=await response.json();state.characters=Array.isArray(report)?report:report.characters;
+  if(!Array.isArray(state.characters)||!state.characters.length)throw new Error('El informe no contiene personajes.');
+  let catalog;try{const data=await fetch('/assets/catalog.json');if(data.ok)catalog=await data.json();}catch{/* El inventario puede incluir su propio catálogo. */}
+  state.characters=state.characters.map(character=>({...character,catalog:character.catalog??catalog?.fighters?.find(item=>item.id===character.id)??null,atlases:character.atlases||[]})).filter(character=>character.atlases.length).sort((a,b)=>a.id.localeCompare(b.id));
+  if(!state.characters.length)throw new Error('No hay atlas en el informe.');
+  let atlases=0;for(const [index,character] of state.characters.entries()){character.playable??=Boolean(character.catalog);atlases+=character.atlases.length;option(controls.character,`${character.catalog?.name||character.id}${character.playable?' · jugable':''}`,index);}
+  $('summary').textContent=`${state.characters.length} personajes · ${atlases} atlas · ${state.characters.filter(item=>item.playable).length} jugables`;$('workspace').hidden=false;chooseCharacter();requestAnimationFrame(tick);
+}catch(error){$('summary').textContent='Inventario no disponible';$('error-detail').textContent=error.message;$('load-error').hidden=false;}}
+init();
+</script>
+</body>
+</html>

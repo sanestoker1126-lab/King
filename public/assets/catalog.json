@@ -1,0 +1,542 @@
+{
+  "version": 1,
+  "source": "Puente-Grande-CORE-040-PIXI.html",
+  "mappingNote": "La cuadrícula y los fotogramas poblados se verificaron en los atlas. Las acciones se infieren por inspección visual; no se incluyeron datos de animación del juego original.",
+  "counts": {
+    "assets": 71,
+    "manifests": 3,
+    "totalAssetBytes": 43336575,
+    "categories": {
+      "characters": 41,
+      "effects": 8,
+      "audio": 17,
+      "backgrounds": 5
+    },
+    "playableFighters": 6
+  },
+  "fighters": [
+    {
+      "id": "mateo",
+      "name": "Mateo",
+      "path": "assets/characters/mateo/atlas_00.webp",
+      "frameWidth": 160,
+      "frameHeight": 144,
+      "columns": 9,
+      "rows": 9,
+      "idleFrames": 9,
+      "portrait": {
+        "row": 0,
+        "column": 0,
+        "alphaBounds": {
+          "x": 60,
+          "y": 38,
+          "width": 42,
+          "height": 100
+        }
+      },
+      "animations": {
+        "idle": {
+          "row": 0,
+          "startColumn": 0,
+          "frames": 9,
+          "inferred": true
+        },
+        "walk": {
+          "row": 1,
+          "startColumn": 0,
+          "frames": 9,
+          "inferred": true
+        },
+        "punch": {
+          "row": 4,
+          "startColumn": 0,
+          "frames": 5,
+          "inferred": true
+        },
+        "kick": {
+          "row": 4,
+          "startColumn": 6,
+          "frames": 3,
+          "inferred": true
+        }
+      }
+    },
+    {
+      "id": "tobi",
+      "name": "Tobi",
+      "path": "assets/characters/tobi/atlas_00_override.webp",
+      "frameWidth": 120,
+      "frameHeight": 120,
+      "columns": 9,
+      "rows": 9,
+      "idleFrames": 9,
+      "portrait": {
+        "row": 0,
+        "column": 0,
+        "alphaBounds": {
+          "x": 31,
+          "y": 22,
+          "width": 58,
+          "height": 90
+        }
+      },
+      "animations": {
+        "idle": {
+          "row": 0,
+          "startColumn": 0,
+          "frames": 9,
+          "inferred": true
+        },
+        "walk": {
+          "row": 1,
+          "startColumn": 0,
+          "frames": 9,
+          "inferred": true
+        },
+        "run": {
+          "row": 2,
+          "startColumn": 0,
+          "frames": 9,
+          "inferred": true
+        },
+        "jump": {
+          "row": 4,
+          "startColumn": 0,
+          "frames": 9,
+          "inferred": true
+        },
+        "punch": {
+          "row": 5,
+          "startColumn": 0,
+          "frames": 9,
+          "inferred": true
+        },
+        "kick": {
+          "row": 6,
+          "startColumn": 0,
+          "frames": 9,
+          "inferred": true
+        },
+        "hurt": {
+          "row": 7,
+          "startColumn": 0,
+          "frames": 9,
+          "inferred": true
+        }
+      }
+    },
+    {
+      "id": "nadia",
+      "name": "Nadia",
+      "path": "assets/characters/nadia/atlas_00.webp",
+      "frameWidth": 160,
+      "frameHeight": 144,
+      "columns": 9,
+      "rows": 10,
+      "idleFrames": 9,
+      "portrait": {
+        "row": 0,
+        "column": 0,
+        "alphaBounds": {
+          "x": 61,
+          "y": 44,
+          "width": 36,
+          "height": 94
+        }
+      },
+      "animations": {
+        "idle": {
+          "row": 0,
+          "startColumn": 0,
+          "frames": 9,
+          "inferred": true
+        },
+        "walk": {
+          "row": 1,
+          "startColumn": 0,
+          "frames": 9,
+          "inferred": true
+        },
+        "punch": {
+          "row": 6,
+          "startColumn": 0,
+          "frames": 4,
+          "inferred": true
+        },
+        "kick": {
+          "row": 6,
+          "startColumn": 6,
+          "frames": 3,
+          "inferred": true
+        }
+      }
+    },
+    {
+      "id": "semillas",
+      "name": "Semillas",
+      "path": "assets/characters/semillas/atlas_00.webp",
+      "frameWidth": 120,
+      "frameHeight": 120,
+      "columns": 9,
+      "rows": 9,
+      "idleFrames": 4,
+      "portrait": {
+        "row": 0,
+        "column": 0,
+        "alphaBounds": {
+          "x": 29,
+          "y": 6,
+          "width": 63,
+          "height": 108
+        }
+      },
+      "animations": {
+        "idle": {
+          "row": 0,
+          "startColumn": 0,
+          "frames": 4,
+          "inferred": true
+        },
+        "walk": {
+          "row": 0,
+          "startColumn": 4,
+          "frames": 5,
+          "inferred": true
+        },
+        "run": {
+          "row": 1,
+          "startColumn": 1,
+          "frames": 7,
+          "inferred": true
+        },
+        "punch": {
+          "row": 3,
+          "startColumn": 0,
+          "frames": 9,
+          "inferred": true
+        },
+        "kick": {
+          "row": 4,
+          "startColumn": 0,
+          "frames": 5,
+          "inferred": true
+        }
+      }
+    },
+    {
+      "id": "oscuro",
+      "name": "Oscuro",
+      "path": "assets/characters/oscuro/atlas_00.webp",
+      "frameWidth": 160,
+      "frameHeight": 144,
+      "columns": 9,
+      "rows": 9,
+      "idleFrames": 3,
+      "portrait": {
+        "row": 0,
+        "column": 0,
+        "alphaBounds": {
+          "x": 47,
+          "y": 36,
+          "width": 67,
+          "height": 100
+        }
+      },
+      "animations": {
+        "idle": {
+          "row": 0,
+          "startColumn": 0,
+          "frames": 3,
+          "inferred": true
+        },
+        "walk": {
+          "row": 1,
+          "startColumn": 0,
+          "frames": 8,
+          "inferred": true
+        },
+        "punch": {
+          "row": 2,
+          "startColumn": 7,
+          "frames": 2,
+          "inferred": true
+        },
+        "kick": {
+          "row": 4,
+          "startColumn": 0,
+          "frames": 5,
+          "inferred": true
+        }
+      }
+    },
+    {
+      "id": "callejero",
+      "name": "Callejero",
+      "path": "assets/characters/callejero/atlas_00.webp",
+      "frameWidth": 160,
+      "frameHeight": 144,
+      "columns": 9,
+      "rows": 8,
+      "idleFrames": 4,
+      "portrait": {
+        "row": 0,
+        "column": 0,
+        "alphaBounds": {
+          "x": 47,
+          "y": 36,
+          "width": 67,
+          "height": 100
+        }
+      },
+      "animations": {
+        "idle": {
+          "row": 0,
+          "startColumn": 0,
+          "frames": 4,
+          "inferred": true
+        },
+        "walk": {
+          "row": 1,
+          "startColumn": 0,
+          "frames": 9,
+          "inferred": true
+        },
+        "punch": {
+          "row": 3,
+          "startColumn": 0,
+          "frames": 2,
+          "inferred": true
+        },
+        "kick": {
+          "row": 4,
+          "startColumn": 0,
+          "frames": 6,
+          "inferred": true
+        }
+      }
+    }
+  ],
+  "backgrounds": [
+    {
+      "id": "exterior",
+      "name": "El reclusorio",
+      "path": "assets/backgrounds/impacto/impacto_exterior.webp",
+      "width": 1260,
+      "height": 540
+    },
+    {
+      "id": "patio",
+      "name": "El patio",
+      "path": "assets/backgrounds/impacto/impacto_patio.webp",
+      "width": 1260,
+      "height": 540
+    },
+    {
+      "id": "interior",
+      "name": "Los pasillos",
+      "path": "assets/backgrounds/impacto/impacto_interior.webp",
+      "width": 1260,
+      "height": 540
+    },
+    {
+      "id": "mercado",
+      "name": "El mercado",
+      "path": "assets/backgrounds/impacto/impacto_mercado.webp",
+      "width": 1260,
+      "height": 540
+    },
+    {
+      "id": "carretera",
+      "name": "La carretera",
+      "path": "assets/backgrounds/impacto/impacto_carretera.webp",
+      "width": 1260,
+      "height": 540
+    }
+  ],
+  "audio": [
+    {
+      "id": "super_g",
+      "name": "Especial",
+      "path": "assets/audio/street/super_g.mp3",
+      "mime": "audio/mpeg",
+      "format": "mp3",
+      "bytes": 157404,
+      "sha256": "a5b857e9a30b288694b4149da5052c4468d70989ccd7d35134b1f79ec7e18d64",
+      "extensionMatchesFormat": true
+    },
+    {
+      "id": "special_dark_impact_01",
+      "name": "Impacto oscuro",
+      "path": "assets/audio/sfx/special_dark_impact_01.wav",
+      "mime": "audio/ogg",
+      "format": "ogg",
+      "bytes": 21438,
+      "sha256": "2508da59becb8b4a1830a45154009132a41a6a1ad65b527f91eff4a7aa4d281a",
+      "extensionMatchesFormat": false
+    },
+    {
+      "id": "special",
+      "name": "Especial procesado",
+      "path": "assets/audio/processed/special.ogg",
+      "mime": "audio/ogg",
+      "format": "ogg",
+      "bytes": 12440,
+      "sha256": "3fa9e47d67bb17ceb5b1b5d0a7cda9d85aa94e6285cb57f21659132d9fbb7d65",
+      "extensionMatchesFormat": true
+    },
+    {
+      "id": "combat_kick_light_01",
+      "name": "Patada ligera",
+      "path": "assets/audio/sfx/combat_kick_light_01.wav",
+      "mime": "audio/ogg",
+      "format": "ogg",
+      "bytes": 9836,
+      "sha256": "41ea41297b55d456edd20d2767564975fc8111e79213f4992d6cd99a01002678",
+      "extensionMatchesFormat": false
+    },
+    {
+      "id": "grab",
+      "name": "Agarre",
+      "path": "assets/audio/processed/grab.ogg",
+      "mime": "audio/ogg",
+      "format": "ogg",
+      "bytes": 7858,
+      "sha256": "e77482f7dd5ce46dfac9d6d953555a47f1c4c0460b23a70e5ef50d7642f50ce6",
+      "extensionMatchesFormat": true
+    },
+    {
+      "id": "kickLight",
+      "name": "Patada ligera procesada",
+      "path": "assets/audio/processed/kickLight.ogg",
+      "mime": "audio/ogg",
+      "format": "ogg",
+      "bytes": 6606,
+      "sha256": "162d520ad7bf15b125fab04cf00b3fd91eedd69ab3778a2af2e3aaef92face23",
+      "extensionMatchesFormat": true
+    },
+    {
+      "id": "remate_g",
+      "name": "Remate",
+      "path": "assets/audio/street/remate_g.mp3",
+      "mime": "audio/mpeg",
+      "format": "mp3",
+      "bytes": 169316,
+      "sha256": "101951907eb7496f6b5d55db02e8bc8353a1456b68f38e5dff8f97c54f878eb1",
+      "extensionMatchesFormat": true
+    },
+    {
+      "id": "entrada_g",
+      "name": "Entrada",
+      "path": "assets/audio/street/entrada_g.mp3",
+      "mime": "audio/mpeg",
+      "format": "mp3",
+      "bytes": 157404,
+      "sha256": "444df616fd608394a2835dda1e08b108cb171d3663d256db203f7995b9bde225",
+      "extensionMatchesFormat": true
+    },
+    {
+      "id": "combat_kick_heavy_01",
+      "name": "Patada fuerte",
+      "path": "assets/audio/sfx/combat_kick_heavy_01.wav",
+      "mime": "audio/ogg",
+      "format": "ogg",
+      "bytes": 13375,
+      "sha256": "38d26db3f8302362de735805c6ef290050f0d218421554d6b6364655243ca9d1",
+      "extensionMatchesFormat": false
+    },
+    {
+      "id": "combat_grab_01",
+      "name": "Agarre de combate",
+      "path": "assets/audio/sfx/combat_grab_01.wav",
+      "mime": "audio/ogg",
+      "format": "ogg",
+      "bytes": 12471,
+      "sha256": "ea3482eb47b5ac1e8254c95399c4064cc407967cc2c07c35a5c1a67998d6d24b",
+      "extensionMatchesFormat": false
+    },
+    {
+      "id": "combat_body_hit_01",
+      "name": "Impacto corporal",
+      "path": "assets/audio/sfx/combat_body_hit_01.wav",
+      "mime": "audio/ogg",
+      "format": "ogg",
+      "bytes": 10829,
+      "sha256": "c1641fcedd51f0528eb77d8f427bc8b476e98e0939a51876468b50ce2ee10f29",
+      "extensionMatchesFormat": false
+    },
+    {
+      "id": "kickHeavy",
+      "name": "Patada fuerte procesada",
+      "path": "assets/audio/processed/kickHeavy.ogg",
+      "mime": "audio/ogg",
+      "format": "ogg",
+      "bytes": 8473,
+      "sha256": "ffd6af13a7b662e68fc42914250fce93a6643071776e2fbe5c302bcf936123dc",
+      "extensionMatchesFormat": true
+    },
+    {
+      "id": "punchHeavy",
+      "name": "Puño fuerte procesado",
+      "path": "assets/audio/processed/punchHeavy.ogg",
+      "mime": "audio/ogg",
+      "format": "ogg",
+      "bytes": 7612,
+      "sha256": "97e00ff00d6fbee31ff04bf04a69be64ebfe34e9dae6cc0004e094548aa147bd",
+      "extensionMatchesFormat": true
+    },
+    {
+      "id": "combat_punch_heavy_01",
+      "name": "Puño fuerte",
+      "path": "assets/audio/sfx/combat_punch_heavy_01.wav",
+      "mime": "audio/ogg",
+      "format": "ogg",
+      "bytes": 11684,
+      "sha256": "03aac92c09a3904501c696e3ca8d344b4a20a4f73e161ff190f06722e2ee0c2f",
+      "extensionMatchesFormat": false
+    },
+    {
+      "id": "combat_punch_light_01",
+      "name": "Puño ligero",
+      "path": "assets/audio/sfx/combat_punch_light_01.wav",
+      "mime": "audio/ogg",
+      "format": "ogg",
+      "bytes": 9086,
+      "sha256": "805ac4e70c4d6466b92dc2f1ce1a86ff68c9129555838c080ec8bc2695ce2371",
+      "extensionMatchesFormat": false
+    },
+    {
+      "id": "body",
+      "name": "Impacto corporal procesado",
+      "path": "assets/audio/processed/body.ogg",
+      "mime": "audio/ogg",
+      "format": "ogg",
+      "bytes": 6964,
+      "sha256": "fd146769a14bedacc9b89bc045f0a0f96d0f678e405d79645bc444f8639124d2",
+      "extensionMatchesFormat": true
+    },
+    {
+      "id": "punchLight",
+      "name": "Puño ligero procesado",
+      "path": "assets/audio/processed/punchLight.ogg",
+      "mime": "audio/ogg",
+      "format": "ogg",
+      "bytes": 6355,
+      "sha256": "b3d38866ee35e958475bd6658cc0f034af9cd69a8eb65b11ffdbf741c2444a9c",
+      "extensionMatchesFormat": true
+    }
+  ],
+  "manifests": [
+    "assets/manifest_parte_1.json",
+    "assets/manifest_parte_2.json",
+    "assets/manifest_parte_3.json"
+  ],
+  "integrity": {
+    "crcVerified": true,
+    "sha256Verified": true,
+    "pathTraversalChecked": true,
+    "duplicatePaths": false,
+    "notes": [
+      "Los audios SFX con extensión .wav contienen datos Ogg; el campo mime refleja el formato real."
+    ]
+  }
+}
