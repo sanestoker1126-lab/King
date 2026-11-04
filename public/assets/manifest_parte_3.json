@@ -1,0 +1,176 @@
+{
+  "part": 3,
+  "of": 3,
+  "source": "Puente-Grande-CORE-040-PIXI.html",
+  "count": 24,
+  "files": [
+    {
+      "path": "assets/fx/atlases/fx_02_energia_carmesi.webp",
+      "bytes": 1775546,
+      "mime": "image/webp",
+      "sha256": "e6790a8a1b7e4d2d0547c1ccb2ae86b34d6788e2092bb6badae9edc09ff46ab4",
+      "source": "PG_FX_ATLASES_028.fx_02_energia_carmesi"
+    },
+    {
+      "path": "assets/fx/atlases/fx_04_cortes_carmesi.webp",
+      "bytes": 1697926,
+      "mime": "image/webp",
+      "sha256": "10aaced1cd409c4e4a8595ac9a24d8aefccd9fcded8448a98a2dfdffd9916117",
+      "source": "PG_FX_ATLASES_028.fx_04_cortes_carmesi"
+    },
+    {
+      "path": "assets/fx/atlases/fx_01_impacto_mixto.webp",
+      "bytes": 1676012,
+      "mime": "image/webp",
+      "sha256": "7500e170989e95ccb044bf947bba14c2939ab85580ed2dae2746f7212b144a34",
+      "source": "PG_FX_ATLASES_028.fx_01_impacto_mixto"
+    },
+    {
+      "path": "assets/fx/atlases/fx_06_proyectiles_carmesi.webp",
+      "bytes": 1566230,
+      "mime": "image/webp",
+      "sha256": "abaa9bca47e2d62bcf8876c1daa16300ed06b5522e220e272ce3effa94275936",
+      "source": "PG_FX_ATLASES_028.fx_06_proyectiles_carmesi"
+    },
+    {
+      "path": "assets/fx/fx.webp",
+      "bytes": 1233574,
+      "mime": "image/webp",
+      "sha256": "fbb2e1fa24abe4ce4c91bd9283272e83efe5c2bf0b9ed01eaec7679594d718f1",
+      "source": "IMG.fx"
+    },
+    {
+      "path": "assets/characters/mecanico/atlas_01.webp",
+      "bytes": 1119496,
+      "mime": "image/webp",
+      "sha256": "5b1c3ee446087e01f9a04a72ff0353becb49dda09a780275a173d5f7d14dcc66",
+      "source": "NIMG.mecanico[1]"
+    },
+    {
+      "path": "assets/characters/cartel/atlas_00.webp",
+      "bytes": 977904,
+      "mime": "image/webp",
+      "sha256": "c2f3d05c7299df33e489478d8f3e1ab65ed6d42819a2a153e07885acf74e057b",
+      "source": "NIMG.cartel[0]"
+    },
+    {
+      "path": "assets/characters/cochi_bombis/atlas_00.webp",
+      "bytes": 844784,
+      "mime": "image/webp",
+      "sha256": "4462e7e9835ca61e11df320f4e57e0dc3783abdac29f7400c315afa0e627a354",
+      "source": "IMG.cochi_bombis[0]"
+    },
+    {
+      "path": "assets/characters/calavera/atlas_00.webp",
+      "bytes": 685868,
+      "mime": "image/webp",
+      "sha256": "19b11fe09388a357cc66d2e6ed2d1b50a019b0cd7c43ada6303eaea6c34e23b8",
+      "source": "NIMG.calavera[0]"
+    },
+    {
+      "path": "assets/characters/semillas/atlas_00.webp",
+      "bytes": 595620,
+      "mime": "image/webp",
+      "sha256": "0224a861351b508028e9ffb8c41ce0c74fac10d66f9a04983c3f30b4e7758bcb",
+      "source": "IMG.semillas[0]"
+    },
+    {
+      "path": "assets/characters/regente/atlas_00.webp",
+      "bytes": 445866,
+      "mime": "image/webp",
+      "sha256": "a7f849b699e10b1cedd0ef53503d7e8c8558ceef2978eeb4399a4710cba4672c",
+      "source": "IMG.regente[0]"
+    },
+    {
+      "path": "assets/characters/nadia/atlas_00.webp",
+      "bytes": 408656,
+      "mime": "image/webp",
+      "sha256": "f0c54ce8b8301641a7559a29124282a1a691fb1869c8e18bf4f41c0131b6622d",
+      "source": "IMG.nadia[0]"
+    },
+    {
+      "path": "assets/characters/callejero/atlas_00.webp",
+      "bytes": 382792,
+      "mime": "image/webp",
+      "sha256": "a743459e1ef56892f976bd72f3403cdcec723b55b17c2cac4a0847636318a5b6",
+      "source": "IMG.callejero[0]"
+    },
+    {
+      "path": "assets/characters/cadena/atlas_02.webp",
+      "bytes": 275658,
+      "mime": "image/webp",
+      "sha256": "ee4b860f21dc5e8a04a6cc97d72478c6fe9066e86612bd39e164dfd9fe99f73e",
+      "source": "NIMG.cadena[2]"
+    },
+    {
+      "path": "assets/characters/calavera/atlas_02.webp",
+      "bytes": 246582,
+      "mime": "image/webp",
+      "sha256": "dae4cf5a0ffc153d79fb9a0de73e0ed9a60f8117ccfbf75882a6105b97049247",
+      "source": "NIMG.calavera[2]"
+    },
+    {
+      "path": "assets/characters/morado/atlas_01.webp",
+      "bytes": 206052,
+      "mime": "image/webp",
+      "sha256": "47bbd457ea644751aeeb0e11dc557ef5ece600cddea3b0b07032e4960c65c19b",
+      "source": "NIMG.morado[1]"
+    },
+    {
+      "path": "assets/characters/garravas/atlas_01.webp",
+      "bytes": 98510,
+      "mime": "image/webp",
+      "sha256": "0076a6a13d3e749e5a089e967add16a8f969dffdd5e475618150d55808fd23ac",
+      "source": "IMG.garravas[1]"
+    },
+    {
+      "path": "assets/characters/bigotes/atlas_01.webp",
+      "bytes": 95634,
+      "mime": "image/webp",
+      "sha256": "e6e62b009802a4aa9fed85a3f92e3d32f77edbd4972bf707912c001762ab708e",
+      "source": "NIMG.bigotes[1]"
+    },
+    {
+      "path": "assets/characters/mateo/atlas_01.webp",
+      "bytes": 46356,
+      "mime": "image/webp",
+      "sha256": "86f00b8d3fdad54a3292125eaf1b28b9f2db51857087845b8b5ef540e00db22c",
+      "source": "IMG.mateo[1]"
+    },
+    {
+      "path": "assets/characters/nadia/atlas_01.webp",
+      "bytes": 35320,
+      "mime": "image/webp",
+      "sha256": "2c889a8986aa71fad3c4572a956f853ee903d4f78939e5dd8871cf494660872c",
+      "source": "IMG.nadia[1]"
+    },
+    {
+      "path": "assets/audio/sfx/combat_punch_heavy_01.wav",
+      "bytes": 11684,
+      "mime": "audio/ogg",
+      "sha256": "03aac92c09a3904501c696e3ca8d344b4a20a4f73e161ff190f06722e2ee0c2f",
+      "source": "RES"
+    },
+    {
+      "path": "assets/audio/sfx/combat_punch_light_01.wav",
+      "bytes": 9086,
+      "mime": "audio/ogg",
+      "sha256": "805ac4e70c4d6466b92dc2f1ce1a86ff68c9129555838c080ec8bc2695ce2371",
+      "source": "RES"
+    },
+    {
+      "path": "assets/audio/processed/body.ogg",
+      "bytes": 6964,
+      "mime": "audio/ogg",
+      "sha256": "fd146769a14bedacc9b89bc045f0a0f96d0f678e405d79645bc444f8639124d2",
+      "source": "U.body"
+    },
+    {
+      "path": "assets/audio/processed/punchLight.ogg",
+      "bytes": 6355,
+      "mime": "audio/ogg",
+      "sha256": "b3d38866ee35e958475bd6658cc0f034af9cd69a8eb65b11ffdbf741c2444a9c",
+      "source": "U.punchLight"
+    }
+  ]
+}

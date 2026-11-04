@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#171a18" />
+    <meta name="description" content="Puente Grande: entra al patio, elige a tu luchador y juega una pelea arcade desde tu navegador." />
+    <title>Puente Grande — El patio es tuyo</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23ff713d'/%3E%3Cpath d='M16 46V18h15q10 0 10 9t-10 9h-6v10m0-18h6' fill='none' stroke='%23171a18' stroke-width='6'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="site-header">
+        <a class="brand" href="#jugar" aria-label="Puente Grande, inicio"><span class="brand-mark">PG<span aria-hidden="true"></span></span><span class="brand-name">PUENTE<br />GRANDE<span class="brand-edition">ARCADE CLUB</span></span></a>
+        <nav aria-label="Navegación principal"><a href="#jugar" class="active">Jugar</a><a href="#luchadores">Luchadores</a><a href="#controles">Cómo jugar</a></nav>
+        <button class="sound-button" id="sound-toggle" aria-pressed="false" aria-label="Activar sonido"><span aria-hidden="true">♪</span><span id="sound-label">Sonido apagado</span></button>
+      </header>
+      <main>
+        <section class="arcade-section" id="jugar" aria-labelledby="main-title">
+          <div class="intro">
+            <span class="eyebrow"><span class="live-dot"></span> HECHO PARA ENTRAR AL RUEDO</span>
+            <h1 id="main-title">EL PATIO<br />ES <span>TUYO.</span></h1>
+            <p class="intro-copy">Aquí cada golpe cuenta.<br /> Elige a tu luchador. Deja tu marca.</p>
+            <div class="match-config">
+              <label for="difficulty">TU RIVAL</label>
+              <div class="select-wrapper"><select id="difficulty"><option value="easy">CPU · Principiante</option><option value="normal" selected>CPU · Callejero</option><option value="hard">CPU · Veterano</option></select><span aria-hidden="true">⌄</span></div>
+              <button class="primary-button" id="play-button" disabled>ENTRAR AL PATIO <span aria-hidden="true">↗</span></button>
+              <span class="game-specs">1 JUGADOR <i></i> AL MEJOR DE 3 <i></i> SIN DESCARGAS</span>
+            </div>
+            <div class="session-stats"><span class="stats-value" id="wins-count">00</span><span>VICTORIAS<br /><span class="muted">EN ESTE DISPOSITIVO</span></span></div>
+          </div>
+          <div class="arcade-machine">
+            <div class="arena-topline"><span><span class="live-dot"></span> <span id="arena-state">PREPARANDO EL PATIO</span></span><span id="round-label">PARTIDA RÁPIDA</span></div>
+            <div class="arena" id="arena-shell">
+              <canvas id="game-canvas" width="960" height="420" role="img" aria-label="Arena de combate de Puente Grande"></canvas>
+              <div class="arena-vignette"></div>
+              <div class="hud" id="hud" hidden>
+                <div class="fighter-hud"><span class="hud-name" id="player-name">TOBI</span><div class="health-track" role="meter" aria-label="Salud de tu luchador" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div id="player-health"></div></div><span class="health-text" id="player-health-text">100 HP</span><div class="energy-track" role="meter" aria-label="Energía de tu luchador" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div id="player-energy"></div></div></div>
+                <div class="timer" id="timer">45</div>
+                <div class="fighter-hud opponent-hud"><span class="hud-name" id="opponent-name">MATEO</span><div class="health-track" role="meter" aria-label="Salud del rival" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div id="opponent-health"></div></div><span class="health-text" id="opponent-health-text">100 HP</span><div class="energy-track" role="meter" aria-label="Energía del rival" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div id="opponent-energy"></div></div></div>
+              </div>
+              <div class="arena-caption" id="arena-caption"><span class="caption-label">ESCENARIO 01 / 05</span><span class="caption-title" id="stage-title">EL PATIO</span><span class="caption-note">Tu historia empieza aquí.</span></div>
+              <div class="arena-message" id="arena-message" hidden><span id="message-eyebrow"></span><h2 id="message-title"></h2><p id="message-copy"></p><div><button id="continue-button" class="primary-button"></button><button id="back-button" class="secondary-button">Elegir luchador</button></div></div>
+              <button class="pause-button" id="pause-button" aria-label="Pausar partida" hidden>Ⅱ</button>
+              <div class="loading-message" id="loading-message" role="status">Cargando luchadores…</div>
+            </div>
+            <div class="arena-bottomline"><span><span class="orange-marker" aria-hidden="true"></span> <span id="selected-label">ELIGE TU LUCHADOR</span></span><span class="keyboard-note">TECLADO O CONTROLES TÁCTILES</span></div>
+            <div class="touch-controls" id="touch-controls" hidden aria-label="Controles de la partida">
+              <div class="direction-controls"><button data-control="left" aria-label="Mover a la izquierda">←</button><div><button data-control="jump" aria-label="Saltar">↑</button><button data-control="block" aria-label="Bloquear">↓</button></div><button data-control="right" aria-label="Mover a la derecha">→</button></div>
+              <div class="action-controls"><button data-control="punch">J<span>GOLPE</span></button><button data-control="kick">K<span>PATADA</span></button><button data-control="special" class="special-control">L<span>ESPECIAL</span></button></div>
+            </div>
+            <div class="cancel-guide" aria-label="Cadena de tu luchador">
+              <div><span id="cancel-fighter">CADENA DE TOBI</span><strong id="cancel-route">J → J → L</strong></div>
+              <p id="cancel-status">Conecta el golpe y pulsa de nuevo para encadenar.</p>
+              <span class="cancel-note">Solo con impacto limpio · +5 de energía por enlace · El especial cuesta 35 adicionales.</span>
+            </div>
+          </div>
+        </section>
+        <section class="selection-section" id="luchadores" aria-labelledby="fighters-title">
+          <div class="section-heading"><div><span class="section-number">01 /</span><h2 id="fighters-title">ELIGE TU LUCHADOR</h2></div><span class="section-hint">SEIS FORMAS DE DEJAR HUELLA</span></div>
+          <div class="fighters-grid" id="fighters-grid" aria-label="Seleccionar luchador"></div>
+        </section>
+        <section class="stage-section" aria-labelledby="stages-title">
+          <div class="section-heading"><div><span class="section-number">02 /</span><h2 id="stages-title">EL TERRENO DE JUEGO</h2></div><span class="section-hint">CADA LUGAR TIENE SU HISTORIA</span></div>
+          <div class="stages-grid" id="stages-grid" aria-label="Seleccionar escenario"></div>
+        </section>
+        <section class="controls-section" id="controles" aria-labelledby="controls-title">
+          <div class="controls-intro"><span class="eyebrow">NO NECESITAS UN MANUAL</span><h2 id="controls-title">APRENDE EN<br />EL PRIMER ROUND.</h2><p>Acércate para golpear, bloquea para reducir el daño y guarda energía para tu especial.</p></div>
+          <div class="control-guide"><div><span class="keys"><kbd>A</kbd><kbd>D</kbd><span>o</span><kbd>←</kbd><kbd>→</kbd></span><span>MOVERTE</span></div><div><span class="keys"><kbd>W</kbd><span>/</span><kbd>↑</kbd></span><span>SALTAR</span></div><div><span class="keys"><kbd>S</kbd><span>/</span><kbd>↓</kbd></span><span>BLOQUEAR</span></div><div><span class="keys"><kbd>J</kbd><kbd>K</kbd><kbd>L</kbd></span><span>GOLPE / PATADA / ESPECIAL</span></div><p><kbd>Esc</kbd> para pausar · En móvil, usa los botones bajo la arena.</p></div>
+        </section>
+        <div class="status-announcement" id="announcement" aria-live="polite" role="status"></div>
+      </main>
+      <footer><span class="footer-brand">PUENTE GRANDE<span>ARCADE CLUB</span></span><p>Un patio. Muchas historias. Tu siguiente pelea.</p><span class="footer-version">PROTOTIPO JUGABLE · V.01</span></footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
