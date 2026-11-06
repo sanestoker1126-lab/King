@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Legend of Presos — El Escape de Puente Grande</title>
+<meta name="description" content="Juego de pelea 2D estilo KOF 2002 con simulación determinista a 60 fps ambientado en el penal de Puente Grande, Jalisco.">
+<meta name="theme-color" content="#0f0b16">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a1026'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='%23ffcf4d' font-family='sans-serif' font-weight='bold'%3EP%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles/game.css">
+<!-- mínimo EN LÍNEA: si styles/game.css no carga (página abierta sola, sin sus carpetas) no queda una pantalla blanca con
+     los botones de combate sueltos; el aviso de abajo explica qué pasó -->
+<style>html,body{background:#0f0b16;color:#e9e4d8}#topbar.hidden,#pad.hidden{display:none}</style>
+</head>
+<body>
+  <div id="game"></div>
+
+  <!-- botones de combate (solo visibles en combate): abajo al centro, entre las barras de poder, para no tapar retratos -->
+  <div id="topbar" class="hidden">
+    <span><button id="btn-debug" title="Mostrar cajas de golpe (F)">Cajas</button> <button id="btn-pause" title="Pausa (Esc)">Pausa</button></span>
+  </div>
+
+  <!-- controles táctiles PRO (los arma pg_touch.js) -->
+  <div id="pad" class="hidden"></div>
+
+  <!-- overlay de interfaz: título, selección, pausa, resultados, opciones -->
+  <div id="ui"></div>
+
+  <script src="engine/pg_diag.js"></script>
+  <script src="engine/pixi.min.js"></script>
+  <script src="engine/pg_rng.js"></script>
+  <script src="engine/pg_cinematics.js"></script>
+  <script src="engine/pg_loader.js"></script>
+  <script src="engine/pg_input.js"></script>
+  <script src="engine/pg_sim.js"></script>
+  <script src="engine/pg_ai.js"></script>
+  <script src="engine/pg_training.js"></script>
+  <script src="engine/pg_stage.js"></script>
+  <script src="engine/pg_render.js"></script>
+  <script src="engine/pg_touch.js"></script>
+  <script src="engine/pg_store.js"></script>
+  <script src="engine/pg_audio.js"></script>
+  <script src="engine/pg_gamepad.js"></script>
+  <script src="engine/pg_frontend.js"></script>
+  <script src="engine/pg_game.js"></script>
+  <script>
+    // AVISO EN LÍNEA (no depende de ningún otro archivo): el juego necesita sus carpetas (engine/, styles/, data/, assets/)
+    // y que se sirva por http(s). Abierto desde el administrador de archivos del teléfono (content://) o como archivo
+    // (file://) no puede leerlas: antes quedaba una pantalla blanca con "Cajas" y "Pausa". Ahora se dice por qué.
+    (function() {
+      var proto = window.location.protocol, motor = !!(window.PIXI && window.PGDiag);
+      if ((proto === 'http:' || proto === 'https:') && motor) return;
+      var d = document.createElement('div');
+      d.setAttribute('style', 'position:fixed;inset:0;z-index:2147483647;overflow:auto;background:#0f0b16;color:#e9e4d8;' +
+        'font:15px/1.45 system-ui,sans-serif;padding:18px 20px');
+      var p = function(t, st) { var e = document.createElement(st || 'p'); e.textContent = t; e.style.margin = '0 0 10px'; d.appendChild(e); return e; };
+      p('El juego no pudo cargar sus archivos', 'h2').style.color = '#ffcf4d';
+      p(motor ? 'Se abrió como archivo (' + proto + '). El juego tiene que abrirse desde un servidor (una dirección http:// o https://).'
+              : 'Se abrió solo esta página, sin las carpetas engine/, styles/, data/ y assets/ (dirección: ' + proto + '//…).');
+      p('Esto pasa al tocar game.html en el administrador de archivos, en una descarga o en Drive: el teléfono abre la página sola.');
+      p('Cómo abrirlo en el teléfono:', 'b');
+      p('1) Con una app de servidor local (por ejemplo "Simple HTTP Server" o Termux con: python -m http.server 8080) apuntando a la carpeta descomprimida completa, y abrir en Chrome http://127.0.0.1:8080/game.html');
+      p('2) O subir la carpeta completa a un hosting (por ejemplo GitHub Pages o Netlify) y abrir su enlace en Chrome; desde ahí se puede instalar y jugar sin conexión.');
+      p('Dirección actual: ' + window.location.href).style.cssText = 'margin:14px 0 0;font-size:12px;opacity:.7;word-break:break-all';
+      var show = function() { document.body.appendChild(d); };
+      if (document.body) show(); else document.addEventListener('DOMContentLoaded', show);
+    })();
+  </script>
+  <script>
+    // PWA: el service worker solo sirve en el navegador. Dentro del APK (MainActivity inyecta window.AndroidBridge)
+    // todo ya es local: su precarga pide './' e 'index.html', que el APK no empaqueta (tools/sync_android.sh), así que
+    // nunca terminaría de instalarse; y si algún día se instalara, serviría archivos viejos después de actualizar el APK.
+    // Por eso en el APK no se registra y se da de baja cualquier registro anterior.
+    if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+      if (window.AndroidBridge) {
+        navigator.serviceWorker.getRegistrations().then(function(regs) {
+          regs.forEach(function(r) { r.unregister(); });
+        }).catch(function() { /* sin registros que limpiar */ });
+      } else {
+        // Actualización: el service worker nuevo toma el control a media sesión (skipWaiting + claim). Si ya había uno,
+        // la página quedaría con el JS viejo y los datos nuevos mezclados; se recarga UNA vez para quedar toda en la
+        // versión nueva. En la primera visita (sin controlador previo) no se recarga.
+        var hadController = !!navigator.serviceWorker.controller, reloaded = false;
+        navigator.serviceWorker.addEventListener('controllerchange', function() {
+          if (hadController && !reloaded) { reloaded = true; window.location.reload(); }
+        });
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('./sw.js').catch(function(e) {
+            console.warn('PWA: Service Worker no registrado en este entorno:', e);
+          });
+        });
+      }
+    }
+  </script>
+</body>
+</html>

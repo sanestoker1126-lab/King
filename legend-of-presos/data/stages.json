@@ -1,0 +1,402 @@
+{
+  "_doc": "Escenarios (spec §4.6 stage.json). El motor (engine/pg_stage.js) y la interfaz leen SOLO este archivo: un escenario nuevo = una entrada aquí (+ su imagen). Coordenadas de 'art' y 'lights' en pixeles de la imagen; la imagen se coloca en la arena (960x540, suelo en y=480) en art.x/art.y con escala art.scale. theme = colores del dibujo procedural (cielo/suelo fuera de la imagen, o todo el escenario si no hay arte).",
+  "stages": [
+    {
+      "id": "puente_grande",
+      "name": "Puente Grande",
+      "swatch": "#c98a3a",
+      "art": {
+        "file": "assets/stages/puente_grande_exterior.webp",
+        "w": 1260,
+        "h": 540,
+        "x": -150,
+        "y": 0,
+        "scale": 1,
+        "_doc": "Arte entregado por Toker (Reclusorio Preventivo del Estado de Jalisco, atardecer con tormenta). 1260x540 = alto exacto de la arena; centrada (x=-150) cubre hasta pantallas 21:9. La base del muro está en y≈400 de la imagen (luminancia media por filas: 300–330 → 33–40; 390–420 → 25): el suelo de pelea (y=480) cae sobre la calle mojada, delante del portón. En 16:9 se ve el centro (letrero y portón); la torre de vigilancia aparece en pantallas más anchas (teléfonos 20:9)."
+      },
+      "theme": {
+        "sky": 4341826,
+        "back": 4341826,
+        "pillar": 2829619,
+        "floor": 2301981,
+        "line": 7035460,
+        "glow": 2828844
+      },
+      "lights": [
+        {
+          "x": 1067,
+          "y": 154,
+          "r": 54,
+          "kind": "farola"
+        },
+        {
+          "x": 541,
+          "y": 193,
+          "r": 48,
+          "kind": "farola"
+        },
+        {
+          "x": 973,
+          "y": 245,
+          "r": 26,
+          "kind": "muro"
+        },
+        {
+          "x": 1080,
+          "y": 245,
+          "r": 26,
+          "kind": "muro"
+        },
+        {
+          "x": 1032,
+          "y": 301,
+          "r": 22,
+          "kind": "muro"
+        },
+        {
+          "x": 965,
+          "y": 302,
+          "r": 20,
+          "kind": "muro"
+        },
+        {
+          "x": 850,
+          "y": 304,
+          "r": 20,
+          "kind": "muro"
+        },
+        {
+          "x": 379,
+          "y": 303,
+          "r": 18,
+          "kind": "ventana"
+        },
+        {
+          "x": 1154,
+          "y": 70,
+          "r": 22,
+          "kind": "torre"
+        }
+      ],
+      "_lightsDoc": "Detectadas con tools/build_stage_lights.py (luminancia > 215, componentes conexos) y clasificadas a ojo en qa/puente_grande_lights_CONTACT.jpg. Descartadas: #1 (472,176) y #10 (339,225) = claros entre nubes; #8 (851,483) = reflejo en un charco; #3 y #9 = la misma farola que #2. r = radio del halo (diseño).",
+      "tower": {
+        "x": 1154,
+        "y": 70,
+        "_doc": "origen del reflector del menú = luz de la torre (#6)"
+      },
+      "rain": {
+        "count": 64,
+        "speed": 14,
+        "drift": -2.6,
+        "len": 16,
+        "alpha": 0.2
+      },
+      "lightning": {
+        "every": 720,
+        "jitter": 420,
+        "frames": 5,
+        "alpha": 0.2
+      },
+      "wetFloor": {
+        "alpha": 0.16
+      },
+      "_fxDoc": "Lluvia, relámpago y reflejo en el piso mojado: solo dibujo (no tocan la simulación), deterministas por frame (la misma pelea se ve igual). Con 'reducir movimiento' del sistema no hay lluvia ni relámpagos."
+    },
+    {
+      "id": "azul_nocturno",
+      "name": "Azul nocturno",
+      "swatch": "#3f7bb0",
+      "theme": {
+        "sky": 792358,
+        "back": 1189437,
+        "pillar": 1915484,
+        "floor": 528412,
+        "line": 4160432,
+        "glow": 1323085
+      }
+    },
+    {
+      "id": "atardecer_cancha",
+      "name": "Atardecer en la cancha",
+      "swatch": "#b0693f",
+      "theme": {
+        "sky": 2757648,
+        "back": 4005910,
+        "pillar": 6042400,
+        "floor": 1838344,
+        "line": 11561279,
+        "glow": 5057044
+      }
+    },
+    {
+      "id": "patio_verde",
+      "name": "Patio verde",
+      "swatch": "#3fb069",
+      "theme": {
+        "sky": 1055250,
+        "back": 1454109,
+        "pillar": 2120755,
+        "floor": 531471,
+        "line": 4173929,
+        "glow": 1327135
+      }
+    },
+    {
+      "id": "patio_morado",
+      "name": "Patio de noche",
+      "swatch": "#5a4780",
+      "theme": {
+        "sky": 1708839,
+        "back": 2366003,
+        "pillar": 3352141,
+        "floor": 1183003,
+        "line": 5916544,
+        "glow": 2759999
+      },
+      "_doc": "El escenario procedural morado que antes se llamaba 'Puente Grande' (ese nombre ahora es el del arte real)."
+    },
+    {
+      "id": "pemex_guadalajara",
+      "name": "Pemex — Guadalajara",
+      "swatch": "#3f8f78",
+      "art": {
+        "w": 1260,
+        "h": 540,
+        "x": -150,
+        "y": 0,
+        "scale": 1,
+        "layers": [
+          {
+            "id": "background",
+            "file": "assets/stages/guadalajara_pemex_background.png",
+            "depth": 0.1,
+            "target": "back"
+          },
+          {
+            "id": "midground",
+            "file": "assets/stages/guadalajara_pemex_midground.png",
+            "depth": 0.38,
+            "target": "back"
+          },
+          {
+            "id": "crowd",
+            "file": "assets/stages/guadalajara_pemex_crowd.png",
+            "depth": 0.52,
+            "target": "back",
+            "animate": "crowd"
+          },
+          {
+            "id": "foreground",
+            "file": "assets/stages/guadalajara_pemex_foreground.png",
+            "depth": 0.92,
+            "target": "back"
+          }
+        ]
+      },
+      "theme": {
+        "sky": 1716508,
+        "back": 2304317,
+        "pillar": 2969161,
+        "floor": 1184274,
+        "line": 7035460,
+        "glow": 2828844
+      },
+      "rain": {
+        "count": 48,
+        "speed": 12,
+        "drift": -2.0,
+        "len": 14,
+        "alpha": 0.14
+      },
+      "wetFloor": {
+        "alpha": 0.22
+      }
+    },
+    {
+      "id": "oxxo_guadalajara",
+      "name": "Oxxo — Guadalajara",
+      "swatch": "#d34d42",
+      "art": {
+        "w": 1260,
+        "h": 540,
+        "x": -150,
+        "y": 0,
+        "scale": 1,
+        "layers": [
+          {
+            "id": "background",
+            "file": "assets/stages/guadalajara_oxxo_background.png",
+            "depth": 0.1,
+            "target": "back"
+          },
+          {
+            "id": "midground",
+            "file": "assets/stages/guadalajara_oxxo_midground.png",
+            "depth": 0.4,
+            "target": "back"
+          },
+          {
+            "id": "crowd",
+            "file": "assets/stages/guadalajara_oxxo_crowd.png",
+            "depth": 0.55,
+            "target": "back",
+            "animate": "crowd"
+          },
+          {
+            "id": "foreground",
+            "file": "assets/stages/guadalajara_oxxo_foreground.png",
+            "depth": 0.92,
+            "target": "back"
+          }
+        ]
+      },
+      "theme": {
+        "sky": 3026461,
+        "back": 5526612,
+        "pillar": 7352718,
+        "floor": 1315860,
+        "line": 11561279,
+        "glow": 5057044
+      },
+      "rain": {
+        "count": 34,
+        "speed": 10,
+        "drift": -1.4,
+        "len": 11,
+        "alpha": 0.1
+      },
+      "wetFloor": {
+        "alpha": 0.18
+      }
+    },
+    {
+      "id": "penal_puente_grande",
+      "name": "Penal de Puente Grande",
+      "swatch": "#526b78",
+      "art": {
+        "w": 1260,
+        "h": 540,
+        "x": -150,
+        "y": 0,
+        "scale": 1,
+        "layers": [
+          {
+            "id": "background",
+            "file": "assets/stages/puente_grande_penal_background.png",
+            "depth": 0.08,
+            "target": "back"
+          },
+          {
+            "id": "midground",
+            "file": "assets/stages/puente_grande_penal_midground.png",
+            "depth": 0.42,
+            "target": "back"
+          },
+          {
+            "id": "crowd",
+            "file": "assets/stages/puente_grande_penal_crowd.png",
+            "depth": 0.58,
+            "target": "back",
+            "animate": "crowd"
+          },
+          {
+            "id": "foreground",
+            "file": "assets/stages/puente_grande_penal_foreground.png",
+            "depth": 0.94,
+            "target": "back"
+          }
+        ]
+      },
+      "theme": {
+        "sky": 2040341,
+        "back": 3421497,
+        "pillar": 5263445,
+        "floor": 1052688,
+        "line": 5460813,
+        "glow": 2631720
+      },
+      "rain": {
+        "count": 58,
+        "speed": 15,
+        "drift": -2.4,
+        "len": 17,
+        "alpha": 0.16
+      },
+      "lightning": {
+        "every": 860,
+        "jitter": 360,
+        "frames": 4,
+        "alpha": 0.14
+      },
+      "wetFloor": {
+        "alpha": 0.2
+      }
+    },
+    {
+      "id": "oxxo_guadalajara_2",
+      "name": "Oxxo — Guadalajara 2",
+      "swatch": "#b8322a",
+      "art": {
+        "file": "assets/stages/guadalajara_oxxo_2.png",
+        "w": 1260,
+        "h": 540,
+        "x": -150,
+        "y": 0,
+        "scale": 1,
+        "_doc": "Fondo de una sola imagen entregado por el usuario el 2026-11-06 (sha256 c360e379ec6dd80ccc4e894e83dfb3500f80cf1e5ac49d5e73e73f20038bc8f6). 1260x540 = mismo formato que puente_grande_exterior (alto de la arena; x=-150 lo centra). Suelo de pelea (y=480) sobre el pavimento mojado. Sin halos de luz: no hay medición (tools/build_stage_lights.py)."
+      },
+      "theme": {
+        "sky": 3026461,
+        "back": 5526612,
+        "pillar": 7352718,
+        "floor": 1315860,
+        "line": 11561279,
+        "glow": 5057044
+      },
+      "rain": {
+        "count": 34,
+        "speed": 10,
+        "drift": -1.4,
+        "len": 11,
+        "alpha": 0.1
+      },
+      "wetFloor": {
+        "alpha": 0.18
+      },
+      "_doc": "tema, lluvia y piso mojado copiados de 'oxxo_guadalajara' (mismo lugar). Agregado AL FINAL: las campañas usan índices."
+    },
+    {
+      "id": "pemex_guadalajara_2",
+      "name": "Pemex — Guadalajara 2",
+      "swatch": "#1f7a5a",
+      "art": {
+        "file": "assets/stages/guadalajara_pemex_2.png",
+        "w": 1260,
+        "h": 540,
+        "x": -150,
+        "y": 0,
+        "scale": 1,
+        "_doc": "Fondo de una sola imagen entregado por el usuario el 2026-11-06 (sha256 72eb29a873ec65af187b466e65a685c07b7272a86a5077414803aeca7d9c054c). 1260x540 = mismo formato que puente_grande_exterior (alto de la arena; x=-150 lo centra). Suelo de pelea (y=480) sobre el pavimento mojado. Sin halos de luz: no hay medición (tools/build_stage_lights.py)."
+      },
+      "theme": {
+        "sky": 1716508,
+        "back": 2304317,
+        "pillar": 2969161,
+        "floor": 1184274,
+        "line": 7035460,
+        "glow": 2828844
+      },
+      "rain": {
+        "count": 48,
+        "speed": 12,
+        "drift": -2.0,
+        "len": 14,
+        "alpha": 0.14
+      },
+      "wetFloor": {
+        "alpha": 0.22
+      },
+      "_doc": "tema, lluvia y piso mojado copiados de 'pemex_guadalajara' (mismo lugar). Agregado AL FINAL: las campañas usan índices."
+    }
+  ]
+}

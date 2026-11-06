@@ -1,0 +1,53 @@
+{
+  "id": "personaje_08",
+  "estado": "entrega_parcial",
+  "entregas": [
+    {
+      "archivo": "personaje_08__base.png",
+      "clip": "base",
+      "cuadros": 1,
+      "bucle": false,
+      "fps_sugerido": null,
+      "cuadro_impacto": null,
+      "descripcion": [
+        "0: pose idle original, extraída como referencia de diseño y compuesta en una celda 640x640; personaje mira a la derecha."
+      ]
+    },
+    {
+      "archivo": "personaje_08__victory_pose.png",
+      "clip": "victory_pose",
+      "cuadros": 8,
+      "bucle": false,
+      "fps_sugerido": 8,
+      "cuadro_impacto": null,
+      "descripcion": [
+        "0: posa con orgullo y puños a los costados.",
+        "1: recoge los puños hacia el pecho y flexiona levemente las rodillas.",
+        "2: alza un puño a la altura del hombro.",
+        "3: extiende la mano hacia delante en gesto de celebración.",
+        "4: levanta ambos puños junto a los hombros.",
+        "5: lleva una mano al pecho y alza el mentón.",
+        "6: baja los brazos y acomoda el peso en una postura segura.",
+        "7: cierra con un puño cerca del pecho y postura confiada."
+      ]
+    }
+  ],
+  "especificacion": {
+    "celda_px": [
+      640,
+      640
+    ],
+    "alto_personaje_px": 520,
+    "pies_y": 600,
+    "fondo": "transparencia RGBA",
+    "hoja_victoria_px": [
+      5120,
+      640
+    ]
+  },
+  "problemas": [
+    "La entrega incluye el diseño base y victory_pose; faltan todavía ko_fall y dizzy, especificados para personaje_08.",
+    "El ZIP del catálogo no contiene atlas/personaje_08/; se usó la única referencia disponible, hojas/personaje_08.jpg, para el base. La animación de victoria es una elaboración generativa guiada por ese diseño; no puede certificarse identidad pixel a pixel frente a los originales del atlas ausente.",
+    "La hoja JPEG de referencia es de baja resolución; el escalado del diseño base puede mostrar suavidad/artefactos. La victoria conserva el uniforme y rasgos principales visibles, pero requiere revisión de arte final contra los originales si se facilita el atlas."
+  ]
+}

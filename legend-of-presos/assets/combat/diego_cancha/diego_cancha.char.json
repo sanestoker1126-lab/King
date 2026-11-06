@@ -1,0 +1,1063 @@
+{
+  "id": "diego_cancha",
+  "displayName": "Diego \"La Cancha\"",
+  "source": "Paquete diego_cancha_atlas_package (81 frames etiquetados, 9x9 @1920). Corte EXACTO por coordsFile.",
+  "_atlas_status": "OK — atlas + coordenadas presentes; se cortan rects exactos (sin drift de rejilla).",
+  "_frame_data_status": "TODO_VERIFICAR — mapeo frame->animacion por palabras clave (spec §5). Afinar visualmente.",
+  "theme": "atletico/fuego; carga de energia, embates y derribos",
+  "frameSize": {
+    "w": 234,
+    "h": 243
+  },
+  "anchor": {
+    "x": 0.5,
+    "y": 1.0
+  },
+  "pivot_note": "bottom-center aprox; frames miran a la DERECHA. Baseline y=0.96 (afinar).",
+  "vida": 300,
+  "atlases": {
+    "base": {
+      "file": "diego_cancha_atlas.png",
+      "columns": 9,
+      "rows": 9,
+      "anchorsFile": "diego_cancha_atlas_anchors.json",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      }
+    },
+    "hidden_special": {
+      "file": "diego_cancha_hidden_specials.png",
+      "columns": 6,
+      "rows": 1,
+      "cell": {
+        "w": 234,
+        "h": 243
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde base:super_punch; FX externos, no horneados."
+    },
+    "melee_attacks": {
+      "file": "diego_cancha_melee_attacks.png",
+      "columns": 7,
+      "rows": 4,
+      "cell": {
+        "w": 234,
+        "h": 243
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde clips de ataque cuerpo a cuerpo; oponentes y FX separados.",
+      "anchorsFile": "diego_cancha_melee_attacks_anchors.json"
+    },
+    "result_poses": {
+      "file": "diego_cancha_result_poses.png",
+      "columns": 8,
+      "rows": 2,
+      "cell": {
+        "w": 234,
+        "h": 243
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde poses de resultado existentes.",
+      "anchorsFile": "diego_cancha_result_poses_anchors.json"
+    },
+    "combo_sequences": {
+      "file": "diego_cancha_combo_sequences.png",
+      "columns": 10,
+      "rows": 1,
+      "cell": {
+        "w": 234,
+        "h": 243
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde clips de combate existentes; rivales y FX separados.",
+      "anchorsFile": "diego_cancha_combo_sequences_anchors.json"
+    },
+    "golpes": {
+      "file": "diego_cancha_golpes.png",
+      "columns": 5,
+      "rows": 3,
+      "cell": {
+        "w": 392,
+        "h": 248
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.975806
+      },
+      "sha256": "528cfb4fbfc037997e1520c1f682334e52ecbab5801fbe3e6c6fcf919cbc0dab",
+      "source": "tools/build_diego_hojas.py (hojas del usuario en sources/diego_cancha/hojas/; ver LEEME.md)"
+    }
+  },
+  "style": {
+    "walk": 3.0,
+    "run": 5.9,
+    "jumpNormal": -15.2,
+    "jumpHigh": -18.8,
+    "airMove": 2.0
+  },
+  "clips": {
+    "idle": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": true,
+      "frames": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "walk": {
+      "atlas": "base",
+      "fps": 10,
+      "loop": true,
+      "frames": [
+        9,
+        10,
+        11
+      ]
+    },
+    "run": {
+      "atlas": "base",
+      "fps": 12,
+      "loop": true,
+      "frames": [
+        12,
+        13,
+        14
+      ]
+    },
+    "crouch_guard": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        23,
+        24,
+        25,
+        26
+      ]
+    },
+    "jump_mobility": {
+      "atlas": "base",
+      "fps": 12,
+      "loop": false,
+      "frames": [
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ]
+    },
+    "punch_combo": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        36,
+        37,
+        40,
+        41,
+        42,
+        43,
+        44
+      ]
+    },
+    "kick_combo": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        45,
+        46,
+        47,
+        48,
+        49
+      ]
+    },
+    "damage_fall": {
+      "atlas": "base",
+      "fps": 10,
+      "loop": false,
+      "frames": [
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ]
+    },
+    "recovery_pose": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        61,
+        62
+      ]
+    },
+    "front_grab": {
+      "atlas": "base",
+      "fps": 13,
+      "loop": false,
+      "frames": [
+        63,
+        64,
+        65
+      ]
+    },
+    "spinning_throw": {
+      "atlas": "base",
+      "fps": 13,
+      "loop": false,
+      "frames": [
+        66,
+        67,
+        68
+      ]
+    },
+    "special_punch_1": {
+      "atlas": "base",
+      "fps": 13,
+      "loop": false,
+      "frames": [
+        72,
+        73,
+        74,
+        75,
+        76
+      ]
+    },
+    "super_punch": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        72,
+        73,
+        74,
+        75,
+        76,
+        77
+      ]
+    },
+    "victory_pose": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        78,
+        79,
+        80
+      ]
+    },
+    "hurt": {
+      "atlas": "base",
+      "frames": [
+        54,
+        55
+      ],
+      "fps": 10,
+      "hold": true,
+      "_doc": "tools/build_hurt_clips.py: frames de pie iniciales de damage_fall (alto>=0.72*idle)"
+    },
+    "down": {
+      "atlas": "base",
+      "frames": [
+        57
+      ],
+      "fps": 10,
+      "hold": true,
+      "lying": true,
+      "_doc": "tools/build_knockdown_clips.py: frame más bajo de damage_fall/recovery_pose (alto 105, idle 231). VERIFICAR a ojo."
+    },
+    "hidden_special": {
+      "atlas": "hidden_special",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "_source": {
+        "atlas": "base",
+        "clip": "super_punch",
+        "frames": [
+          72,
+          73,
+          74,
+          75,
+          76,
+          77
+        ]
+      }
+    },
+    "melee_punch": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "_source": {
+        "clip": "punch_combo",
+        "frames": [
+          36,
+          37,
+          40,
+          41,
+          42,
+          43,
+          44
+        ]
+      }
+    },
+    "melee_heavy": {
+      "atlas": "melee_attacks",
+      "fps": 13,
+      "loop": false,
+      "frames": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "_source": {
+        "clip": "special_punch_1",
+        "frames": [
+          72,
+          73,
+          74,
+          75,
+          76
+        ]
+      }
+    },
+    "melee_kick": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "_source": {
+        "clip": "kick_combo",
+        "frames": [
+          45,
+          46,
+          47,
+          48,
+          49
+        ]
+      }
+    },
+    "melee_upper": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "_source": {
+        "clip": "super_punch",
+        "frames": [
+          72,
+          73,
+          74,
+          75,
+          76,
+          77
+        ]
+      }
+    },
+    "result_victory": {
+      "atlas": "result_poses",
+      "fps": 8,
+      "loop": false,
+      "hold": true,
+      "frames": [
+        0,
+        1,
+        2
+      ],
+      "_source": {
+        "clip": "victory_pose",
+        "frames": [
+          78,
+          79,
+          80
+        ]
+      }
+    },
+    "result_defeat": {
+      "atlas": "result_poses",
+      "fps": 10,
+      "loop": false,
+      "hold": true,
+      "frames": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "_source": {
+        "clip": "damage_fall",
+        "frames": [
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          57
+        ],
+        "endsWith": "down"
+      }
+    },
+    "combo_flying_kicks": {
+      "atlas": "combo_sequences",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "_sources": [
+        {
+          "clip": "kick_combo",
+          "atlas": "base",
+          "frames": [
+            45,
+            46,
+            47,
+            48,
+            49
+          ]
+        },
+        {
+          "clip": "melee_kick",
+          "atlas": "melee_attacks",
+          "frames": [
+            14,
+            15,
+            16,
+            17,
+            18
+          ]
+        }
+      ]
+    },
+    "d_jab": {
+      "atlas": "golpes",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2
+      ],
+      "_doc": "Puño 1 de la hoja: guardia, jab al frente, guardia"
+    },
+    "d_cross": {
+      "atlas": "golpes",
+      "fps": 13,
+      "loop": false,
+      "frames": [
+        3,
+        4,
+        5
+      ],
+      "_doc": "Puño 2: guardia, recto con giro de cadera (espalda a cámara), guardia"
+    },
+    "d_patada": {
+      "atlas": "golpes",
+      "fps": 13,
+      "loop": false,
+      "frames": [
+        6,
+        7,
+        8
+      ],
+      "_doc": "Patada fuerte: rodilla arriba, patada alta, rodilla arriba"
+    },
+    "d_barrida": {
+      "atlas": "golpes",
+      "fps": 12,
+      "loop": false,
+      "frames": [
+        9,
+        10,
+        11
+      ],
+      "_doc": "Patada deslizada: zancada baja, se desliza con la pierna al frente, rodilla en tierra"
+    },
+    "d_uppercut": {
+      "atlas": "golpes",
+      "fps": 13,
+      "loop": false,
+      "frames": [
+        12,
+        13,
+        14
+      ],
+      "_doc": "Uppercut: agachado cargando, puño arriba, guardia"
+    }
+  },
+  "inputs": {
+    "grounded": {
+      "punch": "punch",
+      "kick": "kick"
+    },
+    "air": {
+      "punch": "j_punch",
+      "kick": "j_kick"
+    },
+    "specials": [
+      {
+        "motion": "hcf",
+        "button": "kick",
+        "move": "command_grab"
+      },
+      {
+        "motion": "qcf",
+        "button": "punch",
+        "move": "tiro_libre"
+      },
+      {
+        "motion": "qcb",
+        "button": "kick",
+        "move": "tackle"
+      },
+      {
+        "motion": "dp",
+        "button": "punch",
+        "move": "uppercut"
+      }
+    ],
+    "supers": [
+      {
+        "motion": "qcf2",
+        "button": "punch",
+        "move": "tiempo_extra"
+      }
+    ],
+    "hidden": [
+      {
+        "motion": "qcf2",
+        "button": "kick",
+        "move": "tiempo_extra_ex"
+      }
+    ],
+    "forward": {
+      "punch": "heavy_punch"
+    }
+  },
+  "moves": {
+    "punch": {
+      "clip": "d_jab",
+      "hitbox": {
+        "x": 14,
+        "y": -118,
+        "w": 73,
+        "h": 21
+      },
+      "frames": {
+        "startup": 4,
+        "active": 2,
+        "recovery": 8
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 13,
+      "blockstun": 10,
+      "cancelFrames": [
+        5,
+        8
+      ],
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": 0,
+      "damage": 9,
+      "guardType": "high",
+      "cancelInto": [
+        "heavy_punch",
+        "kick",
+        "tiro_libre",
+        "uppercut",
+        "tackle",
+        "tiempo_extra",
+        "tiempo_extra_ex"
+      ],
+      "name": "Puño",
+      "nameSrc": "generico",
+      "_measure": "tools/build_diego_hojas.py: impacto en [1] del atlas golpes (clip d_jab idx 1-1); caja = extremidad fuera de d_jab[0], altura 0.71; tiempos: data/normals.json clase jab"
+    },
+    "kick": {
+      "clip": "d_patada",
+      "hitbox": {
+        "x": 15,
+        "y": -135,
+        "w": 110,
+        "h": 47
+      },
+      "frames": {
+        "startup": 6,
+        "active": 3,
+        "recovery": 12
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 17,
+      "blockstun": 13,
+      "cancelFrames": [
+        7,
+        11
+      ],
+      "hitstop": 7,
+      "pushHit": 4,
+      "pushBlock": 3,
+      "pushY": 0,
+      "damage": 11,
+      "guardType": "high",
+      "cancelInto": [
+        "tiro_libre",
+        "uppercut",
+        "tackle",
+        "tiempo_extra",
+        "tiempo_extra_ex"
+      ],
+      "name": "Patada",
+      "nameSrc": "generico",
+      "_measure": "tools/build_diego_hojas.py: impacto en [7] del atlas golpes (clip d_patada idx 1-1); caja = extremidad fuera de d_patada[0], altura 0.74; tiempos: data/normals.json clase kick"
+    },
+    "j_punch": {
+      "clip": "punch_combo",
+      "air": true,
+      "hitFrames": [
+        1,
+        2
+      ],
+      "hitbox": {
+        "x": 50,
+        "y": -160,
+        "w": 88,
+        "h": 50
+      },
+      "guardType": "overhead",
+      "damage": 9,
+      "hitstun": 15,
+      "blockstun": 10,
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushY": 0,
+      "name": "Puño Aéreo",
+      "nameSrc": "generico"
+    },
+    "j_kick": {
+      "clip": "kick_combo",
+      "air": true,
+      "hitFrames": [
+        2,
+        3
+      ],
+      "hitbox": {
+        "x": 54,
+        "y": -110,
+        "w": 100,
+        "h": 58
+      },
+      "guardType": "overhead",
+      "damage": 11,
+      "hitstun": 16,
+      "blockstun": 11,
+      "hitstop": 7,
+      "pushHit": 4,
+      "pushY": 0,
+      "name": "Patada Aérea",
+      "nameSrc": "generico"
+    },
+    "throw": {
+      "type": "throw",
+      "clip": "front_grab",
+      "range": 64,
+      "damage": 12,
+      "tossX": 6,
+      "tossY": -10,
+      "tossFrame": 2,
+      "hold": 40,
+      "hitstop": 10,
+      "name": "Agarre",
+      "nameSrc": "generico"
+    },
+    "command_grab": {
+      "type": "command_grab",
+      "clip": "spinning_throw",
+      "range": 62,
+      "damage": 14,
+      "tossX": 7,
+      "tossY": -9,
+      "tossFrame": 2,
+      "hold": 42,
+      "hitstop": 10,
+      "name": "Llave de Comando",
+      "nameSrc": "generico"
+    },
+    "tackle": {
+      "clip": "d_barrida",
+      "hitbox": {
+        "x": 30,
+        "y": -54,
+        "w": 96,
+        "h": 43
+      },
+      "special": true,
+      "meterCost": 0,
+      "frames": {
+        "startup": 9,
+        "active": 6,
+        "recovery": 18
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "cancelFrames": [
+        10,
+        17
+      ],
+      "hitstun": 18,
+      "blockstun": 12,
+      "damage": 14,
+      "chipDamage": 3,
+      "hitstop": 8,
+      "pushHit": 8,
+      "pushBlock": 4,
+      "advance": 7,
+      "advanceFrames": [
+        0,
+        1
+      ],
+      "knockdown": true,
+      "_doc": "Barrida que avanza (↓↙← + Patada) con el arte de la hoja; derriba (lo que ya decía su nota: knockdown en hit limpio). Avance 7 px por cuadro en la zancada y el deslizamiento. TODO: VERIFICAR jugando.",
+      "pushY": 0,
+      "guardType": "low",
+      "cancelInto": [
+        "tiempo_extra",
+        "tiempo_extra_ex"
+      ],
+      "name": "Patada deslizada",
+      "nameSrc": "hoja del usuario",
+      "_measure": "tools/build_diego_hojas.py: impacto en [10] del atlas golpes (clip d_barrida idx 1-1); caja = extremidad fuera de d_barrida[0], altura 0.21; tiempos: spec (DISEÑO)"
+    },
+    "tiro_libre": {
+      "clip": "special_punch_1",
+      "special": true,
+      "meterCost": 0,
+      "hitFrames": [
+        2,
+        3,
+        4
+      ],
+      "cancelWindow": [
+        2,
+        5
+      ],
+      "cancelInto": [
+        "tiempo_extra"
+      ],
+      "hitbox": {
+        "x": 64,
+        "y": -140,
+        "w": 110,
+        "h": 54
+      },
+      "guardType": "high",
+      "damage": 17,
+      "chipDamage": 4,
+      "hitstun": 20,
+      "blockstun": 14,
+      "hitstop": 10,
+      "pushHit": 6,
+      "pushBlock": 3,
+      "pushY": -2,
+      "invuln": true,
+      "invulnFrames": 3,
+      "cinematic": {
+        "kind": "special",
+        "zoom": 1.4,
+        "freeze": 14,
+        "dur": 40
+      },
+      "_doc": "Especial firma (0 barra). Startup con i-frames cortos; cancelable a super"
+    },
+    "tiempo_extra": {
+      "super": true,
+      "clip": "super_punch",
+      "meterCost": 100,
+      "invuln": true,
+      "invulnFrames": 20,
+      "hitFrames": [
+        1,
+        2,
+        3
+      ],
+      "hitbox": {
+        "x": 58,
+        "y": -160,
+        "w": 150,
+        "h": 80
+      },
+      "guardType": "high",
+      "damage": 92,
+      "hitstun": 28,
+      "blockstun": 18,
+      "hitstop": 16,
+      "pushHit": 8,
+      "pushBlock": 6,
+      "pushY": -4,
+      "cinematic": {
+        "kind": "super",
+        "zoom": 1.95,
+        "freeze": 50,
+        "dur": 80
+      },
+      "_doc": "Super (1 barra llena): acercamiento de camara + flash + congelamiento"
+    },
+    "tiempo_extra_ex": {
+      "super": true,
+      "hidden": true,
+      "clip": "hidden_special",
+      "meterCost": 0,
+      "invuln": true,
+      "invulnFrames": 24,
+      "hitFrames": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "hitbox": {
+        "x": 54,
+        "y": -165,
+        "w": 170,
+        "h": 88
+      },
+      "guardType": "high",
+      "damage": 112,
+      "hitstun": 30,
+      "blockstun": 18,
+      "hitstop": 18,
+      "pushHit": 9,
+      "pushY": -5,
+      "cinematic": {
+        "kind": "super",
+        "zoom": 2.1,
+        "freeze": 56,
+        "dur": 92
+      },
+      "_doc": "DM OCULTO: solo accesible en MAX mode (segunda version del super)",
+      "_hidden_frames": {
+        "file": "diego_cancha_hidden_specials.png",
+        "sourceAtlas": "base",
+        "sourceClip": "super_punch",
+        "sourceFrames": [
+          72,
+          73,
+          74,
+          75,
+          76,
+          77
+        ],
+        "cell": {
+          "w": 234,
+          "h": 243
+        },
+        "fxSeparate": true
+      }
+    },
+    "heavy_punch": {
+      "clip": "d_cross",
+      "hitbox": {
+        "x": 14,
+        "y": -121,
+        "w": 65,
+        "h": 21
+      },
+      "frames": {
+        "startup": 7,
+        "active": 3,
+        "recovery": 16
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 21,
+      "blockstun": 15,
+      "cancelFrames": [
+        8,
+        12
+      ],
+      "hitstop": 9,
+      "pushHit": 5,
+      "pushBlock": 4,
+      "pushY": 0,
+      "damage": 20,
+      "guardType": "high",
+      "cancelInto": [
+        "tiro_libre",
+        "uppercut",
+        "tackle",
+        "tiempo_extra",
+        "tiempo_extra_ex"
+      ],
+      "name": "Golpe fuerte",
+      "nameSrc": "generico",
+      "_measure": "tools/build_diego_hojas.py: impacto en [4] del atlas golpes (clip d_cross idx 1-1); caja = extremidad fuera de d_cross[0], altura 0.74; tiempos: data/normals.json clase fuerte"
+    },
+    "uppercut": {
+      "clip": "d_uppercut",
+      "hitbox": {
+        "x": -34,
+        "y": -135,
+        "w": 67,
+        "h": 63
+      },
+      "special": true,
+      "meterCost": 0,
+      "frames": {
+        "startup": 3,
+        "active": 8,
+        "recovery": 22
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "cancelFrames": [
+        4,
+        13
+      ],
+      "hitstun": 18,
+      "blockstun": 9,
+      "damage": 26,
+      "chipDamage": 4,
+      "hitstop": 8,
+      "pushHit": 3,
+      "pushBlock": 4,
+      "launcher": true,
+      "invuln": true,
+      "invulnFrames": 6,
+      "_doc": "Antiaéreo nuevo (→↓↘ + Puño) con el arte de la hoja: mismos datos que el uppercut estándar del elenco (daño 26, invulnerable al arrancar, lanza). Tiempos de la clase común anti_aereo (tools/specs/bosses_spec.json: 3/8/22, en guardia -20; el aturdimiento en guardia se calcula de ahí). TODO: VERIFICAR jugando.",
+      "pushY": 0,
+      "guardType": "high",
+      "cancelInto": [
+        "tiempo_extra",
+        "tiempo_extra_ex"
+      ],
+      "name": "Uppercut",
+      "nameSrc": "hoja del usuario",
+      "_measure": "tools/build_diego_hojas.py: impacto en [13] del atlas golpes (clip d_uppercut idx 1-1); caja = extremidad fuera de d_uppercut[0], altura 0.69; tiempos: clase común anti_aereo (tools/specs/bosses_spec.json)"
+    }
+  },
+  "victory": {
+    "clip": "victory_pose",
+    "_doc": "pose de victoria con leve acercamiento de camara"
+  },
+  "renderScale": 0.6522,
+  "_fix_note": "Atlas re-empacado por componentes conexos (baseline consistente); antes recortaba cabeza/pies por deriva vertical. frame index preservado.",
+  "portrait": {
+    "atlas": "base",
+    "frame": 0,
+    "head": [
+      72,
+      5,
+      97,
+      97
+    ],
+    "body": [
+      62,
+      12,
+      109,
+      231
+    ],
+    "_doc": "tools/build_portraits.py: rects en pixeles del atlas (frame idle[0]).",
+    "clipBox": {
+      "idle": {
+        "l": 92,
+        "r": 90,
+        "t": 233
+      },
+      "victory_pose": {
+        "l": 92,
+        "r": 89,
+        "t": 202
+      }
+    }
+  },
+  "pivotMode": "frame_bottom_center",
+  "_diego_hojas": {
+    "status": "Hojas nuevas del usuario (mismo uniforme, estilo caricatura con contorno; el atlas base es realista). GENERADO por tools/build_diego_hojas.py desde tools/specs/diego_hojas_spec.json: atlas golpes, clips ['d_barrida', 'd_cross', 'd_jab', 'd_patada', 'd_uppercut'], moves ['heavy_punch', 'kick', 'punch', 'tackle', 'uppercut'], inputs.forward y el especial →↓↘+Puño. El resto del archivo no lo toca la herramienta."
+  }
+}

@@ -1,0 +1,1325 @@
+{
+  "id": "gordo",
+  "displayName": "El Gordo Tacos",
+  "renderScale": 1.6393,
+  "source": "REFERENCIA runtime_manifest (113f, estados medidos) — body apilado de 6 hoja(s)",
+  "frameSize": {
+    "w": 160,
+    "h": 144
+  },
+  "anchor": {
+    "x": 0.5,
+    "y": 1.0
+  },
+  "pivot_note": "bottom_center {'type': 'bottom_center', 'local_x': 80, 'local_y': 136}; frames miran a la DERECHA",
+  "vida": 1120,
+  "atlases": {
+    "base": {
+      "file": "gordo_atlas.png",
+      "columns": 9,
+      "rows": 15,
+      "anchorsFile": "gordo_atlas_anchors.json",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      }
+    },
+    "hidden_special": {
+      "file": "gordo_hidden_specials.png",
+      "columns": 4,
+      "rows": 1,
+      "cell": {
+        "w": 160,
+        "h": 144
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde base:atk_super2; FX externos, no horneados."
+    },
+    "melee_attacks": {
+      "file": "gordo_melee_attacks.png",
+      "columns": 3,
+      "rows": 4,
+      "cell": {
+        "w": 160,
+        "h": 144
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde clips de ataque cuerpo a cuerpo; oponentes y FX separados.",
+      "anchorsFile": "gordo_melee_attacks_anchors.json"
+    },
+    "result_poses": {
+      "file": "gordo_result_poses.png",
+      "columns": 7,
+      "rows": 2,
+      "cell": {
+        "w": 160,
+        "h": 144
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde poses de resultado existentes.",
+      "anchorsFile": "gordo_result_poses_anchors.json"
+    },
+    "combo_sequences": {
+      "file": "gordo_combo_sequences.png",
+      "columns": 12,
+      "rows": 2,
+      "cell": {
+        "w": 160,
+        "h": 144
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde clips de combate existentes; rivales y FX separados.",
+      "anchorsFile": "gordo_combo_sequences_anchors.json"
+    }
+  },
+  "_hitbox_status": "TODO_VERIFICAR — clips/estados MEDIDOS del manifest de referencia; hitboxes, daño y timings son DISEÑO inicial (ajustar jugando en Android).",
+  "clips": {
+    "idle": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": true,
+      "frames": [
+        21,
+        21,
+        22,
+        22
+      ]
+    },
+    "walk": {
+      "atlas": "base",
+      "fps": 10,
+      "loop": true,
+      "frames": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "_fix": "La referencia usaba frames 88-91 (hoja 3) = OTRO vestuario (chamarra + pantalon caqui). Se usa el ciclo de caminata del vestuario base (celdas 3-8, mismo personaje que idle)."
+    },
+    "run": {
+      "atlas": "base",
+      "fps": 12,
+      "loop": true,
+      "frames": [
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    "jump_mobility": {
+      "atlas": "base",
+      "fps": 12,
+      "loop": false,
+      "frames": [
+        49,
+        65,
+        40,
+        67,
+        49
+      ]
+    },
+    "crouch_guard": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        59
+      ]
+    },
+    "damage_fall": {
+      "atlas": "base",
+      "fps": 10,
+      "loop": false,
+      "frames": [
+        39,
+        46,
+        62,
+        63,
+        53,
+        55
+      ]
+    },
+    "recovery_pose": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        57,
+        58,
+        59,
+        49
+      ]
+    },
+    "front_grab": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        25,
+        45
+      ]
+    },
+    "atk_light": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        22,
+        26,
+        22
+      ]
+    },
+    "atk_heavy": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        45,
+        31,
+        30
+      ]
+    },
+    "atk_kick": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        22,
+        41,
+        22
+      ]
+    },
+    "atk_kick2": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        44,
+        35,
+        22
+      ]
+    },
+    "atk_upper": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        30,
+        32,
+        30
+      ]
+    },
+    "atk_sweep": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        59,
+        51,
+        42
+      ]
+    },
+    "atk_sp1": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        85,
+        81,
+        22
+      ]
+    },
+    "atk_sp2": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        86,
+        87,
+        49
+      ]
+    },
+    "atk_super": {
+      "atlas": "base",
+      "fps": 16,
+      "loop": false,
+      "frames": [
+        82,
+        89,
+        36,
+        20
+      ]
+    },
+    "atk_airp": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        40,
+        34,
+        67
+      ]
+    },
+    "atk_airk": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        65,
+        41,
+        67
+      ]
+    },
+    "victory_pose": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        73,
+        71,
+        72,
+        74,
+        76,
+        77,
+        75
+      ]
+    },
+    "atk_taco": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        73,
+        45,
+        26,
+        22
+      ],
+      "_doc": "Lanzamiento de taco con el vestuario BASE: 73 = taco en la mano, 45 = impulso, 26 = brazo extendido (sale el proyectil), 22 = recuperacion. La referencia tacoLanza [92-97] usa el vestuario de chamarra (hoja 4) -> no se usa para no cambiar de ropa en pleno combate."
+    },
+    "atk_barrigazo": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        38,
+        24,
+        22
+      ],
+      "_ref": "ref state barrigazo [38, 24, 22] (indices continuos -> rejilla)"
+    },
+    "atk_sp3": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        35,
+        36,
+        20
+      ],
+      "_ref": "ref state special3 [35, 36, 20] (indices continuos -> rejilla)"
+    },
+    "atk_super2": {
+      "atlas": "base",
+      "fps": 16,
+      "loop": false,
+      "frames": [
+        83,
+        84,
+        36,
+        20
+      ],
+      "_ref": "ref state super2 [80, 81, 36, 20] (indices continuos -> rejilla)"
+    },
+    "max_pose": {
+      "atlas": "base",
+      "fps": 12,
+      "loop": false,
+      "frames": [
+        82,
+        83,
+        84
+      ],
+      "_ref": "ref state max [79, 80, 81] (indices continuos -> rejilla)"
+    },
+    "taunt": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        75,
+        70
+      ],
+      "_ref": "ref state taunt [75, 70] (indices continuos -> rejilla)"
+    },
+    "hurt": {
+      "atlas": "base",
+      "frames": [
+        39,
+        46
+      ],
+      "fps": 10,
+      "hold": true,
+      "_doc": "tools/build_hurt_clips.py: frames de pie iniciales de damage_fall (alto>=0.72*idle)"
+    },
+    "down": {
+      "atlas": "base",
+      "frames": [
+        63
+      ],
+      "fps": 10,
+      "hold": true,
+      "lying": true,
+      "_doc": "tools/build_knockdown_clips.py: frame más bajo de damage_fall/recovery_pose (alto 39, idle 92). VERIFICAR a ojo."
+    },
+    "hidden_special": {
+      "atlas": "hidden_special",
+      "fps": 16,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "_source": {
+        "atlas": "base",
+        "clip": "atk_super2",
+        "frames": [
+          83,
+          84,
+          36,
+          20
+        ]
+      }
+    },
+    "melee_punch": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2
+      ],
+      "_source": {
+        "clip": "atk_light",
+        "frames": [
+          22,
+          26,
+          22
+        ]
+      }
+    },
+    "melee_heavy": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        3,
+        4,
+        5
+      ],
+      "_source": {
+        "clip": "atk_heavy",
+        "frames": [
+          45,
+          31,
+          30
+        ]
+      }
+    },
+    "melee_kick": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        6,
+        7,
+        8
+      ],
+      "_source": {
+        "clip": "atk_kick",
+        "frames": [
+          22,
+          41,
+          22
+        ]
+      }
+    },
+    "melee_upper": {
+      "atlas": "melee_attacks",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        9,
+        10,
+        11
+      ],
+      "_source": {
+        "clip": "atk_upper",
+        "frames": [
+          30,
+          32,
+          30
+        ]
+      }
+    },
+    "result_victory": {
+      "atlas": "result_poses",
+      "fps": 8,
+      "loop": false,
+      "hold": true,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "_source": {
+        "clip": "victory_pose",
+        "frames": [
+          73,
+          71,
+          72,
+          74,
+          76,
+          77,
+          75
+        ]
+      }
+    },
+    "result_defeat": {
+      "atlas": "result_poses",
+      "fps": 10,
+      "loop": false,
+      "hold": true,
+      "frames": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "_source": {
+        "clip": "damage_fall",
+        "frames": [
+          39,
+          46,
+          62,
+          63,
+          53,
+          55,
+          63
+        ],
+        "endsWith": "down"
+      }
+    },
+    "combo_body_melee": {
+      "atlas": "combo_sequences",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "_sources": [
+        {
+          "clip": "melee_punch",
+          "atlas": "melee_attacks",
+          "frames": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "clip": "melee_heavy",
+          "atlas": "melee_attacks",
+          "frames": [
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "clip": "melee_kick",
+          "atlas": "melee_attacks",
+          "frames": [
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "clip": "melee_upper",
+          "atlas": "melee_attacks",
+          "frames": [
+            9,
+            10,
+            11
+          ]
+        }
+      ]
+    },
+    "combo_body_grab": {
+      "atlas": "combo_sequences",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "_sources": [
+        {
+          "clip": "front_grab",
+          "atlas": "base",
+          "frames": [
+            25,
+            45
+          ]
+        },
+        {
+          "clip": "melee_heavy",
+          "atlas": "melee_attacks",
+          "frames": [
+            3,
+            4,
+            5
+          ]
+        }
+      ]
+    }
+  },
+  "inputs": {
+    "grounded": {
+      "punch": "punch",
+      "kick": "kick"
+    },
+    "air": {
+      "punch": "j_punch",
+      "kick": "j_kick"
+    },
+    "specials": [
+      {
+        "motion": "qcf",
+        "button": "kick",
+        "move": "taco"
+      },
+      {
+        "motion": "qcf",
+        "button": "punch",
+        "move": "fireball"
+      },
+      {
+        "motion": "dp",
+        "button": "punch",
+        "move": "uppercut"
+      },
+      {
+        "motion": "qcb",
+        "button": "kick",
+        "move": "seismic"
+      },
+      {
+        "motion": "hcf",
+        "button": "kick",
+        "move": "command_grab"
+      }
+    ],
+    "supers": [
+      {
+        "motion": "qcf2",
+        "button": "punch",
+        "move": "super"
+      },
+      {
+        "motion": "qcf2",
+        "button": "kick",
+        "move": "taco_infernal"
+      }
+    ],
+    "hidden": [
+      {
+        "motion": "qcf2",
+        "button": "punch",
+        "move": "caida_del_bloque"
+      }
+    ],
+    "forward": {
+      "punch": "heavy_punch",
+      "kick": "heavy_kick"
+    }
+  },
+  "moves": {
+    "punch": {
+      "clip": "atk_light",
+      "hitbox": {
+        "x": 60,
+        "y": -90,
+        "w": 21,
+        "h": 28
+      },
+      "guardType": "high",
+      "damage": 12,
+      "hitstun": 13,
+      "blockstun": 10,
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": 0,
+      "cancelInto": [
+        "heavy_punch",
+        "kick",
+        "fireball",
+        "uppercut",
+        "super"
+      ],
+      "name": "Puño",
+      "nameSrc": "generico",
+      "frames": {
+        "startup": 4,
+        "active": 2,
+        "recovery": 8
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "cancelFrames": [
+        5,
+        8
+      ],
+      "_normals": "tools/build_normals.py: frame de impacto [1] y caja medidos del sprite (altura 0.52); tiempos de data/normals.json clase jab"
+    },
+    "kick": {
+      "clip": "atk_kick",
+      "hitFrames": [
+        1
+      ],
+      "hitbox": {
+        "x": 34,
+        "y": -50,
+        "w": 60,
+        "h": 26
+      },
+      "guardType": "low",
+      "damage": 16,
+      "hitstun": 16,
+      "blockstun": 11,
+      "hitstop": 7,
+      "pushHit": 4,
+      "pushBlock": 3,
+      "pushY": 0,
+      "cancelWindow": [
+        1,
+        2
+      ],
+      "cancelInto": [
+        "heavy_kick",
+        "fireball",
+        "uppercut",
+        "taco",
+        "super"
+      ],
+      "name": "Patada",
+      "nameSrc": "generico"
+    },
+    "j_punch": {
+      "clip": "atk_airp",
+      "hitbox": {
+        "x": 60,
+        "y": -100,
+        "w": 36,
+        "h": 26
+      },
+      "guardType": "overhead",
+      "damage": 13,
+      "hitstun": 15,
+      "blockstun": 10,
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": 0,
+      "air": true,
+      "name": "Puño Aéreo",
+      "nameSrc": "generico",
+      "_doc": "Aereo de puno: diagonal hacia adelante a media altura. Antes: plantilla identica para ambos (x28,y-96,52x30). TODO: VERIFICAR jugando.",
+      "frames": {
+        "startup": 4,
+        "active": 7,
+        "recovery": 3
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "_normals": "tools/build_normals.py: frame de impacto [1] y caja medidos del sprite (altura 0.59); tiempos de data/normals.json clase aire_p"
+    },
+    "j_kick": {
+      "clip": "atk_airk",
+      "hitFrames": [
+        1
+      ],
+      "hitbox": {
+        "x": 16,
+        "y": -64,
+        "w": 62,
+        "h": 52
+      },
+      "guardType": "overhead",
+      "damage": 13,
+      "hitstun": 15,
+      "blockstun": 10,
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": 0,
+      "air": true,
+      "name": "Patada Aérea",
+      "nameSrc": "generico",
+      "_doc": "Patada de salto: hacia ABAJO-adelante (jump-in que alcanza la cabeza al caer). Antes: plantilla identica para ambos (x28,y-96,52x30). TODO: VERIFICAR jugando."
+    },
+    "fireball": {
+      "clip": "atk_sp1",
+      "hitFrames": [
+        1
+      ],
+      "hitbox": {
+        "x": 10,
+        "y": -110,
+        "w": 70,
+        "h": 80
+      },
+      "guardType": "high",
+      "damage": 23,
+      "hitstun": 16,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 5,
+      "pushBlock": 3,
+      "pushY": -8,
+      "special": true,
+      "meterCost": 0,
+      "cancelInto": [
+        "super"
+      ],
+      "cancelWindow": [
+        1,
+        4
+      ],
+      "name": "Carga Pesada",
+      "nameSrc": "ref:PGPersonajes",
+      "advance": 6,
+      "advanceFrames": [
+        0,
+        1
+      ],
+      "launcher": true,
+      "hitAnim": "impacto_tierra",
+      "_doc": "ref special_1 (derriba). TODO: VERIFICAR frame-data jugando (diseno)"
+    },
+    "uppercut": {
+      "clip": "atk_sp2",
+      "hitFrames": [
+        1
+      ],
+      "hitbox": {
+        "x": -6,
+        "y": -150,
+        "w": 66,
+        "h": 120
+      },
+      "guardType": "high",
+      "damage": 26,
+      "hitstun": 18,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": -11,
+      "launcher": true,
+      "special": true,
+      "meterCost": 0,
+      "invuln": true,
+      "invulnFrames": 8,
+      "cancelInto": [
+        "super"
+      ],
+      "cancelWindow": [
+        1,
+        4
+      ],
+      "name": "Golpe de Patio",
+      "nameSrc": "ref:PGPersonajes",
+      "_doc": "ref special_2 (dp+P, derriba). TODO: VERIFICAR frame-data jugando (diseno)"
+    },
+    "seismic": {
+      "clip": "atk_barrigazo",
+      "hitFrames": [
+        1
+      ],
+      "hitbox": {
+        "x": 10,
+        "y": -100,
+        "w": 60,
+        "h": 70
+      },
+      "guardType": "high",
+      "damage": 20,
+      "hitstun": 18,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 8,
+      "pushBlock": 3,
+      "pushY": 0,
+      "special": true,
+      "meterCost": 0,
+      "name": "Barrigazo",
+      "nameSrc": "ref:manifest(state barrigazo)",
+      "advance": 6,
+      "advanceFrames": [
+        0,
+        1
+      ],
+      "_doc": "Panzazo que avanza (estado barrigazo de la referencia). TODO: VERIFICAR frame-data jugando (diseno)"
+    },
+    "super": {
+      "clip": "atk_super",
+      "hitFrames": [
+        2,
+        3
+      ],
+      "hitbox": {
+        "x": 0,
+        "y": -120,
+        "w": 90,
+        "h": 120
+      },
+      "guardType": "high",
+      "damage": 22,
+      "hitstun": 24,
+      "blockstun": 16,
+      "hitstop": 14,
+      "pushHit": 8,
+      "pushBlock": 3,
+      "pushY": -9,
+      "super": true,
+      "meterCost": 100,
+      "invuln": true,
+      "invulnFrames": 22,
+      "cinematic": {
+        "kind": "super",
+        "zoom": 1.85,
+        "freeze": 46,
+        "dur": 74
+      },
+      "name": "Peso Muerto",
+      "nameSrc": "ref:PGPersonajes",
+      "advance": 7,
+      "advanceFrames": [
+        2,
+        3
+      ],
+      "multiHit": true,
+      "launcher": true,
+      "fx": [
+        {
+          "at": 3,
+          "anim": "polvo_dash",
+          "x": -30,
+          "y": 0,
+          "life": 12,
+          "ground": true,
+          "back": true
+        }
+      ],
+      "_doc": "ref dm_1: 145/1000 -> 2x22. TODO: VERIFICAR frame-data jugando (diseno)"
+    },
+    "throw": {
+      "type": "throw",
+      "clip": "front_grab",
+      "range": 70,
+      "damage": 22,
+      "tossX": 8,
+      "tossY": -11,
+      "tossFrame": 1,
+      "hold": 42,
+      "hitstop": 10,
+      "_doc": "ref throw dano 72/1000 -> 22.",
+      "name": "Agarre",
+      "nameSrc": "generico"
+    },
+    "command_grab": {
+      "type": "command_grab",
+      "clip": "front_grab",
+      "range": 86,
+      "damage": 40,
+      "tossX": 6,
+      "tossY": -13,
+      "tossFrame": 1,
+      "hold": 40,
+      "hitstop": 13,
+      "cinematic": {
+        "kind": "grab",
+        "zoom": 1.55,
+        "freeze": 26,
+        "dur": 46
+      },
+      "name": "Llave de Comando",
+      "nameSrc": "generico"
+    },
+    "taco": {
+      "clip": "atk_taco",
+      "hitFrames": [],
+      "hitbox": {
+        "x": 10,
+        "y": -110,
+        "w": 70,
+        "h": 80
+      },
+      "guardType": "high",
+      "damage": 23,
+      "hitstun": 16,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 5,
+      "pushBlock": 3,
+      "pushY": 0,
+      "special": true,
+      "meterCost": 0,
+      "cancelInto": [
+        "super"
+      ],
+      "cancelWindow": [
+        1,
+        4
+      ],
+      "name": "Taco Volador",
+      "nameSrc": "provisional",
+      "_doc": "Arrojadizo: lanza un taco girando (sale en el frame 2 = brazo extendido). Dueno confirmado por el usuario. TODO: VERIFICAR frame-data jugando (diseno)",
+      "spawnFrame": 2,
+      "spawns": {
+        "speed": 7.5,
+        "life": 90,
+        "offsetX": 52,
+        "offsetY": -88,
+        "hitbox": {
+          "w": 44,
+          "h": 30
+        },
+        "damage": 18,
+        "hitstun": 16,
+        "blockstun": 12,
+        "hitstop": 8,
+        "pushHit": 5,
+        "pushBlock": 3,
+        "chipDamage": 2,
+        "guardType": "high",
+        "kind": "taco",
+        "anim": "taco_giro",
+        "hitAnim": "taco_impacto",
+        "animH": 50
+      }
+    },
+    "taco_infernal": {
+      "clip": "atk_taco",
+      "hitFrames": [],
+      "hitbox": {
+        "x": 0,
+        "y": -120,
+        "w": 90,
+        "h": 120
+      },
+      "guardType": "high",
+      "damage": 22,
+      "hitstun": 24,
+      "blockstun": 16,
+      "hitstop": 14,
+      "pushHit": 8,
+      "pushBlock": 3,
+      "pushY": -9,
+      "super": true,
+      "meterCost": 100,
+      "invuln": true,
+      "invulnFrames": 22,
+      "cinematic": {
+        "kind": "super",
+        "zoom": 1.85,
+        "freeze": 46,
+        "dur": 74
+      },
+      "name": "Taco Infernal",
+      "nameSrc": "provisional",
+      "multiHit": true,
+      "launcher": true,
+      "fx": [
+        {
+          "at": 0,
+          "anim": "taco_llamas",
+          "x": 30,
+          "y": -110,
+          "life": 10,
+          "attach": true,
+          "scale": 0.8
+        }
+      ],
+      "_doc": "DM arrojadizo: taco envuelto en anillo de fuego, 4 golpes. TODO: VERIFICAR frame-data jugando (diseno)",
+      "spawnFrame": 2,
+      "spawns": {
+        "speed": 6.5,
+        "life": 105,
+        "offsetX": 66,
+        "offsetY": -84,
+        "hitbox": {
+          "w": 64,
+          "h": 64
+        },
+        "damage": 13,
+        "hitstun": 18,
+        "blockstun": 12,
+        "hitstop": 6,
+        "pushHit": 2,
+        "pushBlock": 3,
+        "chipDamage": 2,
+        "guardType": "high",
+        "kind": "taco",
+        "anim": "taco_disco",
+        "hitAnim": "taco_explosion",
+        "animH": 98,
+        "hits": 4,
+        "hitEvery": 6,
+        "hitSlow": 0.5,
+        "strength": 3
+      }
+    },
+    "caida_del_bloque": {
+      "clip": "hidden_special",
+      "hitFrames": [
+        2,
+        3
+      ],
+      "hitbox": {
+        "x": 0,
+        "y": -120,
+        "w": 90,
+        "h": 120
+      },
+      "guardType": "high",
+      "damage": 36,
+      "hitstun": 24,
+      "blockstun": 16,
+      "hitstop": 14,
+      "pushHit": 8,
+      "pushBlock": 3,
+      "pushY": -9,
+      "super": true,
+      "meterCost": 0,
+      "invuln": true,
+      "invulnFrames": 20,
+      "cinematic": {
+        "kind": "super",
+        "zoom": 1.9,
+        "freeze": 48,
+        "dur": 76
+      },
+      "name": "Caída del Bloque",
+      "nameSrc": "ref:PGPersonajes",
+      "advance": 8,
+      "advanceFrames": [
+        2,
+        3
+      ],
+      "multiHit": true,
+      "launcher": true,
+      "fx": [
+        {
+          "at": 3,
+          "anim": "impacto_tierra",
+          "x": 40,
+          "y": -20,
+          "life": 16
+        },
+        {
+          "at": 3,
+          "anim": "erupcion",
+          "x": 20,
+          "y": 0,
+          "life": 20,
+          "ground": true,
+          "back": true
+        }
+      ],
+      "_doc": "ref max2 (240/1000 -> 2x36). En MAX reemplaza a Peso Muerto. TODO: VERIFICAR frame-data jugando (diseno)",
+      "hidden": true,
+      "_hidden_frames": {
+        "file": "gordo_hidden_specials.png",
+        "sourceAtlas": "base",
+        "sourceClip": "atk_super2",
+        "sourceFrames": [
+          83,
+          84,
+          36,
+          20
+        ],
+        "cell": {
+          "w": 160,
+          "h": 144
+        },
+        "fxSeparate": true
+      }
+    },
+    "heavy_punch": {
+      "clip": "atk_heavy",
+      "damage": 20,
+      "guardType": "high",
+      "name": "Golpe fuerte",
+      "nameSrc": "generico",
+      "hitbox": {
+        "x": 60,
+        "y": -107,
+        "w": 39,
+        "h": 28
+      },
+      "frames": {
+        "startup": 7,
+        "active": 3,
+        "recovery": 16
+      },
+      "activeIdx": [
+        0,
+        1
+      ],
+      "hitstun": 21,
+      "blockstun": 15,
+      "cancelFrames": [
+        8,
+        12
+      ],
+      "hitstop": 9,
+      "pushHit": 5,
+      "pushBlock": 4,
+      "_normals": "tools/build_normals.py: frame de impacto [0, 1] y caja medidos del sprite (altura 0.63); tiempos de data/normals.json clase fuerte",
+      "cancelInto": [
+        "taco",
+        "fireball",
+        "uppercut",
+        "seismic",
+        "super",
+        "taco_infernal"
+      ]
+    },
+    "heavy_kick": {
+      "clip": "atk_kick2",
+      "damage": 22,
+      "guardType": "high",
+      "name": "Patada fuerte",
+      "nameSrc": "generico",
+      "hitbox": {
+        "x": 60,
+        "y": -110,
+        "w": 32,
+        "h": 28
+      },
+      "frames": {
+        "startup": 9,
+        "active": 3,
+        "recovery": 18
+      },
+      "activeIdx": [
+        0,
+        0
+      ],
+      "hitstun": 22,
+      "blockstun": 16,
+      "cancelFrames": [
+        10,
+        14
+      ],
+      "hitstop": 10,
+      "pushHit": 6,
+      "pushBlock": 5,
+      "_normals": "tools/build_normals.py: frame de impacto [0] y caja medidos del sprite (altura 0.65); tiempos de data/normals.json clase patada_fuerte",
+      "cancelInto": [
+        "taco",
+        "fireball",
+        "uppercut",
+        "seismic",
+        "super",
+        "taco_infernal"
+      ]
+    }
+  },
+  "style": {
+    "walk": 2.8,
+    "run": 4.8,
+    "jumpNormal": -15,
+    "jumpHigh": -18.5,
+    "airMove": 2.0
+  },
+  "_frameIndexSpace": "grid",
+  "_frameIndexFix": "tools/fix_sheet_offsets.py: indices continuos de la referencia -> celda de rejilla apilada",
+  "portrait": {
+    "atlas": "base",
+    "frame": 21,
+    "head": [
+      544,
+      330,
+      39,
+      39
+    ],
+    "body": [
+      526,
+      333,
+      73,
+      92
+    ],
+    "_doc": "tools/build_portraits.py: rects en pixeles del atlas (frame idle[0]).",
+    "clipBox": {
+      "idle": {
+        "l": 36,
+        "r": 41,
+        "t": 91
+      },
+      "victory_pose": {
+        "l": 52,
+        "r": 55,
+        "t": 124
+      }
+    }
+  },
+  "pivotMode": "frame_bottom_center"
+}

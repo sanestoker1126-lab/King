@@ -1,0 +1,26 @@
+{
+  "name": "Legend of Presos — El Escape de Puente Grande",
+  "short_name": "Legend of Presos",
+  "description": "Juego de pelea 2D estilo KOF 2002 con simulación determinista a 60 fps ambientado en el penal de Puente Grande.",
+  "start_url": "./game.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "theme_color": "#0f0b16",
+  "background_color": "#0f0b16",
+  "categories": ["games", "action"],
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

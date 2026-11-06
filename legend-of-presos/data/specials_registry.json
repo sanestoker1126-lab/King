@@ -1,0 +1,58 @@
+{
+  "version": 5,
+  "purpose": "Curated special-sequence registry and presentation metadata; engine-independent.",
+  "characters": {
+    "mateo": {
+      "moves": [
+        "rush_brutal",
+        "patada_voladora",
+        "impacto_rojo"
+      ],
+      "preview_limit": 3
+    },
+    "el_oscuro": {
+      "moves": [
+        "rush_sombra",
+        "patada_voladora",
+        "vortice"
+      ],
+      "preview_limit": 3
+    },
+    "regente": {
+      "moves": [
+        "corte_sombrio",
+        "patada_voladora",
+        "poder_rojo"
+      ],
+      "preview_limit": 3
+    },
+    "cochi_bombis": {
+      "moves": [
+        "cuerpo_pesado",
+        "patada_voladora",
+        "terremoto"
+      ],
+      "preview_limit": 3
+    },
+    "don_gorron": {
+      "moves": [
+        "colmillo_verde",
+        "patada_voladora",
+        "rata_fantasma"
+      ],
+      "preview_limit": 3
+    }
+  },
+  "presentation": {
+    "cell": [
+      120,
+      120
+    ],
+    "pivot": [
+      60,
+      116
+    ],
+    "separate_fx": true,
+    "recommended_fps": 12
+  }
+}

@@ -1,0 +1,463 @@
+{
+  "project": "Puente Grande / Legend of Presos",
+  "package": "PG_PIXI_ASSETS_INTEGRADOS_V5",
+  "policy": {
+    "engine_modified": false,
+    "base_atlases": "loaded as body/base movement resources",
+    "special_atlases": "loaded separately; never overwrite base atlas names",
+    "reference_frames": "normalized contour frames for remapping/QA only",
+    "shadow": "QA reference only, not embedded in runtime character atlases",
+    "fighter_floor_y": 790,
+    "logical_special_cell": [
+      120,
+      120
+    ],
+    "special_pivot": [
+      60,
+      116
+    ],
+    "review_atlas_runtime_default": false,
+    "fx_separation": "Obvious FX-only frames are removed from body animation arrays and listed in pg.overlay_fx; source atlas pixels remain unchanged."
+  },
+  "characters_base": [
+    {
+      "id": "callejero",
+      "atlas": "assets/characters/callejero/callejero.json",
+      "image": "assets/characters/callejero/callejero.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        334
+      ],
+      "frames": 23,
+      "animations": 3,
+      "sha256": "3947b3302f53df6eee171325032f08219db9209a440b675f0ad4bca70cb0d9a4"
+    },
+    {
+      "id": "cochi_bombis",
+      "atlas": "assets/characters/cochi_bombis/cochi_bombis.json",
+      "image": "assets/characters/cochi_bombis/cochi_bombis.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        391
+      ],
+      "frames": 23,
+      "animations": 3,
+      "sha256": "3701c55d4e161a9a15870ec32220e54ad8409471ba885a52ecbbfe73178a92e6"
+    },
+    {
+      "id": "don_gorron",
+      "atlas": "assets/characters/don_gorron/don_gorron.json",
+      "image": "assets/characters/don_gorron/don_gorron.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        418
+      ],
+      "frames": 21,
+      "animations": 3,
+      "sha256": "76a5c29aee913e0734879e9557323e2d9dce78c2e75c9ac26a99620261388168"
+    },
+    {
+      "id": "garravas",
+      "atlas": "assets/characters/garravas/garravas.json",
+      "image": "assets/characters/garravas/garravas.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        347
+      ],
+      "frames": 24,
+      "animations": 3,
+      "sha256": "d18b2b67170fcdda14662dce7cf57b3d85bbf07d77e1c851d0383395a4c1fadd"
+    },
+    {
+      "id": "mateo",
+      "atlas": "assets/characters/mateo/mateo.json",
+      "image": "assets/characters/mateo/mateo.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        407
+      ],
+      "frames": 23,
+      "animations": 3,
+      "sha256": "c97adca35abfb8b9beade526774c7d756c8d9251526910fcb4fcd73aefa84367"
+    },
+    {
+      "id": "nadia",
+      "atlas": "assets/characters/nadia/nadia.json",
+      "image": "assets/characters/nadia/nadia.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        331
+      ],
+      "frames": 24,
+      "animations": 3,
+      "sha256": "9450825c748fb79e5310ffa342692dec52e8b703fb4de59a2095ef65ed2304ff"
+    },
+    {
+      "id": "oscuro",
+      "atlas": "assets/characters/oscuro/oscuro.json",
+      "image": "assets/characters/oscuro/oscuro.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        354
+      ],
+      "frames": 24,
+      "animations": 3,
+      "sha256": "4586029ee8bc354b472f2c4896f8f708ed293130afe8d0f3a4e0829b628d3d1c"
+    },
+    {
+      "id": "oscuro_especiales",
+      "atlas": "assets/characters/oscuro_especiales/oscuro_especiales.json",
+      "image": "assets/characters/oscuro_especiales/oscuro_especiales.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        435
+      ],
+      "frames": 23,
+      "animations": 3,
+      "sha256": "e21bd300aa9ba6deaca6dd9c9b542e0b7216748938b0fa79e358ddb84e4acdea"
+    },
+    {
+      "id": "tactico_sin_asignar",
+      "atlas": "assets/characters/tactico_sin_asignar/tactico_sin_asignar.json",
+      "image": "assets/characters/tactico_sin_asignar/tactico_sin_asignar.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        784
+      ],
+      "frames": 62,
+      "animations": 8,
+      "sha256": "fd68310d7a8b5a039875943b856458324ab3b24cc3d0487ea07d2d7251acd3cd"
+    }
+  ],
+  "characters_specials": [
+    {
+      "id": "cochi_bombis",
+      "atlas": "assets/specials/cochi_bombis/cochi_bombis_atlas.json",
+      "image": "assets/specials/cochi_bombis/cochi_bombis_atlas.webp",
+      "pivot": {
+        "x": 60,
+        "y": 116
+      },
+      "clips": [
+        "cuerpo_pesado",
+        "patada_voladora",
+        "terremoto"
+      ],
+      "image_size": [
+        960,
+        360
+      ],
+      "frames": 24,
+      "animations": 3,
+      "sha256": "454dfd21f4b978e02ff0a6d2083e0c21cd85f2f91dacdfd1c304dbc0901d65a6"
+    },
+    {
+      "id": "don_gorron",
+      "atlas": "assets/specials/don_gorron/don_gorron_atlas.json",
+      "image": "assets/specials/don_gorron/don_gorron_atlas.webp",
+      "pivot": {
+        "x": 60,
+        "y": 116
+      },
+      "clips": [
+        "colmillo_verde",
+        "patada_voladora",
+        "rata_fantasma"
+      ],
+      "image_size": [
+        960,
+        360
+      ],
+      "frames": 24,
+      "animations": 3,
+      "sha256": "6b6117fa26bd860023c1585b0e67af75370de836c561be6e369e1376c5980f76"
+    },
+    {
+      "id": "el_oscuro",
+      "atlas": "assets/specials/el_oscuro/el_oscuro_atlas.json",
+      "image": "assets/specials/el_oscuro/el_oscuro_atlas.webp",
+      "pivot": {
+        "x": 60,
+        "y": 116
+      },
+      "clips": [
+        "rush_sombra",
+        "patada_voladora",
+        "vortice"
+      ],
+      "image_size": [
+        960,
+        360
+      ],
+      "frames": 24,
+      "animations": 3,
+      "sha256": "540f036c67f6b66c87bbb80501226f815c49068fca44c3594aa7189fefbaaff0"
+    },
+    {
+      "id": "mateo",
+      "atlas": "assets/specials/mateo/mateo_atlas.json",
+      "image": "assets/specials/mateo/mateo_atlas.webp",
+      "pivot": {
+        "x": 60,
+        "y": 116
+      },
+      "clips": [
+        "rush_brutal",
+        "patada_voladora",
+        "impacto_rojo"
+      ],
+      "image_size": [
+        960,
+        360
+      ],
+      "frames": 24,
+      "animations": 3,
+      "sha256": "2a1382d37a583e1efc16f2348750bbf2c4cf05313aa2646202c7664dbe0aaa50"
+    },
+    {
+      "id": "regente",
+      "atlas": "assets/specials/regente/regente_atlas.json",
+      "image": "assets/specials/regente/regente_atlas.webp",
+      "pivot": {
+        "x": 60,
+        "y": 116
+      },
+      "clips": [
+        "corte_sombrio",
+        "patada_voladora",
+        "poder_rojo"
+      ],
+      "image_size": [
+        960,
+        360
+      ],
+      "frames": 24,
+      "animations": 3,
+      "sha256": "e3b162a7cd501a6432a186360172b42bcc7349b49734eb1fd9ebb0b29f7876ae"
+    }
+  ],
+  "backgrounds": [
+    {
+      "game_id": "patio",
+      "file": "patio_b.svg",
+      "name": "Patio B",
+      "location": "El muro perimetral"
+    },
+    {
+      "game_id": "comedor",
+      "file": "comedor.svg",
+      "name": "Comedor",
+      "location": "Charolas y mesas largas"
+    },
+    {
+      "game_id": "celdas",
+      "file": "pabellon_c.svg",
+      "name": "Pabellón C",
+      "location": "Dos pisos de celdas"
+    },
+    {
+      "game_id": "azotea",
+      "file": "azotea.svg",
+      "name": "Azotea",
+      "location": "La ciudad al otro lado"
+    },
+    {
+      "game_id": "oficina",
+      "file": "oficina_regente.svg",
+      "name": "Oficina del Regente",
+      "location": "La última puerta"
+    }
+  ],
+  "warnings": [
+    "base:cochi_bombis",
+    "base:don_gorron",
+    "base:mateo"
+  ],
+  "source_status": "BORRADOR_EXTRAIDO_NO_INTEGRADO_AL_COMBATE",
+  "curation": {
+    "selected_best_base": [
+      "callejero",
+      "cochi_bombis",
+      "don_gorron",
+      "garravas",
+      "mateo",
+      "nadia",
+      "oscuro"
+    ],
+    "held_for_review": [
+      "oscuro_especiales",
+      "tactico_sin_asignar"
+    ],
+    "selected_specials": [
+      "cochi_bombis",
+      "don_gorron",
+      "el_oscuro",
+      "mateo",
+      "regente"
+    ],
+    "notes": "Curated from the available library packages. Review-only atlases remain shipped but are marked out of default selection."
+  },
+  "character_aliases": {
+    "oscuro_specials": "el_oscuro",
+    "oscuro": "el_oscuro",
+    "regente_final": "regente",
+    "regente_jefe": "regente",
+    "el_oscuro": "el_oscuro",
+    "cochi": "cochi_bombis",
+    "don_gorron_rata": "don_gorron"
+  },
+  "characters_base_curated": [
+    {
+      "id": "callejero",
+      "atlas": "assets/characters/callejero/callejero.json",
+      "image": "assets/characters/callejero/callejero.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        334
+      ],
+      "frames": 23,
+      "animations": 3,
+      "sha256": "3947b3302f53df6eee171325032f08219db9209a440b675f0ad4bca70cb0d9a4"
+    },
+    {
+      "id": "cochi_bombis",
+      "atlas": "assets/characters/cochi_bombis/cochi_bombis.json",
+      "image": "assets/characters/cochi_bombis/cochi_bombis.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        391
+      ],
+      "frames": 23,
+      "animations": 3,
+      "sha256": "3701c55d4e161a9a15870ec32220e54ad8409471ba885a52ecbbfe73178a92e6"
+    },
+    {
+      "id": "don_gorron",
+      "atlas": "assets/characters/don_gorron/don_gorron.json",
+      "image": "assets/characters/don_gorron/don_gorron.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        418
+      ],
+      "frames": 21,
+      "animations": 3,
+      "sha256": "76a5c29aee913e0734879e9557323e2d9dce78c2e75c9ac26a99620261388168"
+    },
+    {
+      "id": "garravas",
+      "atlas": "assets/characters/garravas/garravas.json",
+      "image": "assets/characters/garravas/garravas.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        347
+      ],
+      "frames": 24,
+      "animations": 3,
+      "sha256": "d18b2b67170fcdda14662dce7cf57b3d85bbf07d77e1c851d0383395a4c1fadd"
+    },
+    {
+      "id": "mateo",
+      "atlas": "assets/characters/mateo/mateo.json",
+      "image": "assets/characters/mateo/mateo.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        407
+      ],
+      "frames": 23,
+      "animations": 3,
+      "sha256": "c97adca35abfb8b9beade526774c7d756c8d9251526910fcb4fcd73aefa84367"
+    },
+    {
+      "id": "nadia",
+      "atlas": "assets/characters/nadia/nadia.json",
+      "image": "assets/characters/nadia/nadia.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        331
+      ],
+      "frames": 24,
+      "animations": 3,
+      "sha256": "9450825c748fb79e5310ffa342692dec52e8b703fb4de59a2095ef65ed2304ff"
+    },
+    {
+      "id": "oscuro",
+      "atlas": "assets/characters/oscuro/oscuro.json",
+      "image": "assets/characters/oscuro/oscuro.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        354
+      ],
+      "frames": 24,
+      "animations": 3,
+      "sha256": "4586029ee8bc354b472f2c4896f8f708ed293130afe8d0f3a4e0829b628d3d1c"
+    }
+  ],
+  "review_only": [
+    {
+      "id": "oscuro_especiales",
+      "atlas": "assets/characters/oscuro_especiales/oscuro_especiales.json",
+      "image": "assets/characters/oscuro_especiales/oscuro_especiales.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        435
+      ],
+      "frames": 23,
+      "animations": 3,
+      "sha256": "e21bd300aa9ba6deaca6dd9c9b542e0b7216748938b0fa79e358ddb84e4acdea"
+    },
+    {
+      "id": "tactico_sin_asignar",
+      "atlas": "assets/characters/tactico_sin_asignar/tactico_sin_asignar.json",
+      "image": "assets/characters/tactico_sin_asignar/tactico_sin_asignar.png",
+      "status": "REQUIERE_REVISION_VISUAL",
+      "image_size": [
+        1024,
+        784
+      ],
+      "frames": 62,
+      "animations": 8,
+      "sha256": "fd68310d7a8b5a039875943b856458324ab3b24cc3d0487ea07d2d7251acd3cd"
+    }
+  ],
+  "featured_stages": [
+    "patio",
+    "comedor",
+    "celdas",
+    "azotea",
+    "oficina"
+  ],
+  "selector_defaults": {
+    "layout": "compact_modern",
+    "specials_preview": 5,
+    "stage_cards": "large_preview"
+  },
+  "ui_notes": {
+    "title": "expediente penitenciario + arcade combat",
+    "selector": "compact roster with dossier panel",
+    "hud": "reinforced life/guard/power presentation"
+  },
+  "specials_registry": "data/specials_registry.json",
+  "presentation_features": [
+    "vs_stage_background",
+    "round_fight_ko_fx",
+    "compact_mobile_hud",
+    "title_stage_strip"
+  ]
+}

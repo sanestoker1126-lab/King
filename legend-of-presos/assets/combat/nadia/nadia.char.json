@@ -1,0 +1,938 @@
+{
+  "id": "nadia",
+  "displayName": "Nadia",
+  "renderScale": 1.5228,
+  "source": "REFERENCIA runtime_manifest (86f, estados medidos) — body apilado de 2 hoja(s)",
+  "frameSize": {
+    "w": 160,
+    "h": 144
+  },
+  "anchor": {
+    "x": 0.5,
+    "y": 1.0
+  },
+  "pivot_note": "bottom_center {'type': 'bottom_center', 'local_x': 80, 'local_y': 136}; frames miran a la DERECHA",
+  "vida": 950,
+  "atlases": {
+    "base": {
+      "file": "nadia_atlas.png",
+      "columns": 9,
+      "rows": 11,
+      "anchorsFile": "nadia_atlas_anchors.json",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      }
+    },
+    "melee_attacks": {
+      "file": "nadia_melee_attacks.png",
+      "columns": 3,
+      "rows": 4,
+      "cell": {
+        "w": 160,
+        "h": 144
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde clips de ataque cuerpo a cuerpo; oponentes y FX separados.",
+      "anchorsFile": "nadia_melee_attacks_anchors.json"
+    },
+    "result_poses": {
+      "file": "nadia_result_poses.png",
+      "columns": 5,
+      "rows": 2,
+      "cell": {
+        "w": 160,
+        "h": 144
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde poses de resultado existentes.",
+      "anchorsFile": "nadia_result_poses_anchors.json"
+    },
+    "combo_sequences": {
+      "file": "nadia_combo_sequences.png",
+      "columns": 6,
+      "rows": 1,
+      "cell": {
+        "w": 160,
+        "h": 144
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde clips de combate existentes; rivales y FX separados.",
+      "anchorsFile": "nadia_combo_sequences_anchors.json"
+    }
+  },
+  "_hitbox_status": "TODO_VERIFICAR — clips/estados MEDIDOS del manifest de referencia; hitboxes, daño y timings son DISEÑO inicial (ajustar jugando en Android).",
+  "clips": {
+    "idle": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": true,
+      "frames": [
+        45,
+        46
+      ]
+    },
+    "walk": {
+      "atlas": "base",
+      "fps": 10,
+      "loop": true,
+      "frames": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    "run": {
+      "atlas": "base",
+      "fps": 12,
+      "loop": true,
+      "frames": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ]
+    },
+    "jump_mobility": {
+      "atlas": "base",
+      "fps": 12,
+      "loop": false,
+      "frames": [
+        41,
+        36,
+        47,
+        47,
+        40,
+        41
+      ]
+    },
+    "crouch_guard": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        66
+      ]
+    },
+    "damage_fall": {
+      "atlas": "base",
+      "fps": 10,
+      "loop": false,
+      "frames": [
+        71,
+        71,
+        70,
+        70
+      ]
+    },
+    "recovery_pose": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        73,
+        75,
+        66
+      ]
+    },
+    "front_grab": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        67
+      ]
+    },
+    "atk_light": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        45,
+        54,
+        45
+      ]
+    },
+    "atk_heavy": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        45,
+        58,
+        45
+      ]
+    },
+    "atk_kick": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        45,
+        61,
+        45
+      ]
+    },
+    "atk_kick2": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        45,
+        62,
+        45
+      ]
+    },
+    "atk_upper": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        45,
+        48,
+        45
+      ]
+    },
+    "atk_sweep": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        42,
+        74,
+        42
+      ]
+    },
+    "atk_sp1": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        45,
+        91,
+        45
+      ]
+    },
+    "atk_sp2": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        64,
+        77,
+        45
+      ]
+    },
+    "atk_super": {
+      "atlas": "base",
+      "fps": 16,
+      "loop": false,
+      "frames": [
+        92,
+        93,
+        78
+      ]
+    },
+    "atk_airp": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        45,
+        54,
+        45
+      ]
+    },
+    "atk_airk": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        45,
+        62,
+        45
+      ]
+    },
+    "victory_pose": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        79
+      ]
+    },
+    "atk_sp3": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        90,
+        78,
+        45
+      ]
+    },
+    "hurt": {
+      "atlas": "base",
+      "frames": [
+        71
+      ],
+      "fps": 10,
+      "hold": true,
+      "_doc": "tools/build_hurt_clips.py: frames de pie iniciales de damage_fall (alto>=0.72*idle)"
+    },
+    "down": {
+      "atlas": "base",
+      "frames": [
+        70
+      ],
+      "fps": 10,
+      "hold": true,
+      "lying": true,
+      "_doc": "tools/build_knockdown_clips.py: frame más bajo de damage_fall/recovery_pose (alto 33, idle 98). VERIFICAR a ojo."
+    },
+    "melee_punch": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2
+      ],
+      "_source": {
+        "clip": "atk_light",
+        "frames": [
+          45,
+          54,
+          45
+        ]
+      }
+    },
+    "melee_heavy": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        3,
+        4,
+        5
+      ],
+      "_source": {
+        "clip": "atk_heavy",
+        "frames": [
+          45,
+          58,
+          45
+        ]
+      }
+    },
+    "melee_kick": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        6,
+        7,
+        8
+      ],
+      "_source": {
+        "clip": "atk_kick",
+        "frames": [
+          45,
+          61,
+          45
+        ]
+      }
+    },
+    "melee_upper": {
+      "atlas": "melee_attacks",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        9,
+        10,
+        11
+      ],
+      "_source": {
+        "clip": "atk_upper",
+        "frames": [
+          45,
+          48,
+          45
+        ]
+      }
+    },
+    "result_victory": {
+      "atlas": "result_poses",
+      "fps": 8,
+      "loop": false,
+      "hold": true,
+      "frames": [
+        0
+      ],
+      "_source": {
+        "clip": "victory_pose",
+        "frames": [
+          79
+        ]
+      }
+    },
+    "result_defeat": {
+      "atlas": "result_poses",
+      "fps": 10,
+      "loop": false,
+      "hold": true,
+      "frames": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "_source": {
+        "clip": "damage_fall",
+        "frames": [
+          71,
+          71,
+          70,
+          70,
+          70
+        ],
+        "endsWith": "down"
+      }
+    },
+    "combo_flying_kicks": {
+      "atlas": "combo_sequences",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "_sources": [
+        {
+          "clip": "atk_airk",
+          "atlas": "base",
+          "frames": [
+            45,
+            62,
+            45
+          ]
+        },
+        {
+          "clip": "melee_kick",
+          "atlas": "melee_attacks",
+          "frames": [
+            6,
+            7,
+            8
+          ]
+        }
+      ]
+    }
+  },
+  "inputs": {
+    "grounded": {
+      "punch": "punch",
+      "kick": "kick"
+    },
+    "air": {
+      "punch": "j_punch",
+      "kick": "j_kick"
+    },
+    "specials": [
+      {
+        "motion": "qcf",
+        "button": "punch",
+        "move": "fireball"
+      },
+      {
+        "motion": "dp",
+        "button": "punch",
+        "move": "uppercut"
+      },
+      {
+        "motion": "qcf",
+        "button": "kick",
+        "move": "flying_special"
+      },
+      {
+        "motion": "hcf",
+        "button": "kick",
+        "move": "command_grab"
+      },
+      {
+        "motion": "dp",
+        "button": "kick",
+        "move": "rodilla_ascendente"
+      },
+      {
+        "motion": "qcb",
+        "button": "kick",
+        "move": "paso_sombra"
+      }
+    ],
+    "supers": [
+      {
+        "motion": "qcf2",
+        "button": "punch",
+        "move": "super"
+      }
+    ],
+    "hidden": []
+  },
+  "moves": {
+    "punch": {
+      "clip": "atk_light",
+      "hitbox": {
+        "x": 46,
+        "y": -130,
+        "w": 20,
+        "h": 22
+      },
+      "guardType": "high",
+      "damage": 12,
+      "hitstun": 13,
+      "blockstun": 10,
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": 0,
+      "cancelInto": [
+        "kick",
+        "fireball",
+        "uppercut",
+        "super"
+      ],
+      "name": "Puño",
+      "nameSrc": "generico",
+      "frames": {
+        "startup": 4,
+        "active": 2,
+        "recovery": 8
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "cancelFrames": [
+        5,
+        8
+      ],
+      "_normals": "tools/build_normals.py: frame de impacto [1] y caja medidos del sprite (altura 0.83); tiempos de data/normals.json clase jab"
+    },
+    "kick": {
+      "clip": "atk_kick",
+      "hitbox": {
+        "x": 46,
+        "y": -118,
+        "w": 32,
+        "h": 22
+      },
+      "guardType": "high",
+      "damage": 16,
+      "hitstun": 17,
+      "blockstun": 13,
+      "hitstop": 7,
+      "pushHit": 4,
+      "pushBlock": 3,
+      "pushY": 0,
+      "cancelInto": [
+        "fireball",
+        "uppercut",
+        "flying_special",
+        "super"
+      ],
+      "name": "Patada",
+      "nameSrc": "generico",
+      "frames": {
+        "startup": 6,
+        "active": 3,
+        "recovery": 12
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "cancelFrames": [
+        7,
+        11
+      ],
+      "_normals": "tools/build_normals.py: frame de impacto [1] y caja medidos del sprite (altura 0.74); tiempos de data/normals.json clase kick"
+    },
+    "j_punch": {
+      "clip": "atk_airp",
+      "hitbox": {
+        "x": 46,
+        "y": -130,
+        "w": 20,
+        "h": 22
+      },
+      "guardType": "overhead",
+      "damage": 13,
+      "hitstun": 15,
+      "blockstun": 10,
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": 0,
+      "air": true,
+      "name": "Puño Aéreo",
+      "nameSrc": "generico",
+      "_doc": "Aereo de puno: diagonal hacia adelante a media altura. Antes: plantilla identica para ambos (x28,y-96,52x30). TODO: VERIFICAR jugando.",
+      "frames": {
+        "startup": 4,
+        "active": 7,
+        "recovery": 3
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "_normals": "tools/build_normals.py: frame de impacto [1] y caja medidos del sprite (altura 0.83); tiempos de data/normals.json clase aire_p"
+    },
+    "j_kick": {
+      "clip": "atk_airk",
+      "hitbox": {
+        "x": 46,
+        "y": -102,
+        "w": 63,
+        "h": 25
+      },
+      "guardType": "overhead",
+      "damage": 13,
+      "hitstun": 15,
+      "blockstun": 10,
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": 0,
+      "air": true,
+      "name": "Patada Aérea",
+      "nameSrc": "generico",
+      "_doc": "Patada de salto: hacia ABAJO-adelante (jump-in que alcanza la cabeza al caer). Antes: plantilla identica para ambos (x28,y-96,52x30). TODO: VERIFICAR jugando.",
+      "frames": {
+        "startup": 6,
+        "active": 8,
+        "recovery": 3
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "_normals": "tools/build_normals.py: frame de impacto [1] y caja medidos del sprite (altura 0.62); tiempos de data/normals.json clase aire_k"
+    },
+    "fireball": {
+      "clip": "atk_sp1",
+      "hitFrames": [
+        1
+      ],
+      "hitbox": {
+        "x": 36,
+        "y": -88,
+        "w": 64,
+        "h": 40
+      },
+      "guardType": "high",
+      "damage": 23,
+      "hitstun": 16,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 5,
+      "pushBlock": 3,
+      "pushY": 0,
+      "special": true,
+      "meterCost": 0,
+      "cancelInto": [
+        "super"
+      ],
+      "cancelWindow": [
+        1,
+        4
+      ],
+      "name": "Pulso Borgoña",
+      "nameSrc": "ref:PGPersonajes"
+    },
+    "uppercut": {
+      "clip": "atk_upper",
+      "hitFrames": [
+        1
+      ],
+      "hitbox": {
+        "x": 26,
+        "y": -112,
+        "w": 46,
+        "h": 52
+      },
+      "guardType": "high",
+      "damage": 26,
+      "hitstun": 18,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": -11,
+      "launcher": true,
+      "special": true,
+      "meterCost": 0,
+      "invuln": true,
+      "invulnFrames": 8,
+      "cancelInto": [
+        "super"
+      ],
+      "cancelWindow": [
+        1,
+        4
+      ],
+      "name": "Gancho Ascendente",
+      "nameSrc": "generico"
+    },
+    "flying_special": {
+      "clip": "atk_kick2",
+      "hitFrames": [
+        1
+      ],
+      "hitbox": {
+        "x": 36,
+        "y": -88,
+        "w": 64,
+        "h": 40
+      },
+      "guardType": "high",
+      "damage": 22,
+      "hitstun": 16,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 5,
+      "pushBlock": 3,
+      "pushY": 0,
+      "special": true,
+      "air": false,
+      "name": "Patada Voladora",
+      "nameSrc": "generico"
+    },
+    "seismic": {
+      "clip": "atk_sweep",
+      "hitFrames": [
+        1
+      ],
+      "hitbox": {
+        "x": 40,
+        "y": -30,
+        "w": 66,
+        "h": 24
+      },
+      "guardType": "low",
+      "damage": 18,
+      "hitstun": 18,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 4,
+      "pushBlock": 3,
+      "pushY": 0,
+      "launcher": true,
+      "special": true,
+      "meterCost": 0,
+      "name": "Barrida Sísmica",
+      "nameSrc": "generico"
+    },
+    "super": {
+      "clip": "atk_super",
+      "hitFrames": [
+        1
+      ],
+      "hitbox": {
+        "x": 30,
+        "y": -98,
+        "w": 90,
+        "h": 46
+      },
+      "guardType": "high",
+      "damage": 55,
+      "hitstun": 24,
+      "blockstun": 16,
+      "hitstop": 14,
+      "pushHit": 8,
+      "pushBlock": 3,
+      "pushY": 0,
+      "super": true,
+      "meterCost": 100,
+      "invuln": true,
+      "invulnFrames": 22,
+      "cinematic": {
+        "kind": "super",
+        "zoom": 1.85,
+        "freeze": 46,
+        "dur": 74
+      },
+      "name": "Estallido Contragolpe",
+      "nameSrc": "ref:PGPersonajes"
+    },
+    "throw": {
+      "type": "throw",
+      "clip": "front_grab",
+      "range": 70,
+      "damage": 30,
+      "tossX": 8,
+      "tossY": -11,
+      "tossFrame": 0,
+      "hold": 42,
+      "hitstop": 10,
+      "name": "Agarre",
+      "nameSrc": "generico"
+    },
+    "command_grab": {
+      "type": "command_grab",
+      "clip": "front_grab",
+      "range": 86,
+      "damage": 40,
+      "tossX": 6,
+      "tossY": -13,
+      "tossFrame": 0,
+      "hold": 40,
+      "hitstop": 13,
+      "cinematic": {
+        "kind": "grab",
+        "zoom": 1.55,
+        "freeze": 26,
+        "dur": 46
+      },
+      "name": "Llave de Comando",
+      "nameSrc": "generico"
+    },
+    "rodilla_ascendente": {
+      "clip": "atk_sp2",
+      "hitFrames": [
+        1
+      ],
+      "hitbox": {
+        "x": 0,
+        "y": -110,
+        "w": 44,
+        "h": 54
+      },
+      "guardType": "high",
+      "damage": 26,
+      "hitstun": 18,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": -11,
+      "launcher": true,
+      "special": true,
+      "meterCost": 0,
+      "invuln": true,
+      "invulnFrames": 6,
+      "cancelInto": [
+        "super"
+      ],
+      "cancelWindow": [
+        1,
+        4
+      ],
+      "name": "Rodilla Ascendente",
+      "nameSrc": "ref:PGPersonajes"
+    },
+    "paso_sombra": {
+      "clip": "atk_sp3",
+      "hitFrames": [
+        1
+      ],
+      "hitbox": {
+        "x": 10,
+        "y": -62,
+        "w": 46,
+        "h": 62
+      },
+      "guardType": "high",
+      "damage": 24,
+      "hitstun": 16,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 5,
+      "pushBlock": 3,
+      "pushY": 0,
+      "special": true,
+      "meterCost": 0,
+      "cancelInto": [
+        "super"
+      ],
+      "cancelWindow": [
+        1,
+        4
+      ],
+      "name": "Paso Sombra",
+      "nameSrc": "ref:PGPersonajes",
+      "advance": 6,
+      "advanceFrames": [
+        0,
+        1
+      ],
+      "_doc": "ref special_3 (qcb+K, avance). TODO: VERIFICAR frame-data jugando (diseno)"
+    }
+  },
+  "style": {
+    "walk": 2.8,
+    "run": 4.8,
+    "jumpNormal": -15,
+    "jumpHigh": -18.5,
+    "airMove": 2.0
+  },
+  "_frameIndexSpace": "grid",
+  "_frameIndexFix": "tools/fix_sheet_offsets.py: indices continuos de la referencia -> celda de rejilla apilada",
+  "portrait": {
+    "atlas": "base",
+    "frame": 45,
+    "head": [
+      66,
+      757,
+      41,
+      41
+    ],
+    "body": [
+      45,
+      760,
+      68,
+      98
+    ],
+    "_doc": "tools/build_portraits.py: rects en pixeles del atlas (frame idle[0]).",
+    "clipBox": {
+      "idle": {
+        "l": 38,
+        "r": 34,
+        "t": 97
+      },
+      "victory_pose": {
+        "l": 26,
+        "r": 28,
+        "t": 90
+      }
+    }
+  },
+  "pivotMode": "frame_bottom_center"
+}

@@ -1,5 +1,7 @@
 # Puente Grande · Arcade Club
 
+> **Este repositorio también contiene el proyecto principal _Legend of Presos — El Escape de Puente Grande_ en [`legend-of-presos/`](legend-of-presos/README.md)** (PixiJS, entrada `legend-of-presos/game.html`). Es independiente de este prototipo: no usa Vite, ni `package.json`, ni el flujo de GitHub Pages de abajo.
+
 Prototipo de juego de peleas para navegador, creado con los tres paquetes de recursos adjuntos de Puente Grande. Incluye seis luchadores, cinco escenarios, rival CPU en tres dificultades, partidas al mejor de tres rondas, efectos de sonido y controles de teclado y táctiles.
 
 ## Jugar en GitHub Pages

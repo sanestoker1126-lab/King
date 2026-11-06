@@ -1,0 +1,529 @@
+{
+  "_doc": "Roster jugable del motor PIXI. Un personaje nuevo = agregar entrada aqui + su carpeta en assets/combat/. Cero lineas de motor.",
+  "default": {
+    "p1": "tobi",
+    "p2": "mateo"
+  },
+  "aliases": {
+    "_doc": "Nombres equivocados/variantes -> id canonico. No se tocan los ids; esta tabla los resuelve (?p1=cochi_bombis carga cochibomba).",
+    "cochi_bombis": "cochibomba",
+    "cochibomba_v248": "cochibomba",
+    "oscuro": "el_oscuro",
+    "oscuro_especiales": "el_oscuro",
+    "tactico_sin_asignar": "tactico_purpura",
+    "regente_jefe": "regente",
+    "el_aedillo": "el_aedillo",
+    "gordo_tacos": "gordo",
+    "el_gordo_tacos": "gordo",
+    "el_gordo": "gordo"
+  },
+  "_nombres_notas": {
+    "titanazul": "viste rojo/negro, no azul (el nombre engaña)",
+    "bestiamorada": "viste verde; el morado esta en el FX",
+    "elexplosivo": "es MUJER (trenzas, top turquesa); nombre en masculino",
+    "jefecarmesi": "trae texto 'IDLE' horneado bajo la fila 0"
+  },
+  "characters": [
+    {
+      "id": "personaje_08",
+      "name": "Personaje 08",
+      "dir": "assets/combat/personaje_08/",
+      "char": "personaje_08.char.json",
+      "status": "playable",
+      "notes": "Base de referencia del motor (24 clips medidos + atlas de especiales).",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": null,
+        "src": "sin expediente en la referencia"
+      }
+    },
+    {
+      "id": "wasirris",
+      "name": "Wasirris \"El Analista\"",
+      "dir": "assets/combat/wasirris/",
+      "char": "wasirris.char.json",
+      "status": "playable",
+      "notes": "Corte EXACTO por coordsFile (81 frames). Frame-data = diseno, TODO_VERIFICAR jugando.",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": "El Analista",
+        "src": "sin expediente en la referencia (alias tomado del nombre)"
+      }
+    },
+    {
+      "id": "valentina_niebla",
+      "name": "Valentina \"Niebla\"",
+      "dir": "assets/combat/valentina_niebla/",
+      "char": "valentina_niebla.char.json",
+      "status": "playable",
+      "notes": "Corte EXACTO por coordsFile (81 frames). Frame-data = diseno, TODO_VERIFICAR jugando.",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": "Niebla",
+        "src": "sin expediente en la referencia (alias tomado del nombre)"
+      }
+    },
+    {
+      "id": "diego_cancha",
+      "name": "Diego \"La Cancha\"",
+      "dir": "assets/combat/diego_cancha/",
+      "char": "diego_cancha.char.json",
+      "status": "playable",
+      "notes": "Corte EXACTO por coordsFile (81 frames) + atlas `golpes` con las hojas nuevas del usuario (jab, golpe fuerte, patada, patada deslizada, uppercut; tools/build_diego_hojas.py). Frame-data = diseño, TODO_VERIFICAR jugando.",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": "La Cancha",
+        "src": "sin expediente en la referencia (alias tomado del nombre)"
+      }
+    },
+    {
+      "id": "mateo_alcaide",
+      "name": "Mateo \"El Alcaide\" Rivera",
+      "dir": "assets/combat/mateo_alcaide/",
+      "char": "mateo.char.json",
+      "status": "needs_atlas",
+      "notes": "Stub antiguo (sin PNG). Superado por el canonico 'mateo' (referencia). Alias no aplicado para no romper datos."
+    },
+    {
+      "id": "tobi",
+      "name": "Tobi",
+      "dir": "assets/combat/tobi/",
+      "char": "tobi.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (81f, estados MEDIDOS). Rejilla 9x9 120px. Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": "0237",
+        "celda": "Patio B",
+        "alias": "El Sobrino",
+        "src": "referencia META/NMETA"
+      }
+    },
+    {
+      "id": "semillas",
+      "name": "Semillas",
+      "dir": "assets/combat/semillas/",
+      "char": "semillas.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (77f, estados MEDIDOS). Rejilla 9x9 120px.",
+      "perfil": {
+        "reo": "0421",
+        "celda": "Patio B",
+        "alias": "El del cometa",
+        "src": "referencia META/NMETA"
+      }
+    },
+    {
+      "id": "cochibomba",
+      "name": "Cochi Bombis",
+      "dir": "assets/combat/cochibomba/",
+      "char": "cochibomba.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico (126f, estados MEDIDOS). Rejilla 9x14 120px (2 hojas apiladas). alias: cochi_bombis.",
+      "perfil": {
+        "reo": "1180",
+        "celda": "Patio de carga",
+        "alias": "Peso de la cadena",
+        "src": "referencia META/NMETA"
+      }
+    },
+    {
+      "id": "mateo",
+      "name": "Mateo \"El Alcaide\"",
+      "dir": "assets/combat/mateo/",
+      "char": "mateo.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Arte de El Sable (decisión del usuario 2026-10-25: espadachín de abrigo negro; el arte anterior quedó en sources/mateo/guardia_azul/). Atlas sentado GENERADO por tools/build_seated_char.py desde tools/specs/mateo_seated.json: no editar a mano. Frame-data de especiales = DISEÑO, TODO: VERIFICAR jugando.",
+      "perfil": {
+        "reo": "0712",
+        "celda": "Patio B",
+        "alias": "Puños de brasa",
+        "src": "referencia META/NMETA"
+      }
+    },
+    {
+      "id": "nadia",
+      "name": "Nadia",
+      "dir": "assets/combat/nadia/",
+      "char": "nadia.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico (86f, estados MEDIDOS). Rejilla 9x11 160x144 (2 hojas apiladas).",
+      "perfil": {
+        "reo": "0588",
+        "celda": "Patio B",
+        "alias": "Pulso borgoña",
+        "src": "referencia META/NMETA"
+      }
+    },
+    {
+      "id": "garravas",
+      "name": "Garravas",
+      "dir": "assets/combat/garravas/",
+      "char": "garravas.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (estados MEDIDOS). Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": "0313",
+        "celda": "Módulo 4",
+        "alias": "La bestia",
+        "src": "referencia META/NMETA"
+      }
+    },
+    {
+      "id": "regente",
+      "name": "Regente",
+      "dir": "assets/combat/regente/",
+      "char": "regente.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (estados MEDIDOS). Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": "0001",
+        "celda": "Celda de castigo",
+        "alias": "Jefe final",
+        "src": "referencia META/NMETA"
+      }
+    },
+    {
+      "id": "cadena",
+      "name": "Cadena",
+      "dir": "assets/combat/cadena/",
+      "char": "cadena.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (estados MEDIDOS). Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": "0943",
+        "celda": "Patio C",
+        "alias": "Peso y cadena",
+        "src": "referencia META/NMETA"
+      }
+    },
+    {
+      "id": "calavera",
+      "name": "La Tapia",
+      "dir": "assets/combat/calavera/",
+      "char": "calavera.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (estados MEDIDOS). Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": "0851",
+        "celda": "Patio D",
+        "alias": "Ánima roja",
+        "src": "referencia META/NMETA"
+      }
+    },
+    {
+      "id": "morado",
+      "name": "Morado",
+      "dir": "assets/combat/morado/",
+      "char": "morado.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (estados MEDIDOS). Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": "0648",
+        "celda": "Módulo 3",
+        "alias": "Pulso violeta",
+        "src": "referencia META/NMETA"
+      }
+    },
+    {
+      "id": "cartel",
+      "name": "El Cartel",
+      "dir": "assets/combat/cartel/",
+      "char": "cartel.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (estados MEDIDOS). Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": "0812",
+        "celda": "Módulo 4",
+        "alias": "El patrón",
+        "src": "referencia META/NMETA"
+      }
+    },
+    {
+      "id": "carmesi",
+      "name": "Carmesí",
+      "dir": "assets/combat/carmesi/",
+      "char": "carmesi.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (estados MEDIDOS). Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": null,
+        "src": "sin expediente en la referencia"
+      }
+    },
+    {
+      "id": "mecanico",
+      "name": "El Mecánico",
+      "dir": "assets/combat/mecanico/",
+      "char": "mecanico.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (estados MEDIDOS). Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": "0774",
+        "celda": "Taller",
+        "alias": "El del taller",
+        "src": "referencia META/NMETA"
+      }
+    },
+    {
+      "id": "tatuado",
+      "name": "El Tatuado",
+      "dir": "assets/combat/tatuado/",
+      "char": "tatuado.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (estados MEDIDOS). Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": null,
+        "src": "sin expediente en la referencia"
+      }
+    },
+    {
+      "id": "morado_urbano",
+      "name": "Morado Urbano",
+      "dir": "assets/combat/morado_urbano/",
+      "char": "morado_urbano.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (estados MEDIDOS). Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": null,
+        "src": "sin expediente en la referencia"
+      }
+    },
+    {
+      "id": "bigotes",
+      "name": "Bigotes",
+      "dir": "assets/combat/bigotes/",
+      "char": "bigotes.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (estados MEDIDOS). Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": "0671",
+        "celda": "Patio C",
+        "alias": "El del mostacho",
+        "src": "referencia META/NMETA"
+      }
+    },
+    {
+      "id": "pocheche",
+      "name": "Pocheche",
+      "dir": "assets/combat/pocheche/",
+      "char": "pocheche.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (estados MEDIDOS). Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": "0735",
+        "celda": "Patio B",
+        "alias": "El pesado",
+        "src": "referencia META/NMETA"
+      }
+    },
+    {
+      "id": "pocheche_tijeras",
+      "name": "Pocheche Tijeras",
+      "dir": "assets/combat/pocheche_tijeras/",
+      "char": "pocheche_tijeras.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (estados MEDIDOS). Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": null,
+        "src": "sin expediente en la referencia"
+      }
+    },
+    {
+      "id": "gasu_harlequin",
+      "name": "Gasu Harlequin",
+      "dir": "assets/combat/gasu_harlequin/",
+      "char": "gasu_harlequin.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (estados MEDIDOS). Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": null,
+        "src": "sin expediente en la referencia"
+      }
+    },
+    {
+      "id": "negrito_nito",
+      "name": "Negrito Nito",
+      "dir": "assets/combat/negrito_nito/",
+      "char": "negrito_nito.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (estados MEDIDOS). Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": null,
+        "src": "sin expediente en la referencia"
+      }
+    },
+    {
+      "id": "luchador_v2",
+      "name": "Luchador V2",
+      "dir": "assets/combat/luchador_v2/",
+      "char": "luchador_v2.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Canonico de la referencia (estados MEDIDOS). Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": null,
+        "src": "sin expediente en la referencia"
+      }
+    },
+    {
+      "id": "gordo",
+      "name": "El Gordo Tacos",
+      "dir": "assets/combat/gordo/",
+      "char": "gordo.char.json",
+      "status": "playable",
+      "origen": "canonico",
+      "notes": "Recuperado de _excluidos (build-11): la hoja de 1 celda ya no desalinea (remapeo de indices por frameStart). Vestuario BASE (tank top). Nombre segun el usuario (2026-10-15). Frame-data=diseno TODO_VERIFICAR.",
+      "perfil": {
+        "reo": "0888",
+        "celda": "Patio de carga",
+        "alias": "Peso pesado",
+        "src": "referencia META/NMETA"
+      }
+    },
+    {
+      "id": "don_garras",
+      "name": "Don Garras",
+      "dir": "assets/combat/don_garras/",
+      "char": "don_garras.char.json",
+      "status": "playable",
+      "provisional": true,
+      "origen": "jefe del paquete de jefes (04_SOLO_JEFES_INTEGRADOS.zip), hoja re-encuadrada",
+      "notes": "PROVISIONAL (decisión del usuario 2026-10-24: seleccionable con etiqueta). Solo tiene los movimientos que tienen cuadros propios; frame-data, cajas y FX = medición del arte + diseño, TODO: VERIFICAR jugando. No entra solo como rival (Torneo / reemplazos de Arcade): hay que elegirlo. GENERADO por tools/build_boss_chars.py desde tools/specs/bosses_spec.json: no editar a mano.",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": null,
+        "src": "sin expediente (jefe del paquete de jefes)"
+      }
+    },
+    {
+      "id": "warriza_wasa",
+      "name": "Warriza Wasa",
+      "dir": "assets/combat/warriza_wasa/",
+      "char": "warriza_wasa.char.json",
+      "status": "playable",
+      "provisional": true,
+      "origen": "jefe del paquete de jefes (04_SOLO_JEFES_INTEGRADOS.zip), hoja re-encuadrada",
+      "notes": "PROVISIONAL (decisión del usuario 2026-10-24: seleccionable con etiqueta). Solo tiene los movimientos que tienen cuadros propios; frame-data, cajas y FX = medición del arte + diseño, TODO: VERIFICAR jugando. No entra solo como rival (Torneo / reemplazos de Arcade): hay que elegirlo. GENERADO por tools/build_boss_chars.py desde tools/specs/bosses_spec.json: no editar a mano.",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": null,
+        "src": "sin expediente (jefe del paquete de jefes)"
+      }
+    },
+    {
+      "id": "wasita",
+      "name": "Wasita",
+      "dir": "assets/combat/wasita/",
+      "char": "wasita.char.json",
+      "status": "playable",
+      "provisional": true,
+      "origen": "jefe del paquete de jefes (04_SOLO_JEFES_INTEGRADOS.zip), hoja re-encuadrada",
+      "notes": "PROVISIONAL (decisión del usuario 2026-10-24: seleccionable con etiqueta). Solo tiene los movimientos que tienen cuadros propios; frame-data, cajas y FX = medición del arte + diseño, TODO: VERIFICAR jugando. No entra solo como rival (Torneo / reemplazos de Arcade): hay que elegirlo. GENERADO por tools/build_boss_chars.py desde tools/specs/bosses_spec.json: no editar a mano.",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": null,
+        "src": "sin expediente (jefe del paquete de jefes)"
+      }
+    },
+    {
+      "id": "sofi",
+      "name": "La Sofi",
+      "dir": "assets/combat/sofi/",
+      "char": "sofi.char.json",
+      "status": "playable",
+      "hidden": true,
+      "badge": "SECRETA",
+      "origen": "Nina (arte de la base) + poses v5 con cuernos; atlas de tools/build_sofi.py",
+      "notes": "SECRETA (decisión del usuario 2026-10-24): no aparece en la selección hasta vencerla en su combate del Arcade (combate 4, sub-jefa con doble vida y doble daño; data/campaigns.json). Frame-data de especiales = DISEÑO, TODO: VERIFICAR jugando. GENERADO por tools/build_sofi.py desde tools/specs/sofi_spec.json: no editar a mano.",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": null,
+        "src": "sin expediente (personaje secreto)"
+      }
+    },
+    {
+      "id": "nina_kof",
+      "name": "Nina KOF",
+      "dir": "assets/combat/nina_kof/",
+      "char": "nina_kof.char.json",
+      "status": "needs_data",
+      "notes": "Clips de arte procesados por contorno y cargados por PGLoader en prueba Chromium; faltan moves, inputs, renderScale y frame-data/combate aprobados. No seleccionable. Ver nina_kof_contour_runtime_draft.char.json e INTEGRACION_NINA_KOF.md. La versión JUGABLE de este arte es `sofi` (La Sofi, personaje secreto: tools/build_sofi.py); esta entrada se conserva como el borrador de contornos que validan tools/validate_nina_contours.py y qa/test_nina_contour_loader.py."
+    },
+    {
+      "id": "el_aedillo",
+      "name": "El Aedillo",
+      "dir": "assets/combat/el_aedillo/",
+      "char": "el_aedillo.char.json",
+      "status": "playable",
+      "provisional": true,
+      "origen": "paquete del usuario el_aedillo_master_package.zip (81 figuras, sources/el_aedillo/); atlas sentado de tools/build_seated_char.py",
+      "notes": "PROVISIONAL (2026-10-26; el usuario dejó la decisión abierta): seleccionable con etiqueta, no entra solo como rival. Identidad sin confirmar. Poses elegidas a ojo (los rótulos del paquete no coinciden con lo dibujado); sin agarres (los cuadros de agarre traen al rival dibujado). Frame-data, nombres y daños = DISEÑO, TODO: VERIFICAR jugando. GENERADO por tools/build_seated_char.py desde tools/specs/el_aedillo_seated.json: no editar a mano.",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": null,
+        "src": "sin expediente (personaje nuevo del paquete)"
+      }
+    },
+    {
+      "id": "el_paisa_sistem",
+      "name": "El Paisa Sistem",
+      "dir": "assets/combat/el_paisa_sistem/",
+      "char": "el_paisa_sistem.char.json",
+      "status": "playable",
+      "origen": "paquete del usuario El_Paisa_Sistem_COMPLETO_216_frames_120x120.zip (216 cuadros, sources/entregas_2026-11-06/el_paisa_sistem/); atlas y char.json de tools/integrar_entregas_20261106.py",
+      "notes": "Personaje NUEVO (2026-11-06). Sin mareo propio (el paquete no trae dizzy: usa el respaldo del motor). Frame-data, daños y comandos = DISEÑO, TODO: VERIFICAR jugando. GENERADO por tools/integrar_entregas_20261106.py desde tools/specs/el_paisa_sistem_spec.json: no editar a mano.",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": null,
+        "src": "sin expediente (personaje nuevo del paquete)"
+      }
+    }
+  ],
+  "_resueltos": {
+    "gordo": "Antes excluido por hoja irregular (160px, 1 columna). Resuelto en build-11 con tools/fix_sheet_offsets.py. OJO: sus hojas 3-4 de la referencia son OTRO vestuario (chamarra + pantalon caqui; 4 de caminar + 6 de lanzar tacos) y no se usan para no cambiar de ropa en combate."
+  }
+}

@@ -1,0 +1,36 @@
+:root{
+  --bg:#140f1a; --panel:#1d1726cc; --ink:#f3ecff; --muted:#b9a7d6;
+  --acc:#ffcf4d; --acc2:#6fe3a0; --warn:#ff8a5c; --line:#3a2f4d;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
+  font-family:"Barlow Condensed",system-ui,Segoe UI,Roboto,sans-serif;overflow:hidden}
+#game{position:fixed;inset:0}
+#game canvas{display:block;width:100%;height:100%}
+
+#hud{position:fixed;top:0;left:0;right:0;padding:10px 14px;pointer-events:none;
+  display:flex;justify-content:space-between;align-items:flex-start;gap:12px;z-index:5}
+#titulo{font-weight:800;letter-spacing:.5px;font-size:20px;text-shadow:0 2px 0 #000}
+#titulo span{color:var(--muted);font-weight:600;font-size:13px}
+#ficha{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:6px 12px;backdrop-filter:blur(6px);text-align:right;min-width:120px}
+#ficha-nombre{display:block;font-weight:800;font-size:18px;color:var(--acc)}
+#ficha-meta{display:block;font-size:12px;color:var(--muted)}
+
+#selector{position:fixed;left:0;right:0;bottom:64px;z-index:5;
+  display:flex;gap:8px;overflow-x:auto;padding:8px 12px;scrollbar-width:thin}
+#selector button{flex:0 0 auto;background:var(--panel);color:var(--ink);
+  border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:15px;
+  font-weight:700;cursor:pointer;white-space:nowrap}
+#selector button.sel{background:var(--acc);color:#2a1d00;border-color:var(--acc)}
+#selector button .f{font-size:11px;color:var(--muted);margin-left:6px;font-weight:600}
+#selector button.sel .f{color:#5a4700}
+#selector button.borrador{border-color:var(--warn)}
+
+#controles{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;gap:8px;
+  padding:10px 12px;background:linear-gradient(0deg,#0b0810,transparent)}
+#controles button{flex:1;background:#2a2136;color:var(--ink);border:1px solid var(--line);
+  border-radius:10px;padding:10px;font-weight:700;font-size:15px;cursor:pointer}
+#controles button:active{background:var(--acc);color:#2a1d00}
+
+@media (max-width:480px){ #titulo{font-size:16px} #titulo span{display:none} }

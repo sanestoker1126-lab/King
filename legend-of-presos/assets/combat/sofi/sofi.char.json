@@ -1,0 +1,779 @@
+{
+  "id": "sofi",
+  "displayName": "La Sofi",
+  "renderScale": 1.3393,
+  "source": "64 celdas de Nina de la base (assets/combat/nina_kof/0X_*.png, intactas) + 12 poses con cuernos del paquete nina_kof_runtime_atlases_v5 (sources/sofi/v5/); atlas armado por tools/build_sofi.py",
+  "frameSize": {
+    "w": 144,
+    "h": 144
+  },
+  "anchor": {
+    "x": 0.5,
+    "y": 0.958333
+  },
+  "pivot_note": "Pie sólido de TODOS los frames en la fila 138 de la celda y raíz en la columna central: ancla única {'x': 0.5, 'y': 0.958333}.",
+  "vida": 1000,
+  "atlases": {
+    "base": {
+      "file": "sofi_atlas.png",
+      "columns": 8,
+      "rows": 10,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.958333
+      },
+      "sha256": "ea2fc272769716ab18ca4881ac9d81acec98a6bcd018f82314c96c0c7ba1a376"
+    }
+  },
+  "clips": {
+    "idle": {
+      "atlas": "base",
+      "fps": 6,
+      "frames": [
+        0
+      ],
+      "loop": true,
+      "_doc": "guardia (única guardia limpia de la base; las demás guardias son el inicio de cada golpe) · frames: idle_1"
+    },
+    "walk": {
+      "atlas": "base",
+      "fps": 6,
+      "frames": [
+        2,
+        3
+      ],
+      "loop": true,
+      "_doc": "pasos de caminar (en la fuente venían etiquetados como idle_3/idle_4) · frames: idle_3, idle_4"
+    },
+    "run": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        72,
+        73,
+        74,
+        75
+      ],
+      "loop": true,
+      "_doc": "carrera (v5, con cuernos) · frames: v5_06_01, v5_06_02, v5_06_03, v5_06_04"
+    },
+    "crouch_guard": {
+      "atlas": "base",
+      "fps": 8,
+      "frames": [
+        7
+      ],
+      "loop": false,
+      "hold": true,
+      "_doc": "agachada en guardia (en la fuente: advance_4) · frames: advance_4"
+    },
+    "jump_mobility": {
+      "atlas": "base",
+      "fps": 3,
+      "frames": [
+        5,
+        9
+      ],
+      "loop": false,
+      "hold": true,
+      "_doc": "salto encogida (advance_2) y estirada (jump_2) · frames: advance_2, jump_2"
+    },
+    "damage_fall": {
+      "atlas": "base",
+      "fps": 10,
+      "frames": [
+        33,
+        37,
+        38,
+        39
+      ],
+      "loop": false,
+      "_doc": "golpe hacia atrás, lanzada, de cabeza, tendida · frames: hit_2, launch_2, launch_3, launch_4"
+    },
+    "hurt": {
+      "atlas": "base",
+      "fps": 10,
+      "frames": [
+        32
+      ],
+      "hold": true,
+      "_doc": "golpe recibido de pie · frames: hit_1"
+    },
+    "down": {
+      "atlas": "base",
+      "fps": 10,
+      "frames": [
+        39
+      ],
+      "hold": true,
+      "lying": true,
+      "_doc": "tendida boca arriba · frames: launch_4"
+    },
+    "recovery_pose": {
+      "atlas": "base",
+      "fps": 8,
+      "frames": [
+        41,
+        42,
+        44
+      ],
+      "loop": false,
+      "_doc": "a gatas, de rodillas, encorvada de pie: 23 frames de levantada (mediana del roster) · frames: fall_2, fall_3, getup_1"
+    },
+    "victory_pose": {
+      "atlas": "base",
+      "fps": 8,
+      "frames": [
+        66
+      ],
+      "hold": true,
+      "_doc": "puño en alto y mano en la cadera (v5) · frames: v5_02_03"
+    },
+    "atk_light": {
+      "atlas": "base",
+      "fps": 14,
+      "frames": [
+        16,
+        17,
+        19
+      ],
+      "loop": false,
+      "_doc": "guardia -> jab -> guardia · frames: light_punch_1, light_punch_2, light_punch_4"
+    },
+    "atk_heavy": {
+      "atlas": "base",
+      "fps": 14,
+      "frames": [
+        20,
+        21,
+        22,
+        23
+      ],
+      "loop": false,
+      "_doc": "guardia -> directo -> directo a fondo -> guardia · frames: heavy_punch_1, heavy_punch_2, heavy_punch_3, heavy_punch_4"
+    },
+    "atk_kick": {
+      "atlas": "base",
+      "fps": 14,
+      "frames": [
+        28,
+        29,
+        30,
+        31
+      ],
+      "loop": false,
+      "_doc": "guardia -> rodilla arriba -> patada alta -> rodilla · frames: high_kick_1, high_kick_2, high_kick_3, high_kick_4"
+    },
+    "atk_kick2": {
+      "atlas": "base",
+      "fps": 14,
+      "frames": [
+        24,
+        25,
+        26,
+        27
+      ],
+      "loop": false,
+      "_doc": "guardia -> rodilla -> patada media de pie -> rodilla (etiqueta 'low_kick' en la fuente, pero es de pie) · frames: low_kick_1, low_kick_2, low_kick_3, low_kick_4"
+    },
+    "atk_sp1": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        48,
+        49,
+        50,
+        51
+      ],
+      "loop": false,
+      "_doc": "guardia -> arranca -> corre -> se lanza con la mano al frente · frames: antler_charge_1, antler_charge_2, antler_charge_3, antler_charge_4"
+    },
+    "atk_sp2": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        52,
+        53,
+        54,
+        55
+      ],
+      "loop": false,
+      "_doc": "estrella en el pecho -> la lanza (estela rosa del arte) -> palma extendida · frames: candy_star_1, candy_star_2, candy_star_3, candy_star_4"
+    },
+    "atk_sp3": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        71,
+        70,
+        69,
+        68
+      ],
+      "loop": false,
+      "_doc": "junta las manos -> empuja con las dos -> palma a fondo (v5) · frames: v5_05_04, v5_05_03, v5_05_02, v5_05_01"
+    },
+    "atk_sp4": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        56,
+        57
+      ],
+      "loop": false,
+      "_doc": "giro con listón rosa (los dos frames sanos; _3 y _4 están dañados) · frames: ribbon_spin_1, ribbon_spin_2"
+    },
+    "atk_super": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        60,
+        61,
+        62,
+        63
+      ],
+      "loop": false,
+      "_doc": "estrella con listón -> salta -> brazos abiertos en el aire -> cae en picada · frames: festive_super_1, festive_super_2, festive_super_3, festive_super_4"
+    }
+  },
+  "inputs": {
+    "grounded": {
+      "punch": "punch",
+      "kick": "kick"
+    },
+    "air": {},
+    "forward": {
+      "punch": "heavy_punch",
+      "kick": "heavy_kick"
+    },
+    "specials": [
+      {
+        "motion": "qcf",
+        "button": "punch",
+        "move": "estrella_caramelo"
+      },
+      {
+        "motion": "qcf",
+        "button": "kick",
+        "move": "embestida_cuernos"
+      },
+      {
+        "motion": "qcb",
+        "button": "punch",
+        "move": "empuje_navideno"
+      },
+      {
+        "motion": "qcb",
+        "button": "kick",
+        "move": "giro_liston"
+      }
+    ],
+    "supers": [
+      {
+        "motion": "qcf2",
+        "button": "punch",
+        "move": "super_festiva"
+      }
+    ],
+    "hidden": []
+  },
+  "moves": {
+    "punch": {
+      "clip": "atk_light",
+      "hitbox": {
+        "x": 23,
+        "y": -111,
+        "w": 48,
+        "h": 19
+      },
+      "frames": {
+        "startup": 4,
+        "active": 2,
+        "recovery": 8
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 13,
+      "blockstun": 10,
+      "cancelFrames": [
+        5,
+        8
+      ],
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": 0,
+      "damage": 12,
+      "guardType": "high",
+      "cancelInto": [
+        "heavy_punch",
+        "estrella_caramelo",
+        "embestida_cuernos",
+        "empuje_navideno",
+        "giro_liston",
+        "super_festiva"
+      ],
+      "name": "Puño",
+      "nameSrc": "generico",
+      "_measure": "tools/build_sofi.py: impacto en ['light_punch_2'] (clip atk_light idx 1-1); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.68; tiempos de data/normals.json clase jab"
+    },
+    "heavy_punch": {
+      "clip": "atk_heavy",
+      "hitbox": {
+        "x": 20,
+        "y": -115,
+        "w": 55,
+        "h": 20
+      },
+      "frames": {
+        "startup": 7,
+        "active": 3,
+        "recovery": 16
+      },
+      "activeIdx": [
+        2,
+        2
+      ],
+      "hitstun": 21,
+      "blockstun": 15,
+      "cancelFrames": [
+        8,
+        12
+      ],
+      "hitstop": 9,
+      "pushHit": 5,
+      "pushBlock": 4,
+      "pushY": 0,
+      "damage": 20,
+      "guardType": "high",
+      "cancelInto": [
+        "estrella_caramelo",
+        "embestida_cuernos",
+        "empuje_navideno",
+        "giro_liston",
+        "super_festiva"
+      ],
+      "name": "Golpe fuerte",
+      "nameSrc": "generico",
+      "_measure": "tools/build_sofi.py: impacto en ['heavy_punch_3'] (clip atk_heavy idx 2-2); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.70; tiempos de data/normals.json clase fuerte"
+    },
+    "kick": {
+      "clip": "atk_kick",
+      "hitbox": {
+        "x": 20,
+        "y": -151,
+        "w": 71,
+        "h": 39
+      },
+      "frames": {
+        "startup": 6,
+        "active": 3,
+        "recovery": 12
+      },
+      "activeIdx": [
+        2,
+        2
+      ],
+      "hitstun": 17,
+      "blockstun": 13,
+      "cancelFrames": [
+        7,
+        11
+      ],
+      "hitstop": 7,
+      "pushHit": 4,
+      "pushBlock": 3,
+      "pushY": 0,
+      "damage": 16,
+      "guardType": "high",
+      "cancelInto": [
+        "heavy_kick",
+        "estrella_caramelo",
+        "embestida_cuernos",
+        "empuje_navideno",
+        "giro_liston",
+        "super_festiva"
+      ],
+      "name": "Patada alta",
+      "nameSrc": "generico",
+      "_measure": "tools/build_sofi.py: impacto en ['high_kick_3'] (clip atk_kick idx 2-2); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.88; tiempos de data/normals.json clase kick"
+    },
+    "heavy_kick": {
+      "clip": "atk_kick2",
+      "hitbox": {
+        "x": 8,
+        "y": -91,
+        "w": 70,
+        "h": 21
+      },
+      "frames": {
+        "startup": 9,
+        "active": 3,
+        "recovery": 18
+      },
+      "activeIdx": [
+        2,
+        2
+      ],
+      "hitstun": 22,
+      "blockstun": 16,
+      "cancelFrames": [
+        10,
+        14
+      ],
+      "hitstop": 10,
+      "pushHit": 6,
+      "pushBlock": 5,
+      "pushY": 0,
+      "damage": 22,
+      "guardType": "high",
+      "cancelInto": [
+        "estrella_caramelo",
+        "embestida_cuernos",
+        "empuje_navideno",
+        "giro_liston",
+        "super_festiva"
+      ],
+      "name": "Patada media",
+      "nameSrc": "generico",
+      "_measure": "tools/build_sofi.py: impacto en ['low_kick_3'] (clip atk_kick2 idx 2-2); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.54; tiempos de data/normals.json clase patada_fuerte"
+    },
+    "estrella_caramelo": {
+      "clip": "atk_sp2",
+      "hitbox": {
+        "x": 23,
+        "y": -110,
+        "w": 46,
+        "h": 19
+      },
+      "frames": {
+        "startup": 11,
+        "active": 4,
+        "recovery": 20
+      },
+      "activeIdx": [
+        2,
+        2
+      ],
+      "hitstun": 25,
+      "blockstun": 17,
+      "damage": 24,
+      "hitstop": 8,
+      "pushHit": 5,
+      "pushBlock": 3,
+      "guardType": "high",
+      "pushY": 0,
+      "special": true,
+      "meterCost": 0,
+      "cancelFrames": [
+        12,
+        17
+      ],
+      "cancelInto": [
+        "super_festiva"
+      ],
+      "name": "Estrella de caramelo",
+      "nameSrc": "etiqueta de la fuente (candy_star)",
+      "_measure": "tools/build_sofi.py: impacto en ['candy_star_3'] (clip atk_sp2 idx 2-2); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.67; tiempos de tools/specs/sofi_spec.json specialClasses.palma (DISEÑO)",
+      "_doc": "Golpe de palma con la estela rosa que trae el arte. TODO: VERIFICAR jugando."
+    },
+    "embestida_cuernos": {
+      "clip": "atk_sp1",
+      "hitbox": {
+        "x": 24,
+        "y": -24,
+        "w": 33,
+        "h": 25
+      },
+      "frames": {
+        "startup": 11,
+        "active": 6,
+        "recovery": 20
+      },
+      "activeIdx": [
+        3,
+        3
+      ],
+      "hitstun": 25,
+      "blockstun": 15,
+      "damage": 22,
+      "hitstop": 9,
+      "pushHit": 6,
+      "pushBlock": 4,
+      "pushY": -7,
+      "knockdown": true,
+      "guardType": "low",
+      "advance": 6,
+      "advanceFrames": [
+        1,
+        3
+      ],
+      "special": true,
+      "meterCost": 0,
+      "cancelFrames": [
+        12,
+        19
+      ],
+      "cancelInto": [
+        "super_festiva"
+      ],
+      "name": "Embestida de cuernos",
+      "nameSrc": "etiqueta de la fuente (antler_charge)",
+      "_measure": "tools/build_sofi.py: impacto en ['antler_charge_4'] (clip atk_sp1 idx 3-3); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.08; tiempos de tools/specs/sofi_spec.json specialClasses.embestida (DISEÑO)",
+      "_doc": "Corre hacia adelante y se lanza en picada con la mano (y el brillo rosa del arte) a ras del piso: golpe BAJO medido (altura 0.08), se bloquea agachado; derriba. TODO: VERIFICAR jugando."
+    },
+    "empuje_navideno": {
+      "clip": "atk_sp3",
+      "hitbox": {
+        "x": 23,
+        "y": -117,
+        "w": 59,
+        "h": 35
+      },
+      "frames": {
+        "startup": 14,
+        "active": 4,
+        "recovery": 22
+      },
+      "activeIdx": [
+        2,
+        3
+      ],
+      "hitstun": 29,
+      "blockstun": 17,
+      "damage": 26,
+      "hitstop": 9,
+      "pushHit": 8,
+      "pushBlock": 5,
+      "guardType": "high",
+      "pushY": 0,
+      "special": true,
+      "meterCost": 0,
+      "cancelFrames": [
+        15,
+        20
+      ],
+      "cancelInto": [
+        "super_festiva"
+      ],
+      "name": "Empuje navideño",
+      "nameSrc": "provisional",
+      "_measure": "tools/build_sofi.py: impacto en ['v5_05_02', 'v5_05_01'] (clip atk_sp3 idx 2-3); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.66; tiempos de tools/specs/sofi_spec.json specialClasses.empuje (DISEÑO)",
+      "_doc": "Empujón con las dos palmas (poses v5); aleja al rival. Nombre propuesto por el arte. TODO: VERIFICAR jugando."
+    },
+    "giro_liston": {
+      "clip": "atk_sp4",
+      "hitbox": {
+        "x": 8,
+        "y": -108,
+        "w": 62,
+        "h": 58
+      },
+      "frames": {
+        "startup": 6,
+        "active": 10,
+        "recovery": 16
+      },
+      "activeIdx": [
+        0,
+        1
+      ],
+      "hitstun": 26,
+      "blockstun": 21,
+      "damage": 11,
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "guardType": "high",
+      "multiHit": true,
+      "pushY": 0,
+      "special": true,
+      "meterCost": 0,
+      "cancelFrames": [
+        7,
+        18
+      ],
+      "cancelInto": [
+        "super_festiva"
+      ],
+      "name": "Giro de listón",
+      "nameSrc": "etiqueta de la fuente (ribbon_spin)",
+      "_measure": "tools/build_sofi.py: impacto en ['ribbon_spin_1', 'ribbon_spin_2'] (clip atk_sp4 idx 0-1); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.53; tiempos de tools/specs/sofi_spec.json specialClasses.giro (DISEÑO)",
+      "_doc": "Dos golpes (un golpe por frame del giro). TODO: VERIFICAR jugando."
+    },
+    "super_festiva": {
+      "clip": "atk_super",
+      "hitbox": {
+        "x": 8,
+        "y": -154,
+        "w": 72,
+        "h": 146
+      },
+      "frames": {
+        "startup": 8,
+        "active": 12,
+        "recovery": 26
+      },
+      "activeIdx": [
+        2,
+        3
+      ],
+      "hitstun": 24,
+      "blockstun": 19,
+      "damage": 55,
+      "hitstop": 14,
+      "pushHit": 8,
+      "pushBlock": 3,
+      "pushY": -11,
+      "launcher": true,
+      "invuln": true,
+      "invulnFrames": 12,
+      "guardType": "high",
+      "meterCost": 100,
+      "cinematic": {
+        "kind": "super",
+        "zoom": 1.85,
+        "freeze": 46,
+        "dur": 74
+      },
+      "super": true,
+      "cancelInto": [],
+      "name": "Súper festiva",
+      "nameSrc": "etiqueta de la fuente (festive_super)",
+      "_measure": "tools/build_sofi.py: impacto en ['festive_super_3', 'festive_super_4'] (clip atk_super idx 2-3); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.54; tiempos de tools/specs/sofi_spec.json specialClasses.super_festiva (DISEÑO)",
+      "_doc": "Súper (qcf x2 + Puño, barra llena). Daño, invulnerabilidad y cinemática = súper de Garravas (canónico). TODO: VERIFICAR jugando."
+    }
+  },
+  "style": {
+    "walk": 2.8,
+    "run": 4.8,
+    "jumpNormal": -15,
+    "jumpHigh": -18.5,
+    "airMove": 2.0
+  },
+  "portrait": {
+    "atlas": "base",
+    "frame": 0,
+    "head": [
+      50,
+      39,
+      47,
+      47
+    ],
+    "body": [
+      35,
+      26,
+      69,
+      112
+    ],
+    "_doc": "tools/build_sofi.py con la regla de tools/build_portraits.py (frame idle[0]).",
+    "clipBox": {
+      "idle": {
+        "l": 37,
+        "r": 32,
+        "t": 112
+      },
+      "victory_pose": {
+        "l": 29,
+        "r": 27,
+        "t": 111
+      }
+    }
+  },
+  "_frames": [
+    "idle_1",
+    "idle_2",
+    "idle_3",
+    "idle_4",
+    "advance_1",
+    "advance_2",
+    "advance_3",
+    "advance_4",
+    "jump_1",
+    "jump_2",
+    "jump_3",
+    "jump_4",
+    "crouch_1",
+    "crouch_2",
+    "crouch_3",
+    "crouch_4",
+    "light_punch_1",
+    "light_punch_2",
+    "light_punch_3",
+    "light_punch_4",
+    "heavy_punch_1",
+    "heavy_punch_2",
+    "heavy_punch_3",
+    "heavy_punch_4",
+    "low_kick_1",
+    "low_kick_2",
+    "low_kick_3",
+    "low_kick_4",
+    "high_kick_1",
+    "high_kick_2",
+    "high_kick_3",
+    "high_kick_4",
+    "hit_1",
+    "hit_2",
+    "hit_3",
+    "hit_4",
+    "launch_1",
+    "launch_2",
+    "launch_3",
+    "launch_4",
+    "fall_1",
+    "fall_2",
+    "fall_3",
+    "fall_4",
+    "getup_1",
+    "getup_2",
+    "getup_3",
+    "getup_4",
+    "antler_charge_1",
+    "antler_charge_2",
+    "antler_charge_3",
+    "antler_charge_4",
+    "candy_star_1",
+    "candy_star_2",
+    "candy_star_3",
+    "candy_star_4",
+    "ribbon_spin_1",
+    "ribbon_spin_2",
+    "ribbon_spin_3",
+    "ribbon_spin_4",
+    "festive_super_1",
+    "festive_super_2",
+    "festive_super_3",
+    "festive_super_4",
+    "v5_02_01",
+    "v5_02_02",
+    "v5_02_03",
+    "v5_02_04",
+    "v5_05_01",
+    "v5_05_02",
+    "v5_05_03",
+    "v5_05_04",
+    "v5_06_01",
+    "v5_06_02",
+    "v5_06_03",
+    "v5_06_04"
+  ],
+  "_secret": {
+    "status": "SECRETA: oculta hasta vencerla en el Arcade (data/campaigns.json unlocks); en su combate tiene doble vida y doble daño (mods de la batalla, no de este archivo)",
+    "disabled": {
+      "j_punch": "sin cuadros de ataque aéreo en ninguna fuente",
+      "j_kick": "sin cuadros de ataque aéreo en ninguna fuente",
+      "throw": "sin cuadros de agarre propios (el front_grab de la base es un borrador generado, no arte de la fuente)",
+      "uppercut": "sin cuadros de antiaéreo"
+    },
+    "unused_frames": {
+      "getup_2": "sin cuernos (en el arte original quedaron fuera de la celda)",
+      "getup_3": "sin cuernos",
+      "getup_4": "sin cuernos",
+      "ribbon_spin_3": "dañado: falta torso/falda/pierna",
+      "ribbon_spin_4": "dañado: falta falda/cadera, pierna separada"
+    }
+  },
+  "_generated": "GENERADO por tools/build_sofi.py desde tools/specs/sofi_spec.json: no editar a mano."
+}
