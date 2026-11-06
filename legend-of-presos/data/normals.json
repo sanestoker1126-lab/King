@@ -1,0 +1,16 @@
+{
+  "_doc": "Golpes NORMALES por clase (tools/build_normals.py los escribe en cada char.json). startup/active/recovery = frames exactos (§4.3); advHit/advBlock = ventaja OBJETIVO al golpe/en guardia: el hitstun y el blockstun se CALCULAN para que se cumpla (stun = adv + active − 1 + recovery). Valores de DISEÑO con referencia al ritmo de KOF (jab rápido y seguro, fuerte lento y castigable en guardia), NO medidos del juego original: ajústalos jugando. damage null = se conserva el daño que ya traía el move.",
+  "classes": {
+    "jab":           { "startup": 4, "active": 2, "recovery": 8,  "advHit": 4, "advBlock": 1,  "damage": null, "hitstop": 6,  "pushHit": 3, "pushBlock": 3 },
+    "kick":          { "startup": 6, "active": 3, "recovery": 12, "advHit": 3, "advBlock": -1, "damage": null, "hitstop": 7,  "pushHit": 4, "pushBlock": 3 },
+    "fuerte":        { "startup": 7, "active": 3, "recovery": 16, "advHit": 3, "advBlock": -3, "damage": 20,   "hitstop": 9,  "pushHit": 5, "pushBlock": 4 },
+    "patada_fuerte": { "startup": 9, "active": 3, "recovery": 18, "advHit": 2, "advBlock": -4, "damage": 22,   "hitstop": 10, "pushHit": 6, "pushBlock": 5 },
+    "aire_p":        { "startup": 4, "active": 7, "recovery": 3,  "damage": null },
+    "aire_k":        { "startup": 6, "active": 8, "recovery": 3,  "damage": null }
+  },
+  "map": { "punch": "jab", "kick": "kick", "heavy_punch": "fuerte", "heavy_kick": "patada_fuerte", "j_punch": "aire_p", "j_kick": "aire_k" },
+  "names": { "heavy_punch": "Golpe fuerte", "heavy_kick": "Patada fuerte" },
+  "hitboxPad": 4,
+  "kickLowBelow": 0.30,
+  "_docSanity": "Una medición solo se aplica si: hay extensión clara (>= 4 px y >= 4% del alto), la caja mide <= 40% del alto del cuerpo, y un puño está a 0.40–0.98 del alto (una patada a 0.05–0.98). Si no pasa, el move conserva sus datos anteriores y queda en qa/normals_REPORT.md para revisarlo a ojo."
+}

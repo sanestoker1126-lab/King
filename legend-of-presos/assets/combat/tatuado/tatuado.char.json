@@ -1,0 +1,1162 @@
+{
+  "id": "tatuado",
+  "displayName": "El Tatuado",
+  "renderScale": 1.1029,
+  "source": "REFERENCIA runtime_manifest (111f, estados medidos) — body apilado de 3 hoja(s)",
+  "frameSize": {
+    "w": 160,
+    "h": 144
+  },
+  "anchor": {
+    "x": 0.5,
+    "y": 1.0
+  },
+  "pivot_note": "bottom_center {'type': 'bottom_center', 'local_x': 80, 'local_y': 136}; frames miran a la DERECHA",
+  "vida": 1000,
+  "atlases": {
+    "base": {
+      "file": "tatuado_atlas.png",
+      "columns": 9,
+      "rows": 13,
+      "anchorsFile": "tatuado_atlas_anchors.json",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      }
+    },
+    "melee_attacks": {
+      "file": "tatuado_melee_attacks.png",
+      "columns": 5,
+      "rows": 4,
+      "cell": {
+        "w": 160,
+        "h": 144
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde clips de ataque cuerpo a cuerpo; oponentes y FX separados.",
+      "anchorsFile": "tatuado_melee_attacks_anchors.json"
+    },
+    "result_poses": {
+      "file": "tatuado_result_poses.png",
+      "columns": 8,
+      "rows": 2,
+      "cell": {
+        "w": 160,
+        "h": 144
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde poses de resultado existentes.",
+      "anchorsFile": "tatuado_result_poses_anchors.json"
+    },
+    "combo_sequences": {
+      "file": "tatuado_combo_sequences.png",
+      "columns": 17,
+      "rows": 3,
+      "cell": {
+        "w": 160,
+        "h": 144
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde clips de combate existentes; rivales y FX separados.",
+      "anchorsFile": "tatuado_combo_sequences_anchors.json"
+    },
+    "especial": {
+      "file": "tatuado_especial.png",
+      "columns": 3,
+      "rows": 2,
+      "cell": {
+        "w": 200,
+        "h": 176
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.948864
+      },
+      "sha256": "a9948f8a2645881f035eb787636da67aba5964dcc71ba31bbc150271e9ff13a0",
+      "source": "tools/build_especiales_hojas.py (hoja del usuario sources/especiales_2026-11-05/tatuado/especial_cuerpo.png; ver qa/especiales/tatuado_REPORTE.md)"
+    }
+  },
+  "_hitbox_status": "TODO_VERIFICAR — clips/estados MEDIDOS del manifest de referencia; hitboxes, daño y timings son DISEÑO inicial (ajustar jugando en Android).",
+  "clips": {
+    "idle": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": true,
+      "frames": [
+        0,
+        1,
+        2
+      ]
+    },
+    "walk": {
+      "atlas": "base",
+      "fps": 10,
+      "loop": true,
+      "frames": [
+        3,
+        4,
+        5
+      ]
+    },
+    "run": {
+      "atlas": "base",
+      "fps": 12,
+      "loop": true,
+      "frames": [
+        85,
+        86,
+        87,
+        88,
+        89
+      ]
+    },
+    "jump_mobility": {
+      "atlas": "base",
+      "fps": 12,
+      "loop": false,
+      "frames": [
+        14,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    "crouch_guard": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        10
+      ]
+    },
+    "damage_fall": {
+      "atlas": "base",
+      "fps": 10,
+      "loop": false,
+      "frames": [
+        63,
+        64,
+        65,
+        94,
+        95,
+        95,
+        96
+      ]
+    },
+    "recovery_pose": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        96,
+        97,
+        71
+      ]
+    },
+    "front_grab": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        48,
+        49,
+        50
+      ]
+    },
+    "atk_light": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        18,
+        19,
+        20,
+        21
+      ]
+    },
+    "atk_heavy": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        22,
+        23,
+        24,
+        25,
+        26
+      ]
+    },
+    "atk_kick": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        36,
+        37,
+        38
+      ]
+    },
+    "atk_kick2": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        39,
+        40,
+        41
+      ]
+    },
+    "atk_upper": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        33,
+        34,
+        35
+      ]
+    },
+    "atk_sweep": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        42,
+        43,
+        44
+      ]
+    },
+    "atk_sp1": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        54,
+        55,
+        56
+      ]
+    },
+    "atk_sp2": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        57,
+        58,
+        59
+      ]
+    },
+    "atk_super": {
+      "atlas": "base",
+      "fps": 16,
+      "loop": false,
+      "frames": [
+        72,
+        73,
+        74,
+        75,
+        76,
+        77
+      ]
+    },
+    "atk_airp": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        14,
+        29,
+        16
+      ]
+    },
+    "atk_airk": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        14,
+        43,
+        16
+      ]
+    },
+    "victory_pose": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        99,
+        100,
+        101,
+        102
+      ]
+    },
+    "hurt": {
+      "atlas": "base",
+      "frames": [
+        63,
+        64
+      ],
+      "fps": 10,
+      "hold": true,
+      "_doc": "tools/build_hurt_clips.py: frames de pie iniciales de damage_fall (alto>=0.72*idle)"
+    },
+    "down": {
+      "atlas": "base",
+      "frames": [
+        96
+      ],
+      "fps": 10,
+      "hold": true,
+      "lying": true,
+      "_doc": "tools/build_knockdown_clips.py: frame más bajo de damage_fall/recovery_pose (alto 63, idle 136). VERIFICAR a ojo."
+    },
+    "melee_punch": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "_source": {
+        "clip": "atk_light",
+        "frames": [
+          18,
+          19,
+          20,
+          21
+        ]
+      }
+    },
+    "melee_heavy": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "_source": {
+        "clip": "atk_heavy",
+        "frames": [
+          22,
+          23,
+          24,
+          25,
+          26
+        ]
+      }
+    },
+    "melee_kick": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        10,
+        11,
+        12
+      ],
+      "_source": {
+        "clip": "atk_kick",
+        "frames": [
+          36,
+          37,
+          38
+        ]
+      }
+    },
+    "melee_upper": {
+      "atlas": "melee_attacks",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        15,
+        16,
+        17
+      ],
+      "_source": {
+        "clip": "atk_upper",
+        "frames": [
+          33,
+          34,
+          35
+        ]
+      }
+    },
+    "result_victory": {
+      "atlas": "result_poses",
+      "fps": 8,
+      "loop": false,
+      "hold": true,
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "_source": {
+        "clip": "victory_pose",
+        "frames": [
+          99,
+          100,
+          101,
+          102
+        ]
+      }
+    },
+    "result_defeat": {
+      "atlas": "result_poses",
+      "fps": 10,
+      "loop": false,
+      "hold": true,
+      "frames": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "_source": {
+        "clip": "damage_fall",
+        "frames": [
+          63,
+          64,
+          65,
+          94,
+          95,
+          95,
+          96,
+          96
+        ],
+        "endsWith": "down"
+      }
+    },
+    "combo_jab_hopper_swing": {
+      "atlas": "combo_sequences",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "_sources": [
+        {
+          "clip": "atk_light",
+          "atlas": "base",
+          "frames": [
+            18,
+            19,
+            20,
+            21
+          ]
+        },
+        {
+          "clip": "atk_light",
+          "atlas": "base",
+          "frames": [
+            18,
+            19,
+            20,
+            21
+          ]
+        },
+        {
+          "clip": "atk_heavy",
+          "atlas": "base",
+          "frames": [
+            22,
+            23,
+            24,
+            25,
+            26
+          ]
+        },
+        {
+          "clip": "atk_upper",
+          "atlas": "base",
+          "frames": [
+            33,
+            34,
+            35
+          ]
+        }
+      ]
+    },
+    "combo_super_swing": {
+      "atlas": "combo_sequences",
+      "fps": 16,
+      "loop": false,
+      "frames": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ],
+      "_sources": [
+        {
+          "clip": "atk_heavy",
+          "atlas": "base",
+          "frames": [
+            22,
+            23,
+            24,
+            25,
+            26
+          ]
+        },
+        {
+          "clip": "atk_sp1",
+          "atlas": "base",
+          "frames": [
+            54,
+            55,
+            56
+          ]
+        },
+        {
+          "clip": "atk_sp2",
+          "atlas": "base",
+          "frames": [
+            57,
+            58,
+            59
+          ]
+        },
+        {
+          "clip": "atk_super",
+          "atlas": "base",
+          "frames": [
+            72,
+            73,
+            74,
+            75,
+            76,
+            77
+          ]
+        }
+      ]
+    },
+    "combo_super_hopper": {
+      "atlas": "combo_sequences",
+      "fps": 16,
+      "loop": false,
+      "frames": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48
+      ],
+      "_sources": [
+        {
+          "clip": "atk_upper",
+          "atlas": "base",
+          "frames": [
+            33,
+            34,
+            35
+          ]
+        },
+        {
+          "clip": "atk_airp",
+          "atlas": "base",
+          "frames": [
+            14,
+            29,
+            16
+          ]
+        },
+        {
+          "clip": "atk_airk",
+          "atlas": "base",
+          "frames": [
+            14,
+            43,
+            16
+          ]
+        },
+        {
+          "clip": "atk_super",
+          "atlas": "base",
+          "frames": [
+            72,
+            73,
+            74,
+            75,
+            76,
+            77
+          ]
+        }
+      ]
+    },
+    "esp_serpiente": {
+      "atlas": "especial",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        3,
+        4
+      ],
+      "_doc": "Guardia -> humo en el puño -> el humo envuelve el brazo -> golpe (sale la serpiente; se sostiene) -> guardia con humo. Figuras: ['t0', 't1', 't2', 't3', 't3', 't5']. GENERADO por tools/build_especiales_hojas.py."
+    }
+  },
+  "inputs": {
+    "grounded": {
+      "punch": "punch",
+      "kick": "kick"
+    },
+    "air": {
+      "punch": "j_punch",
+      "kick": "j_kick"
+    },
+    "specials": [
+      {
+        "motion": "qcf",
+        "button": "punch",
+        "move": "fireball"
+      },
+      {
+        "motion": "dp",
+        "button": "punch",
+        "move": "uppercut"
+      },
+      {
+        "motion": "qcf",
+        "button": "kick",
+        "move": "flying_special"
+      },
+      {
+        "motion": "qcb",
+        "button": "kick",
+        "move": "seismic"
+      },
+      {
+        "motion": "hcf",
+        "button": "kick",
+        "move": "command_grab"
+      },
+      {
+        "motion": "qcb",
+        "button": "punch",
+        "move": "especial_serpiente"
+      }
+    ],
+    "supers": [
+      {
+        "motion": "qcf2",
+        "button": "punch",
+        "move": "super"
+      }
+    ],
+    "hidden": [],
+    "forward": {
+      "punch": "heavy_punch"
+    }
+  },
+  "moves": {
+    "punch": {
+      "clip": "atk_light",
+      "hitbox": {
+        "x": 32,
+        "y": -128,
+        "w": 40,
+        "h": 31
+      },
+      "guardType": "high",
+      "damage": 12,
+      "hitstun": 13,
+      "blockstun": 10,
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": 0,
+      "cancelInto": [
+        "heavy_punch",
+        "kick",
+        "fireball",
+        "uppercut",
+        "especial_serpiente",
+        "super"
+      ],
+      "name": "Puño",
+      "nameSrc": "generico",
+      "frames": {
+        "startup": 4,
+        "active": 2,
+        "recovery": 8
+      },
+      "activeIdx": [
+        2,
+        2
+      ],
+      "cancelFrames": [
+        5,
+        8
+      ],
+      "_normals": "tools/build_normals.py: frame de impacto [2] y caja medidos del sprite (altura 0.75); tiempos de data/normals.json clase jab"
+    },
+    "kick": {
+      "clip": "atk_kick",
+      "hitbox": {
+        "x": 32,
+        "y": -77,
+        "w": 31,
+        "h": 42
+      },
+      "guardType": "high",
+      "damage": 16,
+      "hitstun": 17,
+      "blockstun": 13,
+      "hitstop": 7,
+      "pushHit": 4,
+      "pushBlock": 3,
+      "pushY": 0,
+      "cancelInto": [
+        "fireball",
+        "uppercut",
+        "flying_special",
+        "especial_serpiente",
+        "super"
+      ],
+      "name": "Patada",
+      "nameSrc": "generico",
+      "frames": {
+        "startup": 6,
+        "active": 3,
+        "recovery": 12
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "cancelFrames": [
+        7,
+        11
+      ],
+      "_normals": "tools/build_normals.py: frame de impacto [1] y caja medidos del sprite (altura 0.37); tiempos de data/normals.json clase kick"
+    },
+    "j_punch": {
+      "clip": "atk_airp",
+      "hitbox": {
+        "x": 32,
+        "y": -116,
+        "w": 43,
+        "h": 33
+      },
+      "guardType": "overhead",
+      "damage": 13,
+      "hitstun": 15,
+      "blockstun": 10,
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": 0,
+      "air": true,
+      "name": "Puño Aéreo",
+      "nameSrc": "generico",
+      "_doc": "Aereo de puno: diagonal hacia adelante a media altura. Antes: plantilla identica para ambos (x28,y-96,52x30). TODO: VERIFICAR jugando.",
+      "frames": {
+        "startup": 4,
+        "active": 7,
+        "recovery": 3
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "_normals": "tools/build_normals.py: frame de impacto [1] y caja medidos del sprite (altura 0.67); tiempos de data/normals.json clase aire_p"
+    },
+    "j_kick": {
+      "clip": "atk_airk",
+      "hitbox": {
+        "x": 32,
+        "y": -133,
+        "w": 28,
+        "h": 38
+      },
+      "guardType": "overhead",
+      "damage": 13,
+      "hitstun": 15,
+      "blockstun": 10,
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": 0,
+      "air": true,
+      "name": "Patada Aérea",
+      "nameSrc": "generico",
+      "_doc": "Patada de salto: hacia ABAJO-adelante (jump-in que alcanza la cabeza al caer). Antes: plantilla identica para ambos (x28,y-96,52x30). TODO: VERIFICAR jugando.",
+      "frames": {
+        "startup": 6,
+        "active": 8,
+        "recovery": 3
+      },
+      "activeIdx": [
+        1,
+        2
+      ],
+      "_normals": "tools/build_normals.py: frame de impacto [1, 2] y caja medidos del sprite (altura 0.76); tiempos de data/normals.json clase aire_k"
+    },
+    "fireball": {
+      "clip": "atk_sp1",
+      "hitFrames": [
+        1
+      ],
+      "hitbox": {
+        "x": 36,
+        "y": -88,
+        "w": 64,
+        "h": 40
+      },
+      "guardType": "high",
+      "damage": 22,
+      "hitstun": 16,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 5,
+      "pushBlock": 3,
+      "pushY": 0,
+      "special": true,
+      "meterCost": 0,
+      "cancelInto": [
+        "super"
+      ],
+      "cancelWindow": [
+        1,
+        4
+      ]
+    },
+    "uppercut": {
+      "clip": "atk_upper",
+      "hitFrames": [
+        1
+      ],
+      "hitbox": {
+        "x": 26,
+        "y": -112,
+        "w": 46,
+        "h": 52
+      },
+      "guardType": "high",
+      "damage": 26,
+      "hitstun": 18,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": -11,
+      "launcher": true,
+      "special": true,
+      "meterCost": 0,
+      "invuln": true,
+      "invulnFrames": 8,
+      "cancelInto": [
+        "super"
+      ],
+      "cancelWindow": [
+        1,
+        4
+      ],
+      "name": "Gancho Ascendente",
+      "nameSrc": "generico"
+    },
+    "flying_special": {
+      "clip": "atk_kick2",
+      "hitFrames": [
+        1
+      ],
+      "hitbox": {
+        "x": 36,
+        "y": -88,
+        "w": 64,
+        "h": 40
+      },
+      "guardType": "high",
+      "damage": 22,
+      "hitstun": 16,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 5,
+      "pushBlock": 3,
+      "pushY": 0,
+      "special": true,
+      "air": false,
+      "name": "Patada Voladora",
+      "nameSrc": "generico"
+    },
+    "seismic": {
+      "clip": "atk_sweep",
+      "hitFrames": [
+        1
+      ],
+      "hitbox": {
+        "x": 40,
+        "y": -30,
+        "w": 66,
+        "h": 24
+      },
+      "guardType": "low",
+      "damage": 18,
+      "hitstun": 18,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 4,
+      "pushBlock": 3,
+      "pushY": 0,
+      "launcher": true,
+      "special": true,
+      "meterCost": 0,
+      "name": "Barrida Sísmica",
+      "nameSrc": "generico"
+    },
+    "super": {
+      "clip": "atk_super",
+      "hitFrames": [
+        3
+      ],
+      "hitbox": {
+        "x": 30,
+        "y": -98,
+        "w": 90,
+        "h": 46
+      },
+      "guardType": "high",
+      "damage": 55,
+      "hitstun": 24,
+      "blockstun": 16,
+      "hitstop": 14,
+      "pushHit": 8,
+      "pushBlock": 3,
+      "pushY": 0,
+      "super": true,
+      "meterCost": 100,
+      "invuln": true,
+      "invulnFrames": 22,
+      "cinematic": {
+        "kind": "super",
+        "zoom": 1.85,
+        "freeze": 46,
+        "dur": 74
+      }
+    },
+    "throw": {
+      "type": "throw",
+      "clip": "front_grab",
+      "range": 70,
+      "damage": 30,
+      "tossX": 8,
+      "tossY": -11,
+      "tossFrame": 2,
+      "hold": 42,
+      "hitstop": 10,
+      "name": "Agarre",
+      "nameSrc": "generico"
+    },
+    "command_grab": {
+      "type": "command_grab",
+      "clip": "atk_sp2",
+      "range": 86,
+      "damage": 40,
+      "tossX": 6,
+      "tossY": -13,
+      "tossFrame": 2,
+      "hold": 40,
+      "hitstop": 13,
+      "cinematic": {
+        "kind": "grab",
+        "zoom": 1.55,
+        "freeze": 26,
+        "dur": 46
+      },
+      "name": "Llave de Comando",
+      "nameSrc": "generico"
+    },
+    "heavy_punch": {
+      "clip": "atk_heavy",
+      "damage": 20,
+      "guardType": "high",
+      "name": "Golpe fuerte",
+      "nameSrc": "generico",
+      "hitbox": {
+        "x": 32,
+        "y": -126,
+        "w": 40,
+        "h": 34
+      },
+      "frames": {
+        "startup": 7,
+        "active": 3,
+        "recovery": 16
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 21,
+      "blockstun": 15,
+      "cancelFrames": [
+        8,
+        12
+      ],
+      "hitstop": 9,
+      "pushHit": 5,
+      "pushBlock": 4,
+      "_normals": "tools/build_normals.py: frame de impacto [1] y caja medidos del sprite (altura 0.73); tiempos de data/normals.json clase fuerte",
+      "cancelInto": [
+        "fireball",
+        "uppercut",
+        "flying_special",
+        "seismic",
+        "especial_serpiente",
+        "super"
+      ]
+    },
+    "especial_serpiente": {
+      "clip": "esp_serpiente",
+      "hitFrames": [],
+      "guardType": "high",
+      "special": true,
+      "meterCost": 0,
+      "spawnFrame": 3,
+      "spawns": {
+        "speed": 8,
+        "life": 85,
+        "offsetX": 125,
+        "offsetY": -121,
+        "hitbox": {
+          "w": 141,
+          "h": 43
+        },
+        "damage": 20,
+        "hitstun": 16,
+        "blockstun": 12,
+        "hitstop": 8,
+        "pushHit": 5,
+        "pushBlock": 3,
+        "chipDamage": 2,
+        "guardType": "high",
+        "kind": "energy",
+        "anim": "esp_tatuado_proyectil",
+        "animH": 74
+      },
+      "damage": 20,
+      "hitstun": 16,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 5,
+      "pushBlock": 3,
+      "pushY": 0,
+      "cancelInto": [],
+      "name": "Serpiente negra",
+      "nameSrc": "provisional: describe el arte de la hoja del usuario 2026-11-05 (TODO: VERIFICAR con el usuario)",
+      "_doc": "La serpiente suelta de la tira (figura 5) es el proyectil; en el golpe se corta la cabeza que sale del puño. Impacto: chispa genérica. Proyectil largo: caja casi de todo su ancho y casi pegado a la mano para que pegue a quemarropa (combo_check). Tiempos, daño y velocidad = DISEÑO (TODO: VERIFICAR jugando en Android). GENERADO por tools/build_especiales_hojas.py desde tools/specs/especiales_hojas_spec.json.",
+      "_measure": "tools/build_especiales_hojas.py: escala 0.3546 (alto de pie 384 px fuente vs idle[0] 136 px); proyectil: salida en línea de corte x=1435.0 de t3, centro vertical de lo cortado; tamaño dibujado 166x72 px lógicos (caja 141x43 = [0.85, 0.6]); offset (125, -121)"
+    }
+  },
+  "style": {
+    "walk": 2.8,
+    "run": 4.8,
+    "jumpNormal": -15,
+    "jumpHigh": -18.5,
+    "airMove": 2.0
+  },
+  "_frameIndexSpace": "grid",
+  "_frameIndexFix": "tools/fix_sheet_offsets.py: indices continuos de la referencia -> celda de rejilla apilada",
+  "portrait": {
+    "atlas": "base",
+    "frame": 0,
+    "head": [
+      50,
+      0,
+      57,
+      57
+    ],
+    "body": [
+      46,
+      0,
+      67,
+      136
+    ],
+    "_doc": "tools/build_portraits.py: rects en pixeles del atlas (frame idle[0]).",
+    "clipBox": {
+      "idle": {
+        "l": 36,
+        "r": 36,
+        "t": 136
+      },
+      "victory_pose": {
+        "l": 45,
+        "r": 45,
+        "t": 136
+      }
+    }
+  },
+  "pivotMode": "frame_bottom_center",
+  "_especiales_2026_11_05": {
+    "status": "Especial nuevo desde hojas del usuario 2026-11-05: atlas \"especial\", clip esp_serpiente, move especial_serpiente, entrada qcb+punch, FX lib esp_tatuado. GENERADO por tools/build_especiales_hojas.py desde tools/specs/especiales_hojas_spec.json; el resto del archivo no lo toca la herramienta.",
+    "cancelFrom": [
+      "punch",
+      "kick",
+      "heavy_punch"
+    ]
+  }
+}

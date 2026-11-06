@@ -1,0 +1,26 @@
+EL PAISA SISTEM — LEGEND OF PRESOS
+PAQUETE DE ANIMACIONES REALISTAS
+
+9 hojas PNG RGBA: 216 frames de 120 x 120 px. Cada hoja mide 720 x 480 px, 6 columnas y 4 filas. Fondo alpha real.
+Las dos hojas anteriores (48 frames) se conservan sin cambios. Se añaden 7 hojas con 168 frames.
+
+HOJA 01: reposo, caminar, correr, agacharse y levantarse.
+HOJA 02: salto neutral, retroceso, guardia alta/baja, daño, caída hacia atrás y recuperación.
+HOJA 03: puño ligero, puño fuerte, patada ligera y patada fuerte (6 frames por movimiento).
+HOJA 04: puño agachado, patada agachado, barrida y uppercut (6 cada uno).
+HOJA 05: salto hacia delante, puño aéreo, patada aérea y patada aérea fuerte (6 cada uno).
+HOJA 06: rodada hacia delante (6), rodada hacia atrás (6), inicio de agarre (3), mantener agarre (3) y lanzamiento hacia delante (6).
+HOJA 07: embestida de hombro (6), patada de talón con giro (6), súper combinado (12 en las filas 3 y 4).
+HOJA 08: entrada, burla, victoria y derrota (6 cada uno).
+HOJA 09: daño alto, medio y bajo, caída hacia delante (6 cada uno).
+
+INTEGRACIÓN
+Las coordenadas comienzan arriba a la izquierda, índices desde cero. Cada rectángulo de celda es x=columna*120, y=fila*120, w=120, h=120. JSON por hoja y JSON maestro con todas las animaciones. manifest.csv contiene el mismo mapa. frames/ contiene los 216 PNG individuales.
+
+Pivote de celda bottom_center (60,120). Línea de suelo y=111. Para dibujar los pies a la altura del suelo: esquina superior=(xSuelo-60,ySuelo-111). Las animaciones aéreas conservan la separación visual de los pies respecto del suelo; revisar el anclaje al combinarlo con física para no sumar dos veces la altura dibujada.
+
+Se extraen las siluetas completas por contenido alpha, incluso si sobresalen levemente de una rejilla de origen. Escalado uniforme X=Y; normalización fija por animación, sin estirar cuerpos. Los agachados conservan proporciones de cabeza/cuerpo compatibles con la referencia. Márgenes transparentes de al menos 8 px en las celdas finales.
+
+Los tiempos y los marcadores visuales de contacto son orientativos para previsualización. El motor define hitboxes, daño, hit-stop, gravedad, cancelaciones y duración final de los especiales. Los agarres muestran solo al atacante para que el motor sincronice al rival. No se han dibujado FX sobre el personaje.
+
+Creado con el generador de imágenes integrado. PROMPTS.txt conserva las instrucciones de creación. QA.json documenta la revisión técnica.

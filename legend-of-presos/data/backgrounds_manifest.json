@@ -1,0 +1,48 @@
+{
+  "project": "Legend of Presos",
+  "purpose": "Backgrounds editables para importar a Figma y posteriormente integrar al juego",
+  "canvas": {
+    "width": 2520,
+    "height": 1080,
+    "aspect_ratio": "21:9"
+  },
+  "fighter_floor_y": 790,
+  "stages": [
+    {
+      "game_id": "patio",
+      "file": "patio_b.svg",
+      "name": "Patio B",
+      "location": "El muro perimetral"
+    },
+    {
+      "game_id": "comedor",
+      "file": "comedor.svg",
+      "name": "Comedor",
+      "location": "Charolas y mesas largas"
+    },
+    {
+      "game_id": "celdas",
+      "file": "pabellon_c.svg",
+      "name": "Pabellón C",
+      "location": "Dos pisos de celdas"
+    },
+    {
+      "game_id": "azotea",
+      "file": "azotea.svg",
+      "name": "Azotea",
+      "location": "La ciudad al otro lado"
+    },
+    {
+      "game_id": "oficina",
+      "file": "oficina_regente.svg",
+      "name": "Oficina del Regente",
+      "location": "La última puerta"
+    }
+  ],
+  "figma_file": "https://www.figma.com/design/cRwyqm28MZCoTjoayKNfmC",
+  "notes": [
+    "Cada SVG es vectorial y editable al importarlo en Figma.",
+    "Se dejó una franja central relativamente limpia para que los luchadores no se pierdan visualmente.",
+    "El suelo comienza aproximadamente en y=790 para mantener consistencia entre escenarios."
+  ]
+}

@@ -1,0 +1,73 @@
+===============================================================================
+LEGEND OF PRESOS — EL ESCAPE DE PUENTE GRANDE
+GUÍA DE ASSETS DE AUDIO (assets/audio/LEEME.txt)
+===============================================================================
+
+Este directorio alberga los archivos de sonido reales para el motor de audio
+híbrido (engine/pg_audio.js).
+
+COMPORTAMIENTO DEL MOTOR DE AUDIO:
+----------------------------------
+El motor cuenta con una capa de reserva (fallback) automática y transparente:
+1. Al reproducir cualquier efecto de sonido (SFX) o pista musical, busca primero
+   si existe el archivo de audio pregrabado correspondiente en este directorio.
+   El motor consulta audio-index.json; al agregar o quitar un medio, regenera ese índice con:
+   python3 tools/build_audio_index.py
+2. Si el archivo existe, se precarga y decodifica a un AudioBuffer de Web Audio API.
+   Los SFX usan canales GainNode reutilizables (cantidad en `data/config.json` →
+   `audio.sfxVoiceCount`); Web Audio requiere crear un AudioBufferSourceNode nuevo
+   por reproducción porque cada fuente es de un solo uso. La reproducción se agenda
+   en el reloj de audio al instante; la latencia física no se ha medido en teléfono.
+3. Si el archivo no existe en el índice o no se puede decodificar, el motor cae
+   automáticamente y de inmediato al sintetizador procedural WebAudio en tiempo real.
+   El juego NUNCA se queda mudo ni se congela por falta de archivos.
+
+ESTADO DE LOS ASSETS INCLUIDOS:
+--------------------------------
+El paquete incluye `intro_narration_es_mx.wav`; todavía no incluye los SFX de combate
+ni las tres pistas musicales esperadas. Hasta que se agreguen, esos sonidos siguen
+usando el sintetizador procedural.
+
+FORMATOS Y PARÁMETROS RECOMENDADOS:
+-----------------------------------
+- Formatos admitidos: WAV (.wav), OGG Vorbis (.ogg) o MP3 (.mp3).
+- Se recomienda WAV (PCM 16-bit, 44.1 kHz o 48 kHz, Mono para SFX, Estéreo para música)
+  para evitar retrasos de decodificación en navegadores móviles.
+- Los efectos de golpe deben tener corte seco inicial (0 ms de silencio al inicio)
+  para garantizar impacto instantáneo sincronizado con el frame de la animación.
+
+LISTA DE ARCHIVOS SFX ESPERADOS:
+--------------------------------
+Nombre de archivo          Evento / Uso en combate
+------------------         ----------------------------------------------------
+light.wav                  Golpe normal ligero (puño/patada débil).
+heavy.wav                  Golpe normal fuerte (adelante+P/K o daño alto).
+head.wav                   Golpe a la cabeza / caja superior o antiaéreo.
+block.wav                  Impacto bloqueado en guardia.
+energy.wav                 Proyectiles o ataques de energía (fuego/chispa).
+super.wav                  Arranque / impacto de súper movimiento (MAX o barra).
+boss.wav                   Golpe especial de Garravas o entrada de jefe.
+ko.wav                     Impacto de K.O. definitivo de ronda o combate.
+round.wav                  Gong / campana de inicio de ronda ("Round 1 / Fight").
+time.wav                   Chicharra o bocina de fin de tiempo (Time Up).
+perfect.wav                Fanfarria o campanas de victoria Perfecta (sin daño).
+dizzy.wav                  Efecto de aturdimiento / mareo (estrellas).
+counter.wav                Letrero / aviso de Contragolpe (Counter Hit).
+crush.wav                  Guard Crush (rotura de guardia por agotamiento).
+down.wav                   Cuerpo estrellándose contra el suelo (knockdown).
+tech.wav                   Recuperación en el suelo / rodada de escape.
+ui.wav                     Navegación por menús y botones (bip sutil).
+confirm.wav                Confirmación de selección en menús.
+cancel.wav                 Cancelar / retroceder en menús.
+
+LISTA DE ARCHIVOS DE MÚSICA ESPERADOS (Loops):
+----------------------------------------------
+music_menu.wav             Música de títulos, menús y selección de personajes.
+music_fight.wav            Música de fondo durante combates estándar.
+music_boss.wav             Música de fondo para el combate contra el jefe final.
+
+ARCHIVOS DE NARRACIÓN / VOCES INCLUIDOS:
+----------------------------------------
+intro_narration_es_mx.wav  Narración cinematográfica inicial en español neutro / mexicano.
+
+===============================================================================

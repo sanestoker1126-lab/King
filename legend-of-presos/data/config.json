@@ -1,0 +1,308 @@
+{
+ "_doc": "Configuración central del combate. Todos los tunables viven aquí (spec §9: nada de valores mágicos en código).",
+ "arena": {
+  "W": 960,
+  "H": 540,
+  "ground": 480,
+  "wall": 40
+ },
+ "corner": {
+  "_doc": "Presión en esquina (KOF 2002): cuando el defensor está pegado a la pared (distancia <= threshold px de la pared del fondo), el empuje por impacto o bloqueo (pushHit / pushBlock) en ataques cuerpo a cuerpo (!isProj) se transfiere en sentido inverso al atacante (att.vx = -fdir * push * pushMul), alejándolo para evitar atrapadas infinitas en el muro. Además, la separación de cuerpos en esquina (pushApart) desplaza por completo al atacante si el defensor ya no tiene espacio contra la pared. Valores de DISEÑO.",
+  "enabled": true,
+  "pushMul": 1.0,
+  "threshold": 16
+ },
+ "audio": {
+  "_doc": "Pool de canales GainNode reutilizables para SFX precargados. AudioBufferSourceNode es one-shot por contrato WebAudio y se crea por reproducción; si no hay archivo, se conserva el sintetizador procedural inmediato.",
+  "sfxVoiceCount": 8
+ },
+ "physics": {
+  "gravity": 0.9,
+  "friction": 0.8,
+  "airFriction": 0.985,
+  "walk": 2.6,
+  "run": 4.6,
+  "airMove": 1.9,
+  "jumpShort": -11.5,
+  "jumpNormal": -15,
+  "jumpHigh": -18.5,
+  "backdashVX": -7.5,
+  "backdashVY": -6,
+  "rollSpeed": 7.2
+ },
+ "timing": {
+  "roundTime": 99,
+  "roundsToWin": 2,
+  "roundIntro": 75,
+  "koFreeze": 150,
+  "comboReset": 90,
+  "rollDur": 26,
+  "rollInvulnStart": 2,
+  "rollInvulnEnd": 16,
+  "dashDur": 18,
+  "backdashDur": 22,
+  "backdashInvuln": 6,
+  "inputBufferFrames": 8,
+  "motionWindow": 14,
+  "doubleTapWindow": 12,
+  "maxDur": 360,
+  "simulWindow": 3,
+  "_doc": "simulWindow: frames de tolerancia para dos botones 'a la vez' (Puño+Patada rodada/recuperación, Puño+Especial MAX). Spec §4.4: 2–3. Si el primer botón ya arrancó un golpe normal, dentro de esta ventana se convierte en la acción de dos botones. inputBufferFrames: una pulsación hecha mientras el luchador no puede actuar (recuperación, bloqueo, aturdimiento, aterrizaje) se guarda este número de frames y sale en el primer frame en que sí puede (spec §4.4: 8–10). Antes este valor existía pero el motor no lo usaba: los botones solo contaban el frame exacto en que se pulsaban. prejump: frames en el suelo antes de despegar (KOF tiene pre-salto); si se suelta ARRIBA dentro de ellos el salto es CORTO (hop, physics.jumpShort). Valor de DISEÑO, TODO: VERIFICAR jugando. winPoseDelay: frames del K.O. tras los que el ganador hace su pose de victoria (estado WIN). extraRounds: rondas extra permitidas si hay empates (máximo de rondas = 2·roundsToWin − 1 + extraRounds); si al final siguen iguales, la pelea es empate. koFreeze: frames de la secuencia de K.O. (sin contar el congelamiento del golpe final, hit.koHitstop): letrero de la causa (K.O. / Tiempo / Doble K.O.) durante winPoseDelay, luego 'Perfecto' perfectFrames si el ganador no recibió daño, luego el resultado (Ronda para X / Gana X / Empate) mientras posa. Antes 90 (1,5 s): la pose de victoria casi no se veía. Valor de DISEÑO.",
+  "prejump": 4,
+  "winPoseDelay": 40,
+  "extraRounds": 1,
+  "perfectFrames": 34
+ },
+ "meter": {
+  "max": 100,
+  "gainHitMul": 0.3,
+  "gainBlock": 3,
+  "gainWhiff": 0.5,
+  "maxModeDrain": 0.4,
+  "maxCost": 50
+ },
+ "combo": {
+  "decay": 0.03,
+  "juggleDecay": 0.06,
+  "minScale": 0.15
+ },
+ "hurtbox": {
+  "w": 46,
+  "h": 140,
+  "crouchH": 96,
+  "airH": 112,
+  "_doc": "Alto MEDIDO en pantalla: todos los luchadores se normalizan a ~150 px logicos de alto (renderScale); antes h=104 cubria solo hasta el pecho (cabeza visible fuera de la caja = desincronia vista/simulacion). h=140 (93%), agachado 96 (64%), aire 112. Umbrales de region de dano (cabeza y<-78, pecho y<-45) sin cambios. Antes: {\"w\": 46, \"h\": 104, \"crouchH\": 66, \"airH\": 80}. TODO: VERIFICAR balance jugando."
+ },
+ "fighters": {
+  "startX": [
+   320,
+   640
+  ],
+  "hp": 300,
+  "minHp": 0,
+  "_doc": "minHp: vida mínima tras un golpe (0 = puede caer K.O.; Entrenamiento usa training.minHp)."
+ },
+ "projectile": {
+  "defaultSpeed": 7.5,
+  "defaultLife": 70,
+  "max": 6,
+  "maxPerOwner": 1,
+  "_doc": "maxPerOwner: proyectiles propios simultaneos (regla KOF = 1). Un move puede declarar spawns.maxActive."
+ },
+ "grab": {
+  "range": 70,
+  "damage": 30,
+  "tossX": 8,
+  "tossY": -10,
+  "hold": 42,
+  "meterGain": 16,
+  "tossHitstun": 22,
+  "hitstop": 10,
+  "shake": 7,
+  "sparkLife": 14,
+  "techWindow": 7,
+  "techInvuln": 6,
+  "_doc": "techWindow: frames desde que te agarran (agarre normal, no de comando) para escapar con Guardia+Puño; el lanzamiento nunca ocurre antes de que termine la ventana. Agarre contra agarre en el mismo frame = escape. Valores de DISEÑO."
+ },
+ "cinematic": {
+  "freeze": 46,
+  "dur": 74,
+  "zoom": 1.85,
+  "dim": 0.58,
+  "inFrames": 12,
+  "outFrames": 18,
+  "focusAbove": 150,
+  "ease": 0.15,
+  "dimDecay": 0.8,
+  "flashDecay": 0.82,
+  "_doc": "inFrames/outFrames: frames del acercamiento y del alejamiento; focusAbove: px sobre el piso donde centra la cámara; ease: suavizado del regreso al encuadre normal (por frame); dimDecay/flashDecay: caída por frame del oscurecido y del destello. Valores de DISEÑO (los mismos que antes estaban fijos en pg_cinematics.js)."
+ },
+ "camera": {
+  "follow": true,
+  "maxZoom": 1.18,
+  "near": 150,
+  "far": 430,
+  "ease": 0.1,
+  "_doc": "Cámara de seguimiento (engine/pg_cinematics.js, solo presentación: no cambia hitboxes ni resultado). follow: seguir el punto medio de los dos luchadores; maxZoom: acercamiento máximo cuando están pegados; near/far: distancia en px entre luchadores con la que el acercamiento es máximo / nulo (entre las dos es proporcional); ease: suavizado por frame. El piso queda anclado abajo del cuadro y el centro se limita para no salir de la arena. Valores de DISEÑO, no medidos de KOF: ajustar jugando."
+ },
+ "render": {
+  "targetFrameH": 180,
+  "_doc": "Alto objetivo en pantalla (px lógicos) para normalizar atlas de celdas distintas (120, 213, ...). Cada char puede sobreescribir con renderScale en su char.json. roundFade: frames del fundido a negro al terminar la secuencia de K.O. y del regreso al empezar la ronda siguiente (solo dibujo).",
+  "roundFade": 18
+ },
+ "hit": {
+  "_doc": "Resolución de impactos (antes eran números escritos en pg_sim.js). Desde BUILD-14 el motor RESPETA lo declarado en cada move: daño = damage del move (regionDamage.enabled=false; antes multiplicaba ×1.3 todo golpe con caja alta —todos los puños y proyectiles— y ×0.9 las patadas bajas, así que el daño real no coincidía con el que se ve en Comandos) y hitstop = hitstop del move (useMoveHitstop=true; antes se ignoraba y se usaba la tabla por tipo). Para volver al comportamiento anterior: regionDamage.enabled=true y useMoveHitstop=false. La tabla hitstop/shake/flashColor por tipo sigue usándose para temblor, destello y para moves sin hitstop. cancelOnContact=true: un golpe solo se cancela en otro (normal→especial→súper) si CONECTÓ (golpe o guardia), como en KOF; al aire no se cancela. koHitstop: congelamiento del golpe final (K.O.), más largo que cualquier golpe: el impacto que gana la ronda se SIENTE (pilar Peso). koFlash: destello blanco de pantalla en el golpe final (0..1; se apaga con cinematic.flashDecay).",
+  "region": {
+   "headY": -78,
+   "chestY": -45
+  },
+  "regionDamage": {
+   "enabled": false,
+   "head": 1.3,
+   "chest": 1.0,
+   "legs": 0.9
+  },
+  "useMoveHitstop": true,
+  "hitstop": {
+   "super": 14,
+   "head": 10,
+   "heavy": 7,
+   "light": 5
+  },
+  "shake": {
+   "super": 12,
+   "head": 8,
+   "heavy": 6,
+   "light": 3
+  },
+  "heavyDamage": 20,
+  "flashAdd": 0.3,
+  "flashColor": {
+   "head": "255,60,60",
+   "heavy": "255,140,0",
+   "light": "255,255,255"
+  },
+  "sparkLife": {
+   "super": 18,
+   "normal": 12,
+   "block": 10
+  },
+  "block": {
+   "hitstopMul": 0.5,
+   "shake": 2
+  },
+  "defaults": {
+   "damage": 12,
+   "hitstun": 14,
+   "blockstun": 10,
+   "pushHit": 4,
+   "pushBlock": 3,
+   "pushY": -9,
+   "guardDamage": 8,
+   "hitstop": 5
+  },
+  "cancelOnContact": true,
+  "superCancel": "max",
+  "_superCancel": "Cancelación a SÚPER (motor 2026-10-25; antes no existía: ningún súper salía cancelando aunque el char.json lo declarara en cancelInto). normal -> súper: siempre que el súper esté en cancelInto del normal y la entrada (comando del súper o botón de súper) llegue dentro de su ventana de cancelación. especial -> súper: \"max\" = solo dentro del MAX (regla de KOF 2002), \"always\" = siempre, \"never\" = nunca. súper -> súper: nunca. En MAX también los ocultos (inputs.hidden) si están en cancelInto. Lo verifica tools/combo_check.js.",
+  "koHitstop": 28,
+  "koFlash": 0.7
+ },
+ "max": {
+  "_doc": "Activación de MAX (Puño+Especial). damageMul aplica a agarres en MAX.",
+  "activateInvuln": 12,
+  "activateFrames": 18,
+  "throwDamageMul": 1.2
+ },
+ "knockdown": {
+  "_doc": "Derribo, levantada y recuperación (ukemi). Valores de DISEÑO, no medidos de KOF: ajústalos jugando. downFrames = frames tendido; la levantada dura lo que el clip recovery_pose de cada personaje (wakeupFallback si no lo tiene) y no se le puede golpear ni agarrar; ukemiWindow = frames antes de tocar el piso en que Puño+Patada activa la recuperación (rodada invulnerable hacia atrás); los agarres derriban 'duro' (sin recuperación) si hardOnThrow; un move puede declarar knockdown:true o hardKnockdown:true.",
+  "downFrames": 34,
+  "wakeupFallback": 24,
+  "ukemiWindow": 8,
+  "techFrames": 20,
+  "techInvuln": 16,
+  "techSpeed": 5.5,
+  "hardOnThrow": true,
+  "hardOnLauncherSuper": true,
+  "landShake": 4
+ },
+ "guard": {
+  "_doc": "Barra de guardia (antes se restaba al bloquear pero no hacía nada). Cada golpe bloqueado resta guardDamage del move o damage*damageMul (mínimo damageMin); en 0 la guardia se ROMPE: estado GUARD_CRUSH, vulnerable crushStun frames, y se rellena. Se regenera tras regenDelay frames sin bloquear. Valores de DISEÑO.",
+  "max": 100,
+  "damageMul": 0.5,
+  "damageMin": 4,
+  "regenDelay": 60,
+  "regenPerFrame": 0.35,
+  "crushStun": 48,
+  "crushHitstop": 12,
+  "crushShake": 8
+ },
+ "counter": {
+  "_doc": "Contragolpe: golpear al rival durante el arranque o los frames activos de SU ataque (no en la recuperación). Valores de DISEÑO.",
+  "damageMul": 1.2,
+  "hitstunAdd": 4,
+  "hitstopAdd": 3
+ },
+ "training": {
+  "_doc": "Modo Entrenamiento (banco de pruebas; no afecta Arcade/Versus/Torneo): reloj ∞, el maniquí no cae K.O. (minHp) y la vida de ambos se rellena tras refillIdle frames sin intercambio.",
+  "roundTime": 999,
+  "minHp": 1,
+  "refillIdle": 45
+ },
+ "ai": {
+  "_doc": "IA por niveles (engine/pg_ai.js). levels: probabilidades por frame (react=reaccionar a ataque/proyectil, aggro=atacar en rango, special, jump, spaceBack=retroceder) y minGap (px). range: distancias en px de la arena. cool: frames de espera tras cada acción. Valores de DISEÑO, antes escritos en el código. mash: probabilidad por frame de machacar estando MAREADO (el simulador acepta como mucho una pulsación útil cada stun.mashGap frames).",
+  "levels": {
+   "1": {
+    "react": 0.22,
+    "aggro": 0.03,
+    "special": 0.01,
+    "jump": 0.004,
+    "spaceBack": 0.02,
+    "minGap": 52,
+    "mash": 0.08
+   },
+   "2": {
+    "react": 0.48,
+    "aggro": 0.06,
+    "special": 0.025,
+    "jump": 0.01,
+    "spaceBack": 0.05,
+    "minGap": 58,
+    "mash": 0.15
+   },
+   "3": {
+    "react": 0.8,
+    "aggro": 0.1,
+    "special": 0.05,
+    "jump": 0.02,
+    "spaceBack": 0.1,
+    "minGap": 62,
+    "mash": 0.25
+   }
+  },
+  "range": {
+   "inRange": 92,
+   "close": 130,
+   "airKick": 120,
+   "airApproach": 40,
+   "projectileReact": 170,
+   "projectileJump": 110,
+   "antiAir": 96,
+   "zoning": 220,
+   "downApproach": 110,
+   "ukemiHeight": 40
+  },
+  "cool": {
+   "zoning": 40,
+   "special": 22,
+   "punch": 10,
+   "kick": 12,
+   "crushPunish": 6
+  }
+ },
+ "guardCancel": {
+  "_doc": "Rodada de cancelación de guardia (KOF): Puño+Patada durante el aturdimiento de guardia, en el suelo, cuesta 'cost' de barra (la súper cuesta 100, el MAX 50). Rodada invulnerable normal. Valor de DISEÑO.",
+  "enabled": true,
+  "cost": 50
+ },
+ "stun": {
+  "enabled": true,
+  "max": 100,
+  "mul": 0.7,
+  "superMul": 0.25,
+  "counterMul": 1.5,
+  "throwMul": 0.7,
+  "recoverDelay": 70,
+  "recoverPerFrame": 0.6,
+  "dizzyFrames": 150,
+  "mash": 6,
+  "mashGap": 3,
+  "lockFrames": 240,
+  "_doc": "MAREO (KOF): cada golpe RECIBIDO (no bloqueado) suma aturdimiento = daño base × mul (súper × superMul, contragolpe × counterMul, agarre × throwMul; un move puede fijar el suyo con 'stun'). Si pasan recoverDelay frames sin recibir golpes baja recoverPerFrame por frame. Al llegar a max el luchador queda MAREADO en cuanto se recupera (de pie, al aterrizar o al levantarse): dizzyFrames frames sin poder actuar; cada pulsación o cambio de dirección resta 'mash' frames (como mucho una cada mashGap frames). El primer golpe que recibe lo despierta. Después del mareo no acumula durante lockFrames (sin mareos encadenados). Entrenamiento lo apaga salvo que se active en la pausa. Valores de DISEÑO, TODO: VERIFICAR jugando."
+ },
+ "team": {
+  "size": 3,
+  "recoverMax": 0.25,
+  "carryMeter": true,
+  "_doc": "EQUIPOS (KOF): size = integrantes por equipo. Al caer uno entra el siguiente; el que gana se queda con la vida que le quedó MÁS una recuperación = vida máxima × recoverMax × (tiempo que sobró / tiempo de ronda). carryMeter: la barra de poder pasa al siguiente integrante (la barra es del equipo). Empate por tiempo o doble K.O.: caen los dos. Gana el equipo que deje al otro sin luchadores; si los dos se quedan sin luchadores a la vez, empate. recoverMax es valor de DISEÑO (TODO: VERIFICAR la fórmula exacta de KOF 2002)."
+ }
+}

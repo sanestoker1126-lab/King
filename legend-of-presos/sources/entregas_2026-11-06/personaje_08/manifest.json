@@ -1,0 +1,75 @@
+{
+  "id": "personaje_08",
+  "estado": "entrega_parcial",
+  "entregas": [
+    {
+      "archivo": "personaje_08__base.png",
+      "clip": "base",
+      "cuadros": 1,
+      "bucle": false,
+      "fps_sugerido": null,
+      "cuadro_impacto": null,
+      "descripcion": [
+        "0: pose idle original, extraída como referencia de diseño y compuesta en una celda 640x640; personaje mira a la derecha."
+      ]
+    },
+    {
+      "archivo": "personaje_08__victory_pose.png",
+      "clip": "victory_pose",
+      "cuadros": 8,
+      "bucle": false,
+      "fps_sugerido": 8,
+      "cuadro_impacto": null,
+      "descripcion": [
+        "0: posa con orgullo y puños a los costados.",
+        "1: recoge los puños hacia el pecho y flexiona levemente las rodillas.",
+        "2: alza un puño a la altura del hombro.",
+        "3: extiende la mano hacia delante en gesto de celebración.",
+        "4: levanta ambos puños junto a los hombros.",
+        "5: lleva una mano al pecho y alza el mentón.",
+        "6: baja los brazos y acomoda el peso en una postura segura.",
+        "7: cierra con un puño cerca del pecho y postura confiada."
+      ]
+    },
+    {
+      "archivo": "personaje_08__ko_fall.png",
+      "clip": "ko_fall",
+      "cuadros": 8,
+      "bucle": false,
+      "fps_sugerido": 10,
+      "cuadro_impacto": 0,
+      "descripcion": [
+        "0: recibe el golpe y se inclina hacia atrás, una mano va al pecho.",
+        "1: pierde equilibrio, torso atrás y brazo extendido.",
+        "2: se dobla hacia delante y flexiona las rodillas.",
+        "3: baja a una rodilla mientras busca apoyo con una mano.",
+        "4: se encorva más y cae hacia el suelo, braceando.",
+        "5: colapsa hacia un costado con las piernas recogidas.",
+        "6: queda tendido de lado, brazos y piernas doblados cerca del cuerpo.",
+        "7: pose final tendida de lado, un brazo extendido hacia delante, la otra mano sobre el abdomen y una rodilla más abierta; se mantiene inmóvil."
+      ]
+    }
+  ],
+  "especificacion": {
+    "celda_px": [
+      640,
+      640
+    ],
+    "alto_personaje_px": 520,
+    "pies_y": 600,
+    "fondo": "transparencia RGBA",
+    "hoja_victoria_px": [
+      5120,
+      640
+    ],
+    "hoja_ko_fall_px": [
+      5120,
+      640
+    ]
+  },
+  "problemas": [
+    "La entrega incluye el diseño base, victory_pose y ko_fall; sigue pendiente dizzy.",
+    "El ZIP del catálogo no contiene atlas/personaje_08/; se usó hojas/personaje_08.jpg para el diseño base. Las animaciones generadas conservan los rasgos principales visibles, pero la identidad exacta cuadro a cuadro no puede certificarse contra los originales del atlas ausente.",
+    "La hoja de referencia JPEG es de baja resolución, por lo que el diseño base ampliado puede mostrar suavidad/artefactos de compresión."
+  ]
+}

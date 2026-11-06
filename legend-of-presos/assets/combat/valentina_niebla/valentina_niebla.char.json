@@ -1,0 +1,1049 @@
+{
+  "id": "valentina_niebla",
+  "displayName": "Valentina \"Niebla\"",
+  "source": "Paquete valentina_niebla_atlas_package (81 frames etiquetados, 9x9 @1920). Corte EXACTO por coordsFile.",
+  "_atlas_status": "OK — atlas + coordenadas presentes; se cortan rects exactos (sin drift de rejilla).",
+  "_frame_data_status": "TODO_VERIFICAR — mapeo frame->animacion por palabras clave (spec §5). Afinar visualmente.",
+  "theme": "movil/evasiva; afterimage, fintas de fase, presion aerea",
+  "frameSize": {
+    "w": 288,
+    "h": 298
+  },
+  "anchor": {
+    "x": 0.5,
+    "y": 1.0
+  },
+  "pivot_note": "bottom-center aprox; frames miran a la DERECHA. Baseline y=0.96 (afinar).",
+  "vida": 285,
+  "atlases": {
+    "base": {
+      "file": "valentina_niebla_atlas.png",
+      "columns": 9,
+      "rows": 9,
+      "anchorsFile": "valentina_niebla_atlas_anchors.json",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      }
+    },
+    "hidden_special": {
+      "file": "valentina_niebla_hidden_specials.png",
+      "columns": 6,
+      "rows": 1,
+      "cell": {
+        "w": 288,
+        "h": 298
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde base:super_punch; FX externos, no horneados."
+    },
+    "melee_attacks": {
+      "file": "valentina_niebla_melee_attacks.png",
+      "columns": 6,
+      "rows": 4,
+      "cell": {
+        "w": 288,
+        "h": 298
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde clips de ataque cuerpo a cuerpo; oponentes y FX separados.",
+      "anchorsFile": "valentina_niebla_melee_attacks_anchors.json"
+    },
+    "result_poses": {
+      "file": "valentina_niebla_result_poses.png",
+      "columns": 8,
+      "rows": 2,
+      "cell": {
+        "w": 288,
+        "h": 298
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde poses de resultado existentes.",
+      "anchorsFile": "valentina_niebla_result_poses_anchors.json"
+    },
+    "combo_sequences": {
+      "file": "valentina_niebla_combo_sequences.png",
+      "columns": 10,
+      "rows": 1,
+      "cell": {
+        "w": 288,
+        "h": 298
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde clips de combate existentes; rivales y FX separados.",
+      "anchorsFile": "valentina_niebla_combo_sequences_anchors.json"
+    },
+    "energia": {
+      "file": "valentina_niebla_energia.png",
+      "columns": 4,
+      "rows": 2,
+      "cell": {
+        "w": 464,
+        "h": 280
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.957143
+      },
+      "sha256": "66ccddd54deac9b7f683697cbec02c6a15409e5b1b3f077c17e2b5364f899c2c",
+      "source": "tools/build_valentina_nadia.py (cuadros del paquete \"Nadia\"; ver sources/valentina_niebla/nadia/LEEME.md)"
+    },
+    "victoria": {
+      "file": "valentina_niebla_victoria.png",
+      "columns": 4,
+      "rows": 2,
+      "cell": {
+        "w": 200,
+        "h": 272
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.970588
+      },
+      "sha256": "2b9545a84e61774337943deaa8483a144accfd7432e155890008ddbbd9a1c60d",
+      "source": "tools/build_valentina_nadia.py (cuadros del paquete \"Nadia\"; ver sources/valentina_niebla/nadia/LEEME.md)"
+    },
+    "especial": {
+      "file": "valentina_niebla_especial.png",
+      "columns": 3,
+      "rows": 2,
+      "cell": {
+        "w": 336,
+        "h": 296
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.898649
+      },
+      "sha256": "b1478af94c78e230ecbd05375900d3c34deaf6a780ae618883ceb147da4dcf9c",
+      "source": "tools/build_especiales_hojas.py (hoja del usuario sources/especiales_2026-11-05/valentina_niebla/especial_cuerpo.png; ver qa/especiales/valentina_niebla_REPORTE.md)"
+    }
+  },
+  "style": {
+    "walk": 3.1,
+    "run": 5.6,
+    "jumpNormal": -16.0,
+    "jumpHigh": -19.4,
+    "airMove": 2.4
+  },
+  "clips": {
+    "idle": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": true,
+      "frames": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        8
+      ]
+    },
+    "walk": {
+      "atlas": "base",
+      "fps": 10,
+      "loop": true,
+      "frames": [
+        9,
+        10,
+        11,
+        13,
+        17
+      ]
+    },
+    "run": {
+      "atlas": "base",
+      "fps": 12,
+      "loop": true,
+      "frames": [
+        12,
+        13,
+        14
+      ]
+    },
+    "crouch_guard": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        22,
+        23,
+        24,
+        25
+      ]
+    },
+    "jump_mobility": {
+      "atlas": "base",
+      "fps": 12,
+      "loop": false,
+      "frames": [
+        27,
+        28,
+        29,
+        31,
+        32,
+        33,
+        34,
+        35
+      ]
+    },
+    "punch_combo": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        36,
+        37,
+        38,
+        39,
+        41
+      ]
+    },
+    "kick_combo": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        45,
+        46,
+        47,
+        48,
+        49
+      ]
+    },
+    "damage_fall": {
+      "atlas": "base",
+      "fps": 10,
+      "frames": [
+        57,
+        59,
+        58
+      ],
+      "_doc": "Antes [54..60] (empezaba con dos patadas). Ahora: echada hacia atrás, cae apoyando las manos, tendida."
+    },
+    "recovery_pose": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        60,
+        61,
+        62
+      ]
+    },
+    "front_grab": {
+      "atlas": "base",
+      "fps": 13,
+      "loop": false,
+      "frames": [
+        63,
+        64,
+        65,
+        68
+      ]
+    },
+    "spinning_throw": {
+      "atlas": "base",
+      "fps": 13,
+      "loop": false,
+      "frames": [
+        66,
+        67,
+        68,
+        69
+      ]
+    },
+    "special_punch_1": {
+      "atlas": "base",
+      "fps": 13,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        74,
+        75,
+        76
+      ]
+    },
+    "super_punch": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        74,
+        75,
+        76,
+        77
+      ]
+    },
+    "victory_pose": {
+      "atlas": "victoria",
+      "fps": 5,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "loop": false,
+      "hold": true,
+      "_doc": "Secuencia continua de la fuente (1, 3, 4, 5, 6): de pie, apunta, gira, mira por encima del hombro, brazo arriba. Se queda en el último."
+    },
+    "hurt": {
+      "atlas": "base",
+      "fps": 10,
+      "frames": [
+        56
+      ],
+      "hold": true,
+      "_doc": "Antes [54, 55]: 54 es copia exacta de la patada 45 y 55 una patada alta. 56 = torsión con los brazos lanzados (la única pose del atlas que se lee como impacto). TODO: VERIFICAR a ojo en el juego."
+    },
+    "down": {
+      "atlas": "base",
+      "frames": [
+        58
+      ],
+      "fps": 10,
+      "hold": true,
+      "lying": true,
+      "_doc": "tools/build_knockdown_clips.py: frame más bajo de damage_fall/recovery_pose (alto 95, idle 249). VERIFICAR a ojo."
+    },
+    "hidden_special": {
+      "atlas": "hidden_special",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "_source": {
+        "atlas": "base",
+        "clip": "super_punch",
+        "frames": [
+          0,
+          1,
+          74,
+          75,
+          76,
+          77
+        ]
+      }
+    },
+    "melee_punch": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "_source": {
+        "clip": "punch_combo",
+        "frames": [
+          36,
+          37,
+          38,
+          39,
+          41
+        ]
+      }
+    },
+    "melee_heavy": {
+      "atlas": "melee_attacks",
+      "fps": 13,
+      "loop": false,
+      "frames": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "_source": {
+        "clip": "special_punch_1",
+        "frames": [
+          0,
+          1,
+          74,
+          75,
+          76
+        ]
+      }
+    },
+    "melee_kick": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "_source": {
+        "clip": "kick_combo",
+        "frames": [
+          45,
+          46,
+          47,
+          48,
+          49
+        ]
+      }
+    },
+    "melee_upper": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "_source": {
+        "clip": "super_punch",
+        "frames": [
+          0,
+          1,
+          74,
+          75,
+          76,
+          77
+        ]
+      }
+    },
+    "result_victory": {
+      "atlas": "result_poses",
+      "fps": 8,
+      "loop": false,
+      "hold": true,
+      "frames": [
+        0,
+        1,
+        2
+      ],
+      "_source": {
+        "clip": "victory_pose",
+        "frames": [
+          78,
+          79,
+          80
+        ]
+      }
+    },
+    "result_defeat": {
+      "atlas": "result_poses",
+      "fps": 10,
+      "loop": false,
+      "hold": true,
+      "frames": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "_source": {
+        "clip": "damage_fall",
+        "frames": [
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          58
+        ],
+        "endsWith": "down"
+      }
+    },
+    "combo_flying_kicks": {
+      "atlas": "combo_sequences",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "_sources": [
+        {
+          "clip": "kick_combo",
+          "atlas": "base",
+          "frames": [
+            45,
+            46,
+            47,
+            48,
+            49
+          ]
+        },
+        {
+          "clip": "melee_kick",
+          "atlas": "melee_attacks",
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            16
+          ]
+        }
+      ]
+    },
+    "punch_energia": {
+      "atlas": "energia",
+      "fps": 14,
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "kick_energia": {
+      "atlas": "energia",
+      "fps": 14,
+      "frames": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "victory_alt": {
+      "atlas": "victoria",
+      "fps": 5,
+      "frames": [
+        5,
+        6
+      ],
+      "loop": false,
+      "hold": true,
+      "_doc": "Poses 9 y 10 de la fuente (arrodillada, de espaldas apuntando). SIN USO en el motor: alternativa si se prefiere."
+    },
+    "esp_palma_niebla": {
+      "atlas": "especial",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        2,
+        3,
+        4,
+        5
+      ],
+      "_doc": "Palma -> remolino en la palma -> descarga (sale el cometa) -> carrera envuelta en niebla -> barrido con el brazo -> aterriza agachada. Figuras: ['v0', 'v1', 'v2', 'v2', 'v3', 'v4', 'v5']. GENERADO por tools/build_especiales_hojas.py."
+    }
+  },
+  "inputs": {
+    "grounded": {
+      "punch": "punch",
+      "kick": "kick"
+    },
+    "air": {
+      "punch": "j_punch",
+      "kick": "j_kick"
+    },
+    "specials": [
+      {
+        "motion": "hcf",
+        "button": "kick",
+        "move": "command_grab"
+      },
+      {
+        "motion": "qcf",
+        "button": "punch",
+        "move": "paso_fantasma"
+      },
+      {
+        "motion": "qcb",
+        "button": "kick",
+        "move": "tackle"
+      },
+      {
+        "motion": "qcb",
+        "button": "punch",
+        "move": "especial_palma_niebla"
+      }
+    ],
+    "supers": [
+      {
+        "motion": "qcf2",
+        "button": "punch",
+        "move": "manto_de_niebla"
+      }
+    ],
+    "hidden": [
+      {
+        "motion": "qcf2",
+        "button": "kick",
+        "move": "manto_de_niebla_ex"
+      }
+    ]
+  },
+  "moves": {
+    "punch": {
+      "cancelInto": [
+        "kick",
+        "paso_fantasma",
+        "manto_de_niebla",
+        "especial_palma_niebla"
+      ],
+      "guardType": "high",
+      "damage": 9,
+      "pushY": 0,
+      "clip": "punch_energia",
+      "hitbox": {
+        "x": 20,
+        "y": -121,
+        "w": 56,
+        "h": 53
+      },
+      "frames": {
+        "startup": 4,
+        "active": 2,
+        "recovery": 8
+      },
+      "activeIdx": [
+        1,
+        2
+      ],
+      "hitstun": 13,
+      "blockstun": 10,
+      "cancelFrames": [
+        5,
+        8
+      ],
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "name": "Puño de niebla",
+      "nameSrc": "generico",
+      "_measure": "tools/build_valentina_nadia.py: impacto en [1, 2] del atlas energia (clip punch_energia idx 1-2); caja = extremidad fuera de punch_energia[0], altura 0.62; tiempos data/normals.json clase jab"
+    },
+    "kick": {
+      "cancelInto": [
+        "paso_fantasma",
+        "manto_de_niebla",
+        "especial_palma_niebla"
+      ],
+      "guardType": "high",
+      "damage": 11,
+      "pushY": 0,
+      "clip": "kick_energia",
+      "hitbox": {
+        "x": 37,
+        "y": -125,
+        "w": 103,
+        "h": 57
+      },
+      "frames": {
+        "startup": 6,
+        "active": 3,
+        "recovery": 12
+      },
+      "activeIdx": [
+        2,
+        2
+      ],
+      "hitstun": 17,
+      "blockstun": 13,
+      "cancelFrames": [
+        7,
+        11
+      ],
+      "hitstop": 7,
+      "pushHit": 4,
+      "pushBlock": 3,
+      "name": "Patada lateral",
+      "nameSrc": "generico",
+      "_measure": "tools/build_valentina_nadia.py: impacto en [6] del atlas energia (clip kick_energia idx 2-2); caja = extremidad fuera de kick_energia[1], altura 0.64; tiempos data/normals.json clase kick"
+    },
+    "j_punch": {
+      "clip": "punch_combo",
+      "air": true,
+      "hitFrames": [
+        1,
+        2
+      ],
+      "hitbox": {
+        "x": 50,
+        "y": -160,
+        "w": 88,
+        "h": 50
+      },
+      "guardType": "overhead",
+      "damage": 9,
+      "hitstun": 15,
+      "blockstun": 10,
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushY": 0,
+      "name": "Puño Aéreo",
+      "nameSrc": "generico"
+    },
+    "j_kick": {
+      "clip": "kick_combo",
+      "air": true,
+      "hitFrames": [
+        2,
+        3
+      ],
+      "hitbox": {
+        "x": 54,
+        "y": -110,
+        "w": 100,
+        "h": 58
+      },
+      "guardType": "overhead",
+      "damage": 11,
+      "hitstun": 16,
+      "blockstun": 11,
+      "hitstop": 7,
+      "pushHit": 4,
+      "pushY": 0,
+      "name": "Patada Aérea",
+      "nameSrc": "generico"
+    },
+    "throw": {
+      "type": "throw",
+      "clip": "front_grab",
+      "range": 64,
+      "damage": 12,
+      "tossX": 6,
+      "tossY": -10,
+      "tossFrame": 3,
+      "hold": 40,
+      "hitstop": 10,
+      "name": "Agarre",
+      "nameSrc": "generico"
+    },
+    "command_grab": {
+      "type": "command_grab",
+      "clip": "spinning_throw",
+      "range": 62,
+      "damage": 14,
+      "tossX": 7,
+      "tossY": -9,
+      "tossFrame": 3,
+      "hold": 42,
+      "hitstop": 10,
+      "name": "Llave de Comando",
+      "nameSrc": "generico"
+    },
+    "tackle": {
+      "clip": "kick_combo",
+      "special": true,
+      "meterCost": 0,
+      "hitFrames": [
+        2,
+        3
+      ],
+      "cancelWindow": [
+        3,
+        6
+      ],
+      "cancelInto": [
+        "manto_de_niebla"
+      ],
+      "hitbox": {
+        "x": 70,
+        "y": -90,
+        "w": 120,
+        "h": 60
+      },
+      "guardType": "low",
+      "damage": 14,
+      "chipDamage": 3,
+      "hitstun": 18,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 8,
+      "pushBlock": 4,
+      "pushY": 0,
+      "advance": 7,
+      "_doc": "Embate bajo que avanza; knockdown en hit limpio"
+    },
+    "paso_fantasma": {
+      "clip": "special_punch_1",
+      "special": true,
+      "meterCost": 0,
+      "hitFrames": [
+        2,
+        3,
+        4
+      ],
+      "cancelWindow": [
+        2,
+        5
+      ],
+      "cancelInto": [
+        "manto_de_niebla"
+      ],
+      "hitbox": {
+        "x": 64,
+        "y": -140,
+        "w": 110,
+        "h": 54
+      },
+      "guardType": "high",
+      "damage": 17,
+      "chipDamage": 4,
+      "hitstun": 20,
+      "blockstun": 14,
+      "hitstop": 10,
+      "pushHit": 6,
+      "pushBlock": 3,
+      "pushY": -2,
+      "invuln": true,
+      "invulnFrames": 3,
+      "cinematic": {
+        "kind": "special",
+        "zoom": 1.4,
+        "freeze": 14,
+        "dur": 40
+      },
+      "_doc": "Especial firma (0 barra). Startup con i-frames cortos; cancelable a super"
+    },
+    "manto_de_niebla": {
+      "super": true,
+      "clip": "super_punch",
+      "meterCost": 100,
+      "invuln": true,
+      "invulnFrames": 20,
+      "hitFrames": [
+        1,
+        2,
+        3
+      ],
+      "hitbox": {
+        "x": 58,
+        "y": -160,
+        "w": 150,
+        "h": 80
+      },
+      "guardType": "high",
+      "damage": 92,
+      "hitstun": 28,
+      "blockstun": 18,
+      "hitstop": 16,
+      "pushHit": 8,
+      "pushBlock": 6,
+      "pushY": -4,
+      "cinematic": {
+        "kind": "super",
+        "zoom": 1.9,
+        "freeze": 50,
+        "dur": 80
+      },
+      "_doc": "Super (1 barra llena): acercamiento de camara + flash + congelamiento"
+    },
+    "manto_de_niebla_ex": {
+      "super": true,
+      "hidden": true,
+      "clip": "hidden_special",
+      "meterCost": 0,
+      "invuln": true,
+      "invulnFrames": 24,
+      "hitFrames": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "hitbox": {
+        "x": 54,
+        "y": -165,
+        "w": 170,
+        "h": 88
+      },
+      "guardType": "high",
+      "damage": 112,
+      "hitstun": 30,
+      "blockstun": 18,
+      "hitstop": 18,
+      "pushHit": 9,
+      "pushY": -5,
+      "cinematic": {
+        "kind": "super",
+        "zoom": 2.05,
+        "freeze": 56,
+        "dur": 92
+      },
+      "_doc": "DM OCULTO: solo accesible en MAX mode (segunda version del super)",
+      "_hidden_frames": {
+        "file": "valentina_niebla_hidden_specials.png",
+        "sourceAtlas": "base",
+        "sourceClip": "super_punch",
+        "sourceFrames": [
+          0,
+          1,
+          74,
+          75,
+          76,
+          77
+        ],
+        "cell": {
+          "w": 288,
+          "h": 298
+        },
+        "fxSeparate": true
+      }
+    },
+    "especial_palma_niebla": {
+      "clip": "esp_palma_niebla",
+      "hitFrames": [
+        5
+      ],
+      "guardType": "high",
+      "special": true,
+      "meterCost": 0,
+      "spawnFrame": 2,
+      "spawns": {
+        "speed": 7,
+        "life": 80,
+        "offsetX": 110,
+        "offsetY": -73,
+        "hitbox": {
+          "w": 73,
+          "h": 43
+        },
+        "damage": 16,
+        "hitstun": 16,
+        "blockstun": 12,
+        "hitstop": 7,
+        "pushHit": 5,
+        "pushBlock": 3,
+        "chipDamage": 2,
+        "guardType": "high",
+        "kind": "energy",
+        "anim": "esp_valentina_niebla_proyectil",
+        "animH": 84,
+        "hitAnim": "esp_valentina_niebla_impacto"
+      },
+      "damage": 14,
+      "hitstun": 18,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 6,
+      "pushBlock": 4,
+      "pushY": 0,
+      "hitbox": {
+        "x": 35,
+        "y": -125,
+        "w": 51,
+        "h": 42
+      },
+      "hitAnim": "esp_valentina_niebla_onda",
+      "advance": 6,
+      "advanceFrames": [
+        4,
+        5
+      ],
+      "cancelInto": [
+        "manto_de_niebla"
+      ],
+      "name": "Palma de niebla",
+      "nameSrc": "provisional: describe el arte de la hoja del usuario 2026-11-05 (TODO: VERIFICAR con el usuario)",
+      "_doc": "Descarga de niebla (proyectil) y carrera con barrido (golpe cuerpo a cuerpo en el índice 5; en MAX cancela a Manto de niebla). Tiempos, daño y velocidad = DISEÑO (TODO: VERIFICAR jugando en Android). GENERADO por tools/build_especiales_hojas.py desde tools/specs/especiales_hojas_spec.json.",
+      "_measure": "tools/build_especiales_hojas.py: escala 0.5280 (alto de pie 474 px fuente vs idle[0] 250 px); proyectil: salida en línea de corte x=1080.0 de v2, centro vertical de lo cortado; tamaño dibujado 122x72 px lógicos (caja 73x43 = [0.6, 0.6]); offset (110, -73); cuerpo a cuerpo: caja de ['v4'] (rect a ojo en la hoja fuente) -> {'x': 35, 'y': -125, 'w': 51, 'h': 42}"
+    }
+  },
+  "victory": {
+    "clip": "victory_pose",
+    "_doc": "pose de victoria con leve acercamiento de camara"
+  },
+  "renderScale": 0.6048,
+  "_fix_note": "Atlas re-empacado por componentes conexos (baseline consistente); antes recortaba cabeza/pies por deriva vertical. frame index preservado.",
+  "_blankFix": {
+    "special_punch_1": {
+      "0": "idle[0]",
+      "1": "idle[1]"
+    },
+    "super_punch": {
+      "0": "idle[0]",
+      "1": "idle[1]"
+    }
+  },
+  "portrait": {
+    "atlas": "base",
+    "frame": 0,
+    "head": [
+      100,
+      41,
+      105,
+      105
+    ],
+    "body": [
+      70,
+      48,
+      147,
+      249
+    ],
+    "_doc": "tools/build_portraits.py: rects en pixeles del atlas (frame idle[0]).",
+    "clipBox": {
+      "idle": {
+        "l": 90,
+        "r": 90,
+        "t": 250
+      },
+      "victory_pose": {
+        "l": 74,
+        "r": 80,
+        "t": 256
+      }
+    }
+  },
+  "pivotMode": "frame_bottom_center",
+  "_nadia": {
+    "status": "Cuadros del paquete \"Nadia\" (mismo traje, otro estilo de dibujo; decisión del usuario 2026-10-25). GENERADO por tools/build_valentina_nadia.py: atlases energia/victoria, clips ['damage_fall', 'hurt', 'kick_energia', 'punch_energia', 'victory_alt', 'victory_pose'] y moves ['kick', 'punch']. El resto del archivo no lo toca la herramienta."
+  },
+  "_especiales_2026_11_05": {
+    "status": "Especial nuevo desde hojas del usuario 2026-11-05: atlas \"especial\", clip esp_palma_niebla, move especial_palma_niebla, entrada qcb+punch, FX lib esp_valentina_niebla. GENERADO por tools/build_especiales_hojas.py desde tools/specs/especiales_hojas_spec.json; el resto del archivo no lo toca la herramienta.",
+    "cancelFrom": [
+      "punch",
+      "kick"
+    ]
+  }
+}

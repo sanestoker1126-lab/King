@@ -1,0 +1,508 @@
+{
+  "version": 1,
+  "purpose": "Partículas procedurales para especiales ocultos; no se hornean en spritesheets ni cambian hitboxes.",
+  "defaults": {
+    "life": 16,
+    "count": 8,
+    "speed": 2.4,
+    "spread": 0.9,
+    "size": 2.4,
+    "gravity": 0.02,
+    "drag": 0.96,
+    "glow": 0.45,
+    "shape": "burst"
+  },
+  "characters": {
+    "cadena": {
+      "move": "cadena_final",
+      "palette": [
+        16761037,
+        16770723,
+        16777215
+      ],
+      "shape": "chain_arc",
+      "seed": 101,
+      "frames": {
+        "0": {
+          "count": 5,
+          "life": 12,
+          "radius": 18,
+          "angle": -1.2,
+          "spread": 0.8,
+          "speed": 1.8,
+          "size": 2.1
+        },
+        "2": {
+          "count": 8,
+          "life": 16,
+          "radius": 28,
+          "angle": -0.9,
+          "spread": 1.5,
+          "speed": 2.8,
+          "size": 2.8
+        },
+        "5": {
+          "count": 14,
+          "life": 22,
+          "radius": 42,
+          "angle": -0.2,
+          "spread": 2.4,
+          "speed": 3.8,
+          "size": 3.4,
+          "gravity": 0.08
+        }
+      }
+    },
+    "calavera": {
+      "move": "panteon_final",
+      "palette": [
+        6806977,
+        12263663,
+        8947967
+      ],
+      "shape": "orbit",
+      "seed": 203,
+      "frames": {
+        "0": {
+          "count": 7,
+          "life": 18,
+          "radius": 20,
+          "speed": 1.4,
+          "size": 2.5,
+          "orbit": 2.4
+        },
+        "1": {
+          "count": 11,
+          "life": 22,
+          "radius": 34,
+          "speed": 2.1,
+          "size": 3.1,
+          "orbit": 3.6
+        },
+        "3": {
+          "count": 15,
+          "life": 26,
+          "radius": 52,
+          "speed": 2.6,
+          "size": 3.8,
+          "orbit": 4.8
+        }
+      }
+    },
+    "diego_cancha": {
+      "move": "tiempo_extra_ex",
+      "palette": [
+        16765542,
+        8773375,
+        16777215
+      ],
+      "shape": "zigzag",
+      "seed": 307,
+      "frames": {
+        "0": {
+          "count": 6,
+          "life": 12,
+          "radius": 24,
+          "angle": -1.5,
+          "spread": 0.7,
+          "speed": 3.4,
+          "size": 2.2
+        },
+        "2": {
+          "count": 10,
+          "life": 16,
+          "radius": 38,
+          "angle": -0.7,
+          "spread": 1.8,
+          "speed": 4.1,
+          "size": 2.8
+        },
+        "5": {
+          "count": 12,
+          "life": 20,
+          "radius": 56,
+          "angle": -0.1,
+          "spread": 2.8,
+          "speed": 5.0,
+          "size": 3.2,
+          "gravity": -0.03
+        }
+      }
+    },
+    "gordo": {
+      "move": "caida_del_bloque",
+      "palette": [
+        16736197,
+        16758861,
+        16773304
+      ],
+      "shape": "burst",
+      "seed": 401,
+      "frames": {
+        "0": {
+          "count": 5,
+          "life": 14,
+          "radius": 15,
+          "angle": -1.4,
+          "spread": 1.2,
+          "speed": 1.6,
+          "size": 2.6
+        },
+        "1": {
+          "count": 8,
+          "life": 16,
+          "radius": 24,
+          "angle": -1.0,
+          "spread": 2.0,
+          "speed": 2.3,
+          "size": 3.2
+        },
+        "3": {
+          "count": 18,
+          "life": 24,
+          "radius": 48,
+          "angle": -0.1,
+          "spread": 3.1,
+          "speed": 3.9,
+          "size": 4.0,
+          "gravity": 0.11
+        }
+      }
+    },
+    "mateo": {
+      "move": "ultimo_turno_ex",
+      "palette": [
+        16727107,
+        16724736,
+        16770589
+      ],
+      "shape": "clock_ring",
+      "seed": 503,
+      "frames": {
+        "0": {
+          "count": 6,
+          "life": 18,
+          "radius": 20,
+          "speed": 1.2,
+          "size": 2.2,
+          "orbit": 2.0
+        },
+        "2": {
+          "count": 10,
+          "life": 20,
+          "radius": 32,
+          "speed": 2.0,
+          "size": 2.8,
+          "orbit": 3.5
+        },
+        "3": {
+          "count": 16,
+          "life": 26,
+          "radius": 58,
+          "speed": 3.1,
+          "size": 3.4,
+          "orbit": 5.4
+        }
+      }
+    },
+    "mateo_alcaide": {
+      "move": "ultimo_turno_ex",
+      "palette": [
+        3753087,
+        10144127,
+        16777215
+      ],
+      "shape": "clock_ring",
+      "seed": 509,
+      "frames": {
+        "0": {
+          "count": 6,
+          "life": 14,
+          "radius": 20,
+          "speed": 1.6,
+          "size": 2.2,
+          "orbit": -2.0
+        },
+        "1": {
+          "count": 9,
+          "life": 18,
+          "radius": 34,
+          "speed": 2.4,
+          "size": 2.7,
+          "orbit": -3.4
+        },
+        "2": {
+          "count": 14,
+          "life": 22,
+          "radius": 50,
+          "speed": 3.0,
+          "size": 3.2,
+          "orbit": -4.5
+        }
+      }
+    },
+    "morado": {
+      "move": "eclipse_morado",
+      "palette": [
+        10724351,
+        16739071,
+        6684919
+      ],
+      "shape": "violet_orbit",
+      "seed": 601,
+      "frames": {
+        "0": {
+          "count": 8,
+          "life": 18,
+          "radius": 26,
+          "speed": 1.3,
+          "size": 2.5,
+          "orbit": 2.6
+        },
+        "1": {
+          "count": 12,
+          "life": 20,
+          "radius": 42,
+          "speed": 1.8,
+          "size": 3.0,
+          "orbit": 4.0
+        },
+        "2": {
+          "count": 18,
+          "life": 24,
+          "radius": 68,
+          "speed": 2.5,
+          "size": 3.8,
+          "orbit": 5.4
+        }
+      }
+    },
+    "personaje_08": {
+      "move": "dm_oculto",
+      "palette": [
+        9631595,
+        16732120,
+        16777215
+      ],
+      "shape": "glitch",
+      "seed": 709,
+      "frames": {
+        "0": {
+          "count": 5,
+          "life": 10,
+          "radius": 18,
+          "angle": -1.2,
+          "spread": 0.8,
+          "speed": 2.8,
+          "size": 2.0
+        },
+        "2": {
+          "count": 12,
+          "life": 16,
+          "radius": 38,
+          "angle": -0.4,
+          "spread": 2.4,
+          "speed": 3.9,
+          "size": 2.6
+        },
+        "5": {
+          "count": 16,
+          "life": 20,
+          "radius": 60,
+          "angle": 0.2,
+          "spread": 3.2,
+          "speed": 4.8,
+          "size": 3.0
+        }
+      }
+    },
+    "pocheche_tijeras": {
+      "move": "tijeras_llamas",
+      "palette": [
+        16739126,
+        16726072,
+        16777187
+      ],
+      "shape": "slash",
+      "seed": 811,
+      "frames": {
+        "0": {
+          "count": 6,
+          "life": 14,
+          "radius": 22,
+          "angle": -1.4,
+          "spread": 0.6,
+          "speed": 2.6,
+          "size": 2.6
+        },
+        "2": {
+          "count": 14,
+          "life": 22,
+          "radius": 68,
+          "angle": -0.2,
+          "spread": 2.5,
+          "speed": 4.6,
+          "size": 3.8,
+          "gravity": -0.05
+        }
+      }
+    },
+    "regente": {
+      "move": "estallido_fase_dos",
+      "palette": [
+        14107964,
+        7745322,
+        16756870
+      ],
+      "shape": "blade",
+      "seed": 907,
+      "frames": {
+        "0": {
+          "count": 5,
+          "life": 14,
+          "radius": 24,
+          "angle": -1.2,
+          "spread": 0.8,
+          "speed": 2.0,
+          "size": 2.5
+        },
+        "1": {
+          "count": 9,
+          "life": 18,
+          "radius": 42,
+          "angle": -0.6,
+          "spread": 1.6,
+          "speed": 3.1,
+          "size": 3.0
+        },
+        "2": {
+          "count": 16,
+          "life": 24,
+          "radius": 66,
+          "angle": 0.0,
+          "spread": 2.8,
+          "speed": 4.0,
+          "size": 3.6
+        }
+      }
+    },
+    "valentina_niebla": {
+      "move": "manto_de_niebla_ex",
+      "palette": [
+        9438719,
+        12246527,
+        16056319
+      ],
+      "shape": "mist",
+      "seed": 1009,
+      "frames": {
+        "0": {
+          "count": 10,
+          "life": 24,
+          "radius": 26,
+          "speed": 0.7,
+          "size": 5.5,
+          "gravity": -0.03,
+          "drag": 0.99
+        },
+        "2": {
+          "count": 16,
+          "life": 30,
+          "radius": 48,
+          "speed": 1.0,
+          "size": 7.0,
+          "gravity": -0.06,
+          "drag": 0.99
+        },
+        "5": {
+          "count": 20,
+          "life": 36,
+          "radius": 72,
+          "speed": 1.3,
+          "size": 8.2,
+          "gravity": -0.09,
+          "drag": 0.99
+        }
+      }
+    },
+    "wasirris": {
+      "move": "sentencia_firme_ex",
+      "palette": [
+        5229567,
+        6733055,
+        14283775
+      ],
+      "shape": "electric",
+      "seed": 1103,
+      "frames": {
+        "0": {
+          "count": 7,
+          "life": 12,
+          "radius": 22,
+          "angle": -1.2,
+          "spread": 1.0,
+          "speed": 3.3,
+          "size": 2.2
+        },
+        "2": {
+          "count": 12,
+          "life": 16,
+          "radius": 44,
+          "angle": -0.5,
+          "spread": 2.2,
+          "speed": 4.5,
+          "size": 2.8
+        },
+        "5": {
+          "count": 18,
+          "life": 20,
+          "radius": 72,
+          "angle": 0.0,
+          "spread": 3.0,
+          "speed": 5.6,
+          "size": 3.4,
+          "gravity": -0.02
+        }
+      }
+    },
+    "el_aedillo": {
+      "move": "contragolpe_ex",
+      "palette": [
+        11735598,
+        15221818,
+        16765066
+      ],
+      "shape": "slash",
+      "seed": 709,
+      "frames": {
+        "0": {
+          "count": 6,
+          "life": 16,
+          "radius": 22,
+          "angle": -1.0,
+          "spread": 1.2,
+          "speed": 1.6,
+          "size": 2.3
+        },
+        "3": {
+          "count": 10,
+          "life": 18,
+          "radius": 40,
+          "angle": -0.4,
+          "spread": 1.8,
+          "speed": 2.8,
+          "size": 2.9
+        },
+        "5": {
+          "count": 16,
+          "life": 24,
+          "radius": 64,
+          "angle": -0.2,
+          "spread": 2.4,
+          "speed": 3.8,
+          "size": 3.5
+        }
+      }
+    }
+  }
+}

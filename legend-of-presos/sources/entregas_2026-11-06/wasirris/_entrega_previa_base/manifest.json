@@ -1,0 +1,31 @@
+{
+  "id": "wasirris",
+  "estado": "base_visual_provisional",
+  "entregas": [
+    {
+      "archivo": "wasirris__base.png",
+      "clip": "base",
+      "cuadros": 1,
+      "bucle": false,
+      "fps_sugerido": null,
+      "cuadro_impacto": null,
+      "descripcion": [
+        "0: pose idle neutral del primer cuadro de la hoja de referencia; traje gris carbón, camisa burdeos, cabello corto y barba corta; compuesto en celda 640x640."
+      ]
+    }
+  ],
+  "especificacion": {
+    "celda_px": [
+      640,
+      640
+    ],
+    "alto_personaje_px": 520,
+    "pies_y": 600,
+    "fondo": "transparencia RGBA"
+  },
+  "problemas": [
+    "La entrega solicitada es solo el diseño base. Según la lista del proyecto, siguen pendientes ko_fall, dizzy y extender victory_pose.",
+    "El catálogo no contiene atlas/wasirris/; se usó la pose idle de hojas/wasirris.jpg y una edición referenciada para aislarla. Por la resolución JPEG baja no se puede certificar fidelidad exacta píxel a píxel.",
+    "El primer idle de la hoja se ve frontal/3⁄4 y no claramente de perfil derecho. Se conservó la orientación de esa referencia para no inventar una rotación; confirmar si el motor requiere un perfil estrictamente hacia la derecha."
+  ]
+}

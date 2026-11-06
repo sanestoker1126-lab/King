@@ -1,0 +1,780 @@
+{
+  "id": "el_aedillo",
+  "displayName": "El Aedillo",
+  "vida": 1000,
+  "style": {
+    "walk": 2.8,
+    "run": 4.8,
+    "jumpNormal": -15,
+    "jumpHigh": -18.5,
+    "airMove": 2.0
+  },
+  "_style": "Valores comunes del elenco (tools/specs/bosses_spec.json common.style).",
+  "renderScale": 0.6466,
+  "source": "Hoja sources/el_aedillo/el_aedillo_master_atlas.png (SHA-256 4c2bb89b66d6…): 81 figuras segmentadas por contorno y sentadas en celdas de 264x248 por tools/build_seated_char.py",
+  "frameSize": {
+    "w": 264,
+    "h": 248
+  },
+  "anchor": {
+    "x": 0.5,
+    "y": 0.975806
+  },
+  "pivot_note": "Pie sólido de TODOS los frames en la fila 242 de la celda y raíz en la columna central: ancla única (0.5, 0.975806).",
+  "atlases": {
+    "base": {
+      "file": "el_aedillo_atlas.png",
+      "columns": 9,
+      "rows": 5,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.975806
+      },
+      "sha256": "9ab0d6f163bd1559ef110702f8153b745e88d964c09f7a91d792539a6eb87503"
+    }
+  },
+  "clips": {
+    "idle": {
+      "atlas": "base",
+      "fps": 5,
+      "frames": [
+        0,
+        1
+      ],
+      "loop": true,
+      "_doc": "guardia (celdas 1-2; respiración)"
+    },
+    "walk": {
+      "atlas": "base",
+      "fps": 9,
+      "frames": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "loop": true,
+      "_doc": "caminata (celdas 9-12)"
+    },
+    "run": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "loop": true,
+      "_doc": "carrera (celdas 13-16)"
+    },
+    "crouch_guard": {
+      "atlas": "base",
+      "fps": 8,
+      "frames": [
+        10
+      ],
+      "_doc": "agachado en guardia (celda 25)"
+    },
+    "jump_mobility": {
+      "atlas": "base",
+      "fps": 7,
+      "frames": [
+        11,
+        12,
+        13
+      ],
+      "_doc": "salto: impulso, encogido, cae (celdas 27-29)"
+    },
+    "hurt": {
+      "atlas": "base",
+      "fps": 10,
+      "frames": [
+        31
+      ],
+      "_doc": "recibe: se echa atrás (celda 54)"
+    },
+    "damage_fall": {
+      "atlas": "base",
+      "fps": 10,
+      "frames": [
+        31,
+        32,
+        33,
+        34
+      ],
+      "_doc": "recibe, arqueado, cae de espaldas, tendido (celdas 54, 55, 57, 58)"
+    },
+    "down": {
+      "atlas": "base",
+      "fps": 10,
+      "frames": [
+        34
+      ],
+      "lying": true,
+      "_doc": "tendido boca arriba (celda 58)"
+    },
+    "recovery_pose": {
+      "atlas": "base",
+      "fps": 8,
+      "frames": [
+        35,
+        36,
+        37
+      ],
+      "_doc": "a gatas, de rodilla, de pie (celdas 60-62)"
+    },
+    "victory_pose": {
+      "atlas": "base",
+      "fps": 4,
+      "frames": [
+        40,
+        39
+      ],
+      "_doc": "brazos abiertos y puño arriba (celdas 76, 75)"
+    },
+    "atk_light": {
+      "atlas": "base",
+      "fps": 14,
+      "frames": [
+        16,
+        20,
+        16
+      ],
+      "_doc": "jab: guardia, jab, guardia (celdas 32, 37)"
+    },
+    "atk_heavy": {
+      "atlas": "base",
+      "fps": 13,
+      "frames": [
+        19,
+        21,
+        22
+      ],
+      "_doc": "recto: guardia, recto con la mano de atrás, guardia (celdas 36, 38, 39)"
+    },
+    "atk_kick": {
+      "atlas": "base",
+      "fps": 13,
+      "frames": [
+        24,
+        26,
+        24
+      ],
+      "_doc": "patada lateral: rodilla arriba, patada a la cintura, rodilla (celdas 41, 46)"
+    },
+    "atk_hkick": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        24,
+        28,
+        24
+      ],
+      "_doc": "patada alta: rodilla arriba, patada vertical, rodilla (celdas 41, 48)"
+    },
+    "atk_airp": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        13,
+        15
+      ],
+      "_doc": "puñetazo en el aire (celdas 29, 31)"
+    },
+    "atk_airk": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        12,
+        17
+      ],
+      "_doc": "patada lateral voladora (celdas 28, 33)"
+    },
+    "atk_sp1": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        16,
+        23,
+        19
+      ],
+      "_doc": "embestida: guardia, gancho al cuerpo avanzando, guardia (celdas 32, 40, 36)"
+    },
+    "atk_sp2": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        30,
+        29,
+        27,
+        18
+      ],
+      "_doc": "patada giratoria: giro con rodilla, de espaldas, patada lateral alta, guardia (celdas 50, 49, 47, 35)"
+    },
+    "atk_sp3": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        41,
+        24,
+        14
+      ],
+      "_doc": "rodillazo ascendente: agachado, rodilla arriba, guardia (celdas 80, 41, 30)"
+    },
+    "atk_super": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        38,
+        20,
+        21,
+        23,
+        24,
+        28
+      ],
+      "_doc": "impacto final: carga, jab, recto, gancho al cuerpo, rodilla, patada alta (celdas 73, 37, 38, 40, 41, 48)"
+    },
+    "hidden_special": {
+      "atlas": "base",
+      "fps": 11,
+      "frames": [
+        38,
+        25,
+        26,
+        30,
+        29,
+        27
+      ],
+      "_doc": "contragolpe: carga, patada baja, patada a la cintura, giro, de espaldas, patada lateral alta (celdas 73, 45, 46, 50, 49, 47)"
+    }
+  },
+  "inputs": {
+    "grounded": {
+      "punch": "punch",
+      "kick": "kick"
+    },
+    "air": {
+      "punch": "j_punch",
+      "kick": "j_kick"
+    },
+    "forward": {
+      "punch": "heavy_punch",
+      "kick": "heavy_kick"
+    },
+    "specials": [
+      {
+        "motion": "qcf",
+        "button": "punch",
+        "move": "embestida"
+      },
+      {
+        "motion": "dp",
+        "button": "kick",
+        "move": "rodillazo"
+      },
+      {
+        "motion": "qcb",
+        "button": "kick",
+        "move": "patada_giratoria"
+      }
+    ],
+    "supers": [
+      {
+        "motion": "qcf2",
+        "button": "punch",
+        "move": "super"
+      }
+    ],
+    "hidden": [
+      {
+        "motion": "qcf2",
+        "button": "kick",
+        "move": "contragolpe_ex"
+      }
+    ]
+  },
+  "moves": {
+    "punch": {
+      "clip": "atk_light",
+      "hitbox": {
+        "x": 23,
+        "y": -118,
+        "w": 29,
+        "h": 18
+      },
+      "frames": {
+        "startup": 4,
+        "active": 2,
+        "recovery": 8
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 13,
+      "blockstun": 10,
+      "cancelFrames": [
+        5,
+        8
+      ],
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": 0,
+      "damage": 10,
+      "guardType": "high",
+      "cancelInto": [
+        "heavy_punch",
+        "kick",
+        "embestida",
+        "rodillazo",
+        "patada_giratoria",
+        "super",
+        "contragolpe_ex"
+      ],
+      "name": "Jab",
+      "nameSrc": "provisional",
+      "_measure": "tools/build_seated_char.py: impacto en frame(s) [20] (clip atk_light idx 1-1); caja = extremidad fuera de la silueta de idle[0] (frame 0), altura 0.72; tiempos de data/normals.json clase jab"
+    },
+    "heavy_punch": {
+      "clip": "atk_heavy",
+      "hitbox": {
+        "x": 21,
+        "y": -120,
+        "w": 41,
+        "h": 18
+      },
+      "frames": {
+        "startup": 7,
+        "active": 3,
+        "recovery": 16
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 21,
+      "blockstun": 15,
+      "cancelFrames": [
+        8,
+        12
+      ],
+      "hitstop": 9,
+      "pushHit": 5,
+      "pushBlock": 4,
+      "pushY": 0,
+      "damage": 20,
+      "guardType": "high",
+      "cancelInto": [
+        "embestida",
+        "rodillazo",
+        "patada_giratoria",
+        "super",
+        "contragolpe_ex"
+      ],
+      "name": "Recto",
+      "nameSrc": "provisional",
+      "_measure": "tools/build_seated_char.py: impacto en frame(s) [21] (clip atk_heavy idx 1-1); caja = extremidad fuera de la silueta de idle[0] (frame 0), altura 0.74; tiempos de data/normals.json clase fuerte"
+    },
+    "kick": {
+      "clip": "atk_kick",
+      "hitbox": {
+        "x": 16,
+        "y": -111,
+        "w": 64,
+        "h": 29
+      },
+      "frames": {
+        "startup": 6,
+        "active": 3,
+        "recovery": 12
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 17,
+      "blockstun": 13,
+      "cancelFrames": [
+        7,
+        11
+      ],
+      "hitstop": 7,
+      "pushHit": 4,
+      "pushBlock": 3,
+      "pushY": 0,
+      "damage": 12,
+      "guardType": "high",
+      "cancelInto": [
+        "heavy_kick",
+        "embestida",
+        "rodillazo",
+        "patada_giratoria",
+        "super",
+        "contragolpe_ex"
+      ],
+      "name": "Patada lateral",
+      "nameSrc": "provisional",
+      "_measure": "tools/build_seated_char.py: impacto en frame(s) [26] (clip atk_kick idx 1-1); caja = extremidad fuera de la silueta de atk_kick[0] (frame 24), altura 0.64; tiempos de data/normals.json clase kick"
+    },
+    "heavy_kick": {
+      "clip": "atk_hkick",
+      "hitbox": {
+        "x": 16,
+        "y": -134,
+        "w": 49,
+        "h": 29
+      },
+      "frames": {
+        "startup": 9,
+        "active": 3,
+        "recovery": 18
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 22,
+      "blockstun": 16,
+      "cancelFrames": [
+        10,
+        14
+      ],
+      "hitstop": 10,
+      "pushHit": 6,
+      "pushBlock": 5,
+      "pushY": 0,
+      "damage": 22,
+      "guardType": "high",
+      "cancelInto": [
+        "embestida",
+        "rodillazo",
+        "patada_giratoria",
+        "super",
+        "contragolpe_ex"
+      ],
+      "name": "Patada alta",
+      "nameSrc": "provisional",
+      "_measure": "tools/build_seated_char.py: impacto en frame(s) [28] (clip atk_hkick idx 1-1); caja = extremidad fuera de la silueta de atk_hkick[0] (frame 24), altura 0.80; tiempos de data/normals.json clase patada_fuerte"
+    },
+    "j_punch": {
+      "clip": "atk_airp",
+      "hitbox": {
+        "x": 10,
+        "y": -106,
+        "w": 66,
+        "h": 19
+      },
+      "frames": {
+        "startup": 4,
+        "active": 7,
+        "recovery": 3
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 15,
+      "blockstun": 10,
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": 0,
+      "damage": 11,
+      "guardType": "overhead",
+      "air": true,
+      "cancelInto": [],
+      "name": "Puño aéreo",
+      "nameSrc": "generico",
+      "_measure": "tools/build_seated_char.py: impacto en frame(s) [15] (clip atk_airp idx 1-1); caja = extremidad fuera de la silueta de jump_mobility[2] (frame 13), altura 0.64; tiempos de data/normals.json clase aire_p"
+    },
+    "j_kick": {
+      "clip": "atk_airk",
+      "hitbox": {
+        "x": 13,
+        "y": -67,
+        "w": 71,
+        "h": 22
+      },
+      "frames": {
+        "startup": 6,
+        "active": 8,
+        "recovery": 3
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 15,
+      "blockstun": 10,
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": 0,
+      "damage": 13,
+      "guardType": "overhead",
+      "air": true,
+      "cancelInto": [],
+      "name": "Patada voladora",
+      "nameSrc": "generico",
+      "_measure": "tools/build_seated_char.py: impacto en frame(s) [17] (clip atk_airk idx 1-1); caja = extremidad fuera de la silueta de jump_mobility[1] (frame 12), altura 0.38; tiempos de data/normals.json clase aire_k"
+    },
+    "embestida": {
+      "clip": "atk_sp1",
+      "hitbox": {
+        "x": 33,
+        "y": -98,
+        "w": 17,
+        "h": 18
+      },
+      "frames": {
+        "startup": 10,
+        "active": 5,
+        "recovery": 18
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 24,
+      "blockstun": 14,
+      "damage": 20,
+      "hitstop": 8,
+      "pushHit": 6,
+      "pushBlock": 4,
+      "guardType": "high",
+      "pushY": 0,
+      "special": true,
+      "meterCost": 0,
+      "cancelFrames": [
+        11,
+        17
+      ],
+      "advance": 7,
+      "advanceFrames": [
+        0,
+        1
+      ],
+      "_doc": "↓↘→ + Puño: gancho al cuerpo que avanza. TODO: VERIFICAR jugando.",
+      "cancelInto": [
+        "super",
+        "contragolpe_ex"
+      ],
+      "name": "Embestida",
+      "nameSrc": "provisional (rótulo del paquete RUSH ATTACK)",
+      "_measure": "tools/build_seated_char.py: impacto en frame(s) [23] (clip atk_sp1 idx 1-1); caja = extremidad fuera de la silueta de atk_sp1[0] (frame 16), altura 0.59; tiempos de spec specialClasses.embestida (DISEÑO)"
+    },
+    "patada_giratoria": {
+      "clip": "atk_sp2",
+      "hitbox": {
+        "x": 14,
+        "y": -122,
+        "w": 66,
+        "h": 35
+      },
+      "frames": {
+        "startup": 12,
+        "active": 5,
+        "recovery": 20
+      },
+      "activeIdx": [
+        2,
+        2
+      ],
+      "hitstun": 27,
+      "blockstun": 14,
+      "damage": 24,
+      "hitstop": 9,
+      "pushHit": 3,
+      "pushBlock": 5,
+      "guardType": "high",
+      "pushY": 0,
+      "special": true,
+      "meterCost": 0,
+      "cancelFrames": [
+        13,
+        19
+      ],
+      "knockdown": true,
+      "_doc": "↓↙← + Patada: gira de espaldas y remata con patada lateral alta (el golpe es la patada lateral: la de espaldas, celda 49, sube pegada al cuerpo y no alcanza); derriba. TODO: VERIFICAR jugando.",
+      "cancelInto": [
+        "super",
+        "contragolpe_ex"
+      ],
+      "name": "Patada giratoria",
+      "nameSrc": "provisional",
+      "_measure": "tools/build_seated_char.py: impacto en frame(s) [27] (clip atk_sp2 idx 2-2); caja = extremidad fuera de la silueta de idle[0] (frame 0), altura 0.70; tiempos de spec specialClasses.giratoria (DISEÑO)"
+    },
+    "rodillazo": {
+      "clip": "atk_sp3",
+      "hitbox": {
+        "x": -33,
+        "y": -131,
+        "w": 73,
+        "h": 62
+      },
+      "frames": {
+        "startup": 3,
+        "active": 8,
+        "recovery": 22
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 18,
+      "blockstun": 9,
+      "damage": 26,
+      "hitstop": 8,
+      "pushHit": 3,
+      "pushBlock": 4,
+      "guardType": "high",
+      "pushY": 0,
+      "special": true,
+      "meterCost": 0,
+      "cancelFrames": [
+        4,
+        13
+      ],
+      "invuln": true,
+      "invulnFrames": 6,
+      "launcher": true,
+      "_doc": "→↓↘ + Patada: antiaéreo con los datos del uppercut estándar del elenco (daño 26, invulnerable al arrancar, lanza).",
+      "cancelInto": [
+        "super",
+        "contragolpe_ex"
+      ],
+      "name": "Rodillazo ascendente",
+      "nameSrc": "provisional",
+      "_measure": "tools/build_seated_char.py: impacto en frame(s) [24] (clip atk_sp3 idx 1-1); caja = extremidad fuera de la silueta de atk_sp3[0] (frame 41), altura 0.67; tiempos de spec specialClasses.anti_aereo (DISEÑO)"
+    },
+    "super": {
+      "clip": "atk_super",
+      "hitbox": {
+        "x": 15,
+        "y": -134,
+        "w": 50,
+        "h": 55
+      },
+      "frames": {
+        "startup": 8,
+        "active": 16,
+        "recovery": 26
+      },
+      "activeIdx": [
+        1,
+        5
+      ],
+      "hitstun": 24,
+      "blockstun": 29,
+      "damage": 14,
+      "hitstop": 10,
+      "pushHit": 4,
+      "pushBlock": 3,
+      "pushY": 0,
+      "guardType": "high",
+      "super": true,
+      "meterCost": 100,
+      "cinematic": {
+        "kind": "super",
+        "zoom": 1.85,
+        "freeze": 46,
+        "dur": 74
+      },
+      "invuln": true,
+      "invulnFrames": 22,
+      "advance": 5,
+      "advanceFrames": [
+        1,
+        3
+      ],
+      "multiHit": true,
+      "_doc": "↓↘→↓↘→ + Puño: ráfaga de 5 golpes (jab, recto, gancho, rodilla, patada alta) de 14 c/u (multiHit). TODO: VERIFICAR jugando.",
+      "cancelInto": [],
+      "name": "Impacto Final",
+      "nameSrc": "provisional (rótulo del paquete FINAL IMPACT)",
+      "_measure": "tools/build_seated_char.py: impacto en frame(s) [20, 21, 23, 24, 28] (clip atk_super idx 1-5); caja = extremidad fuera de la silueta de idle[0] (frame 0), altura 0.71; tiempos de spec specialClasses.super (DISEÑO)"
+    },
+    "contragolpe_ex": {
+      "clip": "hidden_special",
+      "hitbox": {
+        "x": 14,
+        "y": -122,
+        "w": 66,
+        "h": 35
+      },
+      "frames": {
+        "startup": 8,
+        "active": 16,
+        "recovery": 26
+      },
+      "activeIdx": [
+        5,
+        5
+      ],
+      "hitstun": 24,
+      "blockstun": 29,
+      "damage": 55,
+      "hitstop": 14,
+      "pushHit": 8,
+      "pushBlock": 3,
+      "pushY": -6,
+      "guardType": "high",
+      "super": true,
+      "meterCost": 0,
+      "cinematic": {
+        "kind": "super",
+        "zoom": 1.85,
+        "freeze": 46,
+        "dur": 74
+      },
+      "invuln": true,
+      "invulnFrames": 22,
+      "hidden": true,
+      "launcher": true,
+      "_doc": "Oculto (solo en MAX, ↓↘→↓↘→ + Patada): patadas en cadena con giro que rematan con la patada lateral alta; 1 golpe de 55 que lanza.",
+      "cancelInto": [],
+      "name": "Contragolpe EX",
+      "nameSrc": "provisional (rótulo del paquete COUNTER KICK)",
+      "_measure": "tools/build_seated_char.py: impacto en frame(s) [27] (clip hidden_special idx 5-5); caja = extremidad fuera de la silueta de idle[0] (frame 0), altura 0.70; tiempos de spec specialClasses.super (DISEÑO)"
+    }
+  },
+  "portrait": {
+    "atlas": "base",
+    "frame": 0,
+    "head": [
+      88,
+      3,
+      97,
+      97
+    ],
+    "body": [
+      62,
+      10,
+      131,
+      232
+    ],
+    "_doc": "tools/build_seated_char.py con la regla de tools/build_portraits.py (frame idle[0]).",
+    "clipBox": {
+      "idle": {
+        "l": 70,
+        "r": 61,
+        "t": 233
+      },
+      "victory_pose": {
+        "l": 79,
+        "r": 86,
+        "t": 205
+      }
+    }
+  },
+  "_disabled": {
+    "throw": "los cuadros de agarre (celdas 64-66) traen AL RIVAL DIBUJADO dentro del cuadro: el rival ya es otro sprite y saldría doble",
+    "command_grab": "mismo motivo"
+  },
+  "_unused_frames": {
+    "_doc": "Figuras sin usar: ver source.exclude (razón por figura)."
+  },
+  "_generated": "GENERADO por tools/build_seated_char.py desde tools/specs/el_aedillo_seated.json: no editar a mano."
+}

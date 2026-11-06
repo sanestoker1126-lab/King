@@ -1,0 +1,621 @@
+{
+  "frames": {
+    "jump_forward_00.png": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 90
+    },
+    "jump_forward_01.png": {
+      "frame": {
+        "x": 120,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 90
+    },
+    "jump_forward_02.png": {
+      "frame": {
+        "x": 240,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 90
+    },
+    "jump_forward_03.png": {
+      "frame": {
+        "x": 360,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 90
+    },
+    "jump_forward_04.png": {
+      "frame": {
+        "x": 480,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 90
+    },
+    "jump_forward_05.png": {
+      "frame": {
+        "x": 600,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 90
+    },
+    "air_punch_00.png": {
+      "frame": {
+        "x": 0,
+        "y": 120,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 55
+    },
+    "air_punch_01.png": {
+      "frame": {
+        "x": 120,
+        "y": 120,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 55
+    },
+    "air_punch_02.png": {
+      "frame": {
+        "x": 240,
+        "y": 120,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 55
+    },
+    "air_punch_03.png": {
+      "frame": {
+        "x": 360,
+        "y": 120,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 55
+    },
+    "air_punch_04.png": {
+      "frame": {
+        "x": 480,
+        "y": 120,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 55
+    },
+    "air_punch_05.png": {
+      "frame": {
+        "x": 600,
+        "y": 120,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 55
+    },
+    "air_kick_00.png": {
+      "frame": {
+        "x": 0,
+        "y": 240,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 60
+    },
+    "air_kick_01.png": {
+      "frame": {
+        "x": 120,
+        "y": 240,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 60
+    },
+    "air_kick_02.png": {
+      "frame": {
+        "x": 240,
+        "y": 240,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 60
+    },
+    "air_kick_03.png": {
+      "frame": {
+        "x": 360,
+        "y": 240,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 60
+    },
+    "air_kick_04.png": {
+      "frame": {
+        "x": 480,
+        "y": 240,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 60
+    },
+    "air_kick_05.png": {
+      "frame": {
+        "x": 600,
+        "y": 240,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 60
+    },
+    "air_kick_heavy_00.png": {
+      "frame": {
+        "x": 0,
+        "y": 360,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 70
+    },
+    "air_kick_heavy_01.png": {
+      "frame": {
+        "x": 120,
+        "y": 360,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 70
+    },
+    "air_kick_heavy_02.png": {
+      "frame": {
+        "x": 240,
+        "y": 360,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 70
+    },
+    "air_kick_heavy_03.png": {
+      "frame": {
+        "x": 360,
+        "y": 360,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 70
+    },
+    "air_kick_heavy_04.png": {
+      "frame": {
+        "x": 480,
+        "y": 360,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 70
+    },
+    "air_kick_heavy_05.png": {
+      "frame": {
+        "x": 600,
+        "y": 360,
+        "w": 120,
+        "h": 120
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 120
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 120
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "duration": 70
+    }
+  },
+  "meta": {
+    "app": "El Paisa Sistem alpha sprite export",
+    "image": "paisa_sistem_hoja_05_ataques_aereos.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 720,
+      "h": 480
+    },
+    "scale": "1",
+    "grid": {
+      "columns": 6,
+      "rows": 4,
+      "cellWidth": 120,
+      "cellHeight": 120
+    },
+    "groundLineY": 111
+  }
+}

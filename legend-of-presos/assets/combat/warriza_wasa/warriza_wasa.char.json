@@ -1,0 +1,457 @@
+{
+  "id": "warriza_wasa",
+  "displayName": "Warriza Wasa",
+  "renderScale": 0.6818,
+  "source": "Paquete de jefes (04_SOLO_JEFES_INTEGRADOS.zip: sources/bosses/warriza_wasa/); hoja re-encuadrada (escala uniforme 0.662) por tools/reseat_boss_atlas.py",
+  "frameSize": {
+    "w": 320,
+    "h": 320
+  },
+  "anchor": {
+    "x": 0.5,
+    "y": 0.971875
+  },
+  "pivot_note": "Pie sólido de TODOS los frames en la fila 311 de la celda y raíz en la columna central: ancla única (0.5, 0.971875).",
+  "vida": 1000,
+  "atlases": {
+    "base": {
+      "file": "warriza_wasa_atlas.png",
+      "columns": 6,
+      "rows": 6,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.971875
+      },
+      "sha256": "b8733b844630d9536444f2cfc1b260c2c0414762d127fb5bd152a82edbee064d"
+    }
+  },
+  "clips": {
+    "idle": {
+      "atlas": "base",
+      "fps": 5,
+      "frames": [
+        2,
+        5
+      ],
+      "loop": true,
+      "_doc": "guardia: pies de 2 y 5 a 1-6 px entre sí. Se descartan 3 (pie delantero 8-9 px atrás) y 4 (pie delantero 14-23 px adelante): patinarían."
+    },
+    "walk": {
+      "atlas": "base",
+      "fps": 8,
+      "frames": [
+        6,
+        7,
+        8
+      ],
+      "loop": true,
+      "_doc": "caminar"
+    },
+    "run": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        9,
+        10,
+        11
+      ],
+      "loop": true,
+      "_doc": "carrera"
+    },
+    "crouch_guard": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        13,
+        12
+      ],
+      "loop": false,
+      "hold": true,
+      "_doc": "agachándose (13) -> en cuclillas con guardia (12)"
+    },
+    "jump_mobility": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        24
+      ],
+      "loop": false,
+      "hold": true,
+      "_doc": "encogido en el aire (único frame aéreo de la hoja)"
+    },
+    "damage_fall": {
+      "atlas": "base",
+      "fps": 10,
+      "frames": [
+        25,
+        25,
+        26,
+        27
+      ],
+      "loop": false,
+      "_doc": "golpe en la cara, cayendo sentado, tendido"
+    },
+    "hurt": {
+      "atlas": "base",
+      "fps": 10,
+      "frames": [
+        25
+      ],
+      "hold": true,
+      "_doc": "golpe en la cara"
+    },
+    "down": {
+      "atlas": "base",
+      "fps": 10,
+      "frames": [
+        27
+      ],
+      "hold": true,
+      "lying": true,
+      "_doc": "tendido"
+    },
+    "recovery_pose": {
+      "atlas": "base",
+      "fps": 8,
+      "frames": [
+        27,
+        26,
+        26
+      ],
+      "loop": false,
+      "_doc": "tendido -> sentado; 23 frames de levantada"
+    },
+    "victory_pose": {
+      "atlas": "base",
+      "fps": 8,
+      "frames": [
+        28
+      ],
+      "hold": true,
+      "_doc": "brazos en alto"
+    },
+    "atk_light": {
+      "atlas": "base",
+      "fps": 14,
+      "frames": [
+        16,
+        17,
+        16
+      ],
+      "loop": false,
+      "_doc": "guardia baja (16) -> jab (17) -> guardia baja"
+    },
+    "atk_heavy": {
+      "atlas": "base",
+      "fps": 14,
+      "frames": [
+        19,
+        20,
+        16
+      ],
+      "loop": false,
+      "_doc": "brazo a medio camino (19) -> gancho (20) -> guardia baja"
+    },
+    "atk_kick": {
+      "atlas": "base",
+      "fps": 14,
+      "frames": [
+        16,
+        23,
+        16
+      ],
+      "loop": false,
+      "_doc": "guardia -> rodillazo (23) -> guardia"
+    },
+    "atk_kick2": {
+      "atlas": "base",
+      "fps": 14,
+      "frames": [
+        16,
+        22,
+        16
+      ],
+      "loop": false,
+      "_doc": "guardia -> patada lateral (22) -> guardia"
+    },
+    "atk_sp1": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        29,
+        30,
+        30,
+        16
+      ],
+      "loop": false,
+      "_doc": "palma abierta (29) -> palma a fondo con el cuerpo (30) -> guardia"
+    }
+  },
+  "inputs": {
+    "grounded": {
+      "punch": "punch",
+      "kick": "kick"
+    },
+    "air": {},
+    "forward": {
+      "punch": "heavy_punch",
+      "kick": "heavy_kick"
+    },
+    "specials": [
+      {
+        "motion": "qcf",
+        "button": "punch",
+        "move": "palma_energia"
+      }
+    ],
+    "supers": [],
+    "hidden": []
+  },
+  "moves": {
+    "punch": {
+      "clip": "atk_light",
+      "hitbox": {
+        "x": 31,
+        "y": -106,
+        "w": 40,
+        "h": 20
+      },
+      "frames": {
+        "startup": 4,
+        "active": 2,
+        "recovery": 8
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 13,
+      "blockstun": 10,
+      "cancelFrames": [
+        5,
+        8
+      ],
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushBlock": 3,
+      "pushY": 0,
+      "damage": 12,
+      "guardType": "high",
+      "cancelInto": [
+        "heavy_punch",
+        "palma_energia"
+      ],
+      "name": "Puño",
+      "nameSrc": "generico",
+      "_measure": "tools/build_boss_chars.py: impacto en frame(s) [17] (clip atk_light idx 1-1); caja = extremidad fuera de la silueta de idle[0] (frame 2), altura 0.64; tiempos de data/normals.json clase jab"
+    },
+    "heavy_punch": {
+      "clip": "atk_heavy",
+      "hitbox": {
+        "x": 27,
+        "y": -119,
+        "w": 20,
+        "h": 22
+      },
+      "frames": {
+        "startup": 7,
+        "active": 3,
+        "recovery": 16
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 21,
+      "blockstun": 15,
+      "cancelFrames": [
+        8,
+        12
+      ],
+      "hitstop": 9,
+      "pushHit": 5,
+      "pushBlock": 4,
+      "pushY": 0,
+      "damage": 20,
+      "guardType": "high",
+      "cancelInto": [
+        "palma_energia"
+      ],
+      "name": "Gancho",
+      "nameSrc": "generico",
+      "_measure": "tools/build_boss_chars.py: impacto en frame(s) [20] (clip atk_heavy idx 1-1); caja = extremidad fuera de la silueta de idle[0] (frame 2), altura 0.72; tiempos de data/normals.json clase fuerte"
+    },
+    "kick": {
+      "clip": "atk_kick",
+      "hitbox": {
+        "x": 21,
+        "y": -114,
+        "w": 38,
+        "h": 76
+      },
+      "frames": {
+        "startup": 6,
+        "active": 3,
+        "recovery": 12
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 17,
+      "blockstun": 13,
+      "cancelFrames": [
+        7,
+        11
+      ],
+      "hitstop": 7,
+      "pushHit": 4,
+      "pushBlock": 3,
+      "pushY": 0,
+      "damage": 16,
+      "guardType": "high",
+      "cancelInto": [
+        "heavy_kick",
+        "palma_energia"
+      ],
+      "name": "Rodillazo",
+      "nameSrc": "generico",
+      "_measure": "tools/build_boss_chars.py: impacto en frame(s) [23] (clip atk_kick idx 1-1); caja = extremidad fuera de la silueta de idle[0] (frame 2), altura 0.51; tiempos de data/normals.json clase kick"
+    },
+    "heavy_kick": {
+      "clip": "atk_kick2",
+      "hitbox": {
+        "x": 21,
+        "y": -104,
+        "w": 88,
+        "h": 28
+      },
+      "frames": {
+        "startup": 9,
+        "active": 3,
+        "recovery": 18
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 22,
+      "blockstun": 16,
+      "cancelFrames": [
+        10,
+        14
+      ],
+      "hitstop": 10,
+      "pushHit": 6,
+      "pushBlock": 5,
+      "pushY": 0,
+      "damage": 22,
+      "guardType": "high",
+      "cancelInto": [
+        "palma_energia"
+      ],
+      "name": "Patada lateral",
+      "nameSrc": "generico",
+      "_measure": "tools/build_boss_chars.py: impacto en frame(s) [22] (clip atk_kick2 idx 1-1); caja = extremidad fuera de la silueta de idle[0] (frame 2), altura 0.60; tiempos de data/normals.json clase patada_fuerte"
+    },
+    "palma_energia": {
+      "clip": "atk_sp1",
+      "hitbox": {
+        "x": 11,
+        "y": -151,
+        "w": 54,
+        "h": 37
+      },
+      "frames": {
+        "startup": 11,
+        "active": 4,
+        "recovery": 20
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "hitstun": 25,
+      "blockstun": 17,
+      "damage": 25,
+      "hitstop": 8,
+      "pushHit": 5,
+      "pushBlock": 3,
+      "guardType": "high",
+      "pushY": 0,
+      "special": true,
+      "meterCost": 0,
+      "fx": [
+        {
+          "at": 1,
+          "anim": "warriza_wasa_fx_energy_loop",
+          "x": 38,
+          "y": -132,
+          "life": 16,
+          "attach": true
+        }
+      ],
+      "hitAnim": "warriza_wasa_fx_burst",
+      "cancelInto": [],
+      "name": "Palma de energía",
+      "nameSrc": "provisional",
+      "_measure": "tools/build_boss_chars.py: impacto en frame(s) [30] (clip atk_sp1 idx 1-1); caja = extremidad fuera de la silueta de idle[0] (frame 2), altura 0.88; tiempos de tools/specs/bosses_spec.json specialClasses.palma (DISEÑO)",
+      "_doc": "Golpe de palma de media distancia con el anillo de energía de su hoja de FX. Nombre propuesto por el arte. Daño, hitstop y empujes = 'Especial de alcance' del paquete de jefes. TODO: VERIFICAR jugando."
+    }
+  },
+  "style": {
+    "walk": 2.8,
+    "run": 4.8,
+    "jumpNormal": -15,
+    "jumpHigh": -18.5,
+    "airMove": 2.0
+  },
+  "portrait": {
+    "atlas": "base",
+    "frame": 2,
+    "head": [
+      757,
+      84,
+      92,
+      92
+    ],
+    "body": [
+      741,
+      91,
+      120,
+      220
+    ],
+    "_doc": "tools/build_boss_chars.py con la regla de tools/build_portraits.py (frame idle[0]).",
+    "clipBox": {
+      "idle": {
+        "l": 65,
+        "r": 62,
+        "t": 221
+      },
+      "victory_pose": {
+        "l": 81,
+        "r": 68,
+        "t": 276
+      }
+    }
+  },
+  "_provisional": {
+    "status": "PROVISIONAL: seleccionable para probarlo; datos de combate pendientes de verificar jugando",
+    "disabled": {
+      "j_punch": "sin cuadros aéreos de ataque: el único frame aéreo (24) es el salto",
+      "j_kick": "sin cuadros aéreos de ataque",
+      "uppercut": "sin cuadros de antiaéreo",
+      "flying_special": "sin cuadros propios",
+      "super": "sin cuadros de súper en la hoja",
+      "throw": "sin cuadros de agarre"
+    },
+    "unused_frames": {
+      "0-1": "reposo relajado",
+      "3-4": "guardias con los pies desplazados respecto de 2/5 (patinarían en el idle)",
+      "14-15": "incorporándose del agachado",
+      "18": "directo erguido (otro jab)",
+      "21": "patada frontal alta (sin botón libre: Patada = rodillazo, adelante+Patada = lateral)"
+    }
+  },
+  "_generated": "GENERADO por tools/build_boss_chars.py desde tools/specs/bosses_spec.json: no editar a mano."
+}

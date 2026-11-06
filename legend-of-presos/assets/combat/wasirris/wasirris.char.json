@@ -1,0 +1,1016 @@
+{
+  "id": "wasirris",
+  "displayName": "Wasirris \"El Analista\"",
+  "source": "Paquete wasirris_atlas_package (81 frames etiquetados, 9x9 @1920). Corte EXACTO por coordsFile.",
+  "_atlas_status": "OK — atlas + coordenadas presentes; se cortan rects exactos (sin drift de rejilla).",
+  "_frame_data_status": "TODO_VERIFICAR — mapeo frame->animacion por palabras clave (spec §5). Afinar visualmente.",
+  "theme": "preciso/electrico-azul; golpes de palma, lecturas y castigo",
+  "frameSize": {
+    "w": 276,
+    "h": 266
+  },
+  "anchor": {
+    "x": 0.5,
+    "y": 1.0
+  },
+  "pivot_note": "bottom-center aprox; frames miran a la DERECHA. Baseline y=0.96 (afinar).",
+  "vida": 310,
+  "atlases": {
+    "base": {
+      "file": "wasirris_atlas.png",
+      "columns": 9,
+      "rows": 9,
+      "anchorsFile": "wasirris_atlas_anchors.json",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      }
+    },
+    "hidden_special": {
+      "file": "wasirris_hidden_specials.png",
+      "columns": 6,
+      "rows": 1,
+      "cell": {
+        "w": 276,
+        "h": 266
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde base:super_punch; FX externos, no horneados."
+    },
+    "melee_attacks": {
+      "file": "wasirris_melee_attacks.png",
+      "columns": 7,
+      "rows": 4,
+      "cell": {
+        "w": 276,
+        "h": 266
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde clips de ataque cuerpo a cuerpo; oponentes y FX separados.",
+      "anchorsFile": "wasirris_melee_attacks_anchors.json"
+    },
+    "result_poses": {
+      "file": "wasirris_result_poses.png",
+      "columns": 8,
+      "rows": 2,
+      "cell": {
+        "w": 276,
+        "h": 266
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde poses de resultado existentes.",
+      "anchorsFile": "wasirris_result_poses_anchors.json"
+    },
+    "combo_sequences": {
+      "file": "wasirris_combo_sequences.png",
+      "columns": 10,
+      "rows": 1,
+      "cell": {
+        "w": 276,
+        "h": 266
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "source": "Reempaquetado determinista desde clips de combate existentes; rivales y FX separados.",
+      "anchorsFile": "wasirris_combo_sequences_anchors.json"
+    },
+    "poses_extra": {
+      "file": "wasirris_poses_extra.png",
+      "columns": 8,
+      "rows": 3,
+      "cell": {
+        "w": 313,
+        "h": 313
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.939063
+      },
+      "sha256": "5bb2e7db195028468631a2cd6e1a13ec9f7bcb96d7d7f3b6d4987395464b2d39",
+      "source": "tools/integrar_entregas_20261106.py: entrega sources/entregas_2026-11-06/wasirris/ (celdas 640x640) reescalada x0.48906 = alto del idle del atlas base (254 px) / alto del base de la entrega (520 px); pie medido en y=601/640. Arte GENERATIVO con revisión artística pendiente (ver manifest.json de la entrega)."
+    }
+  },
+  "style": {
+    "walk": 2.6,
+    "run": 4.6,
+    "jumpNormal": -14.8,
+    "jumpHigh": -18.2,
+    "airMove": 1.9
+  },
+  "clips": {
+    "idle": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": true,
+      "frames": [
+        0,
+        3,
+        4,
+        5,
+        8
+      ]
+    },
+    "walk": {
+      "atlas": "base",
+      "fps": 10,
+      "loop": true,
+      "frames": [
+        9,
+        10,
+        11
+      ]
+    },
+    "run": {
+      "atlas": "base",
+      "fps": 12,
+      "loop": true,
+      "frames": [
+        12,
+        13
+      ]
+    },
+    "crouch_guard": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        22,
+        23,
+        24
+      ]
+    },
+    "jump_mobility": {
+      "atlas": "base",
+      "fps": 12,
+      "loop": false,
+      "frames": [
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34
+      ]
+    },
+    "punch_combo": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        43
+      ]
+    },
+    "kick_combo": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        45,
+        46,
+        47,
+        48,
+        49
+      ]
+    },
+    "damage_fall": {
+      "atlas": "base",
+      "fps": 10,
+      "loop": false,
+      "frames": [
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        59
+      ]
+    },
+    "recovery_pose": {
+      "atlas": "base",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        61,
+        62
+      ]
+    },
+    "front_grab": {
+      "atlas": "base",
+      "fps": 13,
+      "loop": false,
+      "frames": [
+        63,
+        64,
+        65,
+        66,
+        68
+      ]
+    },
+    "spinning_throw": {
+      "atlas": "base",
+      "fps": 13,
+      "loop": false,
+      "frames": [
+        67,
+        68,
+        69
+      ]
+    },
+    "special_punch_1": {
+      "atlas": "base",
+      "fps": 13,
+      "loop": false,
+      "frames": [
+        72,
+        73,
+        74,
+        75,
+        76
+      ]
+    },
+    "super_punch": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        72,
+        73,
+        74,
+        75,
+        76,
+        77
+      ]
+    },
+    "victory_pose": {
+      "atlas": "poses_extra",
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "_doc": "Entrega 2026-11-06 (wasirris__victory_pose.png). 0: vuelve a una postura firme. 1: se acomoda la chaqueta. 2: lleva una mano a la sien en gesto de cálculo. 3: inclina la cabeza en señal de victoria. 4: baja la mano. 5: ajusta el puño de la manga. 6: adopta una postura digna y tranquila. 7: mantiene la pose final.",
+      "_prev": {
+        "atlas": "base",
+        "fps": 8,
+        "loop": false,
+        "frames": [
+          79,
+          80
+        ]
+      }
+    },
+    "hurt": {
+      "atlas": "base",
+      "frames": [
+        54,
+        55
+      ],
+      "fps": 10,
+      "hold": true,
+      "_doc": "tools/build_hurt_clips.py: frames de pie iniciales de damage_fall (alto>=0.72*idle)"
+    },
+    "down": {
+      "atlas": "base",
+      "frames": [
+        59
+      ],
+      "fps": 10,
+      "hold": true,
+      "lying": true,
+      "_doc": "tools/build_knockdown_clips.py: frame más bajo de damage_fall/recovery_pose (alto 102, idle 254). VERIFICAR a ojo."
+    },
+    "hidden_special": {
+      "atlas": "hidden_special",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "_source": {
+        "atlas": "base",
+        "clip": "super_punch",
+        "frames": [
+          72,
+          73,
+          74,
+          75,
+          76,
+          77
+        ]
+      }
+    },
+    "melee_punch": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "_source": {
+        "clip": "punch_combo",
+        "frames": [
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          43
+        ]
+      }
+    },
+    "melee_heavy": {
+      "atlas": "melee_attacks",
+      "fps": 13,
+      "loop": false,
+      "frames": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "_source": {
+        "clip": "special_punch_1",
+        "frames": [
+          72,
+          73,
+          74,
+          75,
+          76
+        ]
+      }
+    },
+    "melee_kick": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "_source": {
+        "clip": "kick_combo",
+        "frames": [
+          45,
+          46,
+          47,
+          48,
+          49
+        ]
+      }
+    },
+    "melee_upper": {
+      "atlas": "melee_attacks",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "_source": {
+        "clip": "super_punch",
+        "frames": [
+          72,
+          73,
+          74,
+          75,
+          76,
+          77
+        ]
+      }
+    },
+    "result_victory": {
+      "atlas": "result_poses",
+      "fps": 8,
+      "loop": false,
+      "hold": true,
+      "frames": [
+        0,
+        1
+      ],
+      "_source": {
+        "clip": "victory_pose",
+        "frames": [
+          79,
+          80
+        ]
+      }
+    },
+    "result_defeat": {
+      "atlas": "result_poses",
+      "fps": 10,
+      "loop": false,
+      "hold": true,
+      "frames": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "_source": {
+        "clip": "damage_fall",
+        "frames": [
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          59,
+          59
+        ],
+        "endsWith": "down"
+      }
+    },
+    "combo_flying_kicks": {
+      "atlas": "combo_sequences",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "_sources": [
+        {
+          "clip": "kick_combo",
+          "atlas": "base",
+          "frames": [
+            45,
+            46,
+            47,
+            48,
+            49
+          ]
+        },
+        {
+          "clip": "melee_kick",
+          "atlas": "melee_attacks",
+          "frames": [
+            14,
+            15,
+            16,
+            17,
+            18
+          ]
+        }
+      ]
+    },
+    "ko_fall": {
+      "atlas": "poses_extra",
+      "fps": 10,
+      "loop": false,
+      "hold": true,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "_doc": "Entrega 2026-11-06 (wasirris__ko_fall.png). 0: recibe el impacto en el pecho y se encoge. 1: retrocede con torso inclinado y brazos levantados. 2: las rodillas ceden y se dobla hacia delante. 3: cae sobre una rodilla y busca apoyo con la mano. 4: vuelca el cuerpo hacia un costado desde la posición baja. 5: hombro y cadera alcanzan el suelo. 6: queda tendido de lado con rodillas recogidas. 7: pose final tendida, cabeza apoyada en el antebrazo para sostener el KO."
+    },
+    "dizzy": {
+      "atlas": "poses_extra",
+      "fps": 8,
+      "loop": true,
+      "frames": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "_doc": "Entrega 2026-11-06 (wasirris__dizzy.png). 0: base erguida del vaivén. 1: cabeza y tronco se inclinan a un lado. 2: cabeza cae y rodillas ceden. 3: vuelve a balancearse con brazos flojos. 4: pierde más el equilibrio con piernas flexionadas. 5: se inclina al lado contrario. 6: recupera parcialmente la vertical. 7: regresa a una pose erguida para cerrar el bucle."
+    }
+  },
+  "inputs": {
+    "grounded": {
+      "punch": "punch",
+      "kick": "kick"
+    },
+    "air": {
+      "punch": "j_punch",
+      "kick": "j_kick"
+    },
+    "specials": [
+      {
+        "motion": "hcf",
+        "button": "kick",
+        "move": "command_grab"
+      },
+      {
+        "motion": "qcf",
+        "button": "punch",
+        "move": "pulso_analitico"
+      },
+      {
+        "motion": "qcb",
+        "button": "kick",
+        "move": "tackle"
+      }
+    ],
+    "supers": [
+      {
+        "motion": "qcf2",
+        "button": "punch",
+        "move": "sentencia_firme"
+      }
+    ],
+    "hidden": [
+      {
+        "motion": "qcf2",
+        "button": "kick",
+        "move": "sentencia_firme_ex"
+      }
+    ]
+  },
+  "moves": {
+    "punch": {
+      "clip": "punch_combo",
+      "hitFrames": [
+        1,
+        2,
+        3
+      ],
+      "cancelWindow": [
+        2,
+        6
+      ],
+      "cancelInto": [
+        "kick",
+        "pulso_analitico",
+        "sentencia_firme"
+      ],
+      "hitbox": {
+        "x": 56,
+        "y": -150,
+        "w": 84,
+        "h": 44
+      },
+      "guardType": "high",
+      "damage": 9,
+      "hitstun": 15,
+      "blockstun": 10,
+      "hitstop": 6,
+      "pushHit": 4,
+      "pushBlock": 2,
+      "pushY": 0,
+      "name": "Puño",
+      "nameSrc": "generico"
+    },
+    "kick": {
+      "clip": "kick_combo",
+      "hitFrames": [
+        1,
+        2,
+        4
+      ],
+      "cancelWindow": [
+        4,
+        8
+      ],
+      "cancelInto": [
+        "pulso_analitico",
+        "sentencia_firme"
+      ],
+      "hitbox": {
+        "x": 60,
+        "y": -70,
+        "w": 100,
+        "h": 40
+      },
+      "guardType": "low",
+      "damage": 11,
+      "hitstun": 16,
+      "blockstun": 12,
+      "hitstop": 7,
+      "pushHit": 5,
+      "pushBlock": 3,
+      "pushY": 0,
+      "name": "Patada",
+      "nameSrc": "generico"
+    },
+    "j_punch": {
+      "clip": "punch_combo",
+      "air": true,
+      "hitFrames": [
+        1,
+        2
+      ],
+      "hitbox": {
+        "x": 50,
+        "y": -160,
+        "w": 88,
+        "h": 50
+      },
+      "guardType": "overhead",
+      "damage": 9,
+      "hitstun": 15,
+      "blockstun": 10,
+      "hitstop": 6,
+      "pushHit": 3,
+      "pushY": 0,
+      "name": "Puño Aéreo",
+      "nameSrc": "generico"
+    },
+    "j_kick": {
+      "clip": "kick_combo",
+      "air": true,
+      "hitFrames": [
+        2,
+        3
+      ],
+      "hitbox": {
+        "x": 54,
+        "y": -110,
+        "w": 100,
+        "h": 58
+      },
+      "guardType": "overhead",
+      "damage": 11,
+      "hitstun": 16,
+      "blockstun": 11,
+      "hitstop": 7,
+      "pushHit": 4,
+      "pushY": 0,
+      "name": "Patada Aérea",
+      "nameSrc": "generico"
+    },
+    "throw": {
+      "type": "throw",
+      "clip": "front_grab",
+      "range": 64,
+      "damage": 12,
+      "tossX": 6,
+      "tossY": -10,
+      "tossFrame": 3,
+      "hold": 40,
+      "hitstop": 10,
+      "name": "Agarre",
+      "nameSrc": "generico"
+    },
+    "command_grab": {
+      "type": "command_grab",
+      "clip": "spinning_throw",
+      "range": 62,
+      "damage": 14,
+      "tossX": 7,
+      "tossY": -9,
+      "tossFrame": 2,
+      "hold": 42,
+      "hitstop": 10,
+      "name": "Llave Giratoria",
+      "nameSrc": "clip spinning_throw"
+    },
+    "tackle": {
+      "clip": "kick_combo",
+      "special": true,
+      "meterCost": 0,
+      "hitFrames": [
+        2,
+        3
+      ],
+      "cancelWindow": [
+        3,
+        6
+      ],
+      "cancelInto": [
+        "sentencia_firme"
+      ],
+      "hitbox": {
+        "x": 70,
+        "y": -90,
+        "w": 120,
+        "h": 60
+      },
+      "guardType": "low",
+      "damage": 14,
+      "chipDamage": 3,
+      "hitstun": 18,
+      "blockstun": 12,
+      "hitstop": 8,
+      "pushHit": 8,
+      "pushBlock": 4,
+      "pushY": 0,
+      "advance": 7,
+      "_doc": "Embate bajo que avanza; knockdown en hit limpio",
+      "name": "Embate Bajo",
+      "nameSrc": "char.json(_doc)",
+      "fx": [
+        {
+          "at": 0,
+          "anim": "polvo_dash",
+          "x": -30,
+          "y": 0,
+          "life": 12,
+          "ground": true,
+          "back": true
+        }
+      ]
+    },
+    "pulso_analitico": {
+      "clip": "special_punch_1",
+      "special": true,
+      "meterCost": 0,
+      "hitFrames": [
+        2,
+        3,
+        4
+      ],
+      "cancelWindow": [
+        2,
+        5
+      ],
+      "cancelInto": [
+        "sentencia_firme"
+      ],
+      "hitbox": {
+        "x": 64,
+        "y": -140,
+        "w": 110,
+        "h": 54
+      },
+      "guardType": "high",
+      "damage": 17,
+      "chipDamage": 4,
+      "hitstun": 20,
+      "blockstun": 14,
+      "hitstop": 10,
+      "pushHit": 6,
+      "pushBlock": 3,
+      "pushY": -2,
+      "invuln": true,
+      "invulnFrames": 3,
+      "cinematic": {
+        "kind": "special",
+        "zoom": 1.4,
+        "freeze": 14,
+        "dur": 40
+      },
+      "_doc": "Especial firma (0 barra). Startup con i-frames cortos; cancelable a super",
+      "name": "Pulso Analítico",
+      "nameSrc": "char.json",
+      "hitAnim": "azul_explosion",
+      "fx": [
+        {
+          "at": 4,
+          "anim": "azul_chispas",
+          "x": 80,
+          "y": -110,
+          "life": 10,
+          "attach": true,
+          "scale": 0.8
+        }
+      ]
+    },
+    "sentencia_firme": {
+      "super": true,
+      "clip": "super_punch",
+      "meterCost": 100,
+      "invuln": true,
+      "invulnFrames": 20,
+      "hitFrames": [
+        1,
+        2,
+        3
+      ],
+      "hitbox": {
+        "x": 58,
+        "y": -160,
+        "w": 150,
+        "h": 80
+      },
+      "guardType": "high",
+      "damage": 92,
+      "hitstun": 28,
+      "blockstun": 18,
+      "hitstop": 16,
+      "pushHit": 8,
+      "pushBlock": 6,
+      "pushY": -4,
+      "cinematic": {
+        "kind": "super",
+        "zoom": 1.85,
+        "freeze": 50,
+        "dur": 80
+      },
+      "_doc": "Super (1 barra llena): acercamiento de camara + flash + congelamiento",
+      "name": "Sentencia Firme",
+      "nameSrc": "char.json",
+      "hitAnim": "azul_explosion",
+      "hitH": 130,
+      "fx": [
+        {
+          "at": 2,
+          "anim": "azul_dash",
+          "x": -40,
+          "y": -80,
+          "life": 12,
+          "attach": true,
+          "back": true
+        },
+        {
+          "at": 5,
+          "anim": "azul_anillo",
+          "x": 0,
+          "y": 0,
+          "life": 20,
+          "ground": true,
+          "back": true,
+          "scale": 1.6
+        }
+      ]
+    },
+    "sentencia_firme_ex": {
+      "super": true,
+      "hidden": true,
+      "clip": "hidden_special",
+      "meterCost": 0,
+      "invuln": true,
+      "invulnFrames": 24,
+      "hitFrames": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "hitbox": {
+        "x": 54,
+        "y": -165,
+        "w": 170,
+        "h": 88
+      },
+      "guardType": "high",
+      "damage": 112,
+      "hitstun": 30,
+      "blockstun": 18,
+      "hitstop": 18,
+      "pushHit": 9,
+      "pushY": -5,
+      "cinematic": {
+        "kind": "super",
+        "zoom": 2.0,
+        "freeze": 56,
+        "dur": 92
+      },
+      "_doc": "DM OCULTO: solo accesible en MAX mode (segunda version del super)",
+      "name": "Sentencia Firme EX",
+      "nameSrc": "char.json",
+      "hitAnim": "azul_explosion",
+      "hitH": 150,
+      "fx": [
+        {
+          "at": 2,
+          "anim": "azul_dash",
+          "x": -40,
+          "y": -80,
+          "life": 12,
+          "attach": true,
+          "back": true
+        },
+        {
+          "at": 5,
+          "anim": "azul_media_luna",
+          "x": 30,
+          "y": -90,
+          "life": 16,
+          "attach": true,
+          "scale": 1.2
+        },
+        {
+          "at": 5,
+          "anim": "azul_anillo",
+          "x": 0,
+          "y": 0,
+          "life": 20,
+          "ground": true,
+          "back": true,
+          "scale": 1.8
+        }
+      ],
+      "_hidden_frames": {
+        "file": "wasirris_hidden_specials.png",
+        "sourceAtlas": "base",
+        "sourceClip": "super_punch",
+        "sourceFrames": [
+          72,
+          73,
+          74,
+          75,
+          76,
+          77
+        ],
+        "cell": {
+          "w": 276,
+          "h": 266
+        },
+        "fxSeparate": true
+      }
+    }
+  },
+  "victory": {
+    "clip": "victory_pose",
+    "_doc": "pose de victoria con leve acercamiento de camara"
+  },
+  "renderScale": 0.5906,
+  "_fix_note": "Atlas re-empacado por componentes conexos (baseline consistente); antes recortaba cabeza/pies por deriva vertical. frame index preservado.",
+  "_blankFix": {
+    "damage_fall": {
+      "6": "self[5]"
+    }
+  },
+  "portrait": {
+    "atlas": "base",
+    "frame": 0,
+    "head": [
+      86,
+      4,
+      107,
+      107
+    ],
+    "body": [
+      86,
+      12,
+      104,
+      254
+    ],
+    "_doc": "tools/build_portraits.py: rects en pixeles del atlas (frame idle[0]).",
+    "clipBox": {
+      "idle": {
+        "l": 92,
+        "r": 92,
+        "t": 256
+      },
+      "victory_pose": {
+        "l": 67,
+        "r": 66,
+        "t": 256
+      }
+    }
+  },
+  "pivotMode": "frame_bottom_center"
+}

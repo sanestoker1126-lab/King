@@ -1,0 +1,86 @@
+{
+  "id": "wasirris",
+  "estado": "animaciones_generadas_con_revision_artistica_pendiente",
+  "entregas": [
+    {
+      "archivo": "wasirris__base.png",
+      "clip": "base",
+      "cuadros": 1,
+      "bucle": false,
+      "fps_sugerido": null,
+      "cuadro_impacto": null,
+      "descripcion": [
+        "0: pose idle neutral basada en el primer cuadro de la hoja de catálogo; traje gris carbón y camisa burdeos."
+      ]
+    },
+    {
+      "archivo": "wasirris__dizzy.png",
+      "clip": "dizzy",
+      "cuadros": 8,
+      "bucle": true,
+      "fps_sugerido": 8,
+      "cuadro_impacto": null,
+      "descripcion": [
+        "0: base erguida del vaivén.",
+        "1: cabeza y tronco se inclinan a un lado.",
+        "2: cabeza cae y rodillas ceden.",
+        "3: vuelve a balancearse con brazos flojos.",
+        "4: pierde más el equilibrio con piernas flexionadas.",
+        "5: se inclina al lado contrario.",
+        "6: recupera parcialmente la vertical.",
+        "7: regresa a una pose erguida para cerrar el bucle."
+      ]
+    },
+    {
+      "archivo": "wasirris__ko_fall.png",
+      "clip": "ko_fall",
+      "cuadros": 8,
+      "bucle": false,
+      "fps_sugerido": 10,
+      "cuadro_impacto": 0,
+      "descripcion": [
+        "0: recibe el impacto en el pecho y se encoge.",
+        "1: retrocede con torso inclinado y brazos levantados.",
+        "2: las rodillas ceden y se dobla hacia delante.",
+        "3: cae sobre una rodilla y busca apoyo con la mano.",
+        "4: vuelca el cuerpo hacia un costado desde la posición baja.",
+        "5: hombro y cadera alcanzan el suelo.",
+        "6: queda tendido de lado con rodillas recogidas.",
+        "7: pose final tendida, cabeza apoyada en el antebrazo para sostener el KO."
+      ]
+    },
+    {
+      "archivo": "wasirris__victory_pose.png",
+      "clip": "victory_pose",
+      "cuadros": 8,
+      "bucle": false,
+      "fps_sugerido": 8,
+      "cuadro_impacto": null,
+      "descripcion": [
+        "0: vuelve a una postura firme.",
+        "1: se acomoda la chaqueta.",
+        "2: lleva una mano a la sien en gesto de cálculo.",
+        "3: inclina la cabeza en señal de victoria.",
+        "4: baja la mano.",
+        "5: ajusta el puño de la manga.",
+        "6: adopta una postura digna y tranquila.",
+        "7: mantiene la pose final."
+      ]
+    }
+  ],
+  "especificacion": {
+    "celda_px": [
+      640,
+      640
+    ],
+    "alto_personaje_px": 520,
+    "pies_y": 600,
+    "margen_minimo_px": 24,
+    "fondo": "PNG RGBA transparente"
+  },
+  "problemas": [
+    "No se encontró el atlas base de Wasirris como imagen individual en los ZIP disponibles; se usaron la hoja de catálogo hojas/wasirris.jpg y el diseño base aislado entregado antes. Debe hacerse comparación final contra el atlas original del juego cuando esté disponible.",
+    "Las nuevas poses se generaron a partir de referencias visuales; no se puede garantizar identidad píxel a píxel. Requieren revisión artística antes de integrarse en producción.",
+    "Las poses tendidas son deliberadamente compactas para respetar celdas 640x640 y el margen mínimo. En dizzy no se incluyeron estrellas porque la especificación indica que el juego ya las dibuja."
+  ]
+}
