@@ -2,6 +2,28 @@
 
 > Los ZIP recibidos el 2026-11-06 no traían `docs/`, así que **el historial anterior no está aquí**. Si tienes el `docs/CHANGELOG.md` completo, pega esta entrada al principio del tuyo.
 
+## 2026-11-06 (2) — auditoría de combos/cancelaciones y pulido de El Paisa
+
+Auditoría OBJETIVA de combos, cancelaciones y especiales ocultos de TODO el roster con la simulación real (`engine/pg_sim.js` en Node, determinista). Herramientas nuevas en `tools/qa_20261106/`:
+- `combo_audit.cjs`: por cada cadena declarada en `cancelInto`, mide si el 2º golpe conecta (daño real), probando varios timings y distancias.
+- `hidden_solo.cjs`: ejecuta cada especial oculto con MAX y confirma que sale y pega.
+- `paisa_gaps.cjs`: calidad de los combos de El Paisa (gap entre golpes, si conecta EN hitstun = combo real).
+- `combo_trace.cjs` + `compose_combo.py`: generan la tira visual del combo.
+
+**Resultado de la auditoría (el sistema ya estaba sano):**
+- Combos/cancelaciones: **505/532 cadenas completan combo; 0 referencias rotas** en todo el roster. Las 27 restantes son por diseño: EX que exigen modo MAX (`_ex`, `contragolpe`, `tiempo_extra_ex`...) o cancelaciones tras un derribo (`tackle ⇒`, `barrida ⇒ super`).
+- Especiales ocultos: **12/12 salen y pegan en MAX**, con 3–9 cuadros de animación, cinemática (congelamiento + zoom) e invulnerabilidad.
+- Reporte por personaje: `qa/entrega_20261106/combos_cancelaciones_REPORTE.txt`.
+
+**No se tocó el frame data de los 31 personajes existentes**: están validados y funcionan; ajustar su balance a ciegas (sin jugar en Android) sería inventar y arriesgar romperlo.
+
+**Pulido de El Paisa Sistem** (único con frame data de diseño propio de esta entrega):
+- `talon_giro`: `startup` 12→10 y `cancelFrames` [13,18]→[11,16], para que el jab (`punch`) lo enlace en combo. Antes `punch ⇒ talon_giro` no conectaba (el rival salía del hitstun antes de la patada); ahora es combo real. Medido con `combo_audit.cjs` y `paisa_gaps.cjs`.
+- Tras el ajuste: **23 cadenas de El Paisa son combos reales (0 fallidas)**; las 4 `especial ⇒ súper` restantes requieren MAX (regla KOF 2002, igual para todo el roster).
+- Cambio acotado: el diff toca SOLO `el_paisa_sistem.char.json` (vía su spec); ningún otro personaje ni `config.json` cambió.
+- Evidencia visual: `qa/entrega_20261106/el_paisa_combo_jab_talon.jpg` (jab → cancela a talón → impacto, golpe a golpe); verificado también en el navegador real.
+- El sistema de impacto ya existente (no modificado): hitstop por tipo (súper 14, cabeza 10, fuerte 7, ligero 5), temblor, destello, chispas, contragolpe y multi-golpe.
+
 ## 2026-11-06 — frames faltantes, El Paisa Sistem y 2 fondos
 
 Generado por `tools/integrar_entregas_20261106.py` (idempotente; `--check` lo verifica). El arte fuente queda intacto en `sources/entregas_2026-11-06/`, con los SHA-256 de cada ZIP en `ORIGEN_SHA256.txt`.

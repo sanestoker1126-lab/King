@@ -1,0 +1,129 @@
+
+### personaje_08 (3 moves con cancelInto)
+  (sin cancelInto)
+  oculto dm_oculto (clip hidden_special, 9 cuadros): hitFrames=[3,4,5,6,7] ✓ dentro
+
+### wasirris (4 moves con cancelInto)
+  (sin cancelInto)
+  oculto sentencia_firme_ex (clip hidden_special, 6 cuadros): hitFrames=[1,2,3,4] ✓ dentro
+
+### valentina_niebla (5 moves con cancelInto)
+  (sin cancelInto)
+  oculto manto_de_niebla_ex (clip hidden_special, 6 cuadros): hitFrames=[1,2,3,4] ✓ dentro
+
+### diego_cancha (6 moves con cancelInto)
+  punch ⇒ tiempo_extra_ex: NO arranca el 2º (añade 11 dáño, combo=2)
+  kick ⇒ tiempo_extra_ex: NO arranca el 2º (añade 11 dáño, combo=1)
+  tackle ⇒ tiempo_extra: arranca pero el 2º NO pega (añade 0 dáño, combo=1)
+  tackle ⇒ tiempo_extra_ex: NO arranca el 2º (añade 0 dáño, combo=1)
+  heavy_punch ⇒ tiempo_extra_ex: NO arranca el 2º (añade 11 dáño, combo=1)
+  uppercut ⇒ tiempo_extra_ex: NO arranca el 2º (añade 11 dáño, combo=1)
+  oculto tiempo_extra_ex (clip hidden_special, 6 cuadros): hitFrames=[1,2,3,4] ✓ dentro
+
+### tobi (5 moves con cancelInto)
+  (sin cancelInto)
+
+### semillas (6 moves con cancelInto)
+  (sin cancelInto)
+
+### cochibomba (6 moves con cancelInto)
+  (sin cancelInto)
+
+### mateo (11 moves con cancelInto)
+  punch ⇒ ultimo_turno_ex: NO arranca el 2º (añade 22 dáño, combo=1)
+  heavy_punch ⇒ ultimo_turno_ex: NO arranca el 2º (añade 22 dáño, combo=1)
+  kick ⇒ ultimo_turno_ex: NO arranca el 2º (añade 22 dáño, combo=1)
+  estocada_carmesi ⇒ ultimo_turno_ex: NO arranca el 2º (añade 22 dáño, combo=1)
+  tajo_ascendente ⇒ ultimo_turno_ex: NO arranca el 2º (añade 0 dáño, combo=1)
+  patada_voladora ⇒ ultimo_turno_ex: NO arranca el 2º (añade 22 dáño, combo=1)
+  tajo_descendente ⇒ super: NO arranca el 2º (añade 0 dáño, combo=1)
+  tajo_descendente ⇒ ultimo_turno_ex: NO arranca el 2º (añade 0 dáño, combo=1)
+  oculto ultimo_turno_ex (clip hidden_special, 5 cuadros): hitFrames=[] (sin hitFrames)
+
+### nadia (6 moves con cancelInto)
+  (sin cancelInto)
+
+### garravas (6 moves con cancelInto)
+  (sin cancelInto)
+
+### regente (6 moves con cancelInto)
+  (sin cancelInto)
+  oculto estallido_fase_dos (clip hidden_special, 3 cuadros): hitFrames=[1,2] ✓ dentro
+
+### cadena (6 moves con cancelInto)
+  (sin cancelInto)
+  oculto cadena_final (clip hidden_special, 6 cuadros): hitFrames=[4,5] ✓ dentro
+
+### calavera (7 moves con cancelInto)
+  (sin cancelInto)
+  oculto panteon_final (clip hidden_special, 4 cuadros): hitFrames=[1,2,3] ✓ dentro
+
+### morado (6 moves con cancelInto)
+  fireball ⇒ super: arranca pero el 2º NO pega (añade 18 dáño, combo=1)
+  oculto eclipse_morado (clip hidden_special, 7 cuadros): hitFrames=[] (sin hitFrames)
+
+### cartel (5 moves con cancelInto)
+  (sin cancelInto)
+
+### carmesi (6 moves con cancelInto)
+  (sin cancelInto)
+
+### mecanico (6 moves con cancelInto)
+  (sin cancelInto)
+
+### tatuado (6 moves con cancelInto)
+  (sin cancelInto)
+
+### morado_urbano (6 moves con cancelInto)
+  (sin cancelInto)
+
+### bigotes (5 moves con cancelInto)
+  (sin cancelInto)
+
+### pocheche (5 moves con cancelInto)
+  (sin cancelInto)
+
+### pocheche_tijeras (4 moves con cancelInto)
+  fireball ⇒ super: arranca pero el 2º NO pega (añade 14 dáño, combo=1)
+  oculto tijeras_llamas (clip hidden_special, 3 cuadros): hitFrames=[] (sin hitFrames)
+
+### gasu_harlequin (5 moves con cancelInto)
+  (sin cancelInto)
+
+### negrito_nito (5 moves con cancelInto)
+  (sin cancelInto)
+
+### luchador_v2 (4 moves con cancelInto)
+  (sin cancelInto)
+
+### gordo (7 moves con cancelInto)
+  fireball ⇒ super: arranca pero el 2º NO pega (añade 0 dáño, combo=1)
+  oculto caida_del_bloque (clip hidden_special, 4 cuadros): hitFrames=[2,3] ✓ dentro
+
+### don_garras (6 moves con cancelInto)
+  (sin cancelInto)
+
+### warriza_wasa (5 moves con cancelInto)
+  (sin cancelInto)
+
+### wasita (6 moves con cancelInto)
+  (sin cancelInto)
+
+### sofi (9 moves con cancelInto)
+  embestida_cuernos ⇒ super_festiva: arranca pero el 2º NO pega (añade 0 dáño, combo=1)
+
+### el_aedillo (11 moves con cancelInto)
+  punch ⇒ contragolpe_ex: NO arranca el 2º (añade 26 dáño, combo=1)
+  heavy_punch ⇒ contragolpe_ex: NO arranca el 2º (añade 26 dáño, combo=1)
+  kick ⇒ contragolpe_ex: NO arranca el 2º (añade 26 dáño, combo=1)
+  heavy_kick ⇒ contragolpe_ex: NO arranca el 2º (añade 26 dáño, combo=1)
+  embestida ⇒ contragolpe_ex: NO arranca el 2º (añade 26 dáño, combo=1)
+  patada_giratoria ⇒ super: arranca pero el 2º NO pega (añade 0 dáño, combo=1)
+  patada_giratoria ⇒ contragolpe_ex: NO arranca el 2º (añade 0 dáño, combo=1)
+  rodillazo ⇒ contragolpe_ex: NO arranca el 2º (añade 0 dáño, combo=1)
+  oculto contragolpe_ex (clip hidden_special, 6 cuadros): hitFrames=[] (sin hitFrames)
+
+### el_paisa_sistem (8 moves con cancelInto)
+  barrida ⇒ super: arranca pero el 2º NO pega (añade 0 dáño, combo=1)
+
+== TOTAL: 505/532 cadenas completan combo; 0 referencias rotas ==
