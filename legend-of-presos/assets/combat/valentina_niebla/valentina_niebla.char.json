@@ -835,7 +835,7 @@
       "hitstop": 10,
       "pushHit": 6,
       "pushBlock": 3,
-      "pushY": -2,
+      "pushY": -10,
       "invuln": true,
       "invulnFrames": 3,
       "cinematic": {
@@ -844,7 +844,9 @@
         "freeze": 14,
         "dur": 40
       },
-      "_doc": "Especial firma (0 barra). Startup con i-frames cortos; cancelable a super"
+      "_doc": "Especial firma (0 barra). Startup con i-frames cortos; cancelable a super",
+      "launcher": true,
+      "_tune": "2026-11-07: habilita juggle (sistema KOF 2002). El gancho ascendente lanza al rival (launcher+pushY); el súper lo remata en el aire en modo MAX. Medido con tools/qa_20261106/juggle_roster.cjs. DISEÑO, TODO: VERIFICAR jugando."
     },
     "manto_de_niebla": {
       "super": true,

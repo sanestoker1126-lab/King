@@ -2,6 +2,31 @@
 
 > Los ZIP recibidos el 2026-11-06 no traían `docs/`, así que **el historial anterior no está aquí**. Si tienes el `docs/CHANGELOG.md` completo, pega esta entrada al principio del tuyo.
 
+## 2026-11-07 — sistema de juggle (combos aéreos estilo KOF 2002)
+
+El motor **ya tenía** el sistema de juggle: un move con `launcher` manda al rival al estado `LAUNCHED` (lo lanza al aire con `pushY`); seguir golpeándolo en el aire suma `juggle++` y el daño decae (`combo.juggleDecay`); al tocar el suelo se resetea. En modo MAX, el launcher se cancela a súper (regla KOF 2002, `hit.superCancel="max"`) y el súper (muchos multi-golpe) remata al rival en el aire.
+
+Auditoría con `tools/qa_20261106/juggle_roster.cjs` (simulación real, cuenta golpes que conectan con el rival sin tocar el suelo):
+- **Antes:** 25/28 personajes con launcher lograban juggle; 4 no tenían launcher.
+- **Ahora:** 28/30 con launcher logran juggle. Varios hacen combos aéreos largos: el_aedillo 5, gordo y pocheche_tijeras 4, El Paisa / mateo / morado / carmesi 3.
+
+**Habilitado el juggle en 3 personajes editables** (marcando su gancho ascendente como launcher; verificado que NO rompe sus combos — combo_audit 22/22, 7/7, 10/10):
+- `semillas`: `uppercut` (Germinación) → launcher (pushY −11). Además su `seismic` (Barrida Sísmica) estaba marcada launcher con `pushY=0` (no lanzaba): corregida a `knockdown` (una barrida derriba, no lanza).
+- `wasirris`: `pulso_analitico` → launcher (pushY −10), remata con su súper Sentencia Firme.
+- `valentina_niebla`: `paso_fantasma` → launcher (pushY −10), remata con Manto de Niebla.
+
+**El Paisa Sistem** ya tenía buen juggle (uppercut → súper multi-golpe = **3 impactos en el aire**); no necesitó cambios. Evidencia visual: `qa/entrega_20261106/el_paisa_juggle_aereo.jpg`.
+
+**Pendientes (NO tocados — son personajes generados por scripts `build_*.py` que no están en este repo; editarlos a mano se perdería al regenerar):**
+- `don_garras` (jefe provisional): tiene `uppercut` launcher pero sin súper rematador → su juggle necesitaría un seguimiento (salto+aéreo con buen timing, o un súper).
+- `sofi` (secreta): su único launcher es el súper `super_festiva`; para juggle necesitaría un launcher no-súper (p.ej. marcar `embestida_cuernos`, que ya es knockdown). Validado en memoria que funciona; aplicarlo requiere su `tools/build_sofi.py`.
+- `warriza_wasa`, `wasita` (jefes provisionales): kit reducido, sin gancho ascendente ni súper; no tienen launcher. Necesitarían un move nuevo o marcar uno existente vía su script.
+- Reporte completo por personaje: `qa/entrega_20261106/juggle_REPORTE.txt`.
+
+**Cómo se hace un juggle** (para la ficha de comandos / el jugador): activar MAX (Puño+Especial con barra), lanzar con el gancho ascendente (↓↘→+P / →↓↘+P según el personaje) y, en el aire, rematar con el súper (↓↘→↓↘→+P). Fuera de MAX el launcher derriba pero no encadena (fiel a KOF 2002).
+
+Herramientas nuevas en `tools/qa_20261106/`: `juggle_roster.cjs`, `juggle_test.cjs`, `juggle_trace.cjs`, `compose_juggle.py`.
+
 ## 2026-11-06 (2) — auditoría de combos/cancelaciones y pulido de El Paisa
 
 Auditoría OBJETIVA de combos, cancelaciones y especiales ocultos de TODO el roster con la simulación real (`engine/pg_sim.js` en Node, determinista). Herramientas nuevas en `tools/qa_20261106/`:
