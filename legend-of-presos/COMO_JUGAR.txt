@@ -1,0 +1,52 @@
+LEGEND OF PRESOS — EL ESCAPE DE PUENTE GRANDE
+Cómo jugar en la PC
+====================================================
+
+IMPORTANTE: el juego NO se abre con doble clic en "game.html".
+Si lo haces, verás una pantalla en blanco o un aviso. Eso es normal:
+estos juegos necesitan arrancar desde un pequeño servidor. Por eso se
+incluye un lanzador que lo hace por ti.
+
+--------------------------------------------------
+WINDOWS
+--------------------------------------------------
+1) Descomprime esta carpeta completa (clic derecho > Extraer todo).
+2) Doble clic en:  JUGAR_Windows.bat
+3) Se abre tu navegador con el juego. Deja abierta la ventana negra
+   mientras juegas; para salir, ciérrala.
+
+Si dice que no encuentra Python:
+   - Instálalo gratis en https://www.python.org/downloads/
+     (al instalar, MARCA la casilla "Add Python to PATH").
+   - Vuelve a abrir JUGAR_Windows.bat.
+   - O pídeme el ENLACE WEB para jugar sin instalar nada.
+
+--------------------------------------------------
+MAC
+--------------------------------------------------
+1) Descomprime la carpeta.
+2) Doble clic en:  JUGAR_Mac.command
+   (La primera vez: clic derecho > Abrir > Abrir, para aceptar el aviso.)
+3) Se abre el navegador con el juego.
+
+--------------------------------------------------
+LINUX
+--------------------------------------------------
+1) Descomprime la carpeta.
+2) En una terminal, dentro de la carpeta:  ./jugar_Linux.sh
+   (o doble clic si tu sistema lo permite).
+
+--------------------------------------------------
+CONTROLES (teclado)
+--------------------------------------------------
+Moverse: A / D o flechas       Saltar: W o flecha arriba
+Agacharse: S o flecha abajo    Golpe: J     Patada: K
+Especial: L     Súper: U       Guardia: Shift     Pausa: Esc
+
+Sofi: al bajar su vida a la mitad se transforma SOLA en Modo Vestía.
+
+--------------------------------------------------
+¿Prefieres no instalar nada?
+--------------------------------------------------
+Se puede publicar el juego en una página web (un enlace) para jugar
+en PC y celular sin descargar nada. Pídemelo y lo preparo.
