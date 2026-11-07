@@ -2,6 +2,27 @@
 
 > Los ZIP recibidos el 2026-11-06 no traían `docs/`, así que **el historial anterior no está aquí**. Si tienes el `docs/CHANGELOG.md` completo, pega esta entrada al principio del tuyo.
 
+## 2026-11-07 (2) — Sofi: Modo Vestía (transformación automática a media vida)
+
+### Modo Vestía (especial oculto que se auto-activa)
+- Arte: 36 frames de la hoja del usuario (`sources/entregas_2026-11-07/sofi_modo_vestia_36f.png`, con SHA-256). Venían sobre un damero gris horneado; `tools/build_vestia_sofi.py` lo recorta (conservando el aura morada del personaje) y normaliza a la escala de Sofi (×0.61, figura cara-pies ≈ idle base). Resultado: `assets/combat/sofi/sofi_vestia.png` (atlas 6×6, celda 160, anclado a los pies).
+- `char.json`: atlas `vestia` + clip `modo_vestia` (36 frames, 15 fps) + move `modo_vestia` (súper oculto: invulnerable durante activación+transformación idx0-15, golpea en el ataque de garras idx18-22 y el remate idx25-28, multi-golpe que lanza).
+- **Activación automática a media vida**: flag `autoTransform` en el char.json (`{move:"modo_vestia", hpBelow:0.5}`). Nueva lógica en `engine/pg_sim.js` (buscar `autoTransform` / `ragePending`): cuando Sofi cae al 50% de vida o menos, ejecuta el Modo Vestía **una vez por ronda**, en el primer frame en que puede actuar (si está en hitstun/aire, espera). `resetRound` recrea los luchadores, así que se rearma cada ronda.
+- **Aislado**: el cambio de motor solo actúa sobre luchadores con `autoTransform` (solo Sofi). Verificado con `tools/qa_20261106/determinism.cjs`: 3 peleas sin Sofi (tobi/mateo, el_paisa/p08, cadena/calavera) salen **idénticas cuadro a cuadro** entre el motor anterior y el nuevo.
+- Verificado en navegador (escenario OXXO): Sofi se transforma sola a media vida, es invulnerable en la transformación, las garras + explosión conectan (combo de 2-3, lanza al rival) y vuelve a su traje normal al terminar. Consola limpia (salvo el aviso de `sw.js`). Evidencia: `qa/entrega_20261106/sofi_modo_vestia_secuencia.jpg`.
+- Frame-data, caja y daños del move = **DISEÑO**, TODO: VERIFICAR jugando.
+
+### Sofi es un personaje GENERADO
+- `sofi.char.json` lo genera `tools/build_sofi.py` (no está en este repo). El Modo Vestía se añadió **a mano** sobre el char.json generado (marca `_vestia_added`). Si regeneras Sofi con tu `build_sofi.py`, reincorpora el bloque del Modo Vestía (atlas `vestia`, clip/move `modo_vestia`, `autoTransform`) a `tools/specs/sofi_spec.json`.
+
+### Auditoría de los 2 ZIP (especiales.zip, especiales_2.zip): NO aportan
+- `especiales.zip` (61 archivos): 48 son imágenes de QA/revisión (`*_review.png`, `e2e_*.png`, `*_hitboxes.png`, `*_secuencia_juego.png`, `*_superposicion_idle.png`) — reportes, no assets de juego. El resto son hojas fuente crudas (chroma key) de personajes **ya integrados** (Wasirris y su FX azul, jefes) + FX que el juego **ya tiene**.
+- `especiales_2.zip` (14 archivos): hojas fuente de jefes/luchadores + FX. 0 coincidencias byte a byte con el juego (son las fuentes sin recortar).
+- **Ningún ZIP contiene frames de Sofi ni assets nuevos que falten.** Según el criterio del usuario ("si no aportan mejoras, no"), no se integra nada de los ZIP.
+
+### Frames normales de Sofi (hojas 16+12): no consolidados
+- Las hojas normales SÍ se pueden recortar (fondo blanco + outline cerrado), pero son **poses sueltas de pelea sin etiquetar**. Sofi ya tiene todos sus clips; solo una pose (brazo al aire) es claramente de victoria y no alcanza para una animación. Mapear el resto a movimientos sería **inventar**, así que no se tocaron (el usuario pidió "sin inventar"). El Modo Vestía es la consolidación real de Sofi en esta entrega.
+
 ## 2026-11-07 — sistema de juggle (combos aéreos estilo KOF 2002)
 
 El motor **ya tenía** el sistema de juggle: un move con `launcher` manda al rival al estado `LAUNCHED` (lo lanza al aire con `pushY`); seguir golpeándolo en el aire suma `juggle++` y el daño decae (`combo.juggleDecay`); al tocar el suelo se resetea. En modo MAX, el launcher se cancela a súper (regla KOF 2002, `hit.superCancel="max"`) y el súper (muchos multi-golpe) remata al rival en el aire.

@@ -54,6 +54,7 @@
       taken:0,               // contactos recibidos (golpe, guardia o agarre): lo lee el modo Entrenamiento (pg_training.js)
       downT:0, wakeDur:0, crushT:0, ukemiT:0, hardKd:false,   // derribo/levantada/guardia rota/recuperación
       stun:0, stunT:0, stunLock:0, dizzyPend:false, dizzyT:0, mashCd:0,   // MAREO: aturdimiento acumulado, frames sin recibir, bloqueo tras marearse, mareo pendiente, frames de mareo
+      ragedUsed:false, ragePending:false,   // AUTO-TRANSFORMACIÓN (data autoTransform: Sofi Modo Vestía a media vida, una vez)
       contact:false,           // el move en curso ya conectó (golpe o guardia): habilita la cancelación (hit.cancelOnContact)
       agP:99, agK:99, agS:99,  // frames desde la última pulsación de Puño/Patada/Especial (ventana de dos botones §4.4)
       bufP:0, bufK:0, bufS:0, bufU:0,   // BUFFER de botones: frames que le quedan a una pulsación guardada (Puño/Patada/Especial/Súper)
@@ -647,6 +648,9 @@
       if(f.invuln>0) f.invuln--;
       f.stateFrame++;
       pushDir(f, inp); recordTap(f, inp);
+      // AUTO-TRANSFORMACIÓN (data: defs.autoTransform): al caer al umbral de vida, marca el disparo (una sola vez).
+      // El move sale en el primer frame en que el luchador puede actuar (justo antes de "estados con control").
+      if(defs.autoTransform && !f.ragedUsed && f.hp>0 && f.hp <= f.maxHp*(defs.autoTransform.hpBelow||0.5)) f.ragePending=true;
 
       if(f.state===S.KO){ koAnim(f); physics(f); continue; }
       if(f.state===S.HITSTUN||f.state===S.LAUNCHED){ f.hitstun--;
@@ -731,6 +735,11 @@
       }
 
       // ---- estados con control ----
+      // AUTO-TRANSFORMACIÓN: Sofi ejecuta su Modo Vestía sola al llegar a media vida (data autoTransform). Solo en el
+      // suelo y cuando puede actuar; si estaba en hitstun/aire espera a recuperarse. Una sola vez por combate.
+      if(defs.autoTransform && f.ragePending && f.grounded){
+        if(tryStartMove(f, defs.autoTransform.move, defs, match)){ f.ragePending=false; f.ragedUsed=true; match.events.push({t:"super"}); continue; }
+      }
       applyBuffer(f, inp);
       // AGARRE normal: Guardia+Puño en corto. Solo si el personaje trae su move de agarre en datos (moves.throw): sin arte
       // de agarre no se finge con otro clip; Guardia+Puño queda como guardia.

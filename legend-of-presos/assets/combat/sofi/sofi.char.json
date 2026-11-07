@@ -23,6 +23,21 @@
         "y": 0.958333
       },
       "sha256": "ea2fc272769716ab18ca4881ac9d81acec98a6bcd018f82314c96c0c7ba1a376"
+    },
+    "vestia": {
+      "file": "sofi_vestia.png",
+      "columns": 6,
+      "rows": 6,
+      "cell": {
+        "w": 160,
+        "h": 160
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.95
+      },
+      "sha256": "c2e428efc41b814f0693485ef7e5ee94d1fe15d1e18028ac4729a9373aabe36f",
+      "source": "36 frames del Modo Vestía (hoja del usuario 2026-11-07, fondo damero recortado por tools/build_vestia_sofi.py) normalizados x0.61 a la escala de Sofi (figura cara-pies 108px ≈ base 111px)."
     }
   },
   "clips": {
@@ -233,6 +248,50 @@
       ],
       "loop": false,
       "_doc": "estrella con listón -> salta -> brazos abiertos en el aire -> cae en picada · frames: festive_super_1, festive_super_2, festive_super_3, festive_super_4"
+    },
+    "modo_vestia": {
+      "atlas": "vestia",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "_doc": "Especial Oculto Modo Vestía (secuencia única): activación F01-08 (idx0-7), transformación F09-16 (idx8-15), ataque de garras F17-24 (idx16-23), remate/explosión F25-32 (idx24-31), recuperación F33-36 (idx32-35)."
     }
   },
   "inputs": {
@@ -643,6 +702,46 @@
       "nameSrc": "etiqueta de la fuente (festive_super)",
       "_measure": "tools/build_sofi.py: impacto en ['festive_super_3', 'festive_super_4'] (clip atk_super idx 2-3); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.54; tiempos de tools/specs/sofi_spec.json specialClasses.super_festiva (DISEÑO)",
       "_doc": "Súper (qcf x2 + Puño, barra llena). Daño, invulnerabilidad y cinemática = súper de Garravas (canónico). TODO: VERIFICAR jugando."
+    },
+    "modo_vestia": {
+      "clip": "modo_vestia",
+      "super": true,
+      "hidden": true,
+      "meterCost": 0,
+      "invuln": true,
+      "invulnFrames": 66,
+      "hitFrames": [
+        18,
+        20,
+        22,
+        25,
+        28
+      ],
+      "multiHit": true,
+      "hitbox": {
+        "x": 14,
+        "y": -156,
+        "w": 96,
+        "h": 150
+      },
+      "guardType": "high",
+      "damage": 16,
+      "hitstun": 22,
+      "blockstun": 14,
+      "hitstop": 10,
+      "pushHit": 4,
+      "pushBlock": 3,
+      "pushY": -8,
+      "launcher": true,
+      "cinematic": {
+        "kind": "super",
+        "zoom": 1.7,
+        "freeze": 40,
+        "dur": 60
+      },
+      "name": "Modo Vestía",
+      "nameSrc": "paquete:ESPECIAL OCULTO MODO VESTÍA",
+      "_doc": "Se activa SOLO (ver autoTransform): no tiene comando. invulnFrames 66 ≈ cubre activación+transformación (idx0-15 a 15fps). hitFrames en el ataque de garras (18,20,22) y el remate (25,28). Frame-data y caja = DISEÑO, TODO: VERIFICAR jugando."
     }
   },
   "style": {
@@ -775,5 +874,11 @@
       "ribbon_spin_4": "dañado: falta falda/cadera, pierna separada"
     }
   },
-  "_generated": "GENERADO por tools/build_sofi.py desde tools/specs/sofi_spec.json: no editar a mano."
+  "_generated": "GENERADO por tools/build_sofi.py desde tools/specs/sofi_spec.json: no editar a mano.",
+  "autoTransform": {
+    "move": "modo_vestia",
+    "hpBelow": 0.5,
+    "_doc": "2026-11-07: al caer al 50% de vida (o menos), Sofi ejecuta modo_vestia AUTOMÁTICAMENTE una vez. Implementado en engine/pg_sim.js (busca 'autoTransform')."
+  },
+  "_vestia_added": "2026-11-07: Modo Vestía añadido a mano (atlas vestia + clip/move modo_vestia + autoTransform) sobre el char.json generado por build_sofi.py. Si regeneras Sofi, reincorpora esto en tools/specs/sofi_spec.json + build_sofi.py."
 }
