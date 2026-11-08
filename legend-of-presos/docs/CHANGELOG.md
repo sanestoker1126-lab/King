@@ -2,6 +2,37 @@
 
 > Los ZIP recibidos el 2026-11-06 no traían `docs/`, así que **el historial anterior no está aquí**. Si tienes el `docs/CHANGELOG.md` completo, pega esta entrada al principio del tuyo.
 
+## 2026-11-08 (2) — Jefes consolidados · Modo Vestía con arte real
+
+### Jefe final: nunca se salta y también es jefe en Equipos
+- **Bug (1 vs 1)**: si elegías a **Garravas**, la batalla del jefe final se filtraba ("el rival eres tú") y el Arcade terminaba en Nadia **sin jefe final**. Ahora el jefe final **nunca se salta**: se pelea el espejo Garravas vs Garravas, con sus mods. La sub-jefa sí se sigue saltando si juegas con Sofi (regla que ya existía).
+- **Equipos**: el combate 6 (Mateo, Cochi Bombis, Garravas) no tenía nada de jefe. Nuevo campo `memberMods` en `data/campaigns.json`: **solo Garravas** recibe ×2.5 vida (750) y ×1.7 daño; Mateo y Cochi pelean normales. Esto corrige lo que se dejó en la entrada anterior ("no se tocó porque el mod afectaría a los 3"): ahora el motor admite modificadores **por integrante**.
+- **Garravas en tu equipo**: antes se reemplazaba por otro luchador y el combate seguía diciendo "JEFE FINAL" sin jefe. Ahora el jefe se queda (espejo) y solo se reemplaza a los demás que coincidan.
+- Motor (`engine/pg_sim.js`): `mods[lado].members[i]` (`modsOf`, `modFor`, `dmgMul`, `resetRound`; en Equipos el que entra nace con la vida de SU modificador). Sin `members` el objeto y el resultado quedan **idénticos** a antes. `engine/pg_game.js`: `copyBattle`/`arcadeStart`/`arcadeNextMatch`.
+- Verificación:
+  - `tools/qa_20261106/bosses_check.cjs`: TODO OK. 1 vs 1 y Equipos (sin mods, con mods de lado, sub-jefa) son idénticos cuadro a cuadro contra el motor anterior; `members` produce lo mismo que los mods de lado; en Equipos la vida máxima es Mateo 300, Cochi 300 y Garravas 750.
+  - `tools/qa_20261106/arcade_bosses.cjs` corre las funciones reales de `pg_game.js`: TODO OK. Contra el código anterior falla el caso "eliges a Garravas", así que el bug existía de verdad.
+
+### Modo Vestía de Sofi con arte REAL (atlas del usuario)
+- **Fuente**: `POCHECHE_ATLAS_MASTER_GAME_READY.zip`. El nombre dice Pocheche, pero el usuario aclaró que es Sofi en Modo Vestía (se ve: cuernos, traje negro con rojo, garras). Trae 103 frames y 43 FX. Está archivado intacto en `sources/entregas_2026-11-08/` con SHA-256.
+- **Reemplaza el recoloreado morado provisional**. Los 19 clips `*_vestia` (idle, caminar con 8 frames, correr, salto, guardia, golpe recibido, caída, derribado, levantarse, victoria, golpes, patadas, 4 especiales y súper) usan el atlas nuevo `assets/combat/sofi/sofi_vestia_real.png` (54 frames, celda 176). Se borraron `sofi_vestia_moveset.png` y `tools/build_sofi_vestia_moveset.py`.
+- Lo genera **`tools/build_sofi_vestia_real.py`** (idempotente, `--check`). El script corrige problemas medidos en la fuente:
+  1. **Escala por frame**: cada frame venía estirado a 220 px de alto, así que una pose agachada medía lo mismo que una de pie. Se deshace con su `content.scale` y una referencia de pie por secuencia. Resultado: de pie 112 px (igual que la base) y guardia agachada 88 px (la base mide 87).
+  2. **Fondo blanco atrapado** entre las piernas y entre mechones en `hurt` y `kick` (7 791 y 2 853 píxeles casi blancos). Se borró.
+  3. **Cuerpo nunca 100 % opaco** (alfa mediano entre 247 y 252 en varias hojas). Se subió a 255 con un factor de 1.01 a 1.03.
+  4. **Ancla en las botas** y no en el centro de la caja, para que el pie de apoyo no patine en las patadas.
+- **Sincronía con la simulación**: cada clip `*_vestia` conserva el número de frames y los fps de su clip base. Solo caminar y golpe recibido cambian, y esos no marcan golpes. Así el frame activo dibujado cae en el mismo tick que el golpe. Determinismo: Sofi contra Tobi, Garravas y Nadia sale idéntico cuadro a cuadro contra la versión anterior.
+- **Legibilidad**: el único golpe bajo de Sofi (Embestida de cuernos, `guardType: low`) usa el barrido deslizante, para que se vea bajo. Los altos usan poses de pie.
+- La asignación pose → golpe es decisión de integración (**TODO: VERIFICAR** con el usuario). La tabla está en `MAP` del script, con el nombre de cada frame fuente en `_src` del clip.
+- **Navegador** (`tools/qa_20261106/vestia_real.cjs`, Sofi CPU vs Tobi CPU en OXXO):
+  - Sofi se transforma y en la pelea se dibujaron 10 clips `*_vestia` distintos.
+  - Las 20 texturas del atlas son válidas.
+  - Consola limpia, salvo el 404 de `sw.js` (el archivo no existe en el repo).
+  - Evidencia: `qa/entrega_20261106/sofi_vestia_real_en_juego.jpg` y `qa/entrega_20261106/sofi_vestia_real_vs_base.jpg`.
+- **No usado**:
+  - Los 43 FX de garras morado/carmesí. Podrían ser las chispas de impacto del Modo Vestía; queda pendiente.
+  - Las imágenes transparentes de la transformación de 36 frames que llegaron por el chat. Medido: en los frames 4 a 34 cerca de la mitad del cuerpo tiene alfa menor a 230, y el traje negro entre 60 y 97 %, así que se vería el fondo a través de Sofi. Se mantiene el recorte de la hoja de alta resolución. Detalle en `sources/entregas_2026-11-08/ORIGEN_SHA256.txt`.
+
 ## 2026-11-08 — Sofi: Modo Vestía pulido + persistente · jefe final
 
 ### Modo Vestía de Sofi — arreglos

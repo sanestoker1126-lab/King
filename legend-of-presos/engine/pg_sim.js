@@ -68,8 +68,15 @@
   // distinto tamaño (un sub-jefe pelea SOLO contra los tres). Sin opts: pelea por rondas.
   // opts.mods = [{hp, damage}, {hp, damage}] -> modificadores de ESA batalla por lado (datos de la campaña: un sub-jefe con
   // el doble de vida y de daño). Viven en el MatchState (serializable, deterministas); por defecto 1.
-  function modsOf(o){ const m=(o&&o.mods)||[]; return [0,1].map(function(s){ const x=m[s]||{};
-    return { hp:(typeof x.hp==="number"&&x.hp>0)?x.hp:1, damage:(typeof x.damage==="number"&&x.damage>0)?x.damage:1 }; }); }
+  // mods[s].members = [{hp, damage} | null, ...] (opcional, alineado con el orden de opts.teams[s]): modificador de UN integrante
+  // del equipo (el jefe final en Equipos: solo Garravas con más vida/daño, no sus compañeros). null = usa el del lado.
+  // Sin `members` el objeto queda exactamente igual que antes (misma forma, mismo resultado).
+  function modOne(x){ x=x||{}; return { hp:(typeof x.hp==="number"&&x.hp>0)?x.hp:1, damage:(typeof x.damage==="number"&&x.damage>0)?x.damage:1 }; }
+  function modsOf(o){ const m=(o&&o.mods)||[]; return [0,1].map(function(s){ const x=m[s]||{}, r=modOne(x);
+    if(Array.isArray(x.members)) r.members=x.members.map(function(e){ return e ? modOne(e) : null; });
+    return r; }); }
+  // modificador vigente del lado s (el del integrante `cur` si lo declara; si no, el del lado)
+  function modFor(M, s, cur){ const x=M[s]; return (x.members && cur!=null && x.members[cur]) || x; }
   function createMatch(seed, config, opts){
     CFG = config || CFG || DEFAULTS;
     const teams = (opts && opts.teams) ? opts.teams.map(function(ids){
@@ -78,7 +85,7 @@
     const mods = modsOf(opts);
     const m = {
       frame:0, seed:(seed>>>0)||12345, rngState:(seed>>>0)||12345,
-      fighters:[createFighter(0, CFG.fighters.startX[0], mods[0].hp), createFighter(1, CFG.fighters.startX[1], mods[1].hp)],
+      fighters:[createFighter(0, CFG.fighters.startX[0], modFor(mods,0,teams?0:null).hp), createFighter(1, CFG.fighters.startX[1], modFor(mods,1,teams?0:null).hp)],
       mods: mods,
       projectiles:[], nextHitId:1,
       hitstop:0, shake:0, hitFlash:0, flashColor:"255,255,255", fx:[],
@@ -519,17 +526,22 @@
     }
     decideOver(match);
   }
-  function dmgMul(match, side){ const M=match.mods; return (M && M[side]) ? M[side].damage : 1; }
+  function dmgMul(match, side){ const M=match.mods; if(!(M && M[side])) return 1;
+    return modFor(M, side, match.teams ? match.teams[side].cur : null).damage; }
   function resetRound(match){
-    const M=match.mods||modsOf(null), xs=CFG.fighters.startX, old=match.fighters, nf=[createFighter(0,xs[0],M[0].hp), createFighter(1,xs[1],M[1].hp)];
-    if(match.teams){
-      // EQUIPOS: entra el siguiente del que cayó; el que siguió en pie conserva su vida + recuperación por el tiempo que sobró.
+    const M=match.mods||modsOf(null), xs=CFG.fighters.startX, old=match.fighters, TS=match.teams, wasOut=[false,false];
+    // EQUIPOS: primero entra el siguiente del que cayó (así el luchador nuevo nace con la vida de SU modificador: el jefe final
+    // en Equipos tiene el suyo aunque sus compañeros no).
+    if(TS) for(let s=0;s<2;s++){ const T=TS[s];
+      if(T.status[T.cur]==="out"){ wasOut[s]=true; let n=T.cur+1; while(n<T.status.length && T.status[n]!=="ready") n++;
+        if(n<T.status.length){ T.cur=n; T.status[n]="active"; } } }
+    const nf=[createFighter(0,xs[0],modFor(M,0,TS?TS[0].cur:null).hp), createFighter(1,xs[1],modFor(M,1,TS?TS[1].cur:null).hp)];
+    if(TS){
+      // el que siguió en pie conserva su vida + recuperación por el tiempo que sobró.
       // La barra es del equipo (team.carryMeter). Todo lo demás (posición, guardia, mareo, MAX) empieza de nuevo.
       const TM=CFG.team, frac=Math.max(0, Math.min(1, match.koTimer/(CFG.timing.roundTime*60)));
-      for(let s=0;s<2;s++){ const T=match.teams[s];
-        if(T.status[T.cur]==="out"){ let n=T.cur+1; while(n<T.status.length && T.status[n]!=="ready") n++;
-          if(n<T.status.length){ T.cur=n; T.status[n]="active"; } }
-        else nf[s].hp=Math.min(nf[s].maxHp, old[s].hp + Math.round(nf[s].maxHp*TM.recoverMax*frac));
+      for(let s=0;s<2;s++){
+        if(!wasOut[s]) nf[s].hp=Math.min(nf[s].maxHp, old[s].hp + Math.round(nf[s].maxHp*TM.recoverMax*frac));
         if(TM.carryMeter) nf[s].meter=old[s].meter;
       }
     }

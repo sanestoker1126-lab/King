@@ -1,12 +1,22 @@
 # PROJECT_STATUS — Legend of Presos
 
-> Estado al **2026-11-06**, verificado sobre esta carpeta. Los ZIP recibidos no traían `docs/` ni `CONTINUAR_AQUI.md`; si tienes las versiones completas, este archivo **solo describe lo que se pudo comprobar aquí**.
+> Estado al **2026-11-06** (con añadidos del 2026-11-08 abajo), verificado sobre esta carpeta. Los ZIP recibidos no traían `docs/` ni `CONTINUAR_AQUI.md`; si tienes las versiones completas, este archivo **solo describe lo que se pudo comprobar aquí**.
 
 ## Qué funciona (comprobado hoy)
 - `game.html` carga en Chromium y se puede pelear. Consola limpia salvo el aviso de PWA por `sw.js` 404 (el archivo no venía en el ZIP).
 - 32 personajes jugables (31 de antes + El Paisa Sistem) y 10 escenarios (8 de antes + Oxxo 2 y Pemex 2). No hay referencias rotas en atlas, clips, golpes ni comandos.
 - Wasirris: K.O., mareo y victoria con arte nuevo. Personaje 08: K.O. y victoria con arte nuevo.
 - Jugabilidad intacta: las peleas CPU contra CPU con semilla fija dan el mismo resultado cuadro a cuadro que antes de esta entrega (`tools/qa_20261106/determinism.cjs`).
+
+## Al 2026-11-08 (jefes y Sofi)
+- **Arcade**:
+  - El jefe final (Garravas) nunca se salta: si lo eliges, es espejo.
+  - En Equipos solo Garravas lleva ×2.5 vida y ×1.7 daño (`memberMods`). La sub-jefa Sofi conserva ×2 vida y ×2 daño.
+  - QA: `node tools/qa_20261106/arcade_bosses.cjs .` y `node tools/qa_20261106/bosses_check.cjs <copia_original> .`
+- **Sofi en Modo Vestía** pelea con arte real del usuario (`sofi_vestia_real.png`, generado por `tools/build_sofi_vestia_real.py`).
+  - Pendiente: confirmar con el usuario qué pose va en cada golpe.
+  - Pendiente: decidir si usar los 43 FX de garras como chispas de impacto.
+  - Pendiente: la pose "derribada" Vestía está recostada (71 px de alto; la base, acostada, mide 37).
 
 ## Qué NO se pudo verificar
 - `tools/test_sim.js` (la "huella" de 197 pruebas), `tools/validate_data.py` y `tools/run_regression.sh` no venían en los ZIP y no se corrieron.
