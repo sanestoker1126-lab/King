@@ -2,6 +2,24 @@
 
 > Los ZIP recibidos el 2026-11-06 no traían `docs/`, así que **el historial anterior no está aquí**. Si tienes el `docs/CHANGELOG.md` completo, pega esta entrada al principio del tuyo.
 
+## 2026-11-08 — Sofi: Modo Vestía pulido + persistente · jefe final
+
+### Modo Vestía de Sofi — arreglos
+- **Damero**: el recorte (`tools/build_vestia_sofi.py`) ahora hace una pasada final que quita el fondo de cuadros gris que se asomaba en los bordes. Frames limpios.
+- **Escala**: el Modo Vestía se dibuja **~1.15× más grande** que la forma normal (antes medía igual y se veía chico). Para no romper la sincronía vista/simulación, la **hurtbox** también crece 1.15× en Modo Vestía (`engine/pg_sim.js`, `hurtboxOf`), así el sprite agrandado y la caja coinciden.
+- **Duración**: la transformación pasa de ~2.4 s a **~3.3 s** (clip a 12 fps).
+
+### Modo Vestía ahora es PERSISTENTE (pelea transformada)
+- Antes era un ataque único que terminaba volviendo a su traje normal. Ahora, al terminar la secuencia (F01–F32, se quitaron los 4 frames de "volver a normal"), **Sofi queda transformada** (`f.transformed`) hasta el fin de la ronda.
+- **Moveset morado**: `tools/build_sofi_vestia_moveset.py` recolorea el atlas base a morado/oscuro (`sofi_vestia_moveset.png`). El `char.json` gana los clips `*_vestia` y el render (`engine/pg_render.js`) los usa cuando `f.transformed`. Así **todas** sus animaciones (idle, caminar, golpes, especiales) se ven en Modo Vestía sin arte nuevo frame a frame — es un recoloreado determinista del arte existente.
+- **Buff**: transformada pega **+20 %** de daño (`CFG.vestiaDamageMul`, DISEÑO). La hurtbox más grande la hace también más fácil de golpear (contrapeso).
+- Aislado y determinista: `tools/qa_20261106/determinism.cjs` confirma que las peleas **sin Sofi** siguen idénticas cuadro a cuadro (el `transformed`/buff/hurtbox solo afecta a quien está transformado).
+- `resetRound` recrea los luchadores → Sofi empieza cada ronda en su forma normal.
+- Evidencia: `qa/entrega_20261106/sofi_modo_vestia_persistente.jpg`.
+
+### Jefe final (garravas)
+- La batalla del jefe final del Arcade (`data/campaigns.json`, `solo[5]`) gana `tag: "JEFE FINAL"` y `mods {hp: 2.5, damage: 1.7}`: ahora el jefe tiene **750 de vida (×2.5)** y pega más, por encima de la sub-jefa Sofi (×2/×2). Antes peleaba con vida/daño normal. Su kit ya estaba completo (17/17 cadenas de combo, juggle en MAX). En el modo equipos no se tocó (el mod afectaría a los 3 del equipo; 3v3 ya es el reto).
+
 ## 2026-11-07 (2) — Sofi: Modo Vestía (transformación automática a media vida)
 
 ### Modo Vestía (especial oculto que se auto-activa)

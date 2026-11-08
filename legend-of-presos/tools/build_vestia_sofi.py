@@ -17,7 +17,7 @@ from collections import deque
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 SRC = os.path.join(ROOT, "sources/entregas_2026-11-07/sofi_modo_vestia_36f.png")
 OUT = os.path.join(ROOT, "assets/combat/sofi/sofi_vestia.png")
-FACTOR, CELL = 0.61, 160          # 0.61 = figura base 111px / figura vestía ~182px; celda con margen para el FX
+FACTOR, CELL = 0.70, 180          # 0.70 en la transformación coincide con el moveset morado dibujado a renderScale×1.15 (Modo Vestía ~1.15x el normal, coherente)
 
 def crop_cell(cell):
     aa = np.array(cell).astype(int); R, G, B = aa[:, :, 0], aa[:, :, 1], aa[:, :, 2]
@@ -53,6 +53,10 @@ def crop_cell(cell):
     yy, xx = np.mgrid[0:hh, 0:ww]
     txt = (yy < 34) & (xx < 44) & (sat < 20) & (lum > 55) & (lum < 225)   # borra el número horneado de la esquina
     alpha = np.where(txt, 0, alpha).astype("uint8")
+    # PASADA FINAL: quita cualquier resto del damero (gris-morado neutro medio) que haya quedado en bordes/esquinas.
+    # El personaje de Vestía es saturado (morado/rojo), muy oscuro (negro, lum<36) o claro (piel/blanco, lum>72), así que no se borra.
+    damero = (lum >= 36) & (lum < 72) & (sat < 16)
+    alpha = np.where(damero, 0, alpha).astype("uint8")
     return Image.fromarray(np.dstack([np.array(cell), alpha]), "RGBA")
 
 def main():

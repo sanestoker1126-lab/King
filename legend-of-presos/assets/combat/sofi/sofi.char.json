@@ -29,15 +29,26 @@
       "columns": 6,
       "rows": 6,
       "cell": {
-        "w": 160,
-        "h": 160
+        "w": 180,
+        "h": 180
       },
       "anchor": {
         "x": 0.5,
         "y": 0.95
       },
-      "sha256": "c2e428efc41b814f0693485ef7e5ee94d1fe15d1e18028ac4729a9373aabe36f",
+      "sha256": "0c0a124e8e2e2cf2278286c85d1d99194a796e934223b10761354ae57dcd6da2",
       "source": "36 frames del Modo Vestía (hoja del usuario 2026-11-07, fondo damero recortado por tools/build_vestia_sofi.py) normalizados x0.61 a la escala de Sofi (figura cara-pies 108px ≈ base 111px)."
+    },
+    "base_vestia": {
+      "file": "sofi_vestia_moveset.png",
+      "columns": 8,
+      "rows": 10,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.958333
+      },
+      "sha256": "2e777f450918158ca0ad28d9c1d33ebac6154a5c74fc931b5e7b482e0c4dc725",
+      "source": "Recoloreado morado/oscuro del atlas base por tools/build_sofi_vestia_moveset.py (moveset del Modo Vestía persistente)."
     }
   },
   "clips": {
@@ -251,7 +262,7 @@
     },
     "modo_vestia": {
       "atlas": "vestia",
-      "fps": 15,
+      "fps": 12,
       "loop": false,
       "frames": [
         0,
@@ -285,13 +296,217 @@
         28,
         29,
         30,
-        31,
-        32,
-        33,
-        34,
-        35
+        31
       ],
-      "_doc": "Especial Oculto Modo Vestía (secuencia única): activación F01-08 (idx0-7), transformación F09-16 (idx8-15), ataque de garras F17-24 (idx16-23), remate/explosión F25-32 (idx24-31), recuperación F33-36 (idx32-35)."
+      "_doc": "Secuencia de transformación F01-F32 (activación, transformación, garras, remate). Termina en modo oscuro; luego Sofi queda transformada (f.transformed) y usa los clips *_vestia. F33-36 (volver a normal) ya no se usan."
+    },
+    "idle_vestia": {
+      "atlas": "base_vestia",
+      "fps": 6,
+      "frames": [
+        0
+      ],
+      "loop": true,
+      "_doc": "Modo Vestía persistente: idle recoloreado (render lo usa cuando f.transformed)."
+    },
+    "walk_vestia": {
+      "atlas": "base_vestia",
+      "fps": 6,
+      "frames": [
+        2,
+        3
+      ],
+      "loop": true,
+      "_doc": "Modo Vestía persistente: walk recoloreado (render lo usa cuando f.transformed)."
+    },
+    "run_vestia": {
+      "atlas": "base_vestia",
+      "fps": 12,
+      "frames": [
+        72,
+        73,
+        74,
+        75
+      ],
+      "loop": true,
+      "_doc": "Modo Vestía persistente: run recoloreado (render lo usa cuando f.transformed)."
+    },
+    "crouch_guard_vestia": {
+      "atlas": "base_vestia",
+      "fps": 8,
+      "frames": [
+        7
+      ],
+      "loop": false,
+      "hold": true,
+      "_doc": "Modo Vestía persistente: crouch_guard recoloreado (render lo usa cuando f.transformed)."
+    },
+    "jump_mobility_vestia": {
+      "atlas": "base_vestia",
+      "fps": 3,
+      "frames": [
+        5,
+        9
+      ],
+      "loop": false,
+      "hold": true,
+      "_doc": "Modo Vestía persistente: jump_mobility recoloreado (render lo usa cuando f.transformed)."
+    },
+    "damage_fall_vestia": {
+      "atlas": "base_vestia",
+      "fps": 10,
+      "frames": [
+        33,
+        37,
+        38,
+        39
+      ],
+      "loop": false,
+      "_doc": "Modo Vestía persistente: damage_fall recoloreado (render lo usa cuando f.transformed)."
+    },
+    "hurt_vestia": {
+      "atlas": "base_vestia",
+      "fps": 10,
+      "frames": [
+        32
+      ],
+      "hold": true,
+      "_doc": "Modo Vestía persistente: hurt recoloreado (render lo usa cuando f.transformed)."
+    },
+    "down_vestia": {
+      "atlas": "base_vestia",
+      "fps": 10,
+      "frames": [
+        39
+      ],
+      "hold": true,
+      "lying": true,
+      "_doc": "Modo Vestía persistente: down recoloreado (render lo usa cuando f.transformed)."
+    },
+    "recovery_pose_vestia": {
+      "atlas": "base_vestia",
+      "fps": 8,
+      "frames": [
+        41,
+        42,
+        44
+      ],
+      "loop": false,
+      "_doc": "Modo Vestía persistente: recovery_pose recoloreado (render lo usa cuando f.transformed)."
+    },
+    "victory_pose_vestia": {
+      "atlas": "base_vestia",
+      "fps": 8,
+      "frames": [
+        66
+      ],
+      "hold": true,
+      "_doc": "Modo Vestía persistente: victory_pose recoloreado (render lo usa cuando f.transformed)."
+    },
+    "atk_light_vestia": {
+      "atlas": "base_vestia",
+      "fps": 14,
+      "frames": [
+        16,
+        17,
+        19
+      ],
+      "loop": false,
+      "_doc": "Modo Vestía persistente: atk_light recoloreado (render lo usa cuando f.transformed)."
+    },
+    "atk_heavy_vestia": {
+      "atlas": "base_vestia",
+      "fps": 14,
+      "frames": [
+        20,
+        21,
+        22,
+        23
+      ],
+      "loop": false,
+      "_doc": "Modo Vestía persistente: atk_heavy recoloreado (render lo usa cuando f.transformed)."
+    },
+    "atk_kick_vestia": {
+      "atlas": "base_vestia",
+      "fps": 14,
+      "frames": [
+        28,
+        29,
+        30,
+        31
+      ],
+      "loop": false,
+      "_doc": "Modo Vestía persistente: atk_kick recoloreado (render lo usa cuando f.transformed)."
+    },
+    "atk_kick2_vestia": {
+      "atlas": "base_vestia",
+      "fps": 14,
+      "frames": [
+        24,
+        25,
+        26,
+        27
+      ],
+      "loop": false,
+      "_doc": "Modo Vestía persistente: atk_kick2 recoloreado (render lo usa cuando f.transformed)."
+    },
+    "atk_sp1_vestia": {
+      "atlas": "base_vestia",
+      "fps": 12,
+      "frames": [
+        48,
+        49,
+        50,
+        51
+      ],
+      "loop": false,
+      "_doc": "Modo Vestía persistente: atk_sp1 recoloreado (render lo usa cuando f.transformed)."
+    },
+    "atk_sp2_vestia": {
+      "atlas": "base_vestia",
+      "fps": 12,
+      "frames": [
+        52,
+        53,
+        54,
+        55
+      ],
+      "loop": false,
+      "_doc": "Modo Vestía persistente: atk_sp2 recoloreado (render lo usa cuando f.transformed)."
+    },
+    "atk_sp3_vestia": {
+      "atlas": "base_vestia",
+      "fps": 12,
+      "frames": [
+        71,
+        70,
+        69,
+        68
+      ],
+      "loop": false,
+      "_doc": "Modo Vestía persistente: atk_sp3 recoloreado (render lo usa cuando f.transformed)."
+    },
+    "atk_sp4_vestia": {
+      "atlas": "base_vestia",
+      "fps": 12,
+      "frames": [
+        56,
+        57
+      ],
+      "loop": false,
+      "_doc": "Modo Vestía persistente: atk_sp4 recoloreado (render lo usa cuando f.transformed)."
+    },
+    "atk_super_vestia": {
+      "atlas": "base_vestia",
+      "fps": 12,
+      "frames": [
+        60,
+        61,
+        62,
+        63
+      ],
+      "loop": false,
+      "_doc": "Modo Vestía persistente: atk_super recoloreado (render lo usa cuando f.transformed)."
     }
   },
   "inputs": {
@@ -709,7 +924,7 @@
       "hidden": true,
       "meterCost": 0,
       "invuln": true,
-      "invulnFrames": 66,
+      "invulnFrames": 80,
       "hitFrames": [
         18,
         20,
@@ -741,7 +956,8 @@
       },
       "name": "Modo Vestía",
       "nameSrc": "paquete:ESPECIAL OCULTO MODO VESTÍA",
-      "_doc": "Se activa SOLO (ver autoTransform): no tiene comando. invulnFrames 66 ≈ cubre activación+transformación (idx0-15 a 15fps). hitFrames en el ataque de garras (18,20,22) y el remate (25,28). Frame-data y caja = DISEÑO, TODO: VERIFICAR jugando."
+      "_doc": "Se activa SOLO (ver autoTransform): no tiene comando. invulnFrames 66 ≈ cubre activación+transformación (idx0-15 a 15fps). hitFrames en el ataque de garras (18,20,22) y el remate (25,28). Frame-data y caja = DISEÑO, TODO: VERIFICAR jugando. Al terminar, f.transformed=true: Sofi pelea con el moveset morado (*_vestia) y +20% de daño hasta el fin de la ronda.",
+      "transformsInto": true
     }
   },
   "style": {
@@ -880,5 +1096,6 @@
     "hpBelow": 0.5,
     "_doc": "2026-11-07: al caer al 50% de vida (o menos), Sofi ejecuta modo_vestia AUTOMÁTICAMENTE una vez. Implementado en engine/pg_sim.js (busca 'autoTransform')."
   },
-  "_vestia_added": "2026-11-07: Modo Vestía añadido a mano (atlas vestia + clip/move modo_vestia + autoTransform) sobre el char.json generado por build_sofi.py. Si regeneras Sofi, reincorpora esto en tools/specs/sofi_spec.json + build_sofi.py."
+  "_vestia_added": "2026-11-07: Modo Vestía añadido a mano (atlas vestia + clip/move modo_vestia + autoTransform) sobre el char.json generado por build_sofi.py. Si regeneras Sofi, reincorpora esto en tools/specs/sofi_spec.json + build_sofi.py.",
+  "_vestia_moveset": "2026-11-08: moveset morado persistente (atlas base_vestia + clips *_vestia). Tras ejecutar modo_vestia, f.transformed=true y el render dibuja estos clips; buff de daño en engine/pg_sim.js (vestiaDamageMul)."
 }

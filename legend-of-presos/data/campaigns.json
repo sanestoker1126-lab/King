@@ -7,7 +7,7 @@
       { "opponent": "calavera", "difficulty": 2, "stage": 6 },
       { "opponent": "sofi", "difficulty": 2, "stage": 1, "midBoss": true, "tag": "SUB-JEFA", "mods": { "hp": 2, "damage": 2 }, "unlocks": "sofi" },
       { "opponent": "nadia", "difficulty": 2, "stage": 2 },
-      { "opponent": "garravas", "difficulty": 3, "stage": 7, "boss": true }
+      { "opponent": "garravas", "difficulty": 3, "stage": 7, "boss": true, "tag": "JEFE FINAL", "mods": { "hp": 2.5, "damage": 1.7 } }
     ],
     "teams": [
       { "opponentTeam": ["regente", "tobi", "morado"], "difficulty": 1, "stage": 0 },

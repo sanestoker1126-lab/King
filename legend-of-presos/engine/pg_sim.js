@@ -54,7 +54,7 @@
       taken:0,               // contactos recibidos (golpe, guardia o agarre): lo lee el modo Entrenamiento (pg_training.js)
       downT:0, wakeDur:0, crushT:0, ukemiT:0, hardKd:false,   // derribo/levantada/guardia rota/recuperación
       stun:0, stunT:0, stunLock:0, dizzyPend:false, dizzyT:0, mashCd:0,   // MAREO: aturdimiento acumulado, frames sin recibir, bloqueo tras marearse, mareo pendiente, frames de mareo
-      ragedUsed:false, ragePending:false,   // AUTO-TRANSFORMACIÓN (data autoTransform: Sofi Modo Vestía a media vida, una vez)
+      ragedUsed:false, ragePending:false, transformed:false,   // AUTO-TRANSFORMACIÓN (autoTransform): Sofi a media vida; `transformed` = ya en Modo Vestía (moveset morado + buff)
       contact:false,           // el move en curso ya conectó (golpe o guardia): habilita la cancelación (hit.cancelOnContact)
       agP:99, agK:99, agS:99,  // frames desde la última pulsación de Puño/Patada/Especial (ventana de dos botones §4.4)
       bufP:0, bufK:0, bufS:0, bufU:0,   // BUFFER de botones: frames que le quedan a una pulsación guardada (Puño/Patada/Especial/Súper)
@@ -112,7 +112,8 @@
     // simula (pilar Justicia al frame). Sigue pudiendo bloquear abajo.
     const dd=STEP_DEFS&&STEP_DEFS[f.side], canDuck=!dd || !!dd.clips.crouch_guard;
     let h = (canDuck && (f.state===S.CROUCH || ((f.state===S.BLOCKSTUN||f.state===S.BLOCK)&&f.crouch))) ? hb.crouchH : (!f.grounded? hb.airH : hb.h);
-    return { x:f.x-hb.w/2, y:f.y-h, w:hb.w, h };
+    const sc = f.transformed ? 1.15 : 1;   // Modo Vestía: cuerpo ~1.15x (coincide con el sprite agrandado en pg_render)
+    return { x:f.x-hb.w*sc/2, y:f.y-h*sc, w:hb.w*sc, h:h*sc };
   }
   function hitboxOf(f, mv){ const hb=mv.hitbox;
     return { x: f.x + (f.facing>0?hb.x:-hb.x-hb.w), y: f.y+hb.y, w:hb.w, h:hb.h }; }
@@ -412,7 +413,7 @@
     { const dd=STEP_DEFS&&STEP_DEFS[def.side];
       if(dd && (def.state===S.ATTACK||def.state===S.AIR_ATTACK||def.state===S.SPECIAL||def.state===S.SUPER)) counter = inStartupOrActive(def, dd); }
     const C=CFG.counter;
-    let dmg=Math.round(base*mult*(counter?C.damageMul:1)*dmgMul(match,att.side));   // × modificador de daño de la batalla (match.mods)
+    let dmg=Math.round(base*mult*(counter?C.damageMul:1)*dmgMul(match,att.side)*(att.transformed?(CFG.vestiaDamageMul||1.2):1));   // × modificador de batalla; ×1.2 en Modo Vestía (DISEÑO)
     const atk = att.comboRef||att;
     if(atk.comboCount>0) dmg=Math.round(dmg*Math.max(CFG.combo.minScale,1-atk.comboCount*CFG.combo.decay));
     if(!def.grounded) dmg=Math.round(dmg*Math.max(0.1,1-def.juggle*CFG.combo.juggleDecay));
@@ -730,7 +731,7 @@
           const nxt=resolveButton(f,defs,nb,inp); inp.x=ix;
           if(nxt && mv.cancelInto && mv.cancelInto.indexOf(nxt)>=0) tryStartMove(f,nxt,defs,match); }
         physics(f);
-        if(finished){ setState(f, f.grounded?S.IDLE:S.JUMP); f.move=null; }
+        if(finished){ if(mv.transformsInto) f.transformed=true; setState(f, f.grounded?S.IDLE:S.JUMP); f.move=null; }
         continue;
       }
 
