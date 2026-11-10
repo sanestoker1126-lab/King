@@ -2,6 +2,23 @@
 
 > Los ZIP recibidos el 2026-11-06 no traían `docs/`, así que **el historial anterior no está aquí**. Si tienes el `docs/CHANGELOG.md` completo, pega esta entrada al principio del tuyo.
 
+## 2026-11-10 — Chispas de impacto del Modo Vestía (FX del usuario)
+
+- Se usan los **43 FX morado/carmesí** del mismo ZIP (`POCHECHE_FX_PURPURA_CARMESI`). Son efectos sueltos de una sola hoja; `tools/build_sofi_vestia_real.py` toma 24 y arma 6 chispas: `vestia_impacto`, `vestia_zarpazo`, `vestia_garras`, `vestia_cruz`, `vestia_barrido` y `vestia_estallido`.
+  - Página `assets/fx/sofi_vestia_fx.webp` (WebP sin pérdida, 1024x1294, 1.06 MB). Solo se carga si Sofi pelea.
+  - Entradas `sofi_vestia_fx` y `vestia_*` en `data/fx_library.json`.
+  - Tamaño relativo restaurado deshaciendo `content.scale`, como en los frames del personaje.
+- **Cuándo salen**: cada golpe de Sofi declara `hitAnimVestia` en su char.json. La simulación la usa **solo si quien pega está transformada** (`engine/pg_sim.js`, chispa del golpe). La propia transformación (`modo_vestia`) usa `vestia_garras` como `hitAnim`.
+  - Asignación: puño, Estrella y Giro → zarpazo · golpe fuerte y Empuje → garras · patada → impacto · patada media → cruz · Embestida (baja) → barrido · súper → estallido. **TODO: VERIFICAR** con el usuario.
+- `engine/pg_loader.js` (`fxRefsOf`) carga también `hitAnimVestia`.
+- Solo cambia el dibujo del FX: la jugabilidad sale idéntica cuadro a cuadro (Sofi contra Tobi, Garravas y Nadia, y Tobi contra Garravas, `determinism.cjs`). Sin transformación, el FX es el mismo objeto que antes.
+- **Navegador** (`tools/qa_20261106/vestia_real.cjs`):
+  - Se cargan las 6 chispas Vestía.
+  - En una pelea de CPU contra CPU salieron cruz, zarpazo, impacto y garras.
+  - Barrido y estallido existen, pero la CPU no hizo esos golpes en la muestra.
+  - Consola limpia salvo el 404 de `sw.js`.
+- Evidencia: `qa/entrega_20261106/sofi_vestia_chispas_escala.jpg` (cada chispa a escala del juego junto a Sofi transformada) y `qa/entrega_20261106/sofi_vestia_chispa_en_juego.jpg`.
+
 ## 2026-11-08 (2) — Jefes consolidados · Modo Vestía con arte real
 
 ### Jefe final: nunca se salta y también es jefe en Equipos
@@ -30,7 +47,7 @@
   - Consola limpia, salvo el 404 de `sw.js` (el archivo no existe en el repo).
   - Evidencia: `qa/entrega_20261106/sofi_vestia_real_en_juego.jpg` y `qa/entrega_20261106/sofi_vestia_real_vs_base.jpg`.
 - **No usado**:
-  - Los 43 FX de garras morado/carmesí. Podrían ser las chispas de impacto del Modo Vestía; queda pendiente.
+  - Los 43 FX de garras morado/carmesí. *(Se integraron el 2026-11-10 como chispas de impacto; ver arriba.)*
   - Las imágenes transparentes de la transformación de 36 frames que llegaron por el chat. Medido: en los frames 4 a 34 cerca de la mitad del cuerpo tiene alfa menor a 230, y el traje negro entre 60 y 97 %, así que se vería el fondo a través de Sofi. Se mantiene el recorte de la hoja de alta resolución. Detalle en `sources/entregas_2026-11-08/ORIGEN_SHA256.txt`.
 
 ## 2026-11-08 — Sofi: Modo Vestía pulido + persistente · jefe final

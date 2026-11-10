@@ -454,7 +454,9 @@
     match.flashColor=H.flashColor[tk==="super"?(region==="head"?"head":heavy?"heavy":"light"):tk];
     // chispa por TIPO de golpe (pilar Legibilidad): el move puede forzar su anim (hitAnim) y alto (hitH)
     const hk = mv.super?"super" : (mv.launcher||def.state===S.LAUNCHED)?"launch" : tk;
-    pushFx(match,{t:'hit',x:ix,y:iy,kind:hk,anim:mv.hitAnim||null,h:mv.hitH||0,facing:fdir,life:mv.hitLife||(mv.super?H.sparkLife.super:H.sparkLife.normal),owner:-1});
+    // transformada (Modo Vestía de Sofi): el move puede declarar otra chispa (hitAnimVestia). Solo cambia el DIBUJO del FX.
+    const vfx = att.transformed && mv.hitAnimVestia;
+    pushFx(match,{t:'hit',x:ix,y:iy,kind:hk,anim:vfx?mv.hitAnimVestia:(mv.hitAnim||null),h:vfx?0:(mv.hitH||0),facing:fdir,life:mv.hitLife||(mv.super?H.sparkLife.super:H.sparkLife.normal),owner:-1});
     match.events.push({t:tk});
     if(def.hp<=0){ def.state=S.KO; def.hitstun=9999; def.clip=koClip(def); def.clipTime=0; onKO(match, att.side, true); }   // el K.O. siempre cae (nunca se queda en `hurt`)
     return true;

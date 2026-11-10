@@ -17,6 +17,9 @@ Problemas del atlas fuente que este script corrige (medidos, ver docs/CHANGELOG.
  3) El pivote de la fuente es el centro de la caja: en una patada la caja se ensancha y el cuerpo "brincaba". Aquí el ancla
     horizontal son las BOTAS (píxeles oscuros de la franja inferior): el pie de apoyo no patina entre frames.
 
+Además arma las CHISPAS DE IMPACTO del Modo Vestía con los 43 FX morado/carmesí del mismo ZIP (assets/fx/sofi_vestia_fx.webp,
+entradas sofi_vestia_fx / vestia_* en data/fx_library.json, y hitAnimVestia en los moves; ver FX_ANIMS / HIT_VESTIA).
+
 Los clips *_vestia son SOLO de dibujo (el render los usa cuando f.transformed): cada uno conserva el número de frames y los
 fps del clip base, así el frame activo dibujado cae en los mismos ticks que el golpe de la simulación (determinismo intacto).
 La asignación pose->golpe es decisión de integración (TODO: VERIFICAR con el usuario): el golpe BAJO (embestida_cuernos)
@@ -77,6 +80,31 @@ MAP = {
 }
 # fps propios donde el clip base es demasiado entrecortado y el clip va en bucle o es de solo pose (no afecta golpes)
 FPS = {"walk": 12, "hurt": 20}
+
+# ---- CHISPAS DE IMPACTO del Modo Vestía (los 43 FX morado/carmesí del mismo ZIP: POCHECHE_FX_PURPURA_CARMESI) ----
+# Son efectos sueltos de UNA hoja fuente (no animaciones armadas): aquí se agrupan en anims cortas. Cada frame venía
+# re-escalado a su caja (content.scale): se restaura su tamaño relativo (alto real ∝ alto/scale) y la anim se escala para
+# que su frame más alto mida `h` px lógicos. Se dibujan con el sistema de hitsparks de siempre (data/fx_library.json).
+FX_PAGE_NAME = "sofi_vestia_fx.webp"
+FX_PAGE = os.path.join(ROOT, "assets/fx", FX_PAGE_NAME)
+FX_LIB = os.path.join(ROOT, "data/fx_library.json")
+FX_LIB_ID = "sofi_vestia_fx"
+FX_ANIMS = {   # id -> índices del atlas FX fuente (fx_claw_purple_crimson_NN), fps, alto lógico
+    "vestia_impacto":   {"frames": [25, 26],                     "fps": 30, "h": 80},    # estallido en estrella
+    "vestia_zarpazo":   {"frames": [0, 1, 2, 3, 4],              "fps": 30, "h": 100},   # arco de zarpazo
+    "vestia_garras":    {"frames": [8, 9, 10, 12],               "fps": 24, "h": 110},   # marcas de tres garras
+    "vestia_cruz":      {"frames": [5, 6, 7],                    "fps": 24, "h": 100},   # corte circular -> en X -> anillo
+    "vestia_barrido":   {"frames": [17, 18, 19, 20],             "fps": 24, "h": 70},    # barrido al ras del piso (golpe bajo)
+    "vestia_estallido": {"frames": [21, 22, 23, 24, 27, 28],     "fps": 20, "h": 150},   # estallido del súper
+}
+# golpe -> chispa cuando Sofi YA está transformada (hitAnimVestia; la simulación solo la elige si att.transformed)
+HIT_VESTIA = {
+    "punch": "vestia_zarpazo", "heavy_punch": "vestia_garras", "kick": "vestia_impacto", "heavy_kick": "vestia_cruz",
+    "estrella_caramelo": "vestia_zarpazo", "embestida_cuernos": "vestia_barrido", "empuje_navideno": "vestia_garras",
+    "giro_liston": "vestia_zarpazo", "super_festiva": "vestia_estallido",
+}
+# la propia transformación (modo_vestia) golpea ANTES de quedar transformada: lleva su chispa como hitAnim normal
+HIT_ALWAYS = {"modo_vestia": "vestia_garras"}
 
 
 def sha256(path):
@@ -187,7 +215,64 @@ def build():
     return atlas, names, info
 
 
+def load_fx_source():
+    with zipfile.ZipFile(SRC_ZIP) as z:
+        meta = json.loads(z.read("pocheche_atlas_master/POCHECHE_FX_PURPURA_CARMESI.json"))
+        img = Image.open(io.BytesIO(z.read("pocheche_atlas_master/POCHECHE_FX_PURPURA_CARMESI.png"))).convert("RGBA")
+    return meta, img
+
+
+def build_fx():
+    """página de FX (solo los frames usados, empaquetados en estantes) + entradas de librería."""
+    meta, img = load_fx_source()
+    by_idx = {f["index"]: (n, f) for n, f in meta["frames"].items()}
+    used = []
+    for A in FX_ANIMS.values():
+        for i in A["frames"]:
+            if i not in by_idx: sys.exit("el atlas FX fuente no tiene el frame %d" % i)
+            if i not in used: used.append(i)
+    crops = {}
+    for i in used:
+        n, f = by_idx[i]; c = f["content"]; x0, y0 = f["frame"]["x"] + c["x"], f["frame"]["y"] + c["y"]
+        im = img.crop((x0, y0, x0 + c["w"], y0 + c["h"]))
+        bb = im.getchannel("A").getbbox()
+        crops[i] = (im.crop(bb) if bb else im, c["scale"])
+    PAGE_W, PAD = 1024, 2
+    x = y = shelf = 0; rects = {}
+    for i in used:
+        im = crops[i][0]
+        if x + im.width + PAD > PAGE_W: x = 0; y += shelf + PAD; shelf = 0
+        rects[i] = (x, y, im.width, im.height); x += im.width + PAD; shelf = max(shelf, im.height)
+    page = Image.new("RGBA", (PAGE_W, y + shelf), (0, 0, 0, 0))
+    for i in used: page.paste(crops[i][0], rects[i][:2])
+    frames = {"f%02d" % i: [rects[i][0], rects[i][1], rects[i][2], rects[i][3], 1.0, rects[i][2], rects[i][3]] for i in used}
+    anims = {}
+    for aid, A in FX_ANIMS.items():
+        native = [crops[i][0].height / crops[i][1] for i in A["frames"]]      # alto real relativo (deshace content.scale)
+        m = A["h"] / max(native)
+        anims[aid] = {"lib": FX_LIB_ID, "frames": ["f%02d" % i for i in A["frames"]], "fps": A["fps"], "loop": False,
+                      "scales": [round(m / crops[i][1], 5) for i in A["frames"]],
+                      "anchors": [[0.5, 0.5] for _ in A["frames"]], "use": "hitspark", "h": A["h"]}
+    return page, frames, anims
+
+
+def update_fx_lib(L, page, frames, anims):
+    L["libs"][FX_LIB_ID] = {
+        "image": "assets/fx/" + FX_PAGE_NAME, "runtime": True, "size": [page.width, page.height],
+        "source": "POCHECHE_FX_PURPURA_CARMESI (dentro de sources/entregas_2026-11-08/POCHECHE_ATLAS_MASTER_GAME_READY.zip)",
+        "owner": "sofi", "confidence": "ALTA",
+        "evidence": "Mismo ZIP que el atlas del Modo Vestía; el usuario: 'Este atlas es de Sofía modo vestía'. Garras morado/carmesí = Vestía. "
+                    "Lo agrega tools/build_sofi_vestia_real.py (volver a correrlo después de pack_fx_library.py).",
+        "frames": frames}
+    for aid, A in anims.items(): L["anims"][aid] = A
+    note = " Entradas sofi_vestia_fx / vestia_*: tools/build_sofi_vestia_real.py (volver a correrlo después de pack_fx_library.py)."
+    if note not in L["_doc"]: L["_doc"] += note
+    return L
+
+
 def update_char(d, names, info, png_sha):
+    for mv, aid in HIT_VESTIA.items(): d["moves"][mv]["hitAnimVestia"] = aid
+    for mv, aid in HIT_ALWAYS.items(): d["moves"][mv]["hitAnim"] = aid
     idx = {n: info[n]["idx"] for n in names}
     d["atlases"].pop("base_vestia", None)
     d["atlases"]["vestia_real"] = {
@@ -222,10 +307,22 @@ def main():
     same_png = old_png is not None and Image.open(io.BytesIO(old_png)).convert("RGBA").tobytes() == atlas.tobytes()
     clipped = [n for n in names if info[n]["clipped"]]
     if clipped: print("AVISO: recortado por la celda:", clipped)
+    # chispas de impacto: página WebP SIN pérdida (lo decodificado = lo generado, así --check compara píxeles exactos)
+    fx_page, fx_frames, fx_anims = build_fx()
+    old_fx = Image.open(FX_PAGE).convert("RGBA") if os.path.exists(FX_PAGE) else None
+    same_fx = old_fx is not None and old_fx.size == fx_page.size and old_fx.tobytes() == fx_page.tobytes()
+    lib_txt = open(FX_LIB, encoding="utf-8").read()
+    new_lib_txt = json.dumps(update_fx_lib(json.loads(lib_txt), fx_page, fx_frames, fx_anims), ensure_ascii=False, indent=1)
     if check:
         ok = same_png and json.loads(old_txt) == json.loads(json.dumps(update_char(json.loads(old_txt), names, info,
                                                                                         hashlib.sha256(old_png).hexdigest() if old_png else "")))
+        ok = ok and same_fx and new_lib_txt == lib_txt
         print("al día" if ok else "DESACTUALIZADO"); sys.exit(0 if ok else 1)
+    if not same_fx:
+        fx_page.save(FX_PAGE, "WEBP", lossless=True, quality=100, method=6, exact=True)
+        print("escrito", os.path.relpath(FX_PAGE, ROOT), fx_page.size, len(fx_frames), "FX")
+    if new_lib_txt != lib_txt:
+        open(FX_LIB, "w", encoding="utf-8").write(new_lib_txt); print("actualizado", os.path.relpath(FX_LIB, ROOT))
     if not same_png:
         open(OUT, "wb").write(data); print("escrito", os.path.relpath(OUT, ROOT), atlas.size, len(names), "frames")
     else:

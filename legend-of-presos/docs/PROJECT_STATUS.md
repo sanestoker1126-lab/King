@@ -15,7 +15,7 @@
   - QA: `node tools/qa_20261106/arcade_bosses.cjs .` y `node tools/qa_20261106/bosses_check.cjs <copia_original> .`
 - **Sofi en Modo Vestía** pelea con arte real del usuario (`sofi_vestia_real.png`, generado por `tools/build_sofi_vestia_real.py`).
   - Pendiente: confirmar con el usuario qué pose va en cada golpe.
-  - Pendiente: decidir si usar los 43 FX de garras como chispas de impacto.
+  - Chispas de impacto propias (los 43 FX de garras; 2026-11-10). Pendiente: confirmar qué chispa va en cada golpe.
   - Pendiente: la pose "derribada" Vestía está recostada (71 px de alto; la base, acostada, mide 37).
 
 ## Qué NO se pudo verificar

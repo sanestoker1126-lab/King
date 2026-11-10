@@ -680,7 +680,8 @@
       ],
       "name": "Puño",
       "nameSrc": "generico",
-      "_measure": "tools/build_sofi.py: impacto en ['light_punch_2'] (clip atk_light idx 1-1); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.68; tiempos de data/normals.json clase jab"
+      "_measure": "tools/build_sofi.py: impacto en ['light_punch_2'] (clip atk_light idx 1-1); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.68; tiempos de data/normals.json clase jab",
+      "hitAnimVestia": "vestia_zarpazo"
     },
     "heavy_punch": {
       "clip": "atk_heavy",
@@ -720,7 +721,8 @@
       ],
       "name": "Golpe fuerte",
       "nameSrc": "generico",
-      "_measure": "tools/build_sofi.py: impacto en ['heavy_punch_3'] (clip atk_heavy idx 2-2); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.70; tiempos de data/normals.json clase fuerte"
+      "_measure": "tools/build_sofi.py: impacto en ['heavy_punch_3'] (clip atk_heavy idx 2-2); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.70; tiempos de data/normals.json clase fuerte",
+      "hitAnimVestia": "vestia_garras"
     },
     "kick": {
       "clip": "atk_kick",
@@ -761,7 +763,8 @@
       ],
       "name": "Patada alta",
       "nameSrc": "generico",
-      "_measure": "tools/build_sofi.py: impacto en ['high_kick_3'] (clip atk_kick idx 2-2); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.88; tiempos de data/normals.json clase kick"
+      "_measure": "tools/build_sofi.py: impacto en ['high_kick_3'] (clip atk_kick idx 2-2); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.88; tiempos de data/normals.json clase kick",
+      "hitAnimVestia": "vestia_impacto"
     },
     "heavy_kick": {
       "clip": "atk_kick2",
@@ -801,7 +804,8 @@
       ],
       "name": "Patada media",
       "nameSrc": "generico",
-      "_measure": "tools/build_sofi.py: impacto en ['low_kick_3'] (clip atk_kick2 idx 2-2); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.54; tiempos de data/normals.json clase patada_fuerte"
+      "_measure": "tools/build_sofi.py: impacto en ['low_kick_3'] (clip atk_kick2 idx 2-2); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.54; tiempos de data/normals.json clase patada_fuerte",
+      "hitAnimVestia": "vestia_cruz"
     },
     "estrella_caramelo": {
       "clip": "atk_sp2",
@@ -840,7 +844,8 @@
       "name": "Estrella de caramelo",
       "nameSrc": "etiqueta de la fuente (candy_star)",
       "_measure": "tools/build_sofi.py: impacto en ['candy_star_3'] (clip atk_sp2 idx 2-2); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.67; tiempos de tools/specs/sofi_spec.json specialClasses.palma (DISEÑO)",
-      "_doc": "Golpe de palma con la estela rosa que trae el arte. TODO: VERIFICAR jugando."
+      "_doc": "Golpe de palma con la estela rosa que trae el arte. TODO: VERIFICAR jugando.",
+      "hitAnimVestia": "vestia_zarpazo"
     },
     "embestida_cuernos": {
       "clip": "atk_sp1",
@@ -885,7 +890,8 @@
       "name": "Embestida de cuernos",
       "nameSrc": "etiqueta de la fuente (antler_charge)",
       "_measure": "tools/build_sofi.py: impacto en ['antler_charge_4'] (clip atk_sp1 idx 3-3); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.08; tiempos de tools/specs/sofi_spec.json specialClasses.embestida (DISEÑO)",
-      "_doc": "Corre hacia adelante y se lanza en picada con la mano (y el brillo rosa del arte) a ras del piso: golpe BAJO medido (altura 0.08), se bloquea agachado; derriba. TODO: VERIFICAR jugando."
+      "_doc": "Corre hacia adelante y se lanza en picada con la mano (y el brillo rosa del arte) a ras del piso: golpe BAJO medido (altura 0.08), se bloquea agachado; derriba. TODO: VERIFICAR jugando.",
+      "hitAnimVestia": "vestia_barrido"
     },
     "empuje_navideno": {
       "clip": "atk_sp3",
@@ -924,7 +930,8 @@
       "name": "Empuje navideño",
       "nameSrc": "provisional",
       "_measure": "tools/build_sofi.py: impacto en ['v5_05_02', 'v5_05_01'] (clip atk_sp3 idx 2-3); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.66; tiempos de tools/specs/sofi_spec.json specialClasses.empuje (DISEÑO)",
-      "_doc": "Empujón con las dos palmas (poses v5); aleja al rival. Nombre propuesto por el arte. TODO: VERIFICAR jugando."
+      "_doc": "Empujón con las dos palmas (poses v5); aleja al rival. Nombre propuesto por el arte. TODO: VERIFICAR jugando.",
+      "hitAnimVestia": "vestia_garras"
     },
     "giro_liston": {
       "clip": "atk_sp4",
@@ -964,7 +971,8 @@
       "name": "Giro de listón",
       "nameSrc": "etiqueta de la fuente (ribbon_spin)",
       "_measure": "tools/build_sofi.py: impacto en ['ribbon_spin_1', 'ribbon_spin_2'] (clip atk_sp4 idx 0-1); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.53; tiempos de tools/specs/sofi_spec.json specialClasses.giro (DISEÑO)",
-      "_doc": "Dos golpes (un golpe por frame del giro). TODO: VERIFICAR jugando."
+      "_doc": "Dos golpes (un golpe por frame del giro). TODO: VERIFICAR jugando.",
+      "hitAnimVestia": "vestia_zarpazo"
     },
     "super_festiva": {
       "clip": "atk_super",
@@ -1006,7 +1014,8 @@
       "name": "Súper festiva",
       "nameSrc": "etiqueta de la fuente (festive_super)",
       "_measure": "tools/build_sofi.py: impacto en ['festive_super_3', 'festive_super_4'] (clip atk_super idx 2-3); caja = extremidad fuera de la silueta de idle[0] (idle_1), altura 0.54; tiempos de tools/specs/sofi_spec.json specialClasses.super_festiva (DISEÑO)",
-      "_doc": "Súper (qcf x2 + Puño, barra llena). Daño, invulnerabilidad y cinemática = súper de Garravas (canónico). TODO: VERIFICAR jugando."
+      "_doc": "Súper (qcf x2 + Puño, barra llena). Daño, invulnerabilidad y cinemática = súper de Garravas (canónico). TODO: VERIFICAR jugando.",
+      "hitAnimVestia": "vestia_estallido"
     },
     "modo_vestia": {
       "clip": "modo_vestia",
@@ -1047,7 +1056,8 @@
       "name": "Modo Vestía",
       "nameSrc": "paquete:ESPECIAL OCULTO MODO VESTÍA",
       "_doc": "Se activa SOLO (ver autoTransform): no tiene comando. invulnFrames 66 ≈ cubre activación+transformación (idx0-15 a 15fps). hitFrames en el ataque de garras (18,20,22) y el remate (25,28). Frame-data y caja = DISEÑO, TODO: VERIFICAR jugando. Al terminar, f.transformed=true: Sofi pelea con el moveset morado (*_vestia) y +20% de daño hasta el fin de la ronda.",
-      "transformsInto": true
+      "transformsInto": true,
+      "hitAnim": "vestia_garras"
     }
   },
   "style": {
