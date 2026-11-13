@@ -30,6 +30,11 @@ Léelo primero en un chat nuevo. Detalle completo en `docs/CHANGELOG.md` y `docs
    - Pendiente del usuario: quién es el personaje del ZIP `sources/entregas_2026-11-13/ATLAS_MAESTRO_PERSONAJE_COMPLEMENTARIO.zip` y quién el del overol naranja (falta su atlas).
    - Pendiente del usuario: la historia de la Toxi Familia (integrantes y trama). No hay nada en el repo y no se debe inventar.
 
+5. **Personaje nuevo provisional e historia (2026-11-13).**
+   - `personaje_complementario` ("Nuevo (sin nombre)"): generado por `python3 -I tools/build_personaje_complementario.py` (`--check`). Pendiente del usuario: nombre, ficha y si entra a la campaña. Para renombrarlo: `NAME` en el script (y, si cambia el id, `CID`).
+   - Historia entre combates: `data/story.json` (6 capítulos de relleno, ocultos en el juego normal; se ven con `game.html?story=draft`). Pendiente del usuario: los textos de la Toxi Familia.
+   - Personaje del overol naranja: confirmado como nuevo; falta su atlas en ZIP y su nombre.
+
 ## Cómo probar (herramientas de este repo)
 ```bash
 cd legend-of-presos

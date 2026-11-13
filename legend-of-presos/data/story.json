@@ -1,0 +1,58 @@
+{
+ "_doc": "HISTORIA entre combates del Arcade (estructura lista, textos por escribir). Cada entrada de arcade.solo es un CAPÍTULO que se muestra ANTES del combate con ese número en data/campaigns.json (0 = primer combate), en la pantalla de capítulo (engine/pg_frontend.js, storyBeat). Campos: tag (línea chica de arriba), title (frase grande), sub (texto), bg (imagen de fondo; por defecto la del escenario del combate), rival (solo referencia para quien escribe). placeholder:true = RELLENO sin escribir: NO se muestra en el juego normal; para verlos mientras se escribe, abrir game.html?story=draft o poner showPlaceholders:true. Para publicar un capítulo: escribir tag/title/sub y borrar la línea placeholder. arcade.teams:'solo' = Equipos usa los mismos capítulos por número de combate (se puede cambiar por una tabla propia). Si un combate se salta (por ejemplo la sub-jefa cuando juegas con ella), su capítulo también. Un capítulo se muestra una sola vez por combate (no se repite al reintentar). La intro y el final siguen escritos en engine/pg_frontend.js (_cinematic y campaignEnding). NO hay canon de la Toxi Familia en el proyecto: no se inventó nada; lo escribe el usuario.",
+ "enabled": true,
+ "showPlaceholders": false,
+ "arcade": {
+  "solo": {
+   "0": {
+    "placeholder": true,
+    "rival": "regente",
+    "bg": "assets/stages/puente_grande_exterior.webp",
+    "tag": "HISTORIA // CAPÍTULO 1 DE 6 — PENDIENTE",
+    "title": "[Falta el texto: antes de pelear contra Regente]",
+    "sub": "Aquí va lo que pasa en la historia de la Toxi Familia antes de este combate."
+   },
+   "1": {
+    "placeholder": true,
+    "rival": "cadena",
+    "bg": "assets/stages/guadalajara_pemex_background.png",
+    "tag": "HISTORIA // CAPÍTULO 2 DE 6 — PENDIENTE",
+    "title": "[Falta el texto: antes de pelear contra Cadena]",
+    "sub": "Aquí va lo que pasa en la historia de la Toxi Familia antes de este combate."
+   },
+   "2": {
+    "placeholder": true,
+    "rival": "calavera",
+    "bg": "assets/stages/guadalajara_oxxo_background.png",
+    "tag": "HISTORIA // CAPÍTULO 3 DE 6 — PENDIENTE",
+    "title": "[Falta el texto: antes de pelear contra La Tapia]",
+    "sub": "Aquí va lo que pasa en la historia de la Toxi Familia antes de este combate."
+   },
+   "3": {
+    "placeholder": true,
+    "rival": "sofi",
+    "bg": null,
+    "tag": "HISTORIA // CAPÍTULO 4 DE 6 — PENDIENTE",
+    "title": "[Falta el texto: antes de pelear contra la sub-jefa La Sofi]",
+    "sub": "Aquí va lo que pasa en la historia de la Toxi Familia antes de este combate."
+   },
+   "4": {
+    "placeholder": true,
+    "rival": "nadia",
+    "bg": null,
+    "tag": "HISTORIA // CAPÍTULO 5 DE 6 — PENDIENTE",
+    "title": "[Falta el texto: antes de pelear contra Nadia]",
+    "sub": "Aquí va lo que pasa en la historia de la Toxi Familia antes de este combate."
+   },
+   "5": {
+    "placeholder": true,
+    "rival": "garravas",
+    "bg": "assets/stages/puente_grande_penal_background.png",
+    "tag": "HISTORIA // CAPÍTULO 6 DE 6 — PENDIENTE",
+    "title": "[Falta el texto: antes de pelear contra el jefe final Garravas]",
+    "sub": "Aquí va lo que pasa en la historia de la Toxi Familia antes de este combate."
+   }
+  },
+  "teams": "solo"
+ }
+}

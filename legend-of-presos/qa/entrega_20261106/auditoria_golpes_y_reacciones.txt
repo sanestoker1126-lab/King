@@ -28,8 +28,9 @@ tobi                   12       7       0       0   4.5 |    2     3     6     4
 valentina_niebla       11       9       0       0   4.9 |    1     3     3     0   0     4
 wasirris               10      10       0       0   5.4 |    2     6     2     8   8     3
 bigotes                12      12       0       0   5.7 |    2    10     8     0   8     2
+personaje_complementario      7       0       0       0   5.9 |    3     5     5     0   7     2
 sofi                   10       1       1       1   6.5 |    1     4     3     0   0     1
 el_paisa_sistem        12       2       0       0   6.8 |    3     4     2     0   6     3
 personaje_08           12      12       0       0   9.0 |    2     9     9     0   8     9
 
-De 32 jugables: sin mareo propio 30 · sin K.O. propio 22 · golpe recibido de 1 pose o menos 13 · media de poses por golpe menor a 3: 6
+De 33 jugables: sin mareo propio 31 · sin K.O. propio 22 · golpe recibido de 1 pose o menos 13 · media de poses por golpe menor a 3: 6

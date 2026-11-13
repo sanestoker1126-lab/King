@@ -6,7 +6,7 @@ const root = process.argv[2] || '.';
 const src = fs.readFileSync(path.join(root, 'engine/pg_game.js'), 'utf8');
 function fn(name) { const i = src.indexOf('function ' + name + '('); if (i < 0) throw new Error('no está ' + name);
   let d = 0, j = src.indexOf('{', i); for (let k = j; k < src.length; k++) { if (src[k] === '{') d++; else if (src[k] === '}' && --d === 0) return src.slice(i, k + 1); } }
-const code = ['resolveAlias', 'autoPool', 'copyBattle', 'arcadeStart', 'arcadeNextMatch'].map(fn).join('\n');
+const code = ['resolveAlias', 'autoPool', 'copyBattle', 'arcadeStart', 'storyBeat', 'arcadeNextMatch'].map(fn).join('\n');
 const J = f => JSON.parse(fs.readFileSync(path.join(root, f), 'utf8'));
 function make() {
   const ctx = { console, JSON, Object, Array, global: {}, window: {} };

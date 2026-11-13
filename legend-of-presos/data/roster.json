@@ -521,6 +521,22 @@
         "alias": null,
         "src": "sin expediente (personaje nuevo del paquete)"
       }
+    },
+    {
+      "id": "personaje_complementario",
+      "name": "Nuevo (sin nombre)",
+      "dir": "assets/combat/personaje_complementario/",
+      "char": "personaje_complementario.char.json",
+      "status": "playable",
+      "provisional": true,
+      "origen": "ZIP del usuario ATLAS_MAESTRO_PERSONAJE_COMPLEMENTARIO (sources/entregas_2026-11-13/); atlas y char.json de tools/build_personaje_complementario.py",
+      "notes": "Personaje NUEVO (2026-11-13), PROVISIONAL: el usuario confirmó que es nuevo pero falta su NOMBRE, ficha y lugar en la historia (TODO: VERIFICAR). Se puede elegir; no sale como rival automático. Frame-data y daños = DISEÑO. GENERADO por tools/build_personaje_complementario.py: no editar a mano.",
+      "perfil": {
+        "reo": null,
+        "celda": null,
+        "alias": null,
+        "src": "sin expediente (personaje nuevo, sin nombre todavía)"
+      }
     }
   ],
   "_resueltos": {

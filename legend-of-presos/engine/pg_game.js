@@ -39,6 +39,8 @@
     G.roster = await (await fetch("data/roster.json",{cache:"no-store"})).json();
     G.stages = await (await fetch("data/stages.json",{cache:"no-store"})).json();   // escenarios (§4.6): motor e interfaz leen lo mismo
     G.campaigns = await (await fetch("data/campaigns.json",{cache:"no-store"})).json();   // Arcade 1v1 y 3v3 (datos, no código)
+    // historia entre combates (data/story.json). Opcional: si falta o está mal, el Arcade sigue igual, sin capítulos.
+    try { G.story = await (await fetch("data/story.json",{cache:"no-store"})).json(); } catch (e){ G.story = null; console.warn("Historia no disponible: " + e.message); }
 
     // audio: sincronizar con opciones guardadas
     if (global.PGAudio){ PGAudio.init(G.cfgBase.audio); PGAudio.setVolume(PGStore.get("volume")); PGAudio.setMusicVolume(PGStore.get("musicVolume")); PGAudio.setMuted(PGStore.get("muted")); }
@@ -81,6 +83,9 @@
   function copyBattle(b, extra){ var o = { difficulty:b.difficulty, stage:b.stage, boss:!!b.boss, midBoss:!!b.midBoss, tag:b.tag||null,
       mods:b.mods ? { hp:b.mods.hp||1, damage:b.mods.damage||1 } : null, unlocks:b.unlocks||null, memberMods:null };
     // memberMods (Equipos): modificador de UN integrante del equipo rival, por id (el jefe final: solo Garravas con más vida/daño)
+    // capítulo de historia de esta batalla: su posición ORIGINAL en data/campaigns.json (no cambia aunque se salten combates)
+    var CA = G.campaigns.arcade, n = CA.solo.indexOf(b), kind = "solo"; if (n < 0){ n = CA.teams.indexOf(b); kind = "teams"; }
+    o.storyKey = n >= 0 ? kind + "." + n : null;
     if (b.memberMods){ o.memberMods = {}; Object.keys(b.memberMods).forEach(function(id){ var x = b.memberMods[id] || {};
       o.memberMods[resolveAlias(id)] = { hp:x.hp||1, damage:x.damage||1 }; }); }
     return Object.assign(o, extra); }
@@ -115,6 +120,16 @@
     G.arcadeCampaign = { isTeam:false, yourId:you, battles:battles, idx:0, length:battles.length, status:"active" };
     arcadeNextMatch();
   }
+  // Capítulo de historia que va ANTES de la batalla b (data/story.json), o null. Los de relleno (placeholder) solo se
+  // muestran en modo borrador (showPlaceholders o game.html?story=draft). Una vez por combate: no se repite al reintentar.
+  function storyBeat(A, b){
+    var S = G.story; if (!S || S.enabled === false || !b.storyKey || A.beatShown === A.idx) return null;
+    var k = b.storyKey.split("."), T = S.arcade || {}, tbl = T[k[0]]; if (typeof tbl === "string") tbl = T[tbl];
+    var beat = tbl && tbl[k[1]]; if (!beat) return null;
+    var draft = !!S.showPlaceholders || (global.location && /[?&]story=draft\b/.test(global.location.search || ""));
+    if (beat.placeholder && !draft) return null;
+    return beat;
+  }
   function arcadeNextMatch(){
     var A=G.arcadeCampaign; if(!A || A.idx>=A.length) return;
     var b=A.battles[A.idx], s=G.fe.sel;
@@ -132,7 +147,9 @@
       if (A.isTeam && b.memberMods) side.members = b.opponentTeam.map(function(id){ return b.memberMods[id] || null; });
       s.mods = [ { hp:1, damage:1 }, side ];
     }
-    G.fe.vs();
+    var beat = storyBeat(A, b);
+    if (beat && G.fe.storyBeat){ A.beatShown = A.idx; G.fe.storyBeat(beat, function(){ G.fe.vs(); }); }
+    else G.fe.vs();
   }
   function arcadeEnding(){
     var A=G.arcadeCampaign; if(!A || A.status!=="won") return;

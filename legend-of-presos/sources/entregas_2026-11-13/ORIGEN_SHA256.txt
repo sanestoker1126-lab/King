@@ -1,13 +1,14 @@
-# Entregas del usuario del 2026-11-13 (chat). Intactas; SHA-256 calculado al recibirlas. NINGUNA está integrada todavía.
+# Entregas del usuario del 2026-11-13 (chat). Intactas; SHA-256 calculado al recibirlas.
 1c56b85dca4bf99f7f8ba9473c560506a735a9f6109b49654e50bacc71b460c5  ATLAS_MAESTRO_PERSONAJE_COMPLEMENTARIO.zip
 #   165 frames (192x192, pivote abajo-centro) de un personaje robusto, calvo, de barba, chamarra negra, playera blanca y
 #   pantalón caqui: 27 animaciones (idle, caminar, agacharse, guardias, carrera, salto, patadas, barrida, aura morada,
 #   golpe recibido, caída, levantarse, victoria...). Su propio LEEME avisa: 10 cuadros son de la imagen original y 155 son
 #   generados ("candidatos", requieren QA de consistencia y separar los FX morados del cuerpo).
-#   SIN INTEGRAR: no coincide a ojo con ningún personaje del roster (se comparó con la pose de espera de los 32) y ni el
-#   ZIP ni el mensaje dicen quién es. Falta que el usuario lo diga.
+#   INTEGRADO el 2026-11-13 como personaje NUEVO PROVISIONAL (id personaje_complementario) por
+#   tools/build_personaje_complementario.py: el usuario confirmó que es un personaje nuevo, pero falta su NOMBRE.
 2c32548d9be2d8a51dc968c9feac2718c74239ec65eb009ce6f07d01353195f8  hoja_de_golpes_overol_naranja.jpg
 #   Hoja de golpes de un personaje de overol naranja: 14 golpes estilo KOF (A, B, C, D, C cerca, 2A, 2B, 2D, aire B,
 #   aire D, CD, Especial 1 proyectil, Especial 2 ascendente, DM) con el frame de impacto marcado e índices 13-67 de un
 #   atlas que NO está en el repo. Tampoco coincide con nadie del roster. Sirve como referencia de cómo quiere el usuario
-#   cada golpe (preparación -> impacto -> recuperación); para integrarlo falta el atlas y saber quién es.
+#   cada golpe (preparación -> impacto -> recuperación); el usuario confirmó que es un personaje NUEVO;
+#   SIN INTEGRAR: falta su atlas completo (ZIP) y su nombre.

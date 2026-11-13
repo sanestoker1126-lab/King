@@ -18,6 +18,11 @@
   - Chispas de impacto propias (los 43 FX de garras; 2026-11-10). Pendiente: confirmar qué chispa va en cada golpe.
   - Pendiente: la pose "derribada" Vestía está recostada (71 px de alto; la base, acostada, mide 37).
 
+## Al 2026-11-13
+- 33 jugables: se agregó `personaje_complementario` (provisional, sin nombre). Reacciones nuevas de Nadia, Regente y Tobi. El golpeado vibra en la pausa de impacto.
+- Historia entre combates: estructura lista en `data/story.json`, con textos de relleno ocultos. Falta el contenido (Toxi Familia).
+- Detalle y pendientes en `CONTINUAR_AQUI.md`.
+
 ## Qué NO se pudo verificar
 - `tools/test_sim.js` (la "huella" de 197 pruebas), `tools/validate_data.py` y `tools/run_regression.sh` no venían en los ZIP y no se corrieron.
 - Android: no hay carpeta `ANDROID/` y no se compiló ningún APK.

@@ -377,6 +377,7 @@
     switch (this._scene){
       case "splash": break;
       case "cinematic": this._finishCinematic(true); break;
+      case "story": if (this._storyGo) this._storyGo(); break;
       case "menu": this._splash(); break;
       case "select": case "teamSelect": case "tourSetup": this._sfx("cancel"); this.title(); break;
       case "commands": this._sfx("cancel"); (this._cmdBack || this.title.bind(this))(); break;
@@ -433,6 +434,16 @@
     this._cineKey = key; window.addEventListener("keydown", key, true);
     audio.play().catch(function(){ /* algunos navegadores requieren gesto; el botón de splash ya lo intentó */ });
     this._cineRAF = requestAnimationFrame(draw);
+  };
+  // ======================================================== CAPÍTULO DE HISTORIA (entre combates del Arcade; data/story.json)
+  // beat = { tag, title, sub, bg }. Misma estética que la apertura, sin narración ni reloj: se avanza con Continuar/Enter/Esc.
+  P.storyBeat = function(beat, done){
+    var self = this, scr = this._mount("story", { cls:"pg-cinematic pg-story pg-cine-cut" });
+    scr.innerHTML = '<div class="pg-cine-frame"><div class="pg-cine-shot"></div><div class="pg-cine-vignette"></div><div class="pg-cine-noise"></div><div class="pg-cine-letterbox top"></div><div class="pg-cine-letterbox bottom"></div><div class="pg-cine-copy"><span class="pg-cine-tag"></span><h1 class="pg-cine-title"></h1><p class="pg-cine-sub"></p></div><button class="pgb prim pg-cine-skip" id="st-go" type="button">Continuar <b>Enter</b></button></div>';
+    if (beat.bg) scr.querySelector(".pg-cine-shot").style.backgroundImage = "url('" + String(beat.bg).replace(/['"\\)]/g, "") + "')";
+    scr.querySelector(".pg-cine-tag").textContent = beat.tag || ""; scr.querySelector(".pg-cine-title").textContent = beat.title || ""; scr.querySelector(".pg-cine-sub").textContent = beat.sub || "";
+    var fin = false, go = function(){ if (fin || self._scene !== "story") return; fin = true; self._storyGo = null; self._sfx("confirm"); done(); };
+    this._storyGo = go; this._click(scr, "#st-go", go); this._armFocus("#st-go");
   };
   P._finishCinematic = function(skipped){
     if (this._scene !== "cinematic") return;

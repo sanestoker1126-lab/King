@@ -2,6 +2,35 @@
 
 > Los ZIP recibidos el 2026-11-06 no traían `docs/`, así que **el historial anterior no está aquí**. Si tienes el `docs/CHANGELOG.md` completo, pega esta entrada al principio del tuyo.
 
+## 2026-11-13 (3) — Personaje nuevo (provisional) + estructura de historia entre combates
+
+Respuestas del usuario: el ZIP es un personaje nuevo, el del overol naranja también, y de la historia "primero la estructura".
+
+### Personaje nuevo del ZIP `ATLAS_MAESTRO_PERSONAJE_COMPLEMENTARIO` (33 jugables)
+- Entra como **provisional** (id `personaje_complementario`, nombre de relleno "Nuevo (sin nombre)"): se puede elegir, pero no sale como rival automático. **Falta su nombre**, su ficha y su lugar en la historia.
+- Lo genera `tools/build_personaje_complementario.py` (idempotente, `--check`): atlas de 90 cuadros (celdas 192, sin reescalar), `char.json` y alta en `data/roster.json`.
+- **Tiene:** espera, caminar, correr, salto, guardia agachada, golpe recibido (3 poses), caída (5), derribado, levantarse (5), K.O. (7), festejo; puño, patada, patada alta, rodilla aérea, Embestida (↓↘→ + puño), Barrida baja que derriba (↓↙← + patada) y súper Descarga (↓↘→↓↘→ + puño, estallido en el sitio).
+- **No tiene** (la fuente no trae esos cuadros, así que quedan desactivados o con el respaldo del motor): puño fuerte, puño aéreo, agarre y mareo.
+- Cajas de golpe medidas del sprite con el método de El Paisa. Tres avisos: la rodilla aérea y la embestida no sobresalen de su pose previa, y su caja es la franja frontal del cuadro. Tiempos y daños de diseño: **TODO: VERIFICAR** jugando.
+- La propia fuente avisa que 155 de sus 165 cuadros son generados y que el aura morada viene pegada al cuerpo. Aquí el aura solo se usa en el súper.
+- Verificación:
+  - `tools/qa_20261106/complementario_moves.cjs`: TODO OK. Cada golpe de comando conecta a su distancia y no pega fuera de alcance (el súper llega a 90 px).
+  - `test_moves.cjs`: puño, patada, patada alta, barrida y rodilla aérea conectan. Su caso "super" falla porque coloca al rival a 120 px, fuera del alcance de este súper.
+  - `cpu_bouts.cjs`: 12 peleas terminan sin errores; ganó 3 de 12 (entra flojo).
+  - Navegador (`complementario_browser.cjs`): aparece en la selección, 94 texturas válidas, consola limpia.
+  - Evidencia: `qa/entrega_20261106/personaje_nuevo_en_juego.jpg` y `personaje_nuevo_animaciones_fuente.jpg`.
+
+### Historia entre combates: estructura lista, sin textos
+- `data/story.json`: un capítulo por combate del Arcade (6), con `tag`, `title`, `sub` y `bg`. Hoy los 6 son **relleno marcado** (`placeholder: true`).
+- Los de relleno **no se muestran** en el juego normal. Para verlos mientras se escriben: `game.html?story=draft`. Para publicar uno: escribir sus textos y borrar la línea `placeholder`.
+- Pantalla de capítulo: `storyBeat` en `engine/pg_frontend.js`, con la estética de la intro; se avanza con Continuar, Enter o Esc. Enganche en `engine/pg_game.js` (`storyBeat`, `arcadeNextMatch`): sale antes del VS, una vez por combate (no se repite al reintentar), y si el combate se salta, su capítulo también. Equipos usa los mismos capítulos.
+- Si `story.json` falta o está mal, el Arcade sigue igual.
+- **No se escribió nada de la Toxi Familia:** no hay canon en el proyecto. La intro y el final siguen como estaban.
+- Verificación (`tools/qa_20261106/story_browser.cjs`): en modo normal el Arcade va directo al VS; en borrador sale el capítulo 1 y Continuar lleva al VS. Consola limpia. `arcade_bosses.cjs` sigue en TODO OK. Evidencia: `qa/entrega_20261106/historia_capitulo_borrador.jpg`.
+
+### Sin integrar
+- **Personaje del overol naranja:** el usuario confirmó que es nuevo, pero solo hay una imagen de su hoja de golpes. Falta su atlas en ZIP y su nombre.
+
 ## 2026-11-13 (2) — Conectar y recibir golpes: auditoría + vibración del golpeado
 
 **Qué ya hacía bien el motor.** La pose de impacto se dibuja exactamente durante los cuadros activos del golpe (`framePhase` en `engine/pg_sim.js`: preparación, impacto y recuperación se reparten sobre `startup/active/recovery`, sin depender de los fps del clip). No había desfase que corregir.
