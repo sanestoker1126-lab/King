@@ -2,6 +2,36 @@
 
 > Los ZIP recibidos el 2026-11-06 no traían `docs/`, así que **el historial anterior no está aquí**. Si tienes el `docs/CHANGELOG.md` completo, pega esta entrada al principio del tuyo.
 
+## 2026-11-13 — Frames rescatados de la otra versión del repo (prototipo de la raíz)
+
+**Qué se revisó.** El usuario pidió revisar los frames de las versiones de Manus y GPT. En el repo solo hay otra versión: el prototipo de la raíz ("Puente Grande · Arcade Club", `public/assets/characters/`, 20 personajes, 41 hojas). La rama `copilot/kin-of-presos2` es `main` sin `legend-of-presos/` y no trae nada propio. Ningún archivo dice de qué herramienta salió cada versión.
+
+**Resultado de la comparación (41 hojas):**
+- 7 hojas son idénticas píxel a píxel a los atlas del juego (Nadia, Regente, Semillas y Tobi; diferencia media menor a 2).
+- Las hojas base de Bigotes, Cadena, Calavera, Cartel, Cochi, Gordo, Mecánico, Morado y Pocheche son el mismo paquete que el juego ya reempaquetó. Cadena, Calavera y Morado ya tienen sus hojas de especiales y K.O. Esto se revisó a ojo, no celda por celda.
+- **Lo que sí faltaba:** hojas de reacciones (1448x1086) que el juego nunca integró.
+
+**Integrado** con `tools/build_reacciones_prototipo.py` (idempotente, `--check`; corte por componentes en `tools/_seg_reacciones.py`):
+
+| Personaje | Antes | Ahora (atlas `reacciones`) |
+|---|---|---|
+| Nadia | golpe 1 pose, caída 2 poses repetidas, levantada 3, sin K.O. propio | golpe 2, caída 4, derribada, levantada 6, K.O. 6 |
+| Regente | caída 2 poses repetidas, levantada 3, sin K.O. propio | caída 3 poses distintas, derribado, levantada 6, K.O. 4 |
+| Tobi | levantada 3, sin mareo ni K.O. propio | levantada 6, **mareo con estrellas** (4), K.O. 3 |
+
+- Cada figura se llevó a la escala del atlas base del personaje (figura de pie de la hoja = alto del idle base).
+- `recovery_pose` y `damage_fall` conservan su duración exacta (más poses, más fps), porque el motor mide la levantada con ese clip. Jugabilidad idéntica cuadro a cuadro en 5 peleas (`determinism.cjs`).
+- Navegador (`tools/qa_20261106/reacciones_browser.cjs`): texturas válidas, consola limpia; se vieron en pelea el golpe y el K.O. de Nadia, y la levantada y el mareo de Tobi.
+- Evidencia: `qa/entrega_20261106/reacciones_prototipo_clips.jpg` y `reacciones_prototipo_<id>.jpg` (hojas con cada figura numerada).
+
+**No integrado, y por qué:**
+- **Hoja "garravas/atlas_02" (bestia-rata):** el Garravas del juego es un hombre de gabardina y Don Garras va de traje. Ese arte no corresponde a ningún personaje del roster. Falta que el usuario diga de quién es.
+- **Semillas:** sus figuras se tocan en vertical y el corte automático no es fiable; además ya tiene caída de 9 poses y levantada de 5.
+- **Mateo:** la hoja es de su arte anterior (hoy usa el de El Sable).
+- **Callejero, Oscuro, Don Gorrón, El Killer de la Fez 104 y El Moco:** no están en el roster. Meterlos es agregar personajes nuevos (golpes, cajas, nombres), no rescatar frames.
+- **Tobi, filas 6 a 9** (aura de poder, barrida, puños con estela): varias figuras se tocan y habría que cortarlas a mano.
+- La elección de poses es decisión de integración: **TODO: VERIFICAR** con el usuario (tabla `SPEC` del script).
+
 ## 2026-11-10 — Chispas de impacto del Modo Vestía (FX del usuario)
 
 - Se usan los **43 FX morado/carmesí** del mismo ZIP (`POCHECHE_FX_PURPURA_CARMESI`). Son efectos sueltos de una sola hoja; `tools/build_sofi_vestia_real.py` toma 24 y arma 6 chispas: `vestia_impacto`, `vestia_zarpazo`, `vestia_garras`, `vestia_cruz`, `vestia_barrido` y `vestia_estallido`.

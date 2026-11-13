@@ -1,4 +1,4 @@
-# CONTINUAR AQUÍ — Legend of Presos (estado al 2026-11-10)
+# CONTINUAR AQUÍ — Legend of Presos (estado al 2026-11-13)
 
 Léelo primero en un chat nuevo. Detalle completo en `docs/CHANGELOG.md` y `docs/PROJECT_STATUS.md`.
 
@@ -19,6 +19,12 @@ Léelo primero en un chat nuevo. Detalle completo en `docs/CHANGELOG.md` y `docs
    - Moveset con el arte real del usuario: atlas `sofi_vestia_real.png`, desde el ZIP mal llamado `POCHECHE_ATLAS_MASTER_GAME_READY.zip`.
    - Chispas de impacto propias (`vestia_*`).
    - Todo lo genera `python3 -I tools/build_sofi_vestia_real.py` (comprobación: `--check`). No editar a mano los clips `*_vestia` ni las entradas `vestia_*`.
+
+3. **Frames de la otra versión (2026-11-13).** Del prototipo de la raíz (`public/assets/characters/`) se rescataron las hojas de reacciones de Nadia, Regente y Tobi: caída, levantada, K.O., y mareo de Tobi. Las genera `python3 -I tools/build_reacciones_prototipo.py` (`--check`).
+   - Pendiente del usuario: de quién es la bestia-rata de `public/assets/characters/garravas/atlas_02.webp` (no es el Garravas ni el Don Garras del juego).
+   - Pendiente del usuario: si entran al roster Callejero, Oscuro, Don Gorrón, El Killer de la Fez 104 y El Moco.
+   - Pendiente del usuario: dónde están las versiones de Manus y GPT, si no son el prototipo de la raíz.
+   - Pendiente técnico: cortar a mano Semillas y las filas 6 a 9 de Tobi.
 
 ## Cómo probar (herramientas de este repo)
 ```bash

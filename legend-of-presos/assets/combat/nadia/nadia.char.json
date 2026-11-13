@@ -68,6 +68,21 @@
       },
       "source": "Reempaquetado determinista desde clips de combate existentes; rivales y FX separados.",
       "anchorsFile": "nadia_combo_sequences_anchors.json"
+    },
+    "reacciones": {
+      "file": "nadia_reacciones.png",
+      "columns": 8,
+      "rows": 3,
+      "cell": {
+        "w": 152,
+        "h": 106
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.95283
+      },
+      "sha256": "6e29469eafcfac3a67238b370608507377d0ee683007636b9f85e89cc89b1665",
+      "source": "Hoja de reacciones del prototipo de la raíz del repo (public/assets/characters/nadia/atlas_02.webp, sha256 a525ede4a0bd5c2f0122fa2871d16d6c4ad3faf97d2b493770217599f38d6fff); recortada y escalada por tools/build_reacciones_prototipo.py."
     }
   },
   "_hitbox_status": "TODO_VERIFICAR — clips/estados MEDIDOS del manifest de referencia; hitboxes, daño y timings son DISEÑO inicial (ajustar jugando en Android).",
@@ -135,25 +150,61 @@
       ]
     },
     "damage_fall": {
-      "atlas": "base",
-      "fps": 10,
       "loop": false,
+      "atlas": "reacciones",
+      "fps": 10,
       "frames": [
-        71,
-        71,
-        70,
-        70
-      ]
+        2,
+        3,
+        4,
+        5
+      ],
+      "_src": [
+        "2.0",
+        "2.1",
+        "2.2",
+        "2.3"
+      ],
+      "_antes": {
+        "atlas": "base",
+        "frames": [
+          71,
+          71,
+          70,
+          70
+        ],
+        "fps": 10
+      }
     },
     "recovery_pose": {
-      "atlas": "base",
-      "fps": 8,
       "loop": false,
+      "atlas": "reacciones",
+      "fps": 16,
       "frames": [
-        73,
-        75,
-        66
-      ]
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "_src": [
+        "1.0",
+        "1.3",
+        "1.4",
+        "1.5",
+        "1.6",
+        "1.7"
+      ],
+      "_antes": {
+        "atlas": "base",
+        "frames": [
+          73,
+          75,
+          66
+        ],
+        "fps": 8
+      }
     },
     "front_grab": {
       "atlas": "base",
@@ -292,23 +343,43 @@
       ]
     },
     "hurt": {
-      "atlas": "base",
+      "atlas": "reacciones",
+      "fps": 20,
       "frames": [
-        71
+        0,
+        1
       ],
-      "fps": 10,
       "hold": true,
-      "_doc": "tools/build_hurt_clips.py: frames de pie iniciales de damage_fall (alto>=0.72*idle)"
+      "_src": [
+        "4.1",
+        "4.2"
+      ],
+      "_antes": {
+        "atlas": "base",
+        "frames": [
+          71
+        ],
+        "fps": 10
+      }
     },
     "down": {
-      "atlas": "base",
-      "frames": [
-        70
-      ],
+      "atlas": "reacciones",
       "fps": 10,
+      "frames": [
+        6
+      ],
       "hold": true,
       "lying": true,
-      "_doc": "tools/build_knockdown_clips.py: frame más bajo de damage_fall/recovery_pose (alto 33, idle 98). VERIFICAR a ojo."
+      "_src": [
+        "2.4"
+      ],
+      "_antes": {
+        "atlas": "base",
+        "frames": [
+          70
+        ],
+        "fps": 10
+      }
     },
     "melee_punch": {
       "atlas": "melee_attacks",
@@ -452,6 +523,28 @@
             8
           ]
         }
+      ]
+    },
+    "ko_fall": {
+      "atlas": "reacciones",
+      "fps": 10,
+      "frames": [
+        1,
+        13,
+        14,
+        15,
+        16,
+        6
+      ],
+      "loop": false,
+      "hold": true,
+      "_src": [
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.5",
+        "4.6",
+        "2.4"
       ]
     }
   },
@@ -934,5 +1027,6 @@
       }
     }
   },
-  "pivotMode": "frame_bottom_center"
+  "pivotMode": "frame_bottom_center",
+  "_reacciones": "2026-11-13: clips hurt, damage_fall, down, recovery_pose, ko_fall con el arte de reacciones del prototipo (atlas `reacciones`), generados por tools/build_reacciones_prototipo.py (no editar a mano). `_antes` guarda el clip anterior. recovery_pose/damage_fall conservan su duración -> simulación idéntica. Elección de poses = TODO: VERIFICAR."
 }
