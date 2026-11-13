@@ -1,0 +1,38 @@
+# Juggle (combos aéreos) por personaje — 2026-11-07
+
+Medido con tools/qa_20261106/juggle_roster.cjs (simulación real, en modo MAX: launcher cancelado a súper; cuenta golpes que conectan con el rival en el aire).
+
+personaje_08       juggle en MAX: SÍ 1 golpe(s) aéreo (uppercut→súper super, dmg 76)
+wasirris           juggle en MAX: SÍ 1 golpe(s) aéreo (pulso_analitico→súper sentencia_firme, dmg 101)
+valentina_niebla   juggle en MAX: SÍ 1 golpe(s) aéreo (paso_fantasma→súper manto_de_niebla, dmg 101)
+diego_cancha       juggle en MAX: SÍ 1 golpe(s) aéreo (uppercut→súper tiempo_extra, dmg 110)
+tobi               juggle en MAX: SÍ 1 golpe(s) aéreo (uppercut→súper super, dmg 76)
+semillas           juggle en MAX: SÍ 1 golpe(s) aéreo (uppercut→súper super, dmg 73)
+cochibomba         juggle en MAX: SÍ 1 golpe(s) aéreo (uppercut→salto+j_kick, dmg 46)
+mateo              juggle en MAX: SÍ 3 golpe(s) aéreo (tajo_ascendente→súper super, dmg 63)
+nadia              juggle en MAX: SÍ 1 golpe(s) aéreo (uppercut→súper super, dmg 76)
+garravas           juggle en MAX: SÍ 1 golpe(s) aéreo (uppercut→súper super, dmg 76)
+regente            juggle en MAX: SÍ 1 golpe(s) aéreo (uppercut→súper super, dmg 74)
+cadena             juggle en MAX: SÍ 2 golpe(s) aéreo (uppercut→súper super, dmg 74)
+calavera           juggle en MAX: SÍ 2 golpe(s) aéreo (uppercut→súper super, dmg 74)
+morado             juggle en MAX: SÍ 3 golpe(s) aéreo (uppercut→súper super, dmg 70)
+cartel             juggle en MAX: SÍ 1 golpe(s) aéreo (uppercut→súper super, dmg 76)
+carmesi            juggle en MAX: SÍ 3 golpe(s) aéreo (uppercut→súper super, dmg 70)
+mecanico           juggle en MAX: SÍ 1 golpe(s) aéreo (uppercut→súper super, dmg 76)
+tatuado            juggle en MAX: SÍ 1 golpe(s) aéreo (uppercut→súper super, dmg 76)
+morado_urbano      juggle en MAX: SÍ 1 golpe(s) aéreo (uppercut→súper super, dmg 76)
+bigotes            juggle en MAX: SÍ 1 golpe(s) aéreo (uppercut→súper super, dmg 76)
+pocheche           juggle en MAX: SÍ 1 golpe(s) aéreo (uppercut→súper super, dmg 76)
+pocheche_tijeras   juggle en MAX: SÍ 4 golpe(s) aéreo (uppercut→súper super, dmg 70)
+gasu_harlequin     juggle en MAX: SÍ 1 golpe(s) aéreo (uppercut→súper super, dmg 76)
+negrito_nito       juggle en MAX: SÍ 1 golpe(s) aéreo (uppercut→súper super, dmg 76)
+luchador_v2        juggle en MAX: SÍ 1 golpe(s) aéreo (uppercut→súper super, dmg 76)
+gordo              juggle en MAX: SÍ 4 golpe(s) aéreo (uppercut→súper taco_infernal, dmg 67)
+don_garras         juggle en MAX: NO
+warriza_wasa       — sin launcher —
+wasita             — sin launcher —
+sofi               juggle en MAX: NO
+el_aedillo         juggle en MAX: SÍ 5 golpe(s) aéreo (rodillazo→súper super, dmg 78)
+el_paisa_sistem    juggle en MAX: SÍ 3 golpe(s) aéreo (uppercut→súper super, dmg 61)
+
+== 28/30 personajes con launcher logran juggle en MAX ==

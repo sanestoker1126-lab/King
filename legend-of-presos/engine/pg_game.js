@@ -79,7 +79,10 @@
   // Rivales que entran SOLOS (reemplazos, torneo): jugables que no son provisionales ni ocultos.
   function autoPool(){ return G.roster.characters.filter(function(c){ return c.status==="playable" && !c.provisional && !c.hidden; }).map(function(c){ return c.id; }); }
   function copyBattle(b, extra){ var o = { difficulty:b.difficulty, stage:b.stage, boss:!!b.boss, midBoss:!!b.midBoss, tag:b.tag||null,
-      mods:b.mods ? { hp:b.mods.hp||1, damage:b.mods.damage||1 } : null, unlocks:b.unlocks||null };
+      mods:b.mods ? { hp:b.mods.hp||1, damage:b.mods.damage||1 } : null, unlocks:b.unlocks||null, memberMods:null };
+    // memberMods (Equipos): modificador de UN integrante del equipo rival, por id (el jefe final: solo Garravas con más vida/daño)
+    if (b.memberMods){ o.memberMods = {}; Object.keys(b.memberMods).forEach(function(id){ var x = b.memberMods[id] || {};
+      o.memberMods[resolveAlias(id)] = { hp:x.hp||1, damage:x.damage||1 }; }); }
     return Object.assign(o, extra); }
   function arcadeStart(p){
     var C = G.campaigns.arcade;
@@ -91,8 +94,10 @@
         var opp = b.opponentTeam.map(resolveAlias);
         // sub-jefe: si está en tu equipo, esa batalla no se juega (no se reemplaza a una sub-jefa por otro con doble vida)
         if (b.midBoss && opp.some(function(id){ return yourTeam.indexOf(id) >= 0; })) return;
+        // el JEFE (integrante con memberMods) nunca se reemplaza: si también está en tu equipo se pelea el espejo
+        var keep = b.memberMods ? Object.keys(b.memberMods).map(resolveAlias) : [];
         for (var i=0; i<opp.length; i++){
-          if (yourTeam.indexOf(opp[i]) >= 0){
+          if (yourTeam.indexOf(opp[i]) >= 0 && keep.indexOf(opp[i]) < 0){
             var repl = available.find(function(a){ return opp.indexOf(a) < 0; });
             if (repl) opp[i] = repl;
           }
@@ -104,7 +109,9 @@
       return;
     }
     var you = resolveAlias(p && p.yourId);
-    var battles = C.solo.filter(function(b){ return resolveAlias(b.opponent) !== you; }).map(function(b){ return copyBattle(b, { opponent:resolveAlias(b.opponent) }); });
+    // se salta la batalla cuyo rival eres tú (p. ej. la sub-jefa si ya la juegas), SALVO el jefe final: el Arcade nunca termina
+    // sin su jefe; si elegiste a Garravas, el jefe final es el espejo (antes esa batalla desaparecía y el Arcade acababa en Nadia)
+    var battles = C.solo.filter(function(b){ return b.boss || resolveAlias(b.opponent) !== you; }).map(function(b){ return copyBattle(b, { opponent:resolveAlias(b.opponent) }); });
     G.arcadeCampaign = { isTeam:false, yourId:you, battles:battles, idx:0, length:battles.length, status:"active" };
     arcadeNextMatch();
   }
@@ -119,7 +126,12 @@
     s.difficulty=b.difficulty; s.stage=b.stage % G.stages.stages.length;
     s.tag="Combate "+(A.idx+1)+" de "+A.length+(b.boss ? " · JEFE FINAL" : b.tag ? " · " + b.tag : "");
     s.track=(b.boss || b.midBoss) ? "boss" : null;
-    s.mods=b.mods ? [ { hp:1, damage:1 }, b.mods ] : null;   // el rival (lado 1) con la vida/daño de la batalla
+    s.mods=null;   // el rival (lado 1) con la vida/daño de la batalla; en Equipos, además, el de cada integrante (memberMods)
+    if (b.mods || (A.isTeam && b.memberMods)){
+      var side = { hp:b.mods ? b.mods.hp : 1, damage:b.mods ? b.mods.damage : 1 };
+      if (A.isTeam && b.memberMods) side.members = b.opponentTeam.map(function(id){ return b.memberMods[id] || null; });
+      s.mods = [ { hp:1, damage:1 }, side ];
+    }
     G.fe.vs();
   }
   function arcadeEnding(){

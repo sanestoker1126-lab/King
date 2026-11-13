@@ -155,7 +155,7 @@
       const out = [];
       const add = id => { if (id && out.indexOf(id) < 0) out.push(id); };
       for (const mv of Object.values(def.moves || {})){
-        add(mv.hitAnim);
+        add(mv.hitAnim); add(mv.hitAnimVestia);   // hitAnimVestia: chispa del move cuando el luchador está transformado (Sofi)
         if (mv.spawns){ add(mv.spawns.anim); add(mv.spawns.hitAnim); }
         for (const e of (mv.fx || [])) add(e.anim);
       }

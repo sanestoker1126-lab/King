@@ -1146,7 +1146,7 @@
         3
       ],
       "frames": {
-        "startup": 12,
+        "startup": 10,
         "active": 4,
         "recovery": 20
       },
@@ -1161,14 +1161,15 @@
       "special": true,
       "meterCost": 0,
       "cancelFrames": [
-        13,
-        18
+        11,
+        16
       ],
       "cancelInto": [
         "super"
       ],
       "name": "Patada de Talón con Giro",
       "nameSrc": "paquete:LEEME",
+      "_tune": "2026-11-06: startup 12→10 para que el jab (punch) pueda enlazarlo en combo (medido con tools/qa_20261106/combo_audit.cjs); igual de rápido que la embestida. cancelFrames 13-18→11-16 acorde. DISEÑO, TODO: VERIFICAR jugando.",
       "hitbox": {
         "x": 42,
         "y": -112,

@@ -713,7 +713,7 @@
       "hitstop": 8,
       "pushHit": 3,
       "pushBlock": 3,
-      "pushY": 0,
+      "pushY": -11,
       "special": true,
       "meterCost": 0,
       "cancelInto": [
@@ -725,7 +725,9 @@
       ],
       "name": "Germinación",
       "nameSrc": "ref:PGPersonajes",
-      "_doc": "ref special_2: golpe BAJO (no antiaereo). TODO: VERIFICAR frame-data jugando (diseno)"
+      "_doc": "ref special_2: golpe BAJO (no antiaereo). TODO: VERIFICAR frame-data jugando (diseno)",
+      "launcher": true,
+      "_tune": "2026-11-07: habilita juggle (sistema KOF 2002). El gancho ascendente lanza al rival (launcher+pushY); el súper lo remata en el aire en modo MAX. Medido con tools/qa_20261106/juggle_roster.cjs. DISEÑO, TODO: VERIFICAR jugando."
     },
     "flying_special": {
       "clip": "atk_sp1",
@@ -788,11 +790,12 @@
       "pushHit": 4,
       "pushBlock": 3,
       "pushY": 0,
-      "launcher": true,
       "special": true,
       "meterCost": 0,
       "name": "Barrida Sísmica",
-      "nameSrc": "generico"
+      "nameSrc": "generico",
+      "knockdown": true,
+      "_tune": "2026-11-07: era launcher con pushY=0 (no lanzaba al aire); una barrida DERRIBA, no lanza -> knockdown. El launcher de semillas es ahora uppercut (Germinación)."
     },
     "super": {
       "clip": "atk_super",

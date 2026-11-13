@@ -82,6 +82,21 @@
       },
       "source": "Reempaquetado determinista desde clips de combate existentes; rivales y FX separados.",
       "anchorsFile": "regente_combo_sequences_anchors.json"
+    },
+    "reacciones": {
+      "file": "regente_reacciones.png",
+      "columns": 8,
+      "rows": 1,
+      "cell": {
+        "w": 108,
+        "h": 116
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.956897
+      },
+      "sha256": "95c6e23f8e0a89b6e76fd8d84558fc8db000b319d75fcbecefe5714c746f9f98",
+      "source": "Hoja de reacciones del prototipo de la raíz del repo (public/assets/characters/regente/atlas_02.webp, sha256 a5194f701d969d0643d734e76efb7d5f648fabc35c425f01efa7da8a7c7f06b0); recortada y escalada por tools/build_reacciones_prototipo.py."
     }
   },
   "_hitbox_status": "TODO_VERIFICAR — clips/estados MEDIDOS del manifest de referencia; hitboxes, daño y timings son DISEÑO inicial (ajustar jugando en Android).",
@@ -134,25 +149,61 @@
       ]
     },
     "damage_fall": {
-      "atlas": "base",
-      "fps": 10,
       "loop": false,
+      "atlas": "reacciones",
+      "fps": 10,
       "frames": [
-        49,
-        49,
-        50,
-        50
-      ]
+        0,
+        0,
+        1,
+        2
+      ],
+      "_src": [
+        "1.0",
+        "1.0",
+        "1.1",
+        "2.2"
+      ],
+      "_antes": {
+        "atlas": "base",
+        "frames": [
+          49,
+          49,
+          50,
+          50
+        ],
+        "fps": 10
+      }
     },
     "recovery_pose": {
-      "atlas": "base",
-      "fps": 8,
       "loop": false,
+      "atlas": "reacciones",
+      "fps": 16,
       "frames": [
-        55,
-        51,
-        57
-      ]
+        1,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "_src": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4",
+        "1.5",
+        "1.6"
+      ],
+      "_antes": {
+        "atlas": "base",
+        "frames": [
+          55,
+          51,
+          57
+        ],
+        "fps": 8
+      }
     },
     "front_grab": {
       "atlas": "base",
@@ -320,14 +371,23 @@
       "_doc": "tools/build_hurt_clips.py: frames de pie iniciales de damage_fall (alto>=0.72*idle)"
     },
     "down": {
-      "atlas": "base",
-      "frames": [
-        50
-      ],
+      "atlas": "reacciones",
       "fps": 10,
+      "frames": [
+        2
+      ],
       "hold": true,
       "lying": true,
-      "_doc": "tools/build_knockdown_clips.py: frame más bajo de damage_fall/recovery_pose (alto 48, idle 111). VERIFICAR a ojo."
+      "_src": [
+        "2.2"
+      ],
+      "_antes": {
+        "atlas": "base",
+        "frames": [
+          50
+        ],
+        "fps": 10
+      }
     },
     "hidden_special": {
       "atlas": "hidden_special",
@@ -628,6 +688,24 @@
             41
           ]
         }
+      ]
+    },
+    "ko_fall": {
+      "atlas": "reacciones",
+      "fps": 8,
+      "frames": [
+        0,
+        1,
+        3,
+        2
+      ],
+      "loop": false,
+      "hold": true,
+      "_src": [
+        "1.0",
+        "1.1",
+        "1.2",
+        "2.2"
       ]
     }
   },
@@ -1203,5 +1281,6 @@
       }
     }
   },
-  "pivotMode": "frame_bottom_center"
+  "pivotMode": "frame_bottom_center",
+  "_reacciones": "2026-11-13: clips damage_fall, down, recovery_pose, ko_fall con el arte de reacciones del prototipo (atlas `reacciones`), generados por tools/build_reacciones_prototipo.py (no editar a mano). `_antes` guarda el clip anterior. recovery_pose/damage_fall conservan su duración -> simulación idéntica. Elección de poses = TODO: VERIFICAR."
 }

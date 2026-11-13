@@ -1,5 +1,5 @@
 {
- "_doc": "Libreria de FX (generada por tools/pack_fx_library.py; NO editar a mano: editar tools/specs/fx_library_spec.json). frames: [x,y,w,h,k,srcW,srcH] (rect en pagina, escala de textura, tamano fuente). anims: frames + fps + loop + scales (px logicos por px de textura, POR frame) + anchors por frame. Entradas <jefe>_fx*: tools/build_boss_chars.py (volver a correrlo con --data-only después de pack_fx_library.py). Entradas esp_<id>*: tools/build_especiales_hojas.py (volver a correrlo después de pack_fx_library.py).",
+ "_doc": "Libreria de FX (generada por tools/pack_fx_library.py; NO editar a mano: editar tools/specs/fx_library_spec.json). frames: [x,y,w,h,k,srcW,srcH] (rect en pagina, escala de textura, tamano fuente). anims: frames + fps + loop + scales (px logicos por px de textura, POR frame) + anchors por frame. Entradas <jefe>_fx*: tools/build_boss_chars.py (volver a correrlo con --data-only después de pack_fx_library.py). Entradas esp_<id>*: tools/build_especiales_hojas.py (volver a correrlo después de pack_fx_library.py). Entradas sofi_vestia_fx / vestia_*: tools/build_sofi_vestia_real.py (volver a correrlo después de pack_fx_library.py).",
  "version": 1,
  "libs": {
   "tijeras": {
@@ -6199,6 +6199,236 @@
      95
     ]
    }
+  },
+  "sofi_vestia_fx": {
+   "image": "assets/fx/sofi_vestia_fx.webp",
+   "runtime": true,
+   "size": [
+    1024,
+    1294
+   ],
+   "source": "POCHECHE_FX_PURPURA_CARMESI (dentro de sources/entregas_2026-11-08/POCHECHE_ATLAS_MASTER_GAME_READY.zip)",
+   "owner": "sofi",
+   "confidence": "ALTA",
+   "evidence": "Mismo ZIP que el atlas del Modo Vestía; el usuario: 'Este atlas es de Sofía modo vestía'. Garras morado/carmesí = Vestía. Lo agrega tools/build_sofi_vestia_real.py (volver a correrlo después de pack_fx_library.py).",
+   "frames": {
+    "f25": [
+     0,
+     0,
+     236,
+     184,
+     1.0,
+     236,
+     184
+    ],
+    "f26": [
+     238,
+     0,
+     236,
+     190,
+     1.0,
+     236,
+     190
+    ],
+    "f00": [
+     476,
+     0,
+     236,
+     207,
+     1.0,
+     236,
+     207
+    ],
+    "f01": [
+     714,
+     0,
+     236,
+     199,
+     1.0,
+     236,
+     199
+    ],
+    "f02": [
+     0,
+     209,
+     236,
+     190,
+     1.0,
+     236,
+     190
+    ],
+    "f03": [
+     238,
+     209,
+     236,
+     157,
+     1.0,
+     236,
+     157
+    ],
+    "f04": [
+     476,
+     209,
+     236,
+     167,
+     1.0,
+     236,
+     167
+    ],
+    "f08": [
+     714,
+     209,
+     236,
+     233,
+     1.0,
+     236,
+     233
+    ],
+    "f09": [
+     0,
+     444,
+     219,
+     236,
+     1.0,
+     219,
+     236
+    ],
+    "f10": [
+     221,
+     444,
+     236,
+     196,
+     1.0,
+     236,
+     196
+    ],
+    "f12": [
+     459,
+     444,
+     236,
+     181,
+     1.0,
+     236,
+     181
+    ],
+    "f05": [
+     697,
+     444,
+     236,
+     190,
+     1.0,
+     236,
+     190
+    ],
+    "f06": [
+     0,
+     682,
+     236,
+     186,
+     1.0,
+     236,
+     186
+    ],
+    "f07": [
+     238,
+     682,
+     227,
+     236,
+     1.0,
+     227,
+     236
+    ],
+    "f17": [
+     467,
+     682,
+     236,
+     126,
+     1.0,
+     236,
+     126
+    ],
+    "f18": [
+     705,
+     682,
+     236,
+     95,
+     1.0,
+     236,
+     95
+    ],
+    "f19": [
+     0,
+     920,
+     236,
+     141,
+     1.0,
+     236,
+     141
+    ],
+    "f20": [
+     238,
+     920,
+     236,
+     141,
+     1.0,
+     236,
+     141
+    ],
+    "f21": [
+     476,
+     920,
+     236,
+     205,
+     1.0,
+     236,
+     205
+    ],
+    "f22": [
+     714,
+     920,
+     236,
+     170,
+     1.0,
+     236,
+     170
+    ],
+    "f23": [
+     0,
+     1127,
+     236,
+     145,
+     1.0,
+     236,
+     145
+    ],
+    "f24": [
+     238,
+     1127,
+     236,
+     142,
+     1.0,
+     236,
+     142
+    ],
+    "f27": [
+     476,
+     1127,
+     236,
+     160,
+     1.0,
+     236,
+     160
+    ],
+    "f28": [
+     714,
+     1127,
+     236,
+     167,
+     1.0,
+     236,
+     167
+    ]
+   }
   }
  },
  "anims": {
@@ -8802,6 +9032,228 @@
    ],
    "use": "proyectil",
    "h": 74
+  },
+  "vestia_impacto": {
+   "lib": "sofi_vestia_fx",
+   "frames": [
+    "f25",
+    "f26"
+   ],
+   "fps": 30,
+   "loop": false,
+   "scales": [
+    0.39863,
+    0.42105
+   ],
+   "anchors": [
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ]
+   ],
+   "use": "hitspark",
+   "h": 80
+  },
+  "vestia_zarpazo": {
+   "lib": "sofi_vestia_fx",
+   "frames": [
+    "f00",
+    "f01",
+    "f02",
+    "f03",
+    "f04"
+   ],
+   "fps": 30,
+   "loop": false,
+   "scales": [
+    0.45663,
+    0.48707,
+    0.52454,
+    0.63694,
+    0.59713
+   ],
+   "anchors": [
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ]
+   ],
+   "use": "hitspark",
+   "h": 100
+  },
+  "vestia_garras": {
+   "lib": "sofi_vestia_fx",
+   "frames": [
+    "f08",
+    "f09",
+    "f10",
+    "f12"
+   ],
+   "fps": 24,
+   "loop": false,
+   "scales": [
+    0.38937,
+    0.43673,
+    0.55249,
+    0.60773
+   ],
+   "anchors": [
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ]
+   ],
+   "use": "hitspark",
+   "h": 110
+  },
+  "vestia_cruz": {
+   "lib": "sofi_vestia_fx",
+   "frames": [
+    "f05",
+    "f06",
+    "f07"
+   ],
+   "fps": 24,
+   "loop": false,
+   "scales": [
+    0.50097,
+    0.44138,
+    0.42373
+   ],
+   "anchors": [
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ]
+   ],
+   "use": "hitspark",
+   "h": 100
+  },
+  "vestia_barrido": {
+   "lib": "sofi_vestia_fx",
+   "frames": [
+    "f17",
+    "f18",
+    "f19",
+    "f20"
+   ],
+   "fps": 24,
+   "loop": false,
+   "scales": [
+    0.26746,
+    0.30593,
+    0.3554,
+    0.49645
+   ],
+   "anchors": [
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ]
+   ],
+   "use": "hitspark",
+   "h": 70
+  },
+  "vestia_estallido": {
+   "lib": "sofi_vestia_fx",
+   "frames": [
+    "f21",
+    "f22",
+    "f23",
+    "f24",
+    "f27",
+    "f28"
+   ],
+   "fps": 20,
+   "loop": false,
+   "scales": [
+    0.56363,
+    0.71667,
+    0.8809,
+    1.05634,
+    0.72787,
+    0.77639
+   ],
+   "anchors": [
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     0.5
+    ]
+   ],
+   "use": "hitspark",
+   "h": 150
   }
  },
  "hitsparks": {

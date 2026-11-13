@@ -1,0 +1,14 @@
+# Entregas del usuario del 2026-11-08 (chat). Intactas; SHA-256 calculado al recibirlas.
+128671ee7daa8a3dc5899fef528e6f027a24153bb5c9f5d7ef10f60c2f9246ba  POCHECHE_ATLAS_MASTER_GAME_READY.zip
+#   El usuario: "Este atlas es de Sofía modo vestía solo que está equivocado el nombre". 103 frames de personaje + 43 FX,
+#   celdas 256 RGBA. USADO por tools/build_sofi_vestia_real.py -> assets/combat/sofi/sofi_vestia_real.png (moveset *_vestia).
+ef8ae78647fa7f81dcac39c183cee5e36ce4681db48a484237534779438fe02a  sofi_vestia_36f_transparente.png
+#   Misma transformación de 36 frames que sources/entregas_2026-11-07/sofi_modo_vestia_36f.png, ya sin fondo, 760x760.
+#   NO usado: medido, en los frames 4-34 ~50 % del cuerpo tiene alfa < 230 y el traje negro 60-97 % (el recorte quitó el
+#   negro y se llevó el traje): en el juego se vería el fondo a través de Sofi. Además es de menor resolución (127 px/celda
+#   vs 209 de la hoja original). Se mantiene el recorte de la hoja de alta resolución (tools/build_vestia_sofi.py).
+63e2be99521f53f99272d65b622dd8f6fb6048ec59101d0eb3bb9b8405652366  sofi_vestia_9f_transparente.png
+#   Frames 1-9 de esa misma transformación a 240x272 px por celda. NO usado (mismo recorte semitransparente).
+29774f18dd611e1e653c712abd24eacc2ff2e359d7062b9451befb50a2fb8929  sofi_vestia_36f_resto.png
+#   Llegó dos veces. Su alfa es casi el complemento del de sofi_vestia_36f_transparente.png (correlación 0.76 con 255-alfa):
+#   es lo que el recorte quitó (bordes, aura). NO usado.

@@ -94,13 +94,14 @@
     }
     _spriteFor(i, f){
       const ch=this.chars[i]; let clip=ch.clips[f.clip]?f.clip:"idle";
+      if(f.transformed && ch.clips[clip+"_vestia"]) clip=clip+"_vestia";   // Modo Vestía persistente: moveset morado
       const def=ch.def.clips[clip]||ch.def.clips.idle;
       const idx=PGSim.clipFrameIndex(def, f.clipTime);
       const tex=(ch.clips[clip]||ch.clips.idle)[idx];
       const spr=this.sprites[i];
       if(tex){ spr.texture=tex; const an=tex.pgAnchor||ch.anchor; if(an) spr.anchor.set(an.x,an.y); } // pie en el suelo (baseline)
       spr.x=f.x; spr.y=f.y;
-      const rs=this.rscale[i]||1;
+      const rs=(this.rscale[i]||1)*(f.transformed?1.15:1);   // Modo Vestía: ~1.15x más imponente (la hurtbox también crece en pg_sim)
       spr.scale.x=(f.facing>=0?rs:-rs); spr.scale.y=rs;
       // tinte: MAX dorado · golpe = parpadeo rojo · guardia rota = parpadeo blanco-azulado (se distingue del golpe)
       spr.tint = f.maxMode ? 0xffe0a0 : (f.state==="HITSTUN" && (f.stateFrame%4<2)) ? 0xff8888 : (f.state==="GUARD_CRUSH" && (f.stateFrame%6<3)) ? 0xa8d8ff : 0xffffff;
