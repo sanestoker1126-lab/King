@@ -26,6 +26,10 @@ Léelo primero en un chat nuevo. Detalle completo en `docs/CHANGELOG.md` y `docs
    - Pendiente del usuario: dónde están las versiones de Manus y GPT, si no son el prototipo de la raíz.
    - Pendiente técnico: cortar a mano Semillas y las filas 6 a 9 de Tobi.
 
+4. **Conectar y recibir (2026-11-13).** El golpeado vibra durante la pausa de impacto (`render.hitShake` en `data/config.json`, solo dibujo). Auditoría de poses de los 32 en `qa/entrega_20261106/auditoria_golpes_y_reacciones.txt`.
+   - Pendiente del usuario: quién es el personaje del ZIP `sources/entregas_2026-11-13/ATLAS_MAESTRO_PERSONAJE_COMPLEMENTARIO.zip` y quién el del overol naranja (falta su atlas).
+   - Pendiente del usuario: la historia de la Toxi Familia (integrantes y trama). No hay nada en el repo y no se debe inventar.
+
 ## Cómo probar (herramientas de este repo)
 ```bash
 cd legend-of-presos

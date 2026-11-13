@@ -128,7 +128,13 @@
  "render": {
   "targetFrameH": 180,
   "_doc": "Alto objetivo en pantalla (px lógicos) para normalizar atlas de celdas distintas (120, 213, ...). Cada char puede sobreescribir con renderScale en su char.json. roundFade: frames del fundido a negro al terminar la secuencia de K.O. y del regreso al empezar la ronda siguiente (solo dibujo).",
-  "roundFade": 18
+  "roundFade": 18,
+  "hitShake": {
+   "px": 3,
+   "blockPx": 1.5,
+   "fade": 4,
+   "_doc": "Vibración del luchador GOLPEADO durante la pausa de impacto (solo dibujo, engine/pg_render.js): px = desplazamiento lateral alterno por frame si recibió el golpe (golpe, lanzado, K.O., guardia rota); blockPx = si lo bloqueó; fade = últimos frames de la pausa en que la vibración se apaga. Se multiplica por la calidad de efectos (con 'reducir movimiento' baja). 0 = apagado. Valores de DISEÑO, TODO: VERIFICAR jugando."
+  }
  },
  "hit": {
   "_doc": "Resolución de impactos (antes eran números escritos en pg_sim.js). Desde BUILD-14 el motor RESPETA lo declarado en cada move: daño = damage del move (regionDamage.enabled=false; antes multiplicaba ×1.3 todo golpe con caja alta —todos los puños y proyectiles— y ×0.9 las patadas bajas, así que el daño real no coincidía con el que se ve en Comandos) y hitstop = hitstop del move (useMoveHitstop=true; antes se ignoraba y se usaba la tabla por tipo). Para volver al comportamiento anterior: regionDamage.enabled=true y useMoveHitstop=false. La tabla hitstop/shake/flashColor por tipo sigue usándose para temblor, destello y para moves sin hitstop. cancelOnContact=true: un golpe solo se cancela en otro (normal→especial→súper) si CONECTÓ (golpe o guardia), como en KOF; al aire no se cancela. koHitstop: congelamiento del golpe final (K.O.), más largo que cualquier golpe: el impacto que gana la ronda se SIENTE (pilar Peso). koFlash: destello blanco de pantalla en el golpe final (0..1; se apaga con cinematic.flashDecay).",

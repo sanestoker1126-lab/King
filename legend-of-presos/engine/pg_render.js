@@ -101,6 +101,12 @@
       const spr=this.sprites[i];
       if(tex){ spr.texture=tex; const an=tex.pgAnchor||ch.anchor; if(an) spr.anchor.set(an.x,an.y); } // pie en el suelo (baseline)
       spr.x=f.x; spr.y=f.y;
+      // VIBRACIÓN DEL GOLPEADO durante la pausa de impacto (hitstop): el que recibe tiembla en su sitio, el que pega queda
+      // congelado en la pose de impacto. Solo dibujo (la x de la simulación no cambia) y determinista (paridad del hitstop).
+      const HS=this._hs, HK=this._hitShake;
+      if(HS>0 && HK){ const st=f.state;
+        const amp = (st==="HITSTUN"||st==="LAUNCHED"||st==="KO"||st==="GUARD_CRUSH") ? (HK.px||0) : st==="BLOCKSTUN" ? (HK.blockPx||0) : 0;
+        if(amp) spr.x += ((HS&1)?amp:-amp)*this.fxK*Math.min(1, HS/(HK.fade||4)); }
       const rs=(this.rscale[i]||1)*(f.transformed?1.15:1);   // Modo Vestía: ~1.15x más imponente (la hurtbox también crece en pg_sim)
       spr.scale.x=(f.facing>=0?rs:-rs); spr.scale.y=rs;
       // tinte: MAX dorado · golpe = parpadeo rojo · guardia rota = parpadeo blanco-azulado (se distingue del golpe)
@@ -118,6 +124,7 @@
       const jx=Math.sin(fr*12.9898)*43758.5453, jy=Math.sin(fr*78.233)*43758.5453;
       this.world.x = vw/2 - cam.x*eff + ((jx-Math.floor(jx))-.5)*sh*this._scale;
       this.world.y = vh/2 - cam.y*eff + ((jy-Math.floor(jy))-.5)*sh*this._scale;
+      this._hs = match.hitstop||0; this._hitShake = (match.cfg && match.cfg.render && match.cfg.render.hitShake) || null;
       for(let i=0;i<2;i++) this._spriteFor(i, match.fighters[i]);
       // el último que EMPEZÓ un ataque (normal, aéreo, especial, súper, agarre, MAX) queda delante hasta que el otro empiece
       // uno: así el golpe nunca queda tapado por el cuerpo del que lo recibe (antes J2 iba siempre encima de J1)

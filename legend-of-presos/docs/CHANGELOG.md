@@ -2,6 +2,27 @@
 
 > Los ZIP recibidos el 2026-11-06 no traían `docs/`, así que **el historial anterior no está aquí**. Si tienes el `docs/CHANGELOG.md` completo, pega esta entrada al principio del tuyo.
 
+## 2026-11-13 (2) — Conectar y recibir golpes: auditoría + vibración del golpeado
+
+**Qué ya hacía bien el motor.** La pose de impacto se dibuja exactamente durante los cuadros activos del golpe (`framePhase` en `engine/pg_sim.js`: preparación, impacto y recuperación se reparten sobre `startup/active/recovery`, sin depender de los fps del clip). No había desfase que corregir.
+
+**Auditoría de poses** (`tools/qa_20261106/audit_poses.py`, resultado en `qa/entrega_20261106/auditoria_golpes_y_reacciones.txt`). De 32 jugables:
+- 30 no tienen mareo propio y 22 no tienen caída de K.O. propia.
+- 13 reciben el golpe con una sola pose (o con el respaldo del motor).
+- 6 tienen menos de 3 poses distintas por golpe: Nadia, Garravas, Regente, Don Garras, Wasita y Warriza Wasa. En ellos el golpe es "pose neutra, impacto, pose neutra".
+- Esto solo se arregla con arte por personaje. La hoja de referencia del usuario (overol naranja) pide 5 o 6 poses por golpe.
+
+**Mejora para todos, sin arte nuevo: el golpeado vibra en la pausa de impacto.**
+- `engine/pg_render.js` (`_spriteFor`): durante el `hitstop`, el sprite del que recibió el golpe se desplaza de lado a lado en frames alternos; el que pega queda quieto en la pose de impacto.
+- Valores en `data/config.json`, `render.hitShake`: 3 px si recibió el golpe, 1.5 px si lo bloqueó, y se apaga en los últimos 4 frames. Respeta la calidad de efectos. Son de diseño: **TODO: VERIFICAR** jugando.
+- Solo dibujo: la posición de la simulación no cambia. Jugabilidad idéntica cuadro a cuadro (`determinism.cjs`, Tobi contra Nadia y Sofi contra Garravas).
+- Navegador (`tools/qa_20261106/hitshake_browser.cjs`): en 43 muestras con pausa de impacto el golpeado vibró en las 43 (máximo 3 px) y el atacante en ninguna; fuera de la pausa, nadie. No salió ningún bloqueo en la muestra, así que la variante de 1.5 px no se vio.
+
+**Recibido y sin integrar** (`sources/entregas_2026-11-13/`, con SHA-256):
+- `ATLAS_MAESTRO_PERSONAJE_COMPLEMENTARIO.zip`: 165 frames de un personaje robusto de chamarra negra y pantalón caqui. No coincide con nadie del roster y nada dice quién es.
+- Hoja de golpes del personaje de overol naranja: su atlas no está en el repo y tampoco coincide con nadie.
+- **Historia de la Toxi Familia:** no hay nada escrito en el repo. No se inventó; falta que el usuario la cuente.
+
 ## 2026-11-13 — Frames rescatados de la otra versión del repo (prototipo de la raíz)
 
 **Qué se revisó.** El usuario pidió revisar los frames de las versiones de Manus y GPT. En el repo solo hay otra versión: el prototipo de la raíz ("Puente Grande · Arcade Club", `public/assets/characters/`, 20 personajes, 41 hojas). La rama `copilot/kin-of-presos2` es `main` sin `legend-of-presos/` y no trae nada propio. Ningún archivo dice de qué herramienta salió cada versión.
