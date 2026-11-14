@@ -2,6 +2,29 @@
 
 > Los ZIP recibidos el 2026-11-06 no traían `docs/`, así que **el historial anterior no está aquí**. Si tienes el `docs/CHANGELOG.md` completo, pega esta entrada al principio del tuyo.
 
+## 2026-11-14 — Transformación de Sofi (Modo Vestía): recorte rehecho, sin cuadrícula
+
+**El usuario reportó por segunda vez que al transformarse "se ve el grill". Tenía razón y la entrega anterior estaba mal.** Yo había revisado el atlas solo sobre fondo oscuro. Sobre fondo claro `sofi_vestia.png` mostraba: las líneas grises del borde de cada celda, restos del número de la esquina, agujeros en el traje y las botas, el aura como mancha sólida con hoyos, y los cuernos del frame de abajo (ver `qa/entrega_20261106/sofi_transformacion_ANTES_fondo_claro.jpg`).
+
+**Causas, medidas en la hoja fuente:**
+- Las celdas no forman una rejilla uniforme: las líneas verticales van cada ~206 px, y las horizontales están en 8, 213, 422, 609, 803, 1004 y 1235 (filas de 186 a 230 px). El script anterior cortaba cada 209 px desde 0.
+- Borrar "los grises" por color no puede separar un brillo translúcido pintado sobre una cuadrícula, y además abría agujeros en el cuerpo.
+
+**`tools/build_vestia_sofi.py` reescrito** (idempotente, `--check`; solo usa `sources/entregas_2026-11-07/sofi_modo_vestia_36f.png`):
+- Detecta las líneas reales de celda y corta por dentro.
+- **Cuerpo opaco** con su color original: lo más oscuro que el fondo, lo brillante que no es morado/magenta, y lo que eso encierra.
+- **Huecos de fondo** (entre las piernas): solo si coinciden casi exacto con el tono del fondo y forman una zona de 60 px o más. Así las botas grises no se confunden con fondo.
+- **Aura translúcida**: su alfa es cuánto se aleja del gris del fondo, con el color despremultiplicado.
+- **Sombra y humo oscuro**: negro translúcido calculado sobre la luminancia suavizada al tamaño del cuadro, para que el patrón no pase.
+- Borra el número de la esquina y los trozos sueltos que tocan el borde (vecinos).
+- Mismo formato de salida (6x6, celda 180): el `char.json` y la simulación no cambian.
+
+**Intento descartado:** un mate por dos fondos con la hoja transparente del usuario (`sofi_vestia_36f_transparente.png`). No sirve: esa hoja no es el arte sobre negro (sus colores son los de la hoja con cuadros y su alfa depende del brillo), y la falda y el traje salían semitransparentes.
+
+**Verificación:** atlas completo sobre fondo claro y sobre rojo (`sofi_transformacion_fondo_claro.jpg`, `sofi_transformacion_fondo_rojo.jpg`) y secuencia dentro del juego frente al OXXO (`sofi_transformacion_en_juego.jpg`, `tools/qa_20261106/vestia_seq.cjs`): sin cuadrícula, líneas ni números; cuerpo sólido. Consola limpia salvo el 404 de `sw.js`.
+
+**Límites que quedan:** la sombra del piso sale punteada porque así está dibujada en la fuente; el humo de los frames 26 a 31 queda como nube gris suave; en los frames 9 a 11 las medias muestran zonas claras que no pude confirmar si son rasgaduras del arte.
+
 ## 2026-11-13 (3) — Personaje nuevo (provisional) + estructura de historia entre combates
 
 Respuestas del usuario: el ZIP es un personaje nuevo, el del overol naranja también, y de la historia "primero la estructura".

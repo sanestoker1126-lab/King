@@ -1,4 +1,4 @@
-# CONTINUAR AQUÍ — Legend of Presos (estado al 2026-11-13)
+# CONTINUAR AQUÍ — Legend of Presos (estado al 2026-11-14)
 
 Léelo primero en un chat nuevo. Detalle completo en `docs/CHANGELOG.md` y `docs/PROJECT_STATUS.md`.
 
@@ -34,6 +34,8 @@ Léelo primero en un chat nuevo. Detalle completo en `docs/CHANGELOG.md` y `docs
    - `personaje_complementario` ("Nuevo (sin nombre)"): generado por `python3 -I tools/build_personaje_complementario.py` (`--check`). Pendiente del usuario: nombre, ficha y si entra a la campaña. Para renombrarlo: `NAME` en el script (y, si cambia el id, `CID`).
    - Historia entre combates: `data/story.json` (6 capítulos de relleno, ocultos en el juego normal; se ven con `game.html?story=draft`). Pendiente del usuario: los textos de la Toxi Familia.
    - Personaje del overol naranja: confirmado como nuevo; falta su atlas en ZIP y su nombre.
+
+6. **Transformación de Sofi rehecha (2026-11-14).** `python3 -I tools/build_vestia_sofi.py` (`--check`). El recorte anterior dejaba la cuadrícula a la vista sobre fondos claros. **Regla aprendida: todo atlas recortado se revisa sobre fondo claro, oscuro y de color**, no solo oscuro.
 
 ## Cómo probar (herramientas de este repo)
 ```bash
