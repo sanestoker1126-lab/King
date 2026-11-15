@@ -845,16 +845,12 @@
       },
       "guardType": "low",
       "damage": 16,
-      "hitstun": 16,
-      "blockstun": 11,
+      "hitstun": 17,
+      "blockstun": 13,
       "hitstop": 7,
       "pushHit": 4,
       "pushBlock": 3,
       "pushY": 0,
-      "cancelWindow": [
-        1,
-        2
-      ],
       "cancelInto": [
         "heavy_kick",
         "fireball",
@@ -863,7 +859,50 @@
         "super"
       ],
       "name": "Patada",
-      "nameSrc": "generico"
+      "nameSrc": "generico",
+      "frames": {
+        "startup": 6,
+        "active": 3,
+        "recovery": 12
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "cancelFrames": [
+        7,
+        11
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1
+        ],
+        "hitstun": 16,
+        "blockstun": 11,
+        "cancelWindow": [
+          1,
+          2
+        ],
+        "damage": 16,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "cancelWindow",
+          "cancelInto",
+          "name",
+          "nameSrc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase normal:kick (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "j_punch": {
       "clip": "atk_airp",
@@ -935,8 +974,8 @@
       },
       "guardType": "high",
       "damage": 9,
-      "hitstun": 14,
-      "blockstun": 12,
+      "hitstun": 20,
+      "blockstun": 13,
       "hitstop": 6,
       "pushHit": 2,
       "pushBlock": 3,
@@ -946,14 +985,60 @@
       "cancelInto": [
         "super"
       ],
-      "cancelWindow": [
-        3,
-        4
-      ],
       "name": "Cadena de Patio",
       "nameSrc": "ref:NSP",
       "multiHit": true,
-      "_doc": "Bola girando alrededor del cuerpo: 3 golpes, cubre frente/espalda/arriba. TODO: VERIFICAR frame-data jugando (diseno)"
+      "_doc": "Bola girando alrededor del cuerpo: 3 golpes, cubre frente/espalda/arriba. TODO: VERIFICAR frame-data jugando (diseno)",
+      "frames": {
+        "startup": 8,
+        "active": 9,
+        "recovery": 16
+      },
+      "activeIdx": [
+        1,
+        3
+      ],
+      "cancelFrames": [
+        9,
+        19
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1,
+          2,
+          3
+        ],
+        "hitstun": 14,
+        "blockstun": 12,
+        "cancelWindow": [
+          3,
+          4
+        ],
+        "multiHit": true,
+        "damage": 9,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "special",
+          "meterCost",
+          "cancelInto",
+          "cancelWindow",
+          "name",
+          "nameSrc",
+          "multiHit",
+          "_doc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "uppercut": {
       "clip": "atk_upper",
@@ -969,7 +1054,7 @@
       "guardType": "high",
       "damage": 26,
       "hitstun": 18,
-      "blockstun": 12,
+      "blockstun": 11,
       "hitstop": 8,
       "pushHit": 3,
       "pushBlock": 3,
@@ -982,12 +1067,56 @@
       "cancelInto": [
         "super"
       ],
-      "cancelWindow": [
-        1,
-        4
-      ],
       "name": "Gancho Ascendente",
-      "nameSrc": "generico"
+      "nameSrc": "generico",
+      "frames": {
+        "startup": 4,
+        "active": 4,
+        "recovery": 22
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "cancelFrames": [
+        5,
+        10
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1
+        ],
+        "hitstun": 18,
+        "blockstun": 12,
+        "cancelWindow": [
+          1,
+          4
+        ],
+        "damage": 26,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "launcher",
+          "special",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "cancelInto",
+          "cancelWindow",
+          "name",
+          "nameSrc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial_lanzador (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "flying_special": {
       "clip": "atk_sp1",
@@ -1003,8 +1132,8 @@
       },
       "guardType": "high",
       "damage": 22,
-      "hitstun": 16,
-      "blockstun": 12,
+      "hitstun": 18,
+      "blockstun": 11,
       "hitstop": 8,
       "pushHit": 5,
       "pushBlock": 3,
@@ -1012,7 +1141,43 @@
       "special": true,
       "air": false,
       "name": "Golpe de Bola",
-      "nameSrc": "provisional"
+      "nameSrc": "provisional",
+      "frames": {
+        "startup": 8,
+        "active": 3,
+        "recovery": 16
+      },
+      "activeIdx": [
+        2,
+        3
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          2,
+          3
+        ],
+        "hitstun": 16,
+        "blockstun": 12,
+        "damage": 22,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "special",
+          "air",
+          "name",
+          "nameSrc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "seismic": {
       "clip": "atk_sweep",
@@ -1028,7 +1193,7 @@
       "guardType": "low",
       "damage": 18,
       "hitstun": 18,
-      "blockstun": 12,
+      "blockstun": 11,
       "hitstop": 8,
       "pushHit": 4,
       "pushBlock": 3,
@@ -1037,7 +1202,43 @@
       "special": true,
       "meterCost": 0,
       "name": "Barrida Sísmica",
-      "nameSrc": "generico"
+      "nameSrc": "generico",
+      "frames": {
+        "startup": 4,
+        "active": 4,
+        "recovery": 22
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1
+        ],
+        "hitstun": 18,
+        "blockstun": 12,
+        "damage": 18,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "launcher",
+          "special",
+          "meterCost",
+          "name",
+          "nameSrc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial_lanzador (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "super": {
       "clip": "atk_super",
@@ -1054,7 +1255,7 @@
       "guardType": "high",
       "damage": 28,
       "hitstun": 24,
-      "blockstun": 16,
+      "blockstun": 14,
       "hitstop": 14,
       "pushHit": 8,
       "pushBlock": 3,
@@ -1087,7 +1288,53 @@
           "life": 16
         }
       ],
-      "_doc": "Se enrolla y rueda como bola (avanza). TODO: VERIFICAR frame-data jugando (diseno)"
+      "_doc": "Se enrolla y rueda como bola (avanza). TODO: VERIFICAR frame-data jugando (diseno)",
+      "frames": {
+        "startup": 5,
+        "active": 6,
+        "recovery": 26
+      },
+      "activeIdx": [
+        1,
+        2
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1,
+          2
+        ],
+        "hitstun": 24,
+        "blockstun": 16,
+        "multiHit": true,
+        "damage": 28,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "super",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "cinematic",
+          "name",
+          "nameSrc",
+          "advance",
+          "advanceFrames",
+          "multiHit",
+          "launcher",
+          "fx",
+          "_doc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase super (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "throw": {
       "type": "throw",
@@ -1191,7 +1438,53 @@
           "h": 190
         },
         "fxSeparate": true
-      }
+      },
+      "frames": {
+        "startup": 8,
+        "active": 6,
+        "recovery": 30
+      },
+      "activeIdx": [
+        4,
+        5
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          4,
+          5
+        ],
+        "hitstun": 24,
+        "blockstun": 16,
+        "multiHit": true,
+        "damage": 36,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "super",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "cinematic",
+          "name",
+          "nameSrc",
+          "multiHit",
+          "launcher",
+          "fx",
+          "_doc",
+          "hidden",
+          "_hidden_frames"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase oculto (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "heavy_punch": {
       "clip": "atk_heavy",

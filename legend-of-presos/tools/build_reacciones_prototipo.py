@@ -114,6 +114,9 @@ def apply(d, cid, fname, idx, cell, png_sha, sheet_sha, orig):
         "source": "Hoja de reacciones del prototipo de la raíz del repo (public/assets/characters/%s, sha256 %s); "
                   "recortada y escalada por tools/build_reacciones_prototipo.py." % (S["sheet"], sheet_sha)}
     for clip, (frames, mode) in S["clips"].items():
+        cur = d["clips"].get(clip)
+        if cur is not None and cur.get("_entrega"):   # arte entregado después por el usuario (tools/integrar_frames_20261115.py): manda ese
+            continue
         old = orig.get(clip)
         if mode == "dur":
             n0, f0 = len(old["frames"]), old.get("fps", 10); fps = f0 * len(frames) / n0

@@ -702,10 +702,6 @@
       "cancelInto": [
         "super"
       ],
-      "cancelWindow": [
-        1,
-        4
-      ],
       "name": "Pulso Violeta",
       "nameSrc": "ref:NSP",
       "spawnFrame": 2,
@@ -742,7 +738,54 @@
           "scale": 0.7
         }
       ],
-      "_doc": "Arrojadizo de energia violeta. TODO: VERIFICAR frame-data jugando (diseno)"
+      "_doc": "Arrojadizo de energia violeta. TODO: VERIFICAR frame-data jugando (diseno)",
+      "frames": {
+        "startup": 10,
+        "active": 2,
+        "recovery": 16
+      },
+      "activeIdx": [
+        2,
+        2
+      ],
+      "cancelFrames": [
+        11,
+        22
+      ],
+      "_clipTiming": {
+        "hitFrames": [],
+        "hitstun": 16,
+        "blockstun": 12,
+        "cancelWindow": [
+          1,
+          4
+        ],
+        "damage": 22,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "special",
+          "meterCost",
+          "cancelInto",
+          "cancelWindow",
+          "name",
+          "nameSrc",
+          "spawnFrame",
+          "spawns",
+          "fx",
+          "_doc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase proyectil (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "uppercut": {
       "clip": "atk_upper",
@@ -758,7 +801,7 @@
       "guardType": "high",
       "damage": 26,
       "hitstun": 18,
-      "blockstun": 12,
+      "blockstun": 11,
       "hitstop": 8,
       "pushHit": 3,
       "pushBlock": 3,
@@ -771,12 +814,56 @@
       "cancelInto": [
         "super"
       ],
-      "cancelWindow": [
-        1,
-        4
-      ],
       "name": "Gancho Ascendente",
-      "nameSrc": "generico"
+      "nameSrc": "generico",
+      "frames": {
+        "startup": 4,
+        "active": 4,
+        "recovery": 22
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "cancelFrames": [
+        5,
+        10
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1
+        ],
+        "hitstun": 18,
+        "blockstun": 12,
+        "cancelWindow": [
+          1,
+          4
+        ],
+        "damage": 26,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "launcher",
+          "special",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "cancelInto",
+          "cancelWindow",
+          "name",
+          "nameSrc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial_lanzador (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "flying_special": {
       "clip": "atk_sp2",
@@ -792,8 +879,8 @@
       },
       "guardType": "high",
       "damage": 12,
-      "hitstun": 16,
-      "blockstun": 12,
+      "hitstun": 20,
+      "blockstun": 13,
       "hitstop": 8,
       "pushHit": 5,
       "pushBlock": 3,
@@ -819,7 +906,50 @@
           "attach": true
         }
       ],
-      "_doc": "Rafaga corta hacia adelante. TODO: VERIFICAR frame-data jugando (diseno)"
+      "_doc": "Rafaga corta hacia adelante. TODO: VERIFICAR frame-data jugando (diseno)",
+      "frames": {
+        "startup": 8,
+        "active": 6,
+        "recovery": 16
+      },
+      "activeIdx": [
+        1,
+        2
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1,
+          2
+        ],
+        "hitstun": 16,
+        "blockstun": 12,
+        "multiHit": true,
+        "damage": 12,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "special",
+          "air",
+          "name",
+          "nameSrc",
+          "advance",
+          "advanceFrames",
+          "multiHit",
+          "hitAnim",
+          "fx",
+          "_doc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "seismic": {
       "clip": "atk_sweep",
@@ -835,7 +965,7 @@
       "guardType": "low",
       "damage": 18,
       "hitstun": 18,
-      "blockstun": 12,
+      "blockstun": 11,
       "hitstop": 8,
       "pushHit": 4,
       "pushBlock": 3,
@@ -844,7 +974,43 @@
       "special": true,
       "meterCost": 0,
       "name": "Barrida Sísmica",
-      "nameSrc": "generico"
+      "nameSrc": "generico",
+      "frames": {
+        "startup": 4,
+        "active": 4,
+        "recovery": 22
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1
+        ],
+        "hitstun": 18,
+        "blockstun": 12,
+        "damage": 18,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "launcher",
+          "special",
+          "meterCost",
+          "name",
+          "nameSrc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial_lanzador (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "super": {
       "clip": "atk_super",
@@ -914,7 +1080,47 @@
           "back": true
         }
       ],
-      "_doc": "DM: media luna violeta de 3 golpes. TODO: VERIFICAR frame-data jugando (diseno)"
+      "_doc": "DM: media luna violeta de 3 golpes. TODO: VERIFICAR frame-data jugando (diseno)",
+      "frames": {
+        "startup": 5,
+        "active": 2,
+        "recovery": 24
+      },
+      "activeIdx": [
+        2,
+        2
+      ],
+      "_clipTiming": {
+        "hitFrames": [],
+        "hitstun": 24,
+        "blockstun": 16,
+        "damage": 55,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "super",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "cinematic",
+          "name",
+          "nameSrc",
+          "spawnFrame",
+          "spawns",
+          "fx",
+          "_doc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase super_proyectil (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "throw": {
       "type": "throw",
@@ -1036,7 +1242,49 @@
           "h": 144
         },
         "fxSeparate": true
-      }
+      },
+      "frames": {
+        "startup": 5,
+        "active": 2,
+        "recovery": 28
+      },
+      "activeIdx": [
+        2,
+        2
+      ],
+      "_clipTiming": {
+        "hitFrames": [],
+        "hitstun": 24,
+        "blockstun": 16,
+        "damage": 55,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "super",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "cinematic",
+          "name",
+          "nameSrc",
+          "spawnFrame",
+          "spawns",
+          "fx",
+          "_doc",
+          "hidden",
+          "_hidden_frames"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase oculto_proyectil (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "heavy_punch": {
       "clip": "atk_heavy",

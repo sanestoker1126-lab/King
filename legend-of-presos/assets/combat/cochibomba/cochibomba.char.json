@@ -753,7 +753,7 @@
       "guardType": "high",
       "damage": 22,
       "hitstun": 18,
-      "blockstun": 12,
+      "blockstun": 11,
       "hitstop": 8,
       "pushHit": 7,
       "pushBlock": 3,
@@ -762,10 +762,6 @@
       "meterCost": 0,
       "cancelInto": [
         "super"
-      ],
-      "cancelWindow": [
-        5,
-        7
       ],
       "name": "Cuerpo Pesado",
       "nameSrc": "registry",
@@ -786,7 +782,59 @@
           "back": true
         }
       ],
-      "_doc": "Embestida con todo el cuerpo (avanza). TODO: VERIFICAR frame-data jugando (diseno)"
+      "_doc": "Embestida con todo el cuerpo (avanza). TODO: VERIFICAR frame-data jugando (diseno)",
+      "frames": {
+        "startup": 8,
+        "active": 3,
+        "recovery": 16
+      },
+      "activeIdx": [
+        3,
+        5
+      ],
+      "cancelFrames": [
+        9,
+        13
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          3,
+          4,
+          5
+        ],
+        "hitstun": 18,
+        "blockstun": 12,
+        "cancelWindow": [
+          5,
+          7
+        ],
+        "damage": 22,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "special",
+          "meterCost",
+          "cancelInto",
+          "cancelWindow",
+          "name",
+          "nameSrc",
+          "advance",
+          "advanceFrames",
+          "hitAnim",
+          "fx",
+          "_doc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "uppercut": {
       "clip": "atk_upper",
@@ -802,7 +850,7 @@
       "guardType": "high",
       "damage": 26,
       "hitstun": 18,
-      "blockstun": 12,
+      "blockstun": 11,
       "hitstop": 8,
       "pushHit": 3,
       "pushBlock": 3,
@@ -815,12 +863,56 @@
       "cancelInto": [
         "super"
       ],
-      "cancelWindow": [
-        1,
-        4
-      ],
       "name": "Gancho Ascendente",
-      "nameSrc": "generico"
+      "nameSrc": "generico",
+      "frames": {
+        "startup": 4,
+        "active": 4,
+        "recovery": 22
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "cancelFrames": [
+        5,
+        10
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1
+        ],
+        "hitstun": 18,
+        "blockstun": 12,
+        "cancelWindow": [
+          1,
+          4
+        ],
+        "damage": 26,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "launcher",
+          "special",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "cancelInto",
+          "cancelWindow",
+          "name",
+          "nameSrc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial_lanzador (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "flying_special": {
       "clip": "atk_kick2",
@@ -835,8 +927,8 @@
       },
       "guardType": "high",
       "damage": 22,
-      "hitstun": 16,
-      "blockstun": 12,
+      "hitstun": 20,
+      "blockstun": 13,
       "hitstop": 8,
       "pushHit": 5,
       "pushBlock": 3,
@@ -849,7 +941,44 @@
       "advanceFrames": [
         0,
         1
-      ]
+      ],
+      "frames": {
+        "startup": 8,
+        "active": 3,
+        "recovery": 16
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1
+        ],
+        "hitstun": 16,
+        "blockstun": 12,
+        "damage": 22,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "special",
+          "air",
+          "name",
+          "nameSrc",
+          "advance",
+          "advanceFrames"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "seismic": {
       "clip": "atk_sweep",
@@ -896,7 +1025,43 @@
         "hitAnim": "impacto_tierra",
         "animH": 80
       },
-      "_doc": "Onda que corre por el suelo: se bloquea AGACHADO. TODO: VERIFICAR frame-data jugando (diseno)"
+      "_doc": "Onda que corre por el suelo: se bloquea AGACHADO. TODO: VERIFICAR frame-data jugando (diseno)",
+      "frames": {
+        "startup": 10,
+        "active": 2,
+        "recovery": 16
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "_clipTiming": {
+        "hitFrames": [],
+        "hitstun": 18,
+        "blockstun": 12,
+        "damage": 18,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "special",
+          "meterCost",
+          "name",
+          "nameSrc",
+          "spawnFrame",
+          "spawns",
+          "_doc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase proyectil (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "super": {
       "clip": "atk_super",
@@ -913,7 +1078,7 @@
       "guardType": "low",
       "damage": 55,
       "hitstun": 24,
-      "blockstun": 16,
+      "blockstun": 13,
       "hitstop": 14,
       "pushHit": 8,
       "pushBlock": 3,
@@ -960,7 +1125,50 @@
           "back": true
         }
       ],
-      "_doc": "Salta y azota el suelo: golpe BAJO en area (frente y espalda). TODO: VERIFICAR frame-data jugando (diseno)"
+      "_doc": "Salta y azota el suelo: golpe BAJO en area (frente y espalda). TODO: VERIFICAR frame-data jugando (diseno)",
+      "frames": {
+        "startup": 11,
+        "active": 4,
+        "recovery": 26
+      },
+      "activeIdx": [
+        6,
+        7
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          6,
+          7
+        ],
+        "hitstun": 24,
+        "blockstun": 16,
+        "damage": 55,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "super",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "cinematic",
+          "name",
+          "nameSrc",
+          "launcher",
+          "hitAnim",
+          "fx",
+          "_doc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase super (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "throw": {
       "type": "throw",
@@ -1009,7 +1217,7 @@
       "guardType": "high",
       "damage": 24,
       "hitstun": 18,
-      "blockstun": 12,
+      "blockstun": 11,
       "hitstop": 9,
       "pushHit": 6,
       "pushBlock": 3,
@@ -1018,10 +1226,6 @@
       "meterCost": 0,
       "cancelInto": [
         "super"
-      ],
-      "cancelWindow": [
-        5,
-        6
       ],
       "name": "Peso de la Cadena",
       "nameSrc": "provisional",
@@ -1036,7 +1240,56 @@
           "attach": true
         }
       ],
-      "_doc": "Mangual de largo alcance (el cuerpo ya trae bola y cadena; el FX agrega la estela). Nombre tomado del alias del personaje. TODO: VERIFICAR frame-data jugando (diseno)"
+      "_doc": "Mangual de largo alcance (el cuerpo ya trae bola y cadena; el FX agrega la estela). Nombre tomado del alias del personaje. TODO: VERIFICAR frame-data jugando (diseno)",
+      "frames": {
+        "startup": 8,
+        "active": 3,
+        "recovery": 16
+      },
+      "activeIdx": [
+        4,
+        5
+      ],
+      "cancelFrames": [
+        9,
+        13
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          4,
+          5
+        ],
+        "hitstun": 18,
+        "blockstun": 12,
+        "cancelWindow": [
+          5,
+          6
+        ],
+        "damage": 24,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "special",
+          "meterCost",
+          "cancelInto",
+          "cancelWindow",
+          "name",
+          "nameSrc",
+          "hitAnim",
+          "fx",
+          "_doc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "heavy_punch": {
       "clip": "atk_heavy",

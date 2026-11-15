@@ -23,6 +23,11 @@
 - Historia entre combates: estructura lista en `data/story.json`, con textos de relleno ocultos. Falta el contenido (Toxi Familia).
 - Detalle y pendientes en `CONTINUAR_AQUI.md`.
 
+## Al 2026-11-15
+- Especiales, súpers y ocultos con tiempos explícitos (`data/frame_data.json`, `tools/build_frame_data.py`): ya no quedan a favor en guardia y los ganchos invulnerables se castigan. Multi-golpes dibujados pegan cada impacto. Bug de guardia baja en multi-golpes corregido. Proyectil → súper en MAX funciona.
+- Entrega "frames trabajadas": Sentencia Firme de Wasirris (16 cuadros con FX), mareo/K.O./victoria de Tobi y Diego (`tools/integrar_frames_20261115.py`). Defecto de escala entre cuadros en algunas hojas de la fuente (ver CHANGELOG).
+- Todo es DISEÑO: **TODO: VERIFICAR jugando en Android**.
+
 ## Qué NO se pudo verificar
 - `tools/test_sim.js` (la "huella" de 197 pruebas), `tools/validate_data.py` y `tools/run_regression.sh` no venían en los ZIP y no se corrieron.
 - Android: no hay carpeta `ANDROID/` y no se compiló ningún APK.

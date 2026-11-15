@@ -1,11 +1,10 @@
-# CONTINUAR AQUÍ — Legend of Presos (estado al 2026-11-14)
+# CONTINUAR AQUÍ — Legend of Presos (estado al 2026-11-15)
 
 Léelo primero en un chat nuevo. Detalle completo en `docs/CHANGELOG.md` y `docs/PROJECT_STATUS.md`.
 
 ## Dónde está
 - Repo `sanestoker1126-lab/King`, carpeta `legend-of-presos/`.
-- Rama de trabajo: `claude/legend-presos-characters-backgrounds-p7c99g`.
-- PR #1 a `main`, abierto. Lo nuevo va en la misma rama.
+- Ramas: `claude/legend-presos-characters-backgrounds-p7c99g` (PR #1 y #2 ya fusionados a `main`; sus 3 últimos commits, del 13 y 14-11, todavía no). Lo del 2026-11-15 está en `ccr-f312e5dd-m4ve03`, que parte de esa rama.
 - Entrada real del juego: `game.html`. Necesita servidor http; en PC están `JUGAR_Windows.bat`, `JUGAR_Mac.command` y `jugar_Linux.sh`.
 - Manifiesto: `MANIFEST_SHA256.txt`. Para verificarlo: `sha256sum -c --quiet MANIFEST_SHA256.txt`.
 
@@ -37,6 +36,11 @@ Léelo primero en un chat nuevo. Detalle completo en `docs/CHANGELOG.md` y `docs
 
 6. **Transformación de Sofi rehecha (2026-11-14).** `python3 -I tools/build_vestia_sofi.py` (`--check`). El recorte anterior dejaba la cuadrícula a la vista sobre fondos claros. **Regla aprendida: todo atlas recortado se revisa sobre fondo claro, oscuro y de color**, no solo oscuro.
 
+7. **Sensación de combate + "frames trabajadas" (2026-11-15).**
+   - Tiempos de especiales/súpers/ocultos: `data/frame_data.json` → `python3 -I tools/build_frame_data.py` (`--check`, `--revert`). Los move con `_clipTiming` los escribe ese script: no editarlos a mano.
+   - Entrega del ZIP: `python3 -I tools/integrar_frames_20261115.py` y luego `build_frame_data.py`. Pendiente del usuario: corregir el tamaño que cambia entre cuadros en Diego (mareo y victoria) y Tobi (mareo y victoria, cuadros 4 y 7).
+   - Medir: `node tools/qa_20261106/feel_audit.cjs . all` (ventaja en golpe/guardia, multi-golpes, cadenas en MAX).
+
 ## Cómo probar (herramientas de este repo)
 ```bash
 cd legend-of-presos
@@ -44,6 +48,11 @@ python3 -m http.server 8000 --bind 127.0.0.1          # http://127.0.0.1:8000/ga
 python3 -I tools/build_sofi_vestia_real.py --check     # Vestía al día
 python3 -I tools/integrar_entregas_20261106.py --check # generados al día
 node tools/qa_20261106/arcade_bosses.cjs .             # campaña: jefe/sub-jefa
+python3 -I tools/build_frame_data.py --check           # tiempos de especiales al día
+python3 -I tools/integrar_frames_20261115.py --check   # entrega 2026-11-15 al día
+node tools/qa_20261106/feel_audit.cjs . all            # ventaja, multi-golpes, cadenas en MAX
+node tools/qa_20261106/combo_audit.cjs . all           # cadenas cancelInto (540/546)
+node tools/qa_20261106/frames1115_browser.cjs http://127.0.0.1:8000 <prefijo_capturas>
 node tools/qa_20261106/bosses_check.cjs <copia_anterior> .   # determinismo + mods por integrante
 node tools/qa_20261106/determinism.cjs <copia_anterior> . sofi tobi 777 9000
 node tools/qa_20261106/vestia_real.cjs http://127.0.0.1:8000 <prefijo_capturas>

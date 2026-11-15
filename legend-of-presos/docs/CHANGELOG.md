@@ -2,6 +2,43 @@
 
 > Los ZIP recibidos el 2026-11-06 no traían `docs/`, así que **el historial anterior no está aquí**. Si tienes el `docs/CHANGELOG.md` completo, pega esta entrada al principio del tuyo.
 
+## 2026-11-15 — Sensación de combate: tiempos coherentes en especiales, multi-golpes, guardia y entrega "frames trabajadas"
+
+Pedido del usuario: pulir combos, cancelaciones y que los cuadros del personaje y de los golpes concuerden, que cada impacto tenga reacción, incluyendo los especiales ocultos. Durante el trabajo llegó además el ZIP `frames_trabajadas_legend_of_presos.zip` (3 partes).
+
+### Lo que se midió primero (herramienta nueva `tools/qa_20261106/feel_audit.cjs`, simulación real)
+Por golpe de suelo: ventaja en golpe y en guardia, cuántos impactos conectan, y las cadenas que solo existen en MAX. Problemas reales encontrados:
+- **157 golpes de 25 personajes** (casi todos los especiales, súpers y ocultos) seguían el reloj del clip: un especial de 3 poses a 15 fps duraba 12 frames en total. Resultado: **148 de 267 golpes quedaban a favor (≥0) en guardia**, incluidos **21 ganchos invulnerables "seguros"** (+4 en guardia). Visualmente: preparación y recuperación de 1 frame por pose.
+- Golpes con varios impactos dibujados que pegaban una sola vez (p.ej. el puño de Personaje 08 dibuja 3 puños en las poses 2, 4 y 6).
+- **Bug de guardia**: en un golpe BAJO de varios impactos, el 2º impacto bloqueado borraba el "agachado" del defensor y el 3º entraba aunque siguiera cubriéndose abajo.
+- **Proyectil → súper en MAX no salía nunca**: el "contacto" que habilita la cancelación solo lo marcaba el cuerpo a cuerpo.
+
+### Cambios
+- **`data/frame_data.json` + `tools/build_frame_data.py`** (idempotente; `--check`; `--revert` deja los char.json byte a byte como estaban): pasa esos 157 golpes a tiempos explícitos (`frames` + `activeIdx`, el mismo sistema de los normales de `data/normals.json`). Clases de DISEÑO (TODO: VERIFICAR jugando): especial (8/3/16, −5 en guardia), especial lanzador o invulnerable (4/4/22, −14), especial bajo (7/3/18, −8), proyectil (10/2/16), súper (5/4/26, −14), oculto (5/4/30, −16). El arranque nunca baja de 2 frames por pose de preparación dibujada. hitstun/blockstun se calculan para la ventaja objetivo; derribos y lanzadores conservan su hitstun. Cada move guarda su definición anterior en `_clipTiming`. No cambian cajas, daño total, clips ni arte. Se saltan `sofi.modo_vestia` y `el_paisa_sistem.super` (los escriben sus propios generadores).
+- Impactos no seguidos (`[2,4,6]`) → **multiHit**, uno por grupo, con el daño repartido (el total no sube): Personaje 08 puño y patada, patada de Wasirris.
+- **Motor (`engine/pg_sim.js`)**:
+  - en tiempos explícitos, `hitFrames` limita qué cuadros de la fase activa pegan (`[]` = solo lanza proyectil);
+  - el proyectil se marca con `_spawned` (antes `moveFrame=-99`, que rompía los moves con tiempos explícitos);
+  - la guardia agachada se conserva durante el bloqueo y, manteniendo Guardia, se puede cambiar alta/baja (como KOF);
+  - si el proyectil conecta mientras su dueño sigue en el especial que lo lanzó, cuenta como contacto (cancelación a súper en MAX). Ventana: activo + 10 frames (`projectileCancelExtra`).
+  - La caja de depuración (F) respeta `hitFrames`.
+- `tools/qa_20261106/combo_audit.cjs`: especial ⇒ súper y X ⇒ oculto ahora se miden en MAX (es la regla del juego, `hit.superCancel="max"`). Antes se medían sin MAX y contaban como combos falsos: el gancho duraba tan poco que el súper salía DESPUÉS y alcanzaba al rival cayendo.
+
+### Entrega "frames trabajadas" (2026-11-15)
+- ZIP reconstruido de las partes 001+002+003 (la 003 llegó dos veces, idéntica). SHA-256 en `sources/entregas_2026-11-15/ORIGEN_SHA256.txt`. Se archivó **solo lo nuevo**: lo de Personaje 08 y la base/mareo/K.O./victoria de Wasirris es idéntico byte a byte a `sources/entregas_2026-11-06/`.
+- `tools/integrar_frames_20261115.py` (idempotente, `--check`; después correr `build_frame_data.py`):
+  - **Tobi y Diego Cancha**: `dizzy`, `ko_fall` y `victory_pose` de 8 cuadros (atlas `<id>_poses_extra.png`). Escala = alto del idle del atlas base / 520 px (lo que declara la entrega). Diego no tenía ni mareo ni K.O. propios. Lo anterior queda en `_prev`. `build_reacciones_prototipo.py` ya no pisa clips marcados `_entrega`.
+  - **Wasirris, Sentencia Firme**: 16 cuadros, cuerpo + capa FX compuesta (atlas `wasirris_sentencia.png`, misma escala que sus poses del 06-11). Impacto en los cuadros 8-9 (el manifest marca el 8). Caja **medida** de la palma + destello del cuadro 8 (antes 150 px de ancho: pegaba a 220 px sin moverse; ahora avanza 78 px durante el dash dibujado en el sitio y conecta hasta 160). Se quitaron los FX sueltos del clip viejo de 6 cuadros (ahora vienen dibujados). Lo anterior en `_prev`.
+- **Defecto de la fuente, no corregido**: en varias hojas el personaje cambia de tamaño entre cuadros. Diego `dizzy` 0-3 y `victory_pose` 0-3 son ~15 % más chicos que 4-7; en Tobi, `dizzy`/`victory_pose` 4 y 7 son más grandes. En bucle se nota como un "latido". Medidas en `python3 -I tools/integrar_frames_20261115.py --report`. Se arregla en el arte, no aquí.
+
+### Resultado (salida real)
+- `feel_audit.cjs`: golpes a favor en guardia **148 → 37 de 267** (los que quedan son casi todos jabs, +1 por diseño); ganchos seguros **21 → 0**; multi-golpe **18/18** conectan todos sus impactos; cadenas en MAX que combean **82/95 → 91/95**. Las 4 que faltan: barrida/embestida ⇒ súper (el rival queda tendido e intocable, como en KOF) y Mateo `tajo_descendente ⇒ ultimo_turno_ex` (lo genera un script que no está en el repo). Reporte completo en `qa/entrega_20261106/sensacion_combate_REPORTE.txt`.
+- `combo_audit.cjs` con la regla real: **540/546, exactamente las mismas cadenas que antes** (sin regresiones; 0 referencias rotas).
+- `hidden_solo.cjs`: **12/12** ocultos salen y pegan en MAX. `juggle_roster.cjs`: 28/31 (igual). `test_moves` El Paisa, `complementario_moves`, `arcade_bosses`: OK. `cpu_bouts` (Tobi, Wasirris, Diego, Nadia, Personaje 08 contra 3 rivales): todas terminan sin errores.
+- Navegador (`tools/qa_20261106/frames1115_browser.cjs`): Sentencia Firme con comando real (↓↘→↓↘→+P), 92 de daño; mareo, K.O. y victoria nuevos de Tobi y Diego. Consola: solo el 404 conocido de `sw.js`. Evidencia: `qa/entrega_20261106/wasirris_sentencia_firme_en_juego.jpg`, `tobi_diego_mareo_ko_victoria_en_juego.jpg`.
+- **La jugabilidad CAMBIA a propósito** (`determinism.cjs` ya no da idéntico): los especiales duran más y son castigables. El cambio de motor por sí solo (sin los datos nuevos) se verificó idéntico cuadro a cuadro en 6 peleas.
+- Generadores al día: `build_frame_data`, `integrar_frames_20261115`, `integrar_entregas_20261106`, `build_reacciones_prototipo`, `build_sofi_vestia_real`, `build_personaje_complementario`, `build_vestia_sofi`.
+
 ## 2026-11-14 — Transformación de Sofi (Modo Vestía): recorte rehecho, sin cuadrícula
 
 **El usuario reportó por segunda vez que al transformarse "se ve el grill". Tenía razón y la entrega anterior estaba mal.** Yo había revisado el atlas solo sobre fondo oscuro. Sobre fondo claro `sofi_vestia.png` mostraba: las líneas grises del borde de cada celda, restos del número de la esquina, agujeros en el traje y las botas, el aura como mancha sólida con hoyos, y los cuernos del frame de abajo (ver `qa/entrega_20261106/sofi_transformacion_ANTES_fondo_claro.jpg`).

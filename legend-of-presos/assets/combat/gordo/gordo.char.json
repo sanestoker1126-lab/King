@@ -738,16 +738,12 @@
       },
       "guardType": "low",
       "damage": 16,
-      "hitstun": 16,
-      "blockstun": 11,
+      "hitstun": 17,
+      "blockstun": 13,
       "hitstop": 7,
       "pushHit": 4,
       "pushBlock": 3,
       "pushY": 0,
-      "cancelWindow": [
-        1,
-        2
-      ],
       "cancelInto": [
         "heavy_kick",
         "fireball",
@@ -756,7 +752,50 @@
         "super"
       ],
       "name": "Patada",
-      "nameSrc": "generico"
+      "nameSrc": "generico",
+      "frames": {
+        "startup": 6,
+        "active": 3,
+        "recovery": 12
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "cancelFrames": [
+        7,
+        11
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1
+        ],
+        "hitstun": 16,
+        "blockstun": 11,
+        "cancelWindow": [
+          1,
+          2
+        ],
+        "damage": 16,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "cancelWindow",
+          "cancelInto",
+          "name",
+          "nameSrc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase normal:kick (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "j_punch": {
       "clip": "atk_airp",
@@ -827,7 +866,7 @@
       "guardType": "high",
       "damage": 23,
       "hitstun": 16,
-      "blockstun": 12,
+      "blockstun": 11,
       "hitstop": 8,
       "pushHit": 5,
       "pushBlock": 3,
@@ -836,10 +875,6 @@
       "meterCost": 0,
       "cancelInto": [
         "super"
-      ],
-      "cancelWindow": [
-        1,
-        4
       ],
       "name": "Carga Pesada",
       "nameSrc": "ref:PGPersonajes",
@@ -850,7 +885,57 @@
       ],
       "launcher": true,
       "hitAnim": "impacto_tierra",
-      "_doc": "ref special_1 (derriba). TODO: VERIFICAR frame-data jugando (diseno)"
+      "_doc": "ref special_1 (derriba). TODO: VERIFICAR frame-data jugando (diseno)",
+      "frames": {
+        "startup": 4,
+        "active": 4,
+        "recovery": 22
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "cancelFrames": [
+        5,
+        10
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1
+        ],
+        "hitstun": 16,
+        "blockstun": 12,
+        "cancelWindow": [
+          1,
+          4
+        ],
+        "damage": 23,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "special",
+          "meterCost",
+          "cancelInto",
+          "cancelWindow",
+          "name",
+          "nameSrc",
+          "advance",
+          "advanceFrames",
+          "launcher",
+          "hitAnim",
+          "_doc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial_lanzador (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "uppercut": {
       "clip": "atk_sp2",
@@ -866,7 +951,7 @@
       "guardType": "high",
       "damage": 26,
       "hitstun": 18,
-      "blockstun": 12,
+      "blockstun": 11,
       "hitstop": 8,
       "pushHit": 3,
       "pushBlock": 3,
@@ -879,13 +964,58 @@
       "cancelInto": [
         "super"
       ],
-      "cancelWindow": [
-        1,
-        4
-      ],
       "name": "Golpe de Patio",
       "nameSrc": "ref:PGPersonajes",
-      "_doc": "ref special_2 (dp+P, derriba). TODO: VERIFICAR frame-data jugando (diseno)"
+      "_doc": "ref special_2 (dp+P, derriba). TODO: VERIFICAR frame-data jugando (diseno)",
+      "frames": {
+        "startup": 4,
+        "active": 4,
+        "recovery": 22
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "cancelFrames": [
+        5,
+        10
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1
+        ],
+        "hitstun": 18,
+        "blockstun": 12,
+        "cancelWindow": [
+          1,
+          4
+        ],
+        "damage": 26,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "launcher",
+          "special",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "cancelInto",
+          "cancelWindow",
+          "name",
+          "nameSrc",
+          "_doc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial_lanzador (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "seismic": {
       "clip": "atk_barrigazo",
@@ -900,8 +1030,8 @@
       },
       "guardType": "high",
       "damage": 20,
-      "hitstun": 18,
-      "blockstun": 12,
+      "hitstun": 20,
+      "blockstun": 13,
       "hitstop": 8,
       "pushHit": 8,
       "pushBlock": 3,
@@ -915,7 +1045,45 @@
         0,
         1
       ],
-      "_doc": "Panzazo que avanza (estado barrigazo de la referencia). TODO: VERIFICAR frame-data jugando (diseno)"
+      "_doc": "Panzazo que avanza (estado barrigazo de la referencia). TODO: VERIFICAR frame-data jugando (diseno)",
+      "frames": {
+        "startup": 8,
+        "active": 3,
+        "recovery": 16
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1
+        ],
+        "hitstun": 18,
+        "blockstun": 12,
+        "damage": 20,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "special",
+          "meterCost",
+          "name",
+          "nameSrc",
+          "advance",
+          "advanceFrames",
+          "_doc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "super": {
       "clip": "atk_super",
@@ -932,7 +1100,7 @@
       "guardType": "high",
       "damage": 22,
       "hitstun": 24,
-      "blockstun": 16,
+      "blockstun": 14,
       "hitstop": 14,
       "pushHit": 8,
       "pushBlock": 3,
@@ -967,7 +1135,53 @@
           "back": true
         }
       ],
-      "_doc": "ref dm_1: 145/1000 -> 2x22. TODO: VERIFICAR frame-data jugando (diseno)"
+      "_doc": "ref dm_1: 145/1000 -> 2x22. TODO: VERIFICAR frame-data jugando (diseno)",
+      "frames": {
+        "startup": 5,
+        "active": 6,
+        "recovery": 26
+      },
+      "activeIdx": [
+        2,
+        3
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          2,
+          3
+        ],
+        "hitstun": 24,
+        "blockstun": 16,
+        "multiHit": true,
+        "damage": 22,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "super",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "cinematic",
+          "name",
+          "nameSrc",
+          "advance",
+          "advanceFrames",
+          "multiHit",
+          "launcher",
+          "fx",
+          "_doc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase super (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "throw": {
       "type": "throw",
@@ -1024,10 +1238,6 @@
       "cancelInto": [
         "super"
       ],
-      "cancelWindow": [
-        1,
-        4
-      ],
       "name": "Taco Volador",
       "nameSrc": "provisional",
       "_doc": "Arrojadizo: lanza un taco girando (sale en el frame 2 = brazo extendido). Dueno confirmado por el usuario. TODO: VERIFICAR frame-data jugando (diseno)",
@@ -1053,7 +1263,53 @@
         "anim": "taco_giro",
         "hitAnim": "taco_impacto",
         "animH": 50
-      }
+      },
+      "frames": {
+        "startup": 10,
+        "active": 2,
+        "recovery": 16
+      },
+      "activeIdx": [
+        2,
+        2
+      ],
+      "cancelFrames": [
+        11,
+        22
+      ],
+      "_clipTiming": {
+        "hitFrames": [],
+        "hitstun": 16,
+        "blockstun": 12,
+        "cancelWindow": [
+          1,
+          4
+        ],
+        "damage": 23,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "special",
+          "meterCost",
+          "cancelInto",
+          "cancelWindow",
+          "name",
+          "nameSrc",
+          "_doc",
+          "spawnFrame",
+          "spawns"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase proyectil (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "taco_infernal": {
       "clip": "atk_taco",
@@ -1124,7 +1380,50 @@
         "hitEvery": 6,
         "hitSlow": 0.5,
         "strength": 3
-      }
+      },
+      "frames": {
+        "startup": 5,
+        "active": 2,
+        "recovery": 24
+      },
+      "activeIdx": [
+        2,
+        2
+      ],
+      "_clipTiming": {
+        "hitFrames": [],
+        "hitstun": 24,
+        "blockstun": 16,
+        "multiHit": true,
+        "damage": 22,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "super",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "cinematic",
+          "name",
+          "nameSrc",
+          "multiHit",
+          "launcher",
+          "fx",
+          "_doc",
+          "spawnFrame",
+          "spawns"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase super_proyectil (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "caida_del_bloque": {
       "clip": "hidden_special",
@@ -1200,7 +1499,55 @@
           "h": 144
         },
         "fxSeparate": true
-      }
+      },
+      "frames": {
+        "startup": 5,
+        "active": 6,
+        "recovery": 30
+      },
+      "activeIdx": [
+        2,
+        3
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          2,
+          3
+        ],
+        "hitstun": 24,
+        "blockstun": 16,
+        "multiHit": true,
+        "damage": 36,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "super",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "cinematic",
+          "name",
+          "nameSrc",
+          "advance",
+          "advanceFrames",
+          "multiHit",
+          "launcher",
+          "fx",
+          "_doc",
+          "hidden",
+          "_hidden_frames"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase oculto (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "heavy_punch": {
       "clip": "atk_heavy",

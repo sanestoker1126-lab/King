@@ -1,0 +1,79 @@
+{
+  "id": "tobi",
+  "nombre": "Tobi",
+  "referencias": [
+    "atlases/tobi/tobi_atlas.png",
+    "hojas/tobi.jpg"
+  ],
+  "entregas": [
+    {
+      "archivo": "tobi__dizzy.png",
+      "clip": "dizzy",
+      "cuadros": 8,
+      "bucle": true,
+      "fps_sugerido": 8,
+      "cuadro_impacto": null,
+      "descripcion": [
+        "0: inicia balanceándose con la cabeza inclinada.",
+        "1: oscila hacia el lado opuesto, brazos sueltos.",
+        "2: dobla las rodillas y lleva una mano a la sien.",
+        "3: intenta recuperar el equilibrio con un paso corto.",
+        "4: contra-inclinación con brazos colgando.",
+        "5: las rodillas ceden mientras se tambalea.",
+        "6: se encorva y se sostiene la cabeza.",
+        "7: vuelve a una posición erguida de mareo para enlazar el bucle."
+      ]
+    },
+    {
+      "archivo": "tobi__ko_fall.png",
+      "clip": "ko_fall",
+      "cuadros": 8,
+      "bucle": false,
+      "fps_sugerido": 10,
+      "cuadro_impacto": null,
+      "descripcion": [
+        "0: retrocede por un impacto, torso y brazos hacia atrás.",
+        "1: pierde el equilibrio y flexiona las rodillas.",
+        "2: se dobla hacia delante con las manos buscando apoyo.",
+        "3: cae sobre una rodilla y toca el suelo con una mano.",
+        "4: vuelca de lado desde el apoyo en rodilla.",
+        "5: hombro y cadera llegan al suelo con piernas recogidas.",
+        "6: queda de lado, sostenido por el antebrazo.",
+        "7: sostiene pose final tendida de K.O. sobre un costado."
+      ]
+    },
+    {
+      "archivo": "tobi__victory_pose.png",
+      "clip": "victory_pose",
+      "cuadros": 8,
+      "bucle": false,
+      "fps_sugerido": 8,
+      "cuadro_impacto": null,
+      "descripcion": [
+        "0: se planta en guardia orgullosa.",
+        "1: lleva un puño al pecho.",
+        "2: levanta un puño en celebración contenida.",
+        "3: abre el pecho y sostiene la pose.",
+        "4: saluda con una mano abierta extendida a la altura del hombro.",
+        "5: baja el brazo y relaja los hombros.",
+        "6: posa con las manos cerca de las caderas.",
+        "7: cierra la celebración con ambos brazos alzados en V y los puños cerrados."
+      ]
+    }
+  ],
+  "parametros_tecnicos": {
+    "celda_px": [
+      640,
+      640
+    ],
+    "layout": "8 columnas × 1 fila por clip",
+    "escala_uniforme_px_por_pixel_fuente": 0.608899,
+    "altura_maxima_pose_de_pie_px": 520,
+    "baseline_apoyado_y": 600,
+    "orientacion": "derecha",
+    "fondo": "transparencia RGBA"
+  },
+  "problemas": [
+    "Se observa un fino contorno gris/rojizo alrededor de varias siluetas en las fuentes generadas. Se conservaron los bordes para no erosionar el contorno anatómico; verificar sobre fondos de juego antes de integrar."
+  ]
+}
