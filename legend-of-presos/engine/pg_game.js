@@ -316,7 +316,8 @@
   // controles encima. Sin controles visibles, siempre pantalla completa.
   function applySafe(){
     if (!G.render || !G.render.setSafe) return;
-    var shown = !document.getElementById("pad").classList.contains("hidden");
+    // con controles táctiles en uso, la arena conserva su lugar también en la pausa (antes saltaba a pantalla completa)
+    var shown = padWanted() && !!G.match;
     var ins = (shown && PGStore.get("touchArena") !== "immersive" && global.PGTouch) ? PGTouch.insets() : { l: 0, r: 0 };
     G.render.setSafe(ins.l, ins.r);
   }

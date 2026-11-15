@@ -2,6 +2,55 @@
 
 > Los ZIP recibidos el 2026-11-06 no traían `docs/`, así que **el historial anterior no está aquí**. Si tienes el `docs/CHANGELOG.md` completo, pega esta entrada al principio del tuyo.
 
+## 2026-11-15 (2) — Controles táctiles v2, IA con comandos reales, menú y selección rehechos
+
+Pedido del usuario: mejores controles para Android sin que los botones estorben, ajuste de escala, IA que haga combos y especiales, y un menú/selector más compacto, estético y fácil para empezar a pelear.
+
+### Diagnóstico (capturas reales en un Pixel 7 emulado, horizontal 863×360)
+- La arena ocupaba todo el ancho: el joystick y 7 botones en cuadrícula quedaban ENCIMA de los luchadores (un luchador contra la pared derecha quedaba bajo los botones). "Cajas" (depuración) visible para el jugador.
+- Selección: arrancaba con 1P "Personaje 08" y 2P vacío; "Pelear" bloqueado hasta elegir los dos; la fila de 10 escenarios no cabía.
+- Menú: descripciones cortadas ("Campaña · 6 co…").
+- **Bug del lector de comandos** (motor): ↘ contaba como el primer → del DP. Un ↓↘↘↘→ (mantener ↘ un par de cuadros, lo normal con el pulgar o con palanca) salía como gancho en vez del especial de cuarto de círculo. Medido: antes ↓↘↘↘→+P = `uppercut`; ahora = `fireball`; →↓↘+P sigue siendo `uppercut`.
+- **IA**: solo pulsaba el botón de atajo "especial", que siempre lanza el PRIMER especial de la lista (por eso la CPU casi solo hacía la Embestida); nunca hacía un súper por comando ni un oculto.
+
+### Controles táctiles v2 (`engine/pg_touch.js`, `styles/game.css`)
+- Joystick **flotante** (aparece donde apoyas el pulgar en la mitad izquierda; si el pulgar se pasa del borde, la base lo sigue) o fijo. 8 direcciones por sectores de 45° con **histéresis de 10°**: los ↓↘→ y →↓↘ salen limpios aunque el pulgar tiemble. Flechas que se iluminan con la dirección activa.
+- Botones en **arco estilo arcade**: Puño, Patada, Especial y Súper grandes; Guardia junto al pulgar; MAX (Puño+Especial) y ROD (Puño+Patada) pequeños arriba. Etiquetas P/K/ESP/SÚP o A/B/C/D.
+- **Deslizar**: un dedo que pasa de un botón a otro suelta el primero y pulsa el siguiente (encadenar sin levantar el pulgar). Multitáctil real (cada dedo, un botón).
+- **Arena despejada** (por defecto): el render (`setSafe` en `engine/pg_render.js`) coloca y escala la arena ENTRE el joystick y los botones, apoyada abajo; el fondo del escenario se amplía alrededor del suelo para cubrir la pantalla (`artBounds`/`zoomBack` en `engine/pg_stage.js`). Opción "Inmersiva" = pantalla completa como antes. Solo dibujo: la simulación no cambia. En la pausa la arena ya no salta de tamaño.
+- En táctil: Pausa como icono en la esquina; "Cajas" solo con teclado (F) o Entrenamiento.
+- **Opciones › Controles** (pestaña nueva): Controles táctiles, Arena, Tamaño (70–140 %), Opacidad (30–100 %), Joystick flotante/fijo, Diestro/Zurdo, Etiquetas, Zona muerta, Restablecer; con **miniatura a escala** de tu pantalla que se actualiza al cambiar cada opción. Valores nuevos en `engine/pg_store.js`.
+
+### Motor
+- `engine/pg_sim.js`: el DP exige un → **puro** al inicio (arreglo del bug de arriba). Cambia la jugabilidad a propósito: ↘↓↘ ya no es atajo de DP.
+
+### IA (`engine/pg_ai.js`, `data/config.json` ai.levels.combo/maxUse)
+- **Ejecutor de comandos**: la CPU hace los movimientos reales del personaje (↓↘→, →↓↘, medias lunas, ↓↘→↓↘→) cuadro a cuadro, leídos de SUS datos (`inputs.*`).
+- **Confirmación de golpe**: si su golpe conectó, cancela a especial (prefiere uno que derribe), y en difícil a súper o, en MAX, a oculto, respetando las reglas del juego (especial → súper solo en MAX). En guardia, a veces presiona con un especial.
+- **MAX** con media barra (difícil), **juggle** (súper/oculto sobre el rival lanzado, en MAX), **antiaéreo** con su gancho real solo contra saltos de verdad, **castigo** de golpes fallados (solo después de que la fase activa del rival pasó sin conectar), zonificación con su arrojadizo real y entradas con su embestida.
+- Medido con `tools/qa_20261106/ai_stats.cjs` (24 peleas CPU contra CPU, difícil). Antes → ahora:
+  - especiales distintos usados: 7 → 31; por pelea: 1.9 → 6.4;
+  - % de especiales que conectan (golpe o guardia): 44 % → 46 %;
+  - súpers: 2 → 10; ocultos: 0 → 8; combos de 2+ golpes por minuto: 5.7 → 9.1.
+  - El fácil casi no hace especiales (10.7/min, sin combos dirigidos).
+  - Errores en dos iteraciones, corregidos antes de entregar: antiaéreo contra rivales que la propia CPU lanzó, "entrada" evaluada cada cuadro desde lejos, y castigo durante el ARRANQUE rival (dos CPU se castigaban en bucle).
+
+### Menú principal y selección (`engine/pg_frontend.js`, capa final de `styles/game.css`)
+- Menú v3: marca + **Pelea rápida** (tu último duelo; la primera vez Tobi contra un rival al azar; nunca deshabilitada) + 6 tarjetas de modo con icono SVG. Sin textos cortados en teléfono ni en PC. Medido: del menú a pelear en **3.3 s con un toque** (incluye la pantalla VS).
+- Selección: las dos fichas empiezan llenas (Tobi + rival al azar) y **Pelear** queda listo y enfocado; tocar una carta cambia la ficha activa. Escenario en un selector compacto ‹ nombre ›. Botón "Al azar". En teléfono horizontal se ocultan la cabecera y las ayudas de teclado para dar espacio.
+
+### Pruebas (salida real)
+- `touch_browser.cjs` (toques reales por CDP en Pixel 7): arena despejada (paredes en x=157 y 616; joystick hasta 136; botones desde 643), ↓↘→+P con joystick = `fireball`, deslizar Puño→Patada OK.
+- `menu_flow_browser.cjs` (teléfono y 1280×720): Pelea rápida → combate en 3.3 s; Versus → Pelear sin elegir nada → combate; escenario cambia; salir por Pausa → menú. Consola: solo el 404 de `sw.js`.
+- `frames1115_browser.cjs`, `hidden_solo` 12/12, `combo_audit` 540/546 (sin cambios), `arcade_bosses` OK, `cpu_bouts` sin errores.
+- Evidencia: `qa/entrega_20261106/controles_menu_antes_despues.jpg`, `opciones_controles.jpg`.
+
+### No hecho / límites
+- Probado en Chromium emulando un Pixel 7, **no en un Android físico**. Sin APK.
+- En arena despejada los luchadores se ven más chicos (la arena mide ~490 de 863 px de ancho en ese teléfono); la opción Inmersiva lo revierte.
+- El "Al azar" y el escenario de Pelea rápida usan `Math.random` en el menú (fuera de la simulación determinista).
+- Las demás pantallas (Equipos, Torneo, Resultados) conservan su estilo anterior.
+
 ## 2026-11-15 — Sensación de combate: tiempos coherentes en especiales, multi-golpes, guardia y entrega "frames trabajadas"
 
 Pedido del usuario: pulir combos, cancelaciones y que los cuadros del personaje y de los golpes concuerden, que cada impacto tenga reacción, incluyendo los especiales ocultos. Durante el trabajo llegó además el ZIP `frames_trabajadas_legend_of_presos.zip` (3 partes).

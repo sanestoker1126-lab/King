@@ -456,47 +456,52 @@
 
   // ======================================================== MENÚ PRINCIPAL
   P.title = function(){ if (!this._started) return this._splash(); this._menu(); };
-  // Menú COMPACTO: un solo panel (marca + lista + una descripción). Antes la descripción salía dos veces (bajo el modo y en
-  // un panel grande aparte) y los títulos ocupaban media pantalla. "Pelea rápida" repite tu último duelo en un paso.
+  // Iconos de los modos (SVG en línea, trazo = currentColor): se ven nítidos en cualquier densidad de pantalla
+  var ICON = {
+    quick:    '<path d="M7 4l12 8-12 8z"/>',
+    arcade:   '<path d="M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M5 5H3v2a3 3 0 0 0 4 3M19 5h2v2a3 3 0 0 1-4 3M12 13v4M8 21h8M9 17h6"/>',
+    team:     '<circle cx="12" cy="7" r="3"/><circle cx="5" cy="9" r="2.4"/><circle cx="19" cy="9" r="2.4"/><path d="M6 20a6 6 0 0 1 12 0M1.5 19a4 4 0 0 1 5-3.6M22.5 19a4 4 0 0 0-5-3.6"/>',
+    torneo:   '<path d="M3 5h5v4h4M3 15h5v-4M12 9v6h4M3 19h5v-4M21 12h-5"/>',
+    versus:   '<path d="M4 4l9 9M4 4h4M4 4v4M20 4l-9 9M20 4h-4M20 4v4M6 18l3-3M18 18l-3-3M4 20l3-3M20 20l-3-3"/>',
+    training: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/>',
+    options:  '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>'
+  };
+  function icon(n){ return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICON[n] || "") + '</svg>'; }
+  // MENÚ PRINCIPAL v3: marca + PELEA RÁPIDA (un toque y estás peleando) + tarjetas de modo con icono.
+  // Pelea rápida = tu último duelo; la primera vez, Tobi (el protagonista) contra un rival al azar. Nunca está deshabilitada.
   P._menu = function(){
-    var self = this, scr = this._mount("menu", { wall: true, cls: "pg-menu" });
+    var self = this, scr = this._mount("menu", { wall: true, cls: "pg-menu pg-menu3" });
     if (this.audio) this.audio.music("menu");
-    var panel = el("div", "pg-mpanel");
-    panel.innerHTML = '<div class="pg-mbrand"><p class="pg-logo-a">LEGEND OF PRESOS</p><h1 class="pg-mlogo">El escape de Puente Grande</h1></div>';
-    var list = el("nav", "pg-modes"); list.setAttribute("aria-label", "Modos de juego");
-    var lp1 = this._char(this.store.get("lastP1")), lp2 = this._char(this.store.get("lastP2"));
-    var rows = [];
-    if (lp1 && lp2) rows.push({ m: "quick", t: "Pelea rápida", meta: lp1.name + " vs " + lp2.name, d: "Repite tu último duelo contra la CPU, con el escenario y la dificultad que usaste." });
-    ["arcade", "team", "torneo", "versus", "training", "options"].forEach(function(m){ rows.push({ m: m, t: MODES[m].t, meta: MODES[m].m, d: MODES[m].d }); });
-    var byM = {};
+    var pl = this._playable(), lp1 = this._char(this.store.get("lastP1")), lp2 = this._char(this.store.get("lastP2"));
+    var q1 = lp1 || this._char("tobi") || pl[0], q2 = lp2;
+    if (!q2 || q2.id === q1.id){ var pool = pl.filter(function(c){ return c.id !== q1.id && c.id !== "garravas"; }); q2 = pool[Math.floor(Math.random() * pool.length)] || pl[1]; }
+    var diff = DIFF[(this.store.get("difficulty") || 2) - 1];
+    var wrap = el("div", "pg-m3");
+    wrap.innerHTML =
+      '<div class="pg-m3-brand"><p class="pg-m3-kicker">LEGEND OF PRESOS</p><h1 class="pg-m3-logo">El escape de<br><span>Puente Grande</span></h1></div>' +
+      '<button class="pg-mode pg-m3-quick" data-m="quick">' + icon("quick") + '<span class="pg-m3-qt"><b>Pelea rápida</b><small>' + esc(q1.name) + ' vs ' + esc(q2.name) + ' · CPU ' + esc(diff) + '</small></span><i class="pg-m3-go">¡A pelear!</i></button>' +
+      '<nav class="pg-m3-grid" aria-label="Modos de juego"></nav><p class="pg-m3-desc"></p>';
+    scr.appendChild(wrap);
+    var grid = wrap.querySelector(".pg-m3-grid"), desc = wrap.querySelector(".pg-m3-desc");
+    var rows = ["arcade", "team", "torneo", "versus", "training", "options"].map(function(m){ return { m: m, t: MODES[m].t, meta: MODES[m].m, d: MODES[m].d }; });
+    var byM = { quick: { d: "Un toque y a pelear: " + q1.name + " contra " + q2.name + " (CPU " + diff + "). Cambia de luchadores en Arcade o Versus." } };
     rows.forEach(function(r){ byM[r.m] = r;
-      var b = el("button", "pg-mode" + (r.m === "quick" ? " quick" : ""), "<b>" + esc(r.t) + "</b><small>" + esc(r.meta) + "</small>"); b.dataset.m = r.m;
-      b.addEventListener("click", function(){
-        self._sfx("confirm"); if (self.audio) self.audio.resume();
-        if (r.m !== "quick") self.store.set("lastMode", r.m);
-        if (r.m === "options") return self.options("title");
-        if (r.m === "torneo") return self.tournamentSetup();
-        if (r.m === "team"){ self.sel.mode = "team"; return self.teamSelect(); }
-        if (r.m === "quick"){ self.sel.mode = "arcade"; self.sel.p1 = lp1.id; self.sel.p2 = lp2.id; self.sel.slot = 1; return self.vs(); }
-        self.sel.mode = r.m; self.sel.p1 = null; self.sel.p2 = null; self.sel.slot = 0; self.select();
-      });
-      list.appendChild(b);
-    });
-    var desc = el("p", "pg-mdesc");
-    panel.appendChild(list); panel.appendChild(desc); scr.appendChild(panel);
-    this._hints(scr, ["nav", "ok", "back"]);
+      var b = el("button", "pg-mode pg-m3-tile", icon(r.m) + "<b>" + esc(r.t) + "</b><small>" + esc(r.meta) + "</small>"); b.dataset.m = r.m;
+      grid.appendChild(b); });
     var rounds = this.store.get("roundsToWin") || 2;
-    var descOf = function(r){ return r.m === "arcade" ? r.d + " Al mejor de " + (rounds * 2 - 1) + "." : r.d; };
-    // alto FIJO de la descripción = el de la más larga. Antes el panel (pegado abajo) crecía o se encogía al cambiar el foco y
-    // la lista se movía bajo el cursor: el clic empezaba en un botón y terminaba en otro, y no pasaba nada.
-    var maxH = 0; rows.forEach(function(r){ desc.textContent = descOf(r); maxH = Math.max(maxH, desc.offsetHeight); });
-    desc.style.minHeight = maxH + "px"; desc.textContent = "";
-    this._onFocus = function(e){
-      var r = byM[e.dataset.m]; if (!r) return;
-      desc.textContent = descOf(r);
-    };
-    var last = this.store.get("lastMode");
-    this._armFocus(lp1 && lp2 ? '.pg-mode[data-m="quick"]' : (last ? '.pg-mode[data-m="' + last + '"]' : ".pg-mode"));
+    function go(m){
+      self._sfx("confirm"); if (self.audio) self.audio.resume();
+      if (m !== "quick") self.store.set("lastMode", m);
+      if (m === "options") return self.options("title");
+      if (m === "torneo") return self.tournamentSetup();
+      if (m === "team"){ self.sel.mode = "team"; return self.teamSelect(); }
+      if (m === "quick"){ self.sel.mode = "arcade"; self.sel.p1 = q1.id; self.sel.p2 = q2.id; self.sel.slot = 1; self.store.merge({ lastP1: q1.id, lastP2: q2.id }); return self.vs(); }
+      self.sel.mode = m; self.sel.p1 = null; self.sel.p2 = null; self.sel.slot = 0; self.select();
+    }
+    wrap.querySelectorAll(".pg-mode").forEach(function(b){ b.addEventListener("click", function(){ go(b.dataset.m); }); });
+    this._hints(scr, ["nav", "ok", "back"]);
+    this._onFocus = function(e){ var r = byM[e.dataset.m]; if (r) desc.textContent = r.m === "arcade" ? r.d + " Al mejor de " + (rounds * 2 - 1) + "." : r.d; };
+    this._armFocus('.pg-m3-quick');
   };
 
   // ======================================================== SELECCIÓN — fichas de filiación
@@ -550,8 +555,8 @@
       '<div class="pg-bar">' +
       (arcade ? '<div class="pg-field">Formato <div class="pg-seg" id="s-arcfmt"></div></div>' : '') +
       (cpu ? '<div class="pg-field">CPU <div class="pg-seg" id="s-diff"></div></div>' : '') +
-      '<div class="pg-field">Escenario <div class="pg-seg" id="s-stage"></div></div>' +
-      '<div class="pg-bar-actions"><button class="pgb ghost" id="s-back">Volver</button><button class="pgb" id="s-cmds">Comandos</button><button class="pgb prim" id="s-go" disabled>Pelear</button></div></div>';
+      '<div class="pg-field pg-stagecyc">Escenario <div class="pg-cyc" id="s-stage"><button class="pgb ghost pg-cyc-b" data-d="-1" aria-label="Escenario anterior">‹</button><span class="pg-cyc-v"></span><button class="pgb ghost pg-cyc-b" data-d="1" aria-label="Escenario siguiente">›</button></div></div>' +
+      '<div class="pg-bar-actions"><button class="pgb ghost" id="s-back">Volver</button><button class="pgb ghost" id="s-rnd" title="Luchador al azar para la ficha activa">Al azar</button><button class="pgb" id="s-cmds">Comandos</button><button class="pgb prim" id="s-go" disabled>Pelear</button></div></div>';
     scr.appendChild(main); this._hints(scr, ["nav", "ok", "back"]);
     var files = main.querySelectorAll(".pg-file");
     var prev = [new Preview(files[0].querySelector("canvas")), new Preview(files[1].querySelector("canvas"), { flip: true })];
@@ -577,8 +582,17 @@
       });
     }
     if (cpu){ this._seg(main.querySelector("#s-diff"), DIFF, this.sel.difficulty - 1, function(i){ self.sel.difficulty = i + 1; self.store.set("difficulty", i + 1); }); }
-    this._seg(main.querySelector("#s-stage"), STAGES.map(function(s){ return '<i class="pg-swatch" style="background:' + s.c + '"></i>' + s.n; }), this.sel.stage,
-      function(i){ self.sel.stage = i; self.store.set("stage", i); });
+    // escenario: selector compacto ‹ nombre › (antes una fila de 10 botones que no cabía en el teléfono)
+    var cycV = main.querySelector("#s-stage .pg-cyc-v");
+    function paintStage(){ var st = STAGES[self.sel.stage]; cycV.innerHTML = '<i class="pg-swatch" style="background:' + st.c + '"></i>' + esc(st.n) + '<small>' + (self.sel.stage + 1) + '/' + STAGES.length + '</small>'; }
+    main.querySelectorAll("#s-stage .pg-cyc-b").forEach(function(b){ b.addEventListener("click", function(){
+      self.sel.stage = (self.sel.stage + (+b.dataset.d) + STAGES.length) % STAGES.length; self.store.set("stage", self.sel.stage); self._sfx("ui"); paintStage(); }); });
+    paintStage();
+    this._click(main, "#s-rnd", function(){ self._sfx("ui");
+      var other = self.sel.slot === 0 ? self.sel.p2 : self.sel.p1, pool = playable.filter(function(c){ return c.id !== other; });
+      var c = pool[Math.floor(Math.random() * pool.length)]; if (!c) return;
+      if (arcade || self.sel.slot === 0) self.sel.p1 = c.id; else self.sel.p2 = c.id;
+      hoverId = null; centerRosterCard(cells, c.id, true); refresh(); });
     this._click(main, "#s-back", function(){ self._sfx("cancel"); self.title(); });
     this._click(main, "#s-cmds", function(){ self._sfx("ui"); var id = self.sel.p1 || playable[0].id; self.commands(id, function(){ self.select(); }); });
     this._click(main, "#s-go", function(){
@@ -608,7 +622,12 @@
     }
     this.sel.p1 = this.sel.p1 || this.store.get("lastP1"); this.sel.p2 = arcade ? null : (this.sel.p2 || this.store.get("lastP2"));
     if (this.sel.p1 && !this._char(this.sel.p1)) this.sel.p1 = null; if (this.sel.p2 && !this._char(this.sel.p2)) this.sel.p2 = null;
-    this.sel.slot = arcade ? 0 : (this.sel.p1 ? 1 : 0);
+    // nunca empezar con fichas vacías: 1P = Tobi (el protagonista) y el rival al azar. "Pelear" queda listo desde el inicio;
+    // tocar una carta cambia la ficha activa. Antes había que elegir los dos y el botón seguía bloqueado hasta entonces.
+    var inList = function(id){ return playable.some(function(c){ return c.id === id; }); };
+    if (!this.sel.p1 || !inList(this.sel.p1)) this.sel.p1 = (inList("tobi") ? "tobi" : playable[0].id);
+    if (!arcade && (!this.sel.p2 || !inList(this.sel.p2))){ var pool2 = playable.filter(function(c){ return c.id !== self.sel.p1; }); this.sel.p2 = (pool2[Math.floor(Math.random() * pool2.length)] || playable[0]).id; }
+    this.sel.slot = 0;   // la ficha activa empieza en 1P (con las dos ya llenas, "Pelear" funciona de inmediato)
     refresh();
     centerRosterCard(cells, self.sel.slot === 0 ? (self.sel.p1 || self.sel.p2) : (self.sel.p2 || self.sel.p1), false);
     this._armFocus(arcade ? (this.sel.p1 ? "#s-go" : ".pg-cell") : (this.sel.p1 && this.sel.p2 ? "#s-go" : ".pg-cell"));
@@ -988,10 +1007,15 @@
       var rt = S.get("roundTime"); opt("Tiempo por ronda", null, seg(["60 s", "99 s", "Sin límite"], rt === 60 ? 0 : rt === 99 ? 1 : 2, function(i){ S.set("roundTime", [60, 99, 5940][i]); }));
     } else if (tab === "controls"){
       // vista previa EN VIVO de los controles táctiles (los mismos de combate, montados sobre un controlador de prueba)
-      var prevBox = el("div", "pg-touchprev"); prevBox.innerHTML = '<div class="pg-touchprev-arena"><span>Arena</span></div><div class="pg-touchprev-pad"></div>';
-      function preview(){ if (!global.PGTouch || !global.PGInput) return; var host = prevBox.querySelector(".pg-touchprev-pad");
+      // pantalla EN MINIATURA: un "teléfono" del tamaño real de esta pantalla, reducido con scale (así la proporción
+      // botones/arena es la que verás en combate)
+      var prevBox = el("div", "pg-touchprev"); prevBox.innerHTML = '<div class="pg-touchprev-scr"><div class="pg-touchprev-arena"><span>Arena</span></div><div class="pg-touchprev-pad"></div></div>';
+      function preview(){ if (!global.PGTouch || !global.PGInput) return;
+        var scrn = prevBox.querySelector(".pg-touchprev-scr"), host = prevBox.querySelector(".pg-touchprev-pad"), W = window.innerWidth, H = window.innerHeight;
+        var k = Math.min(1, (prevBox.clientWidth || 600) / W); scrn.style.width = W + "px"; scrn.style.height = H + "px"; scrn.style.transform = "scale(" + k + ")";
+        prevBox.style.height = Math.round(H * k) + "px";
         var ins = PGTouch.mount(host, new PGInput.Controller({}), { preview: true }).insets(), ar = prevBox.querySelector(".pg-touchprev-arena");
-        var imm = S.get("touchArena") === "immersive"; ar.style.left = (imm ? 0 : ins.l) + "px"; ar.style.right = (imm ? 0 : ins.r) + "px"; }
+        var imm = S.get("touchArena") === "immersive"; ar.style.left = (imm ? 0 : ins.l / k) + "px"; ar.style.right = (imm ? 0 : ins.r / k) + "px"; }
       function pct(k, min, max, def, apply){ var w = el("div", "pg-range"), inp = el("input"), out = el("output"); inp.type = "range"; inp.min = min; inp.max = max; inp.step = 5;
         inp.value = Math.round((S.get(k) == null ? def : S.get(k)) * 100); out.textContent = inp.value + " %"; inp.setAttribute("aria-label", k);
         inp.addEventListener("input", function(){ S.set(k, inp.value / 100); out.textContent = inp.value + " %"; if (apply) apply(); });

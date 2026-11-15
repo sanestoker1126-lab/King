@@ -75,7 +75,9 @@
         var z = zone.getBoundingClientRect(), r = R;
         return { x: lefty ? z.right - r - 18 : z.left + r + 18, y: z.bottom - r - 18 };
       }
-      function place(x, y) { var z = zone.getBoundingClientRect(); base.style.left = (x - z.left) + "px"; base.style.top = (y - z.top) + "px"; cx = x; cy = y; }
+      // (k = escala visual del contenedor: 1 en combate; < 1 en la miniatura de Opciones, que está reducida con transform)
+      function place(x, y) { var z = zone.getBoundingClientRect(), k = (z.width / (zone.offsetWidth || z.width)) || 1;
+        base.style.left = ((x - z.left) / k) + "px"; base.style.top = ((y - z.top) / k) + "px"; cx = x; cy = y; }
       function rest() { R = radius(); var h = home(); place(h.x, h.y); knob.style.transform = "translate(-50%,-50%)"; base.classList.remove("live"); sector = -1; setDir(controller, -1); paintArrows(-1); }
       function paintArrows(s) { base.dataset.s = s; }
       function move(px, py) {

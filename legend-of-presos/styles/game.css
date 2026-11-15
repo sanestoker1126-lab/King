@@ -679,11 +679,105 @@ button{font-family:inherit}
 @media(prefers-reduced-motion:reduce){ .pg-sel .pg-file.pg-swap .pg-booth,.pg-sel .pg-file.pg-swap .pg-dossier{animation:none} }
 
 /* vista previa de controles (Opciones › Controles): un teléfono en miniatura con la arena y los botones reales */
-.pg-touchprev{position:relative;width:min(100%,640px);aspect-ratio:2.2/1;border:2px solid var(--linea-2);border-radius:14px;overflow:hidden;
-  background:linear-gradient(#1b2633,#0d131a)}
+.pg-touchprev{position:relative;width:min(100%,560px,calc((100vh - 160px)*2.3));border:2px solid var(--linea-2);border-radius:14px;overflow:hidden;background:linear-gradient(#1b2633,#0d131a)}
+.pg-touchprev-scr{position:absolute;left:0;top:0;transform-origin:0 0}
 .pg-touchprev-arena{position:absolute;top:0;bottom:0;left:0;right:0;background:repeating-linear-gradient(90deg,#f0a83a14 0 1px,transparent 1px 32px),linear-gradient(#2b3a4c55,#2b3a4c22);
   border-left:1px dashed #f0a83a66;border-right:1px dashed #f0a83a66;display:flex;align-items:center;justify-content:center;transition:left .15s,right .15s}
 .pg-touchprev-arena span{font:700 12px var(--f-ui);letter-spacing:.2em;text-transform:uppercase;color:#f0a83a99}
 .pg-touchprev-pad{position:absolute;inset:0}
 .pg-touchprev .pgtouch .pg-stickzone,.pg-touchprev .pgtouch .pg-btns{position:absolute}
-.pg-touchprev .pgtouch .pg-stickzone{height:100%;width:44%}
+.pg-touchprev .pgtouch .pg-stickzone{height:80%;width:44%}
+
+/* =====================================================================
+   MENÚ PRINCIPAL v3 (P._menu): marca + "Pelea rápida" + 6 tarjetas de modo con icono.
+   Pensado primero para teléfono en horizontal (≈ 860×360): todo cabe sin desplazar y sin textos cortados.
+   ===================================================================== */
+.pg-menu3{display:flex;align-items:center;justify-content:center}
+.pg-m3{position:relative;z-index:1;width:min(1080px,100%);display:grid;gap:clamp(8px,1.6vh,16px) clamp(12px,2.4vw,28px);
+  grid-template-columns:minmax(230px,.85fr) 1.35fr;grid-template-areas:"brand grid" "quick grid" "desc grid";align-items:start;
+  padding:clamp(10px,2.4vh,28px) max(clamp(12px,3vw,40px),env(safe-area-inset-left,0px))}
+.pg-m3-brand{grid-area:brand}
+.pg-m3-kicker{margin:0 0 4px;font:800 11px/1 var(--f-ui);letter-spacing:.38em;color:var(--alarma)}
+.pg-m3-logo{margin:0;font:700 clamp(28px,4.6vw,58px)/.92 var(--f-disp);color:#f6efe6;text-transform:uppercase;letter-spacing:.01em;text-shadow:0 3px 0 #000a,0 0 30px #ff294f30}
+.pg-m3-logo span{color:var(--sodio);text-shadow:0 3px 0 #000a,0 0 28px #f0a83a55}
+#ui .pg-menu3 .pg-mode{all:unset;box-sizing:border-box;cursor:pointer;-webkit-tap-highlight-color:transparent}
+/* --- PELEA RÁPIDA --- */
+#ui .pg-menu3 .pg-m3-quick{grid-area:quick;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;
+  background:linear-gradient(135deg,#ffcf73 0,#f0a83a 45%,#c97a18 100%);color:#1a1004;box-shadow:0 0 0 1px #ffe2ad inset,0 6px 0 #6b4410,0 10px 24px #000a;
+  transition:transform .12s var(--ease),box-shadow .12s}
+#ui .pg-menu3 .pg-m3-quick svg{width:30px;height:30px;fill:#1a1004;stroke:#1a1004}
+.pg-m3-qt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.pg-m3-qt b{font:700 clamp(22px,2.6vw,30px)/1 var(--f-disp);text-transform:uppercase;letter-spacing:.02em}
+.pg-m3-qt small{font:600 12px/1.2 var(--f-ui);opacity:.82;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pg-m3-go{font:800 11px/1 var(--f-ui);font-style:normal;letter-spacing:.12em;text-transform:uppercase;background:#1a1004;color:var(--sodio-2);padding:7px 9px;border-radius:999px;
+  animation:pgGoPulse 1.6s ease-in-out infinite}
+@keyframes pgGoPulse{50%{transform:scale(1.06);box-shadow:0 0 0 4px #1a100422}}
+#ui .pg-menu3 .pg-m3-quick.pg-focus,#ui .pg-menu3 .pg-m3-quick:hover{transform:translateY(-2px);box-shadow:0 0 0 2px #fff6 inset,0 8px 0 #6b4410,0 14px 30px #f0a83a55}
+#ui .pg-menu3 .pg-m3-quick:active{transform:translateY(4px);box-shadow:0 0 0 1px #ffe2ad inset,0 2px 0 #6b4410,0 6px 16px #000a}
+/* --- TARJETAS DE MODO --- */
+.pg-m3-grid{grid-area:grid;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.4vw,14px);align-self:center}
+#ui .pg-menu3 .pg-m3-tile{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;min-height:clamp(92px,22vh,150px);padding:12px;border-radius:12px;
+  background:linear-gradient(160deg,#ffffff12 0,#ffffff04 40%,#0000 60%),linear-gradient(180deg,#1b2532e6,#0e141bf2);border:1px solid #3b4b5e;
+  box-shadow:0 8px 20px #0008;color:var(--tiza);overflow:hidden;transition:transform .14s var(--ease),border-color .12s,box-shadow .12s,background .12s}
+#ui .pg-menu3 .pg-m3-tile svg{position:absolute;top:10px;left:12px;width:28px;height:28px;color:var(--sodio);opacity:.92}
+#ui .pg-menu3 .pg-m3-tile::after{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,#f0a83a22,transparent 70%)}
+#ui .pg-menu3 .pg-m3-tile b{font:700 clamp(19px,2.1vw,26px)/1 var(--f-disp);text-transform:uppercase;letter-spacing:.02em}
+#ui .pg-menu3 .pg-m3-tile small{font:600 11.5px/1.25 var(--f-ui);color:var(--acero)}
+#ui .pg-menu3 .pg-m3-tile.pg-focus,#ui .pg-menu3 .pg-m3-tile:hover{transform:translateY(-3px);border-color:var(--sodio);box-shadow:0 0 0 1px var(--sodio),0 10px 26px #f0a83a2e;
+  background:linear-gradient(160deg,#f0a83a26 0,#ffffff05 45%,#0000 60%),linear-gradient(180deg,#223040f0,#10171ff5)}
+#ui .pg-menu3 .pg-m3-tile.pg-focus small,#ui .pg-menu3 .pg-m3-tile:hover small{color:var(--tiza)}
+#ui .pg-menu3 .pg-m3-tile:active{transform:translateY(1px) scale(.98)}
+#ui .pg-menu3 .pg-m3-tile[data-m="options"] svg{color:var(--acero)}
+.pg-m3-desc{grid-area:desc;margin:0;max-width:46ch;font-size:13px;line-height:1.4;color:#c9c0b6;min-height:3.9em}
+#ui .pg-menu3 .pg-hints{position:absolute;bottom:6px;right:12px}
+/* teléfono horizontal bajo */
+@media (max-height:440px){
+  .pg-m3{grid-template-columns:minmax(220px,.8fr) 1.4fr;grid-template-areas:"brand grid" "quick grid";padding-top:10px;padding-bottom:10px}
+  .pg-m3-logo{font-size:clamp(26px,7.5vh,40px)} .pg-m3-kicker{font-size:10px}
+  .pg-m3-desc,#ui .pg-menu3 .pg-hints{display:none}
+  #ui .pg-menu3 .pg-m3-tile{min-height:calc((100vh - 40px)/2 - 8px);max-height:150px;padding:10px}
+  #ui .pg-menu3 .pg-m3-quick{padding:10px 12px}
+}
+/* teléfono vertical / ventana angosta */
+@media (max-width:640px){
+  .pg-m3{grid-template-columns:1fr;grid-template-areas:"brand" "quick" "grid" "desc"}
+  .pg-m3-grid{grid-template-columns:repeat(2,1fr)}
+  #ui .pg-menu3 .pg-m3-tile{min-height:84px}
+}
+@media (prefers-reduced-motion:reduce){ .pg-m3-go{animation:none} #ui .pg-menu3 .pg-mode{transition:none} }
+#ui .pg-menu3 .pg-mode small{max-width:none;white-space:normal;overflow:visible}
+#ui .pg-menu3 .pg-m3-qt small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#ui .pg-menu3 .pg-mode::before,#ui .pg-menu3 .pg-mode::after{border:0}
+#ui .pg-menu3 .pg-m3-quick,#ui .pg-menu3 .pg-m3-quick b,#ui .pg-menu3 .pg-m3-quick small{color:#1a1004}
+#ui .pg-menu3 .pg-m3-quick small{opacity:.78}
+#ui .pg-menu3 .pg-m3-qt b{white-space:nowrap;font-size:clamp(20px,2.4vw,30px)}
+@media (max-height:440px){ #ui .pg-menu3 .pg-m3-go{display:none} }
+
+/* =====================================================================
+   SELECCIÓN v3: escenario en un selector compacto ‹ › , botón Pelear protagonista, "Al azar", y en teléfono
+   horizontal se quita la cabecera para dar el alto a las fichas y a las cartas.
+   ===================================================================== */
+#ui .pg-sel .pg-cyc{display:inline-flex;align-items:center;gap:4px;min-width:0}
+#ui .pg-sel .pg-cyc-b{min-width:34px;width:34px;padding:0;font-size:20px;line-height:1}
+#ui .pg-sel .pg-cyc-v{display:inline-flex;align-items:center;gap:7px;min-width:0;max-width:min(42vw,300px);padding:0 10px;height:34px;border:1px solid #3b4b5e;border-radius:8px;
+  background:#0f151d;font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#ui .pg-sel .pg-cyc-v small{margin-left:auto;padding-left:8px;color:var(--acero-2);font-size:11px;font-weight:600}
+#ui .pg-sel .pg-bar .pg-field.pg-stagecyc{order:0;flex:0 1 auto;max-width:none}
+#ui .pg-sel #s-go{min-width:120px;font-family:var(--f-disp);font-size:18px;letter-spacing:.06em;text-transform:uppercase;
+  background:linear-gradient(135deg,#ffcf73,#f0a83a 50%,#c97a18);border-color:#ffe2ad;color:#1a1004;box-shadow:0 4px 0 #6b4410,0 0 18px #f0a83a55}
+#ui .pg-sel #s-go:hover:not(:disabled){filter:brightness(1.07)}
+#ui .pg-sel #s-go:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 #6b4410}
+#ui .pg-sel #s-go:disabled{filter:grayscale(.7) brightness(.6);box-shadow:none}
+@media (max-height:440px){
+  #ui .pg-sel .pg-head{display:none}
+  #ui .pg-sel .pg-hints{display:none}
+  #ui .pg-sel .pg-bar{padding-top:4px;flex-wrap:nowrap}
+  #ui .pg-sel .pgb{min-height:34px;padding:0 10px;font-size:12px}
+  #ui .pg-sel #s-go{min-height:38px;font-size:16px;min-width:104px}
+  #ui .pg-sel #s-cmds{display:none}
+  #ui .pg-sel .pg-roster-head{display:none}
+}
+#ui .pg-menu3 .pg-m3-tile b{font-size:clamp(16px,1.8vw,25px);overflow-wrap:anywhere}
+@media (max-height:440px){ #ui .pg-menu3 .pg-m3-tile b{font-size:clamp(16px,2.3vw,22px)} }
+#ui .pg-menu3 .pg-m3-tile b{font-size:clamp(14px,1.55vw,24px);overflow-wrap:normal;white-space:nowrap;letter-spacing:0}
+@media (max-height:440px){ #ui .pg-menu3 .pg-m3-tile b{font-size:clamp(14px,2vw,20px)} }
