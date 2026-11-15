@@ -780,10 +780,6 @@
         2,
         3
       ],
-      "cancelWindow": [
-        3,
-        6
-      ],
       "cancelInto": [
         "manto_de_niebla"
       ],
@@ -796,14 +792,61 @@
       "guardType": "low",
       "damage": 14,
       "chipDamage": 3,
-      "hitstun": 18,
-      "blockstun": 12,
+      "hitstun": 19,
+      "blockstun": 10,
       "hitstop": 8,
       "pushHit": 8,
       "pushBlock": 4,
       "pushY": 0,
       "advance": 7,
-      "_doc": "Embate bajo que avanza; knockdown en hit limpio"
+      "_doc": "Embate bajo que avanza; knockdown en hit limpio",
+      "frames": {
+        "startup": 7,
+        "active": 3,
+        "recovery": 18
+      },
+      "activeIdx": [
+        2,
+        3
+      ],
+      "cancelFrames": [
+        8,
+        12
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          2,
+          3
+        ],
+        "hitstun": 18,
+        "blockstun": 12,
+        "cancelWindow": [
+          3,
+          6
+        ],
+        "damage": 14,
+        "_keys": [
+          "clip",
+          "special",
+          "meterCost",
+          "hitFrames",
+          "cancelWindow",
+          "cancelInto",
+          "hitbox",
+          "guardType",
+          "damage",
+          "chipDamage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "advance",
+          "_doc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial_bajo (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "paso_fantasma": {
       "clip": "special_punch_1",
@@ -813,10 +856,6 @@
         2,
         3,
         4
-      ],
-      "cancelWindow": [
-        2,
-        5
       ],
       "cancelInto": [
         "manto_de_niebla"
@@ -831,7 +870,7 @@
       "damage": 17,
       "chipDamage": 4,
       "hitstun": 20,
-      "blockstun": 14,
+      "blockstun": 8,
       "hitstop": 10,
       "pushHit": 6,
       "pushBlock": 3,
@@ -846,7 +885,59 @@
       },
       "_doc": "Especial firma (0 barra). Startup con i-frames cortos; cancelable a super",
       "launcher": true,
-      "_tune": "2026-11-07: habilita juggle (sistema KOF 2002). El gancho ascendente lanza al rival (launcher+pushY); el súper lo remata en el aire en modo MAX. Medido con tools/qa_20261106/juggle_roster.cjs. DISEÑO, TODO: VERIFICAR jugando."
+      "_tune": "2026-11-07: habilita juggle (sistema KOF 2002). El gancho ascendente lanza al rival (launcher+pushY); el súper lo remata en el aire en modo MAX. Medido con tools/qa_20261106/juggle_roster.cjs. DISEÑO, TODO: VERIFICAR jugando.",
+      "frames": {
+        "startup": 4,
+        "active": 4,
+        "recovery": 22
+      },
+      "activeIdx": [
+        2,
+        4
+      ],
+      "cancelFrames": [
+        5,
+        10
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          2,
+          3,
+          4
+        ],
+        "hitstun": 20,
+        "blockstun": 14,
+        "cancelWindow": [
+          2,
+          5
+        ],
+        "damage": 17,
+        "_keys": [
+          "clip",
+          "special",
+          "meterCost",
+          "hitFrames",
+          "cancelWindow",
+          "cancelInto",
+          "hitbox",
+          "guardType",
+          "damage",
+          "chipDamage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "invuln",
+          "invulnFrames",
+          "cinematic",
+          "_doc",
+          "launcher",
+          "_tune"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial_lanzador (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "manto_de_niebla": {
       "super": true,
@@ -867,8 +958,8 @@
       },
       "guardType": "high",
       "damage": 92,
-      "hitstun": 28,
-      "blockstun": 18,
+      "hitstun": 30,
+      "blockstun": 12,
       "hitstop": 16,
       "pushHit": 8,
       "pushBlock": 6,
@@ -879,7 +970,46 @@
         "freeze": 50,
         "dur": 80
       },
-      "_doc": "Super (1 barra llena): acercamiento de camara + flash + congelamiento"
+      "_doc": "Super (1 barra llena): acercamiento de camara + flash + congelamiento",
+      "frames": {
+        "startup": 5,
+        "active": 4,
+        "recovery": 26
+      },
+      "activeIdx": [
+        1,
+        3
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1,
+          2,
+          3
+        ],
+        "hitstun": 28,
+        "blockstun": 18,
+        "damage": 92,
+        "_keys": [
+          "super",
+          "clip",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "cinematic",
+          "_doc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase super (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "manto_de_niebla_ex": {
       "super": true,
@@ -902,8 +1032,8 @@
       },
       "guardType": "high",
       "damage": 112,
-      "hitstun": 30,
-      "blockstun": 18,
+      "hitstun": 34,
+      "blockstun": 14,
       "hitstop": 18,
       "pushHit": 9,
       "pushY": -5,
@@ -931,7 +1061,48 @@
           "h": 298
         },
         "fxSeparate": true
-      }
+      },
+      "frames": {
+        "startup": 5,
+        "active": 4,
+        "recovery": 30
+      },
+      "activeIdx": [
+        1,
+        4
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "hitstun": 30,
+        "blockstun": 18,
+        "damage": 112,
+        "_keys": [
+          "super",
+          "hidden",
+          "clip",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushY",
+          "cinematic",
+          "_doc",
+          "_hidden_frames"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase oculto (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "especial_palma_niebla": {
       "clip": "esp_palma_niebla",
@@ -989,7 +1160,54 @@
       "name": "Palma de niebla",
       "nameSrc": "provisional: describe el arte de la hoja del usuario 2026-11-05 (TODO: VERIFICAR con el usuario)",
       "_doc": "Descarga de niebla (proyectil) y carrera con barrido (golpe cuerpo a cuerpo en el índice 5; en MAX cancela a Manto de niebla). Tiempos, daño y velocidad = DISEÑO (TODO: VERIFICAR jugando en Android). GENERADO por tools/build_especiales_hojas.py desde tools/specs/especiales_hojas_spec.json.",
-      "_measure": "tools/build_especiales_hojas.py: escala 0.5280 (alto de pie 474 px fuente vs idle[0] 250 px); proyectil: salida en línea de corte x=1080.0 de v2, centro vertical de lo cortado; tamaño dibujado 122x72 px lógicos (caja 73x43 = [0.6, 0.6]); offset (110, -73); cuerpo a cuerpo: caja de ['v4'] (rect a ojo en la hoja fuente) -> {'x': 35, 'y': -125, 'w': 51, 'h': 42}"
+      "_measure": "tools/build_especiales_hojas.py: escala 0.5280 (alto de pie 474 px fuente vs idle[0] 250 px); proyectil: salida en línea de corte x=1080.0 de v2, centro vertical de lo cortado; tamaño dibujado 122x72 px lógicos (caja 73x43 = [0.6, 0.6]); offset (110, -73); cuerpo a cuerpo: caja de ['v4'] (rect a ojo en la hoja fuente) -> {'x': 35, 'y': -125, 'w': 51, 'h': 42}",
+      "frames": {
+        "startup": 10,
+        "active": 4,
+        "recovery": 16
+      },
+      "activeIdx": [
+        2,
+        5
+      ],
+      "cancelFrames": [
+        11,
+        24
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          5
+        ],
+        "hitstun": 18,
+        "blockstun": 12,
+        "damage": 14,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "guardType",
+          "special",
+          "meterCost",
+          "spawnFrame",
+          "spawns",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "hitbox",
+          "hitAnim",
+          "advance",
+          "advanceFrames",
+          "cancelInto",
+          "name",
+          "nameSrc",
+          "_doc",
+          "_measure"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase proyectil (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     }
   },
   "victory": {

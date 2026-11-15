@@ -869,8 +869,8 @@
       },
       "guardType": "high",
       "damage": 22,
-      "hitstun": 16,
-      "blockstun": 12,
+      "hitstun": 20,
+      "blockstun": 13,
       "hitstop": 8,
       "pushHit": 5,
       "pushBlock": 3,
@@ -880,10 +880,49 @@
       "cancelInto": [
         "super"
       ],
-      "cancelWindow": [
+      "frames": {
+        "startup": 8,
+        "active": 3,
+        "recovery": 16
+      },
+      "activeIdx": [
         1,
-        4
-      ]
+        1
+      ],
+      "cancelFrames": [
+        9,
+        13
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1
+        ],
+        "hitstun": 16,
+        "blockstun": 12,
+        "cancelWindow": [
+          1,
+          4
+        ],
+        "damage": 22,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "special",
+          "meterCost",
+          "cancelInto",
+          "cancelWindow"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "uppercut": {
       "clip": "atk_upper",
@@ -899,7 +938,7 @@
       "guardType": "high",
       "damage": 26,
       "hitstun": 18,
-      "blockstun": 12,
+      "blockstun": 11,
       "hitstop": 8,
       "pushHit": 3,
       "pushBlock": 3,
@@ -912,12 +951,56 @@
       "cancelInto": [
         "super"
       ],
-      "cancelWindow": [
-        1,
-        4
-      ],
       "name": "Gancho Ascendente",
-      "nameSrc": "generico"
+      "nameSrc": "generico",
+      "frames": {
+        "startup": 4,
+        "active": 4,
+        "recovery": 22
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "cancelFrames": [
+        5,
+        10
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1
+        ],
+        "hitstun": 18,
+        "blockstun": 12,
+        "cancelWindow": [
+          1,
+          4
+        ],
+        "damage": 26,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "launcher",
+          "special",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "cancelInto",
+          "cancelWindow",
+          "name",
+          "nameSrc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial_lanzador (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "flying_special": {
       "clip": "atk_kick2",
@@ -932,8 +1015,8 @@
       },
       "guardType": "high",
       "damage": 22,
-      "hitstun": 16,
-      "blockstun": 12,
+      "hitstun": 20,
+      "blockstun": 13,
       "hitstop": 8,
       "pushHit": 5,
       "pushBlock": 3,
@@ -941,7 +1024,42 @@
       "special": true,
       "air": false,
       "name": "Patada Voladora",
-      "nameSrc": "generico"
+      "nameSrc": "generico",
+      "frames": {
+        "startup": 8,
+        "active": 3,
+        "recovery": 16
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1
+        ],
+        "hitstun": 16,
+        "blockstun": 12,
+        "damage": 22,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "special",
+          "air",
+          "name",
+          "nameSrc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "seismic": {
       "clip": "atk_sweep",
@@ -957,7 +1075,7 @@
       "guardType": "low",
       "damage": 18,
       "hitstun": 18,
-      "blockstun": 12,
+      "blockstun": 11,
       "hitstop": 8,
       "pushHit": 4,
       "pushBlock": 3,
@@ -966,7 +1084,43 @@
       "special": true,
       "meterCost": 0,
       "name": "Barrida Sísmica",
-      "nameSrc": "generico"
+      "nameSrc": "generico",
+      "frames": {
+        "startup": 4,
+        "active": 4,
+        "recovery": 22
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1
+        ],
+        "hitstun": 18,
+        "blockstun": 12,
+        "damage": 18,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "launcher",
+          "special",
+          "meterCost",
+          "name",
+          "nameSrc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial_lanzador (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "super": {
       "clip": "atk_super",
@@ -981,8 +1135,8 @@
       },
       "guardType": "high",
       "damage": 55,
-      "hitstun": 24,
-      "blockstun": 16,
+      "hitstun": 33,
+      "blockstun": 15,
       "hitstop": 14,
       "pushHit": 8,
       "pushBlock": 3,
@@ -996,7 +1150,43 @@
         "zoom": 1.85,
         "freeze": 46,
         "dur": 74
-      }
+      },
+      "frames": {
+        "startup": 6,
+        "active": 4,
+        "recovery": 26
+      },
+      "activeIdx": [
+        3,
+        3
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          3
+        ],
+        "hitstun": 24,
+        "blockstun": 16,
+        "damage": 55,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "super",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "cinematic"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase super (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "throw": {
       "type": "throw",
@@ -1109,7 +1299,44 @@
       "name": "Serpiente negra",
       "nameSrc": "provisional: describe el arte de la hoja del usuario 2026-11-05 (TODO: VERIFICAR con el usuario)",
       "_doc": "La serpiente suelta de la tira (figura 5) es el proyectil; en el golpe se corta la cabeza que sale del puño. Impacto: chispa genérica. Proyectil largo: caja casi de todo su ancho y casi pegado a la mano para que pegue a quemarropa (combo_check). Tiempos, daño y velocidad = DISEÑO (TODO: VERIFICAR jugando en Android). GENERADO por tools/build_especiales_hojas.py desde tools/specs/especiales_hojas_spec.json.",
-      "_measure": "tools/build_especiales_hojas.py: escala 0.3546 (alto de pie 384 px fuente vs idle[0] 136 px); proyectil: salida en línea de corte x=1435.0 de t3, centro vertical de lo cortado; tamaño dibujado 166x72 px lógicos (caja 141x43 = [0.85, 0.6]); offset (125, -121)"
+      "_measure": "tools/build_especiales_hojas.py: escala 0.3546 (alto de pie 384 px fuente vs idle[0] 136 px); proyectil: salida en línea de corte x=1435.0 de t3, centro vertical de lo cortado; tamaño dibujado 166x72 px lógicos (caja 141x43 = [0.85, 0.6]); offset (125, -121)",
+      "frames": {
+        "startup": 10,
+        "active": 2,
+        "recovery": 16
+      },
+      "activeIdx": [
+        3,
+        3
+      ],
+      "_clipTiming": {
+        "hitFrames": [],
+        "hitstun": 16,
+        "blockstun": 12,
+        "damage": 20,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "guardType",
+          "special",
+          "meterCost",
+          "spawnFrame",
+          "spawns",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "cancelInto",
+          "name",
+          "nameSrc",
+          "_doc",
+          "_measure"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase proyectil (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     }
   },
   "style": {

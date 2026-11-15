@@ -1,0 +1,16 @@
+personaje_id,clip,capa,cuadros,hoja_png,celda_px
+diego_cancha,dizzy,cuerpo,8,hojas/diego_cancha/diego_cancha__dizzy.png,640x640
+diego_cancha,ko_fall,cuerpo,8,hojas/diego_cancha/diego_cancha__ko_fall.png,640x640
+diego_cancha,victory_pose,cuerpo,8,hojas/diego_cancha/diego_cancha__victory_pose.png,640x640
+personaje_08,base,cuerpo,1,hojas/personaje_08/personaje_08__base.png,640x640
+personaje_08,ko_fall,cuerpo,8,hojas/personaje_08/personaje_08__ko_fall.png,640x640
+personaje_08,victory_pose,cuerpo,8,hojas/personaje_08/personaje_08__victory_pose.png,640x640
+tobi,dizzy,cuerpo,8,hojas/tobi/tobi__dizzy.png,640x640
+tobi,ko_fall,cuerpo,8,hojas/tobi/tobi__ko_fall.png,640x640
+tobi,victory_pose,cuerpo,8,hojas/tobi/tobi__victory_pose.png,640x640
+wasirris,base,cuerpo,1,hojas/wasirris/wasirris__base.png,640x640
+wasirris,dizzy,cuerpo,8,hojas/wasirris/wasirris__dizzy.png,640x640
+wasirris,ko_fall,cuerpo,8,hojas/wasirris/wasirris__ko_fall.png,640x640
+wasirris,sentencia_firme,cuerpo,16,hojas/wasirris/wasirris__sentencia_firme.png,640x640
+wasirris,sentencia_firme,fx,16,hojas/wasirris/wasirris__sentencia_firme__fx.png,640x640
+wasirris,victory_pose,cuerpo,8,hojas/wasirris/wasirris__victory_pose.png,640x640

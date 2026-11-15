@@ -343,7 +343,7 @@
     if(!air && isCommandNormal(defs,name)) f.dirHist.length=0;
     f.state = mv.super?S.SUPER : mv.special?S.SPECIAL : air?S.AIR_ATTACK : S.ATTACK;
     f.stateFrame=0; f.hitId=0; f.struck={}; // nuevo golpe limpia su propio registro de impactos del defensor se maneja por hitId
-    f._fxIdx=-1; f._hitIdx=-1;                // FX por frame del clip (mv.fx[].at) se emiten al ENTRAR a cada índice
+    f._fxIdx=-1; f._hitIdx=-1; f._spawned=false;   // FX por frame del clip (mv.fx[].at) se emiten al ENTRAR a cada índice · proyectil aún no lanzado
     if(air) f.airAtkUsed=true;
     if(mv.invuln) f.invuln=Math.max(f.invuln, mv.invulnFrames||0);
     if(mv.spawnOnStart) spawnProjectile(f, mv, defs, match);
@@ -370,7 +370,7 @@
       chipDamage:p.chipDamage||0, launcher:!!p.launcher, pushY:p.pushY||0,
       kind:p.kind||"energy", anim:p.anim||null, hitAnim:p.hitAnim||null, hitLife:p.hitLife||16, h0:p.animH||0,
       hits:p.hits||1, hitEvery:p.hitEvery||8, hitSlow:(p.hitSlow!=null?p.hitSlow:1), cool:0, strength:p.strength||1, ground:!!p.ground,
-      hitId:match.nextHitId++
+      hitId:match.nextHitId++, src:f.move   // src: move que lo lanzó (si conecta mientras el dueño sigue en él, cuenta como contacto)
     });
     match.events.push({t:"energy"});
   }
@@ -404,7 +404,10 @@
         if(!isProj) att.meter=Math.min(att.maxMeter, att.meter+CFG.meter.gainBlock);
         return true;
       }
-      def.blockstun=mv.blockstun||D.blockstun; def.crouch=(def.state===S.BLOCK&&def.wantCrouch); setState(def,S.BLOCKSTUN);
+      // agachado o de pie: se decide al entrar a la guardia y se conserva (o lo cambia la palanca) durante el bloqueo.
+      // Antes el 2º impacto bloqueado lo ponía en false: el 3º impacto de un golpe BAJO de varios golpes entraba aunque
+      // el defensor siguiera cubriéndose abajo (lo encontró tools/qa_20261106/feel_audit.cjs con la patada de Personaje 08).
+      def.blockstun=mv.blockstun||D.blockstun; if(def.state===S.BLOCK) def.crouch=!!def.wantCrouch; setState(def,S.BLOCKSTUN);
       def.vx=fdir*pb;
       if(cornerPress) att.vx = -fdir*pb*cornerPushMul;
       match.hitstop=Math.max(match.hitstop, Math.round((mv.hitstop||D.hitstop)*H.block.hitstopMul));
@@ -693,6 +696,9 @@
         // RODADA DE CANCELACIÓN DE GUARDIA: Puño+Patada bloqueando, en el suelo, con barra
         const GC=CFG.guardCancel;
         if(GC && GC.enabled && f.grounded && f.meter>=GC.cost && simul(f,inp,"P","K")){ f.meter-=GC.cost; startRoll(f); setNotice(match,'gc',f.side); match.events.push({t:"tech"}); continue; }
+        // manteniendo Guardia se puede cambiar de guardia alta a baja (y al revés) durante el bloqueo, como en KOF.
+        // Sin Guardia pulsada se conserva la que tenía (la CPU suelta los botones en el aturdimiento).
+        if(inp.block){ f.wantCrouch=inp.down; f.crouch=inp.down; }
         f.blockstun--; physics(f); if(f.blockstun<=0) setState(f,S.IDLE); continue; }
       // AGARRES / LLAVES
       if(f.state===S.THROWN){
@@ -716,7 +722,11 @@
         if(f.state===S.ATTACK && f.grounded && f.stateFrame<=(CFG.timing.simulWindow||0) && !mv.special && !mv.super && twoButton(f, match, inp)){ f.move=null; continue; }
         let idx, hitNow, finished;
         if(mv.frames){   // tiempos explícitos: la pose sale de la fase (startup/active/recovery), no del reloj del clip
-          idx = framePhase(mv, clip, ++f.moveFrame); hitNow = PH_OUT.active; finished = PH_OUT.done;
+          idx = framePhase(mv, clip, ++f.moveFrame); finished = PH_OUT.done;
+          // con hitFrames (lista de índices del clip) solo pegan esos cuadros dentro de la fase activa: un golpe de varios
+          // impactos dibujados (p.ej. 3 puños en la pose 2, 4 y 6) pega en cada uno y no en las poses de entre medio.
+          // hitFrames vacío = el move no pega cuerpo a cuerpo (solo lanza su proyectil).
+          hitNow = PH_OUT.active && (!mv.hitFrames || mv.hitFrames.indexOf(idx)>=0);
           if(idx<0){ f.clip=clipOf(f,"idle"); f.clipTime=0; idx=0; }
           else { f.clip=mv.clip; f.clipTime=Math.floor((idx+0.5)*60/(clip.fps||10)); }
         } else {
@@ -726,7 +736,8 @@
         if(idx!==f._fxIdx){ f._fxIdx=idx; if(mv.fx) emitMoveFx(f,mv,idx,match); if(mv.hidden || (defs.hiddenParticles && defs.hiddenParticles.move===f.move)) emitHiddenParticleFx(f,defs,idx,match); }
         if(mv.advance){ const af=mv.advanceFrames||[0, mv.hitFrames&&mv.hitFrames.length?mv.hitFrames[mv.hitFrames.length-1]:clip.frames.length-1];
           if(idx>=af[0] && idx<=af[1]) f.vx=f.facing*mv.advance; }
-        if(mv.spawnFrame!=null && idx===mv.spawnFrame && f.moveFrame!==-99){ spawnProjectile(f,mv,defs,match); f.moveFrame=-99; }
+        // un proyectil por move. Antes se marcaba con moveFrame=-99, lo que rompía los moves con tiempos explícitos (mv.frames)
+        if(mv.spawnFrame!=null && idx===mv.spawnFrame && !f._spawned){ spawnProjectile(f,mv,defs,match); f._spawned=true; }
         if(hitNow){
           // multiHit: cada índice de hitFrames es un golpe distinto (hitId nuevo); si no, un solo golpe por move
           if(!f.hitId || (mv.multiHit && f._hitIdx!==idx)){ f.hitId=match.nextHitId++; f._hitIdx=idx; }
@@ -894,6 +905,9 @@
                    guardType:p.guardType,chipDamage:p.chipDamage,launcher:p.launcher,pushY:p.pushY||undefined,
                    hitbox:{y:-80},hitAnim:p.hitAnim,hitLife:p.hitLife,hitH:p.h0?p.h0*1.6:0},match,true,ix,iy);
             // multi-golpe: el proyectil puede FRENAR al conectar (hitSlow, KOF: la bola "muerde" al rival) para dar todos sus golpes
+            // contacto del PROYECTIL: si el dueño sigue en el especial que lo lanzó, puede cancelarlo (a súper en MAX, como un
+            // golpe cuerpo a cuerpo). Antes `contact` solo lo marcaba el cuerpo a cuerpo y "bola cancelada a súper" no salía nunca.
+            if(landed){ const ow=match.fighters[p.owner]; if(ow && ow.move===p.src && ow.state===S.SPECIAL) ow.contact=true; }
             if(landed){ p.hits--; if(p.hits>0){ p.hitId=match.nextHitId++; p.cool=p.hitEvery; p.vx*=p.hitSlow; } else dead=true; }
           }
         }
@@ -989,7 +1003,9 @@
     get ARENA(){ const c=CFG||DEFAULTS; return {W:c.arena.W,H:c.arena.H,GROUND:c.arena.ground,WALL:c.arena.wall}; },
     hitboxActive:(f,defs)=>{ if([S.ATTACK,S.AIR_ATTACK,S.SPECIAL,S.SUPER].indexOf(f.state)<0) return null;
       const mv=defs.moves[f.move]; if(!mv) return null;
-      if(mv.frames) return (f.moveFrame>mv.frames.startup && f.moveFrame<=mv.frames.startup+mv.frames.active) ? hitboxOf(f,mv) : null;
+      if(mv.frames){ if(!(f.moveFrame>mv.frames.startup && f.moveFrame<=mv.frames.startup+mv.frames.active)) return null;
+        if(mv.hitFrames && mv.hitFrames.indexOf(framePhase(mv, defs.clips[mv.clip], f.moveFrame))<0) return null;
+        return hitboxOf(f,mv); }
       const clip=defs.clips[mv.clip];
       const idx=clipIndex(clip,f.clipTime); return (mv.hitFrames&&mv.hitFrames.indexOf(idx)>=0)?hitboxOf(f,mv):null; },
     _setCfg:(c)=>{CFG=c;} };

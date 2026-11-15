@@ -897,10 +897,6 @@
         4,
         6
       ],
-      "cancelWindow": [
-        4,
-        8
-      ],
       "cancelInto": [
         "kick",
         "fireball",
@@ -914,15 +910,61 @@
         "h": 26
       },
       "guardType": "high",
-      "damage": 12,
+      "damage": 4,
       "hitstun": 14,
-      "blockstun": 10,
+      "blockstun": 11,
       "hitstop": 6,
       "pushHit": 3,
       "pushBlock": 3,
       "pushY": 0,
       "name": "Puño",
-      "nameSrc": "generico"
+      "nameSrc": "generico",
+      "multiHit": true,
+      "frames": {
+        "startup": 4,
+        "active": 15,
+        "recovery": 8
+      },
+      "activeIdx": [
+        2,
+        6
+      ],
+      "cancelFrames": [
+        5,
+        21
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          2,
+          4,
+          6
+        ],
+        "hitstun": 14,
+        "blockstun": 10,
+        "cancelWindow": [
+          4,
+          8
+        ],
+        "damage": 12,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "cancelWindow",
+          "cancelInto",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "name",
+          "nameSrc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase normal:jab (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "kick": {
       "clip": "kick_combo",
@@ -930,10 +972,6 @@
         2,
         4,
         6
-      ],
-      "cancelWindow": [
-        4,
-        8
       ],
       "cancelInto": [
         "fireball",
@@ -948,15 +986,61 @@
         "h": 26
       },
       "guardType": "low",
-      "damage": 16,
-      "hitstun": 16,
-      "blockstun": 11,
+      "damage": 5,
+      "hitstun": 17,
+      "blockstun": 13,
       "hitstop": 7,
       "pushHit": 4,
       "pushBlock": 3,
       "pushY": 0,
       "name": "Patada",
-      "nameSrc": "generico"
+      "nameSrc": "generico",
+      "multiHit": true,
+      "frames": {
+        "startup": 6,
+        "active": 15,
+        "recovery": 12
+      },
+      "activeIdx": [
+        2,
+        6
+      ],
+      "cancelFrames": [
+        7,
+        23
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          2,
+          4,
+          6
+        ],
+        "hitstun": 16,
+        "blockstun": 11,
+        "cancelWindow": [
+          4,
+          8
+        ],
+        "damage": 16,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "cancelWindow",
+          "cancelInto",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "name",
+          "nameSrc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase normal:kick (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "j_punch": {
       "clip": "punch_combo",
@@ -1049,10 +1133,6 @@
         2,
         3
       ],
-      "cancelWindow": [
-        3,
-        6
-      ],
       "cancelInto": [
         "super"
       ],
@@ -1065,14 +1145,64 @@
       "guardType": "high",
       "damage": 26,
       "hitstun": 18,
-      "blockstun": 12,
+      "blockstun": 8,
       "hitstop": 8,
       "pushHit": 3,
       "pushBlock": 4,
       "pushY": -11,
       "launcher": true,
       "name": "Gancho Ascendente",
-      "nameSrc": "generico"
+      "nameSrc": "generico",
+      "frames": {
+        "startup": 4,
+        "active": 4,
+        "recovery": 22
+      },
+      "activeIdx": [
+        1,
+        3
+      ],
+      "cancelFrames": [
+        5,
+        10
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          1,
+          2,
+          3
+        ],
+        "hitstun": 18,
+        "blockstun": 12,
+        "cancelWindow": [
+          3,
+          6
+        ],
+        "damage": 26,
+        "_keys": [
+          "clip",
+          "special",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "hitFrames",
+          "cancelWindow",
+          "cancelInto",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "launcher",
+          "name",
+          "nameSrc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial_lanzador (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "flying_special": {
       "clip": "flying_kick_2",
@@ -1154,8 +1284,8 @@
       },
       "guardType": "high",
       "damage": 55,
-      "hitstun": 24,
-      "blockstun": 16,
+      "hitstun": 30,
+      "blockstun": 12,
       "hitstop": 14,
       "pushHit": 8,
       "pushBlock": 6,
@@ -1165,7 +1295,46 @@
         "zoom": 1.85,
         "freeze": 46,
         "dur": 74
-      }
+      },
+      "frames": {
+        "startup": 8,
+        "active": 4,
+        "recovery": 26
+      },
+      "activeIdx": [
+        4,
+        7
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "hitstun": 24,
+        "blockstun": 16,
+        "damage": 55,
+        "_keys": [
+          "clip",
+          "super",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "cinematic"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase super (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "throw": {
       "type": "throw",
@@ -1221,8 +1390,8 @@
       },
       "guardType": "high",
       "damage": 72,
-      "hitstun": 28,
-      "blockstun": 18,
+      "hitstun": 34,
+      "blockstun": 14,
       "hitstop": 16,
       "pushHit": 9,
       "pushBlock": 6,
@@ -1253,7 +1422,49 @@
           "h": 120
         },
         "fxSeparate": true
-      }
+      },
+      "frames": {
+        "startup": 6,
+        "active": 5,
+        "recovery": 30
+      },
+      "activeIdx": [
+        3,
+        7
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "hitstun": 28,
+        "blockstun": 18,
+        "damage": 72,
+        "_keys": [
+          "super",
+          "hidden",
+          "clip",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "cinematic",
+          "_hidden_frames"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase oculto (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     }
   },
   "style": {

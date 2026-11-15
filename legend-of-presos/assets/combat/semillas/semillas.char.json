@@ -677,8 +677,8 @@
       },
       "guardType": "high",
       "damage": 24,
-      "hitstun": 16,
-      "blockstun": 12,
+      "hitstun": 20,
+      "blockstun": 13,
       "hitstop": 8,
       "pushHit": 5,
       "pushBlock": 3,
@@ -688,12 +688,53 @@
       "cancelInto": [
         "super"
       ],
-      "cancelWindow": [
-        1,
-        4
-      ],
       "name": "Corte de Semilla",
-      "nameSrc": "ref:PGPersonajes"
+      "nameSrc": "ref:PGPersonajes",
+      "frames": {
+        "startup": 8,
+        "active": 3,
+        "recovery": 16
+      },
+      "activeIdx": [
+        2,
+        2
+      ],
+      "cancelFrames": [
+        9,
+        13
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          2
+        ],
+        "hitstun": 16,
+        "blockstun": 12,
+        "cancelWindow": [
+          1,
+          4
+        ],
+        "damage": 24,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "special",
+          "meterCost",
+          "cancelInto",
+          "cancelWindow",
+          "name",
+          "nameSrc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "uppercut": {
       "clip": "atk_sp2",
@@ -709,7 +750,7 @@
       "guardType": "low",
       "damage": 23,
       "hitstun": 18,
-      "blockstun": 12,
+      "blockstun": 11,
       "hitstop": 8,
       "pushHit": 3,
       "pushBlock": 3,
@@ -719,15 +760,59 @@
       "cancelInto": [
         "super"
       ],
-      "cancelWindow": [
-        1,
-        4
-      ],
       "name": "Germinación",
       "nameSrc": "ref:PGPersonajes",
       "_doc": "ref special_2: golpe BAJO (no antiaereo). TODO: VERIFICAR frame-data jugando (diseno)",
       "launcher": true,
-      "_tune": "2026-11-07: habilita juggle (sistema KOF 2002). El gancho ascendente lanza al rival (launcher+pushY); el súper lo remata en el aire en modo MAX. Medido con tools/qa_20261106/juggle_roster.cjs. DISEÑO, TODO: VERIFICAR jugando."
+      "_tune": "2026-11-07: habilita juggle (sistema KOF 2002). El gancho ascendente lanza al rival (launcher+pushY); el súper lo remata en el aire en modo MAX. Medido con tools/qa_20261106/juggle_roster.cjs. DISEÑO, TODO: VERIFICAR jugando.",
+      "frames": {
+        "startup": 4,
+        "active": 4,
+        "recovery": 22
+      },
+      "activeIdx": [
+        2,
+        2
+      ],
+      "cancelFrames": [
+        5,
+        10
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          2
+        ],
+        "hitstun": 18,
+        "blockstun": 12,
+        "cancelWindow": [
+          1,
+          4
+        ],
+        "damage": 23,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "special",
+          "meterCost",
+          "cancelInto",
+          "cancelWindow",
+          "name",
+          "nameSrc",
+          "_doc",
+          "launcher",
+          "_tune"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial_lanzador (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "flying_special": {
       "clip": "atk_sp1",
@@ -769,7 +854,42 @@
         "guardType": "high",
         "kind": "energy"
       },
-      "_doc": "ref proyectil \"cometa\". SIN ARTE de cometa en la libreria (dibujo procedural) -> candidato: hoja s16 fila 0, sin confirmar. TODO: VERIFICAR frame-data jugando (diseno)"
+      "_doc": "ref proyectil \"cometa\". SIN ARTE de cometa en la libreria (dibujo procedural) -> candidato: hoja s16 fila 0, sin confirmar. TODO: VERIFICAR frame-data jugando (diseno)",
+      "frames": {
+        "startup": 10,
+        "active": 2,
+        "recovery": 16
+      },
+      "activeIdx": [
+        1,
+        1
+      ],
+      "_clipTiming": {
+        "hitFrames": [],
+        "hitstun": 16,
+        "blockstun": 12,
+        "damage": 22,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "special",
+          "name",
+          "nameSrc",
+          "spawnFrame",
+          "spawns",
+          "_doc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase proyectil (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "seismic": {
       "clip": "atk_sweep",
@@ -795,7 +915,44 @@
       "name": "Barrida Sísmica",
       "nameSrc": "generico",
       "knockdown": true,
-      "_tune": "2026-11-07: era launcher con pushY=0 (no lanzaba al aire); una barrida DERRIBA, no lanza -> knockdown. El launcher de semillas es ahora uppercut (Germinación)."
+      "_tune": "2026-11-07: era launcher con pushY=0 (no lanzaba al aire); una barrida DERRIBA, no lanza -> knockdown. El launcher de semillas es ahora uppercut (Germinación).",
+      "frames": {
+        "startup": 7,
+        "active": 3,
+        "recovery": 18
+      },
+      "activeIdx": [
+        2,
+        2
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          2
+        ],
+        "hitstun": 18,
+        "blockstun": 12,
+        "damage": 18,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "special",
+          "meterCost",
+          "name",
+          "nameSrc",
+          "knockdown",
+          "_tune"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase especial_bajo (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "super": {
       "clip": "atk_super",
@@ -810,8 +967,8 @@
       },
       "guardType": "high",
       "damage": 55,
-      "hitstun": 24,
-      "blockstun": 16,
+      "hitstun": 33,
+      "blockstun": 15,
       "hitstop": 14,
       "pushHit": 8,
       "pushBlock": 3,
@@ -827,7 +984,45 @@
         "dur": 74
       },
       "name": "Destino",
-      "nameSrc": "ref:PGPersonajes"
+      "nameSrc": "ref:PGPersonajes",
+      "frames": {
+        "startup": 5,
+        "active": 4,
+        "recovery": 26
+      },
+      "activeIdx": [
+        2,
+        2
+      ],
+      "_clipTiming": {
+        "hitFrames": [
+          2
+        ],
+        "hitstun": 24,
+        "blockstun": 16,
+        "damage": 55,
+        "_keys": [
+          "clip",
+          "hitFrames",
+          "hitbox",
+          "guardType",
+          "damage",
+          "hitstun",
+          "blockstun",
+          "hitstop",
+          "pushHit",
+          "pushBlock",
+          "pushY",
+          "super",
+          "meterCost",
+          "invuln",
+          "invulnFrames",
+          "cinematic",
+          "name",
+          "nameSrc"
+        ]
+      },
+      "_timing": "tools/build_frame_data.py clase super (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "throw": {
       "type": "throw",

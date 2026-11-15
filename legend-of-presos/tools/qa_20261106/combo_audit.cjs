@@ -1,7 +1,7 @@
 // Auditoría OBJETIVA de combos y cancelaciones con la simulación real (engine/pg_sim.js), en Node.
 // Para cada personaje mide, cadena por cadena declarada en cancelInto, si el combo COMPLETA (el 2º golpe
 // conecta mientras el rival sigue en stun: comboCount>=2) probando varios timings de la 2ª entrada.
-// Reporta: cadenas que completan, cancelInto ROTOS (move inexistente), especiales OCULTOS y si su animación
+// Especial ⇒ súper y X ⇒ oculto se miden en MAX (solo existen ahí). Reporta: cadenas que completan, cancelInto ROTOS (move inexistente), especiales OCULTOS y si su animación
 // cabe (hitFrames dentro del clip). NO cambia nada; solo mide. Uso: node combo_audit.cjs <raiz> [id|all] [rival]
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const root=process.argv[2], who=process.argv[3]||'all', rivalId=process.argv[4]||'personaje_08';
@@ -36,15 +36,18 @@ function moveSeq(d,name){
   for(const g of ['specials','supers','hidden']) for(const s of (In[g]||[])) if(s.move===name) return motionSeq(s.motion,s.button);
   return null;
 }
-function fresh(d,dR,gap){
+// max=true: especial ⇒ súper y ⇒ oculto solo existen en MAX (config hit.superCancel="max", regla KOF 2002); se miden así.
+function fresh(d,dR,gap,max){
   const m=Sim.createMatch(12345,JSON.parse(JSON.stringify(cfg)),null);
   let guard=0; while(m.phase!=='fight'&&guard++<1000) Sim.step(m,[d,dR],[N(),N()]);
-  const [f,o]=m.fighters; f.x=400;o.x=400+gap; f.meter=f.maxMeter; return {m,f,o};
+  const [f,o]=m.fighters; f.x=400;o.x=400+gap; f.meter=f.maxMeter; if(max){ f.maxMode=true; f.maxT=900; } return {m,f,o};
 }
+function needsMax(d,base,next){ const b=d.moves[base], n=d.moves[next]; if(!b||!n) return false;
+  return (d.inputs.hidden||[]).some(h=>h.move===next) || (b.special && n.super && (cfg.hit.superCancel||'max')==='max'); }
 // La 2ª secuencia empieza en el frame absoluto start2 (el motion largo puede PRE-bufferearse antes del contacto,
 // como hace un jugador). Devuelve {combo,dmg,used2}.
 function tryChain(d,dR,base,next,gap,start2){
-  const {m,f,o}=fresh(d,dR,gap);
+  const {m,f,o}=fresh(d,dR,gap,needsMax(d,base,next));
   const bs=moveSeq(d,base), ns=moveSeq(d,next);
   if(!bs||bs==='AIRP'||bs==='AIRK'||!ns||ns==='AIRP'||ns==='AIRK') return null;
   let maxCombo=0; const hp0=o.hp; let seen2=false;
@@ -58,13 +61,13 @@ function tryChain(d,dR,base,next,gap,start2){
   }
   return {combo:maxCombo, dmg:hp0-o.hp, used2:seen2};
 }
-function baseOnly(d,dR,base,gap){ const {m,f,o}=fresh(d,dR,gap); const bs=moveSeq(d,base);
+function baseOnly(d,dR,base,gap,max){ const {m,f,o}=fresh(d,dR,gap,max); const bs=moveSeq(d,base);
   if(!bs||bs==='AIRP'||bs==='AIRK') return 0; const hp0=o.hp;
   for(let t=0;t<120;t++){ Sim.step(m,[d,dR],[t<bs.length?bs[t]:N(),N()]); } return hp0-o.hp; }
 function best(d,dR,base,next){
   if(!d.moves[next]) return {broken:true};
   let r={combo:0,dmg:0,used2:false};
-  for(const gap of [40,55,70]){ const b0=baseOnly(d,dR,base,gap);
+  for(const gap of [40,55,70]){ const b0=baseOnly(d,dR,base,gap,needsMax(d,base,next));
     for(let start2=3;start2<=40;start2++){
       const x=tryChain(d,dR,base,next,gap,start2); if(!x) return {skip:true};
       x.added=x.dmg-b0;
