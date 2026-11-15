@@ -81,6 +81,15 @@
     get wetAlpha(){ return (this.def.wetFloor && this.def.wetFloor.alpha) || 0; }
 
     // Tema procedural. El escenario se dibuja MÁS ANCHO que la arena jugable (M a cada lado) y más alto (MY): en
+    // extensión horizontal del ARTE (px de arena), para que el render sepa cuánto ampliar el fondo y cubrir la pantalla
+    artBounds(){
+      const L = this.art ? [this.art] : this._layerSprites; if (!L || !L.length) return null;
+      let a = Infinity, b = -Infinity, bot = -Infinity;
+      for (const sp of L){ if (!sp.texture) continue; a = Math.min(a, sp.x); b = Math.max(b, sp.x + sp.texture.width * sp.scale.x); bot = Math.max(bot, sp.y + sp.texture.height * sp.scale.y); }
+      return isFinite(a) ? { minX: a, maxX: b, maxY: bot } : null;
+    }
+    // ampliación del fondo alrededor del punto (cx, cy) del suelo: con z=1 queda como siempre
+    zoomBack(z, cx, cy){ for (const c of [this.back, this.front]){ c.pivot.set(cx, cy); c.position.set(cx, cy); c.scale.set(z); } }
     // pantallas 20:9 / 4:3 no se ve el borde (§4.5). Con arte, la imagen tapa el centro y esto rellena lo que sobra.
     _drawProcedural(){
       const { W, H, GROUND } = A(), g = this.g; g.clear();

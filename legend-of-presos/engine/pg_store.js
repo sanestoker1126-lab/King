@@ -19,6 +19,11 @@
     touchPad: "auto",    // "auto" | "on" | "off"
     touchDeadZone: 0.30, // 0.20 pequeña | 0.30 normal | 0.40 amplia
     touchLayout: "classic", // "classic" | "arcade"
+    touchScale: 1,       // tamaño de los controles táctiles (0.7–1.4)
+    touchOpacity: 0.85,  // opacidad de los controles táctiles (0.3–1)
+    touchStick: "float", // "float" (aparece donde apoyas el pulgar) | "fixed"
+    touchLefty: false,   // zurdo: botones a la izquierda, joystick a la derecha
+    touchArena: "clear", // "clear" (la arena entre los controles) | "immersive" (pantalla completa, controles encima)
     showBoxes: false,    // modo debug de cajas al iniciar un combate
     shake: null,         // "full" | "soft" | "off"; null = según el sistema ("reducir movimiento" -> suave)
     keysP1: null,        // reasignación de teclas {accion:[tecla]} (null = por defecto)

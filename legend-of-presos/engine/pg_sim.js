@@ -171,11 +171,13 @@
     for(let i=0;i<toks.length && pi<pattern.length;i++){ if(pattern[pi](toks[i])) pi++; }
     return pi===pattern.length;
   }
-  const isDown = t=>t.indexOf("D")>=0, isFwd=t=>t.indexOf("F")>=0, isBack=t=>t.indexOf("B")>=0;
+  const isDown = t=>t.indexOf("D")>=0, isFwd=t=>t.indexOf("F")>=0, isBack=t=>t.indexOf("B")>=0, isPureFwd=t=>t==="F";
   function matchMotion(f, name){
     if(name==="qcf") return hasSeq(f,[isDown, isFwd]);
     if(name==="qcb") return hasSeq(f,[isDown, isBack]);
-    if(name==="dp")  return hasSeq(f,[isFwd, isDown, isFwd]);
+    // DP: el primer → tiene que ser PURO (sin abajo). Antes ↘ contaba como ese →: un ↓↘↘→ (mantener ↘ un par de cuadros,
+    // lo normal con el pulgar o con palanca) se leía como →↓↘ y salía el gancho en vez del cuarto de círculo.
+    if(name==="dp")  return hasSeq(f,[isPureFwd, isDown, isFwd]);
     if(name==="hcf") return hasSeq(f,[isBack, isDown, isFwd]);   // media luna (agarre de comando)
     if(name==="hcb") return hasSeq(f,[isFwd, isDown, isBack]);
     if(name==="qcf2")return hasSeq(f,[isDown,isFwd,isDown,isFwd]);

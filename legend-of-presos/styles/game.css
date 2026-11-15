@@ -326,31 +326,65 @@ button{font-family:inherit}
 @keyframes pgToast{0%{opacity:0;transform:translateX(-50%) translateY(-8px)}11%,82%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0;transform:translateX(-50%) translateY(0)}}
 @media (prefers-reduced-motion:reduce){@keyframes pgToast{0%,88%{opacity:1;transform:translateX(-50%)}100%{opacity:0;transform:translateX(-50%)}}}
 
-/* ===== controles táctiles ===== */
-#pad{position:fixed;inset:0;z-index:6;pointer-events:none}
+/* ===== controles táctiles v2 (pg_touch.js) =====
+   --tk = escala (Opciones › Controles), --ta = opacidad. Todo en px base × --tk: mismo tamaño físico en cualquier teléfono.
+   Botones en arco estilo arcade; coordenadas del CENTRO de cada botón dentro de un grupo de 210×190 px base. */
+#pad{position:fixed;inset:0;z-index:6;pointer-events:none;--tk:1;--ta:.85}
 #pad.hidden{display:none}
-.pgtouch .pg-stick{position:fixed;left:max(3.5vmin,env(safe-area-inset-left,12px));bottom:max(3.5vmin,env(safe-area-inset-bottom,12px));pointer-events:auto;touch-action:none}
-.pgtouch .pg-stick-base{position:relative;width:34vmin;height:34vmin;min-width:120px;min-height:120px;max-width:220px;max-height:220px;border-radius:50%;
-  background:radial-gradient(circle at 50% 42%,#243140cc,#121a23cc);border:2px solid var(--linea-2)}
-.pgtouch .pg-stick-knob{position:absolute;left:50%;top:50%;width:15vmin;height:15vmin;min-width:52px;min-height:52px;max-width:96px;max-height:96px;transform:translate(-50%,-50%);
-  border-radius:50%;background:radial-gradient(circle at 42% 38%,var(--sodio-2),var(--sodio) 60%,var(--sodio-osc));border:2px solid #ffe2ad}
-.pgtouch .pg-btns{position:fixed;right:max(3.5vmin,env(safe-area-inset-right,12px));bottom:max(3.5vmin,env(safe-area-inset-bottom,12px));pointer-events:auto;display:grid;grid-template-columns:repeat(3,max(48px,13vmin));grid-auto-rows:max(48px,13vmin);gap:1.6vmin;
-  grid-template-areas:"max su roll" "sp k ." "gd p ."}
-.pgtouch .pg-btn{border-radius:50%;border:2px solid var(--linea-2);background:#1a2430d8;color:var(--tiza);font-weight:800;font-size:max(16px,4.6vmin);
-  min-width:48px;min-height:48px;max-width:92px;max-height:92px;width:100%;height:100%;padding:0;touch-action:none;-webkit-user-select:none;user-select:none}
-.pgtouch .pg-btn.on{background:var(--sodio);color:#1c1204;transform:scale(.94)}
-.pgtouch .b-p{grid-area:p;border-color:var(--sodio)} .pgtouch .b-k{grid-area:k;border-color:var(--fosforo)}
-.pgtouch .b-sp{grid-area:sp;border-color:#a98be8} .pgtouch .b-su{grid-area:su;border-color:var(--alarma)}
-.pgtouch .b-gd{grid-area:gd;border-color:var(--acero);font-size:max(13px,3.4vmin)}
-.pgtouch .b-roll{grid-area:roll;border-color:#38bdf8;font-size:max(13px,3.4vmin)}
-.pgtouch .b-max{grid-area:max;border-color:#f43f5e;font-size:max(13px,3.4vmin)}
-@media (max-height:400px){
-  .pgtouch .pg-btns{grid-template-columns:repeat(3,min(54px,14vmin));grid-auto-rows:min(54px,14vmin);gap:6px}
-  .pgtouch .pg-btn{min-width:44px;min-height:44px;font-size:15px}
-  .pgtouch .b-gd,.pgtouch .b-max,.pgtouch .b-roll{font-size:12px}
-  .pgtouch .pg-stick-base{width:min(140px,36vmin);height:min(140px,36vmin);min-width:100px;min-height:100px}
+.pgtouch .pg-stickzone{position:fixed;left:0;bottom:0;width:44vw;height:80vh;pointer-events:auto;touch-action:none}
+.pgtouch.lefty .pg-stickzone{left:auto;right:0}
+.pgtouch .pg-stick-base{position:absolute;width:calc(108px*var(--tk));height:calc(108px*var(--tk));transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle at 50% 45%,#2a384acc 0,#141c26d9 62%,#0c1118e6 100%);border:2px solid #5a6e86;box-shadow:inset 0 0 0 6px #ffffff08,0 4px 14px #0008;
+  opacity:calc(var(--ta)*.75);transition:opacity .12s}
+.pgtouch .pg-stick-base.live{opacity:1;border-color:#8aa3bf}
+.pgtouch .pg-stick-knob{position:absolute;left:50%;top:50%;width:44%;height:44%;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle at 38% 32%,#fff2d0 0,var(--sodio-2) 22%,var(--sodio) 58%,var(--sodio-osc) 100%);border:2px solid #ffe2ad;box-shadow:0 3px 8px #000a}
+/* flechas: la del sector activo se ilumina (8 sectores; 0 = derecha, sentido antihorario) */
+.pgtouch .pg-stick-arrows{position:absolute;inset:0}
+.pgtouch .pg-stick-arrows i{position:absolute;left:50%;top:50%;width:0;height:0;border:7px solid transparent;border-bottom:9px solid #8aa3bf88;transform-origin:50% 100%}
+.pgtouch .pg-stick-arrows i:nth-child(1){transform:translate(-50%,-50%) rotate(0deg) translateY(calc(-44px*var(--tk)))}
+.pgtouch .pg-stick-arrows i:nth-child(2){transform:translate(-50%,-50%) rotate(90deg) translateY(calc(-44px*var(--tk)))}
+.pgtouch .pg-stick-arrows i:nth-child(3){transform:translate(-50%,-50%) rotate(180deg) translateY(calc(-44px*var(--tk)))}
+.pgtouch .pg-stick-arrows i:nth-child(4){transform:translate(-50%,-50%) rotate(270deg) translateY(calc(-44px*var(--tk)))}
+.pgtouch .pg-stick-base[data-s="1"] i:nth-child(1),.pgtouch .pg-stick-base[data-s="2"] i:nth-child(1),.pgtouch .pg-stick-base[data-s="3"] i:nth-child(1),
+.pgtouch .pg-stick-base[data-s="7"] i:nth-child(2),.pgtouch .pg-stick-base[data-s="0"] i:nth-child(2),.pgtouch .pg-stick-base[data-s="1"] i:nth-child(2),
+.pgtouch .pg-stick-base[data-s="5"] i:nth-child(3),.pgtouch .pg-stick-base[data-s="6"] i:nth-child(3),.pgtouch .pg-stick-base[data-s="7"] i:nth-child(3),
+.pgtouch .pg-stick-base[data-s="3"] i:nth-child(4),.pgtouch .pg-stick-base[data-s="4"] i:nth-child(4),.pgtouch .pg-stick-base[data-s="5"] i:nth-child(4){border-bottom-color:var(--sodio-2)}
+
+.pgtouch .pg-btns{position:fixed;right:calc(env(safe-area-inset-right,0px) + 10px);bottom:calc(env(safe-area-inset-bottom,0px) + 8px);
+  width:calc(210px*var(--tk));height:calc(190px*var(--tk));pointer-events:auto;touch-action:none;-webkit-user-select:none;user-select:none}
+.pgtouch.lefty .pg-btns{right:auto;left:calc(env(safe-area-inset-left,0px) + 10px);transform:scaleX(-1)}
+.pgtouch.lefty .pg-btn>*{transform:scaleX(-1)}
+.pgtouch .pg-btn{--c:#9aa7b4;--d:56px;position:absolute;width:calc(var(--d)*var(--tk));height:calc(var(--d)*var(--tk));
+  left:calc(var(--x)*var(--tk));top:calc(var(--y)*var(--tk));transform:translate(-50%,-50%);border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;color:#f4efe4;
+  background:radial-gradient(circle at 50% 30%,#ffffff26 0,#ffffff00 46%),radial-gradient(circle at 50% 60%,#1f2a37 0,#111821 100%);
+  border:3px solid var(--c);box-shadow:0 0 0 1px #000a,0 4px 10px #000b,inset 0 -4px 0 #0006;opacity:var(--ta);
+  transition:transform .06s,box-shadow .06s,background .06s}
+.pgtouch .pg-btn b{font:800 calc(19px*var(--tk))/1 var(--f-disp);letter-spacing:.02em;text-shadow:0 1px 0 #000}
+.pgtouch .pg-btn small{font:600 calc(7.5px*var(--tk))/1 var(--f-ui);text-transform:uppercase;letter-spacing:.02em;opacity:.7;margin-top:2px}
+.pgtouch .pg-btn.on{opacity:1;transform:translate(-50%,-50%) scale(.92);background:radial-gradient(circle at 50% 40%,#fff6 0,var(--c) 70%);color:#0d0d0d;
+  box-shadow:0 0 0 1px #000a,0 0 18px var(--c),inset 0 3px 0 #0004}
+.pgtouch .pg-btn.on small{opacity:.85}
+.pgtouch .b-p   {--c:var(--sodio);--d:60px;--x:84px;--y:150px}
+.pgtouch .b-k   {--c:var(--fosforo);--d:60px;--x:150px;--y:128px}
+.pgtouch .b-sp  {--c:#b394ff;--d:54px;--x:68px;--y:82px}
+.pgtouch .b-su  {--c:var(--alarma);--d:54px;--x:134px;--y:62px}
+.pgtouch .b-gd  {--c:#8fa3b8;--d:48px;--x:26px;--y:138px}
+.pgtouch .b-gd b{font-size:calc(11px*var(--tk))}
+.pgtouch .pg-btn.mini{--d:38px}
+.pgtouch .pg-btn.mini b{font-size:calc(11px*var(--tk))} .pgtouch .pg-btn.mini small{display:none}
+.pgtouch .b-max {--c:#f43f5e;--x:24px;--y:32px}
+.pgtouch .b-roll{--c:#38bdf8;--x:190px;--y:38px}
+@media (min-width:1000px) and (pointer:fine){ #pad{--ta:.45} }
+/* en táctil: sin "Cajas" (depuración: tecla F o Entrenamiento); Pausa como icono en la esquina, fuera de la arena */
+@media (pointer:coarse){
+  #topbar{top:calc(env(safe-area-inset-top,0px) + 6px);bottom:auto;left:calc(env(safe-area-inset-left,0px) + 6px);transform:none}
+  #topbar #btn-debug{display:none}
+  #topbar #btn-pause{width:38px;height:38px;padding:0;border-radius:50%;font-size:0;position:relative;background:#121a23cc}
+  #topbar #btn-pause::before,#topbar #btn-pause::after{content:"";position:absolute;top:11px;width:4px;height:16px;background:var(--tiza);border-radius:1px}
+  #topbar #btn-pause::before{left:13px} #topbar #btn-pause::after{right:13px}
 }
-@media (min-width:1000px) and (pointer:fine){ .pgtouch .pg-stick,.pgtouch .pg-btns{opacity:.4} }
 .pg-hide-touch .pgtouch{display:none}
 
 @media (prefers-reduced-motion:reduce){
@@ -643,3 +677,13 @@ button{font-family:inherit}
 .pg-sel .pg-file.pg-swap .pg-booth,.pg-sel .pg-file.pg-swap .pg-dossier{animation:pgFileSwap .16s ease-out}
 @keyframes pgFileSwap{from{opacity:.3}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){ .pg-sel .pg-file.pg-swap .pg-booth,.pg-sel .pg-file.pg-swap .pg-dossier{animation:none} }
+
+/* vista previa de controles (Opciones › Controles): un teléfono en miniatura con la arena y los botones reales */
+.pg-touchprev{position:relative;width:min(100%,640px);aspect-ratio:2.2/1;border:2px solid var(--linea-2);border-radius:14px;overflow:hidden;
+  background:linear-gradient(#1b2633,#0d131a)}
+.pg-touchprev-arena{position:absolute;top:0;bottom:0;left:0;right:0;background:repeating-linear-gradient(90deg,#f0a83a14 0 1px,transparent 1px 32px),linear-gradient(#2b3a4c55,#2b3a4c22);
+  border-left:1px dashed #f0a83a66;border-right:1px dashed #f0a83a66;display:flex;align-items:center;justify-content:center;transition:left .15s,right .15s}
+.pg-touchprev-arena span{font:700 12px var(--f-ui);letter-spacing:.2em;text-transform:uppercase;color:#f0a83a99}
+.pg-touchprev-pad{position:absolute;inset:0}
+.pg-touchprev .pgtouch .pg-stickzone,.pg-touchprev .pgtouch .pg-btns{position:absolute}
+.pg-touchprev .pgtouch .pg-stickzone{height:100%;width:44%}

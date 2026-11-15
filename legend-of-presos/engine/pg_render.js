@@ -86,11 +86,26 @@
       if(this.root.parent) this.root.parent.removeChild(this.root);
       this.root.destroy({children:true});   // texturas de atlas NO se destruyen (las comparte la caché de precarga)
     }
+    // ZONA LIBRE de controles táctiles (px CSS a los lados): la arena se escala y centra ENTRE el joystick y los botones,
+    // así ningún control tapa a los luchadores. 0,0 = pantalla completa. Solo dibujo: la simulación no cambia.
+    setSafe(l, r){ l=Math.max(0,l|0); r=Math.max(0,r|0); const k=this.app.renderer.width/Math.max(1,window.innerWidth);
+      this.safe={l:l*k, r:r*k}; this._layout(); }
     _layout(){
-      const {W,H}=A(); const vw=this.app.renderer.width, vh=this.app.renderer.height;
-      const s=Math.min(vw/W, vh/H); this._scale=s;
-      this.world.scale.set(s); this.world.x=(vw-W*s)/2; this.world.y=(vh-H*s)/2;
-      this.hud.scale.set(s); this.hud.x=this.world.x; this.hud.y=this.world.y;
+      const {W,H}=A(); const vw=this.app.renderer.width, vh=this.app.renderer.height, sf=this.safe||{l:0,r:0};
+      const aw=Math.max(W*0.25, vw-sf.l-sf.r);
+      const s=Math.min(aw/W, vh/H); this._scale=s; this._cx=sf.l+aw/2;
+      const clear=(sf.l>0||sf.r>0) && H*s<vh-2;
+      // despejada: la arena se apoya ABAJO (sin franja de piso vacío) y el HUD queda arriba de la pantalla
+      this._cy = clear ? vh-H*s/2 : vh/2;
+      this.world.scale.set(s); this.world.x=this._cx-W*s/2; this.world.y=this._cy-H*s/2;
+      this.hud.scale.set(s); this.hud.x=this.world.x; this.hud.y=clear?0:this.world.y;
+      // fondo: si la pantalla muestra más que el arte (arena angosta entre controles), se amplía alrededor del suelo
+      // (la línea del piso no se mueve). Margen = lo que puede desplazarse la cámara al acercarse.
+      const st=this.stage, ab=st&&st.artBounds?st.artBounds():null;
+      if(ab && st.zoomBack){ const {GROUND}=A(), cam=(this.cfgCam||1.18), pan=W/2-W/(2*cam);
+        const halfView=Math.max(this._cx, vw-this._cx)/s + pan, room=Math.min(W/2-ab.minX, ab.maxX-W/2);
+        const topView=(this._cy-H*s/2)/s + GROUND, roomUp=GROUND - 0;
+        st.zoomBack(Math.max(1, halfView/Math.max(1,room), topView/Math.max(1,roomUp)), W/2, GROUND); }
     }
     _spriteFor(i, f){
       const ch=this.chars[i]; let clip=ch.clips[f.clip]?f.clip:"idle";
@@ -122,8 +137,8 @@
       // sacudida DETERMINISTA (función del frame, sin Math.random): misma partida => misma imagen
       const fr=(match.frame||0)+(match.hitstop||0)*7;
       const jx=Math.sin(fr*12.9898)*43758.5453, jy=Math.sin(fr*78.233)*43758.5453;
-      this.world.x = vw/2 - cam.x*eff + ((jx-Math.floor(jx))-.5)*sh*this._scale;
-      this.world.y = vh/2 - cam.y*eff + ((jy-Math.floor(jy))-.5)*sh*this._scale;
+      this.world.x = (this._cx!=null?this._cx:vw/2) - cam.x*eff + ((jx-Math.floor(jx))-.5)*sh*this._scale;
+      this.world.y = (this._cy!=null?this._cy:vh/2) - cam.y*eff + ((jy-Math.floor(jy))-.5)*sh*this._scale;
       this._hs = match.hitstop||0; this._hitShake = (match.cfg && match.cfg.render && match.cfg.render.hitShake) || null;
       for(let i=0;i<2;i++) this._spriteFor(i, match.fighters[i]);
       // el último que EMPEZÓ un ataque (normal, aéreo, especial, súper, agarre, MAX) queda delante hasta que el otro empiece

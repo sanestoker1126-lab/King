@@ -961,7 +961,7 @@
   P.options = function(back, tab){
     var self = this; this._optBackMode = back; this._optBack = function(){ if (back === "pause") self.pause(); else self.title(); };
     var scr = this._mount("options", { title: "Opciones", ctx: "Se guardan en este dispositivo", over: back === "pause", wall: back !== "pause", cls: "pg-optscene" });
-    var tabs = [["audio", "Audio"], ["match", "Partida"], ["screen", "Pantalla"], ["keys", "Teclas"]]; tab = tab || this._optTab || "audio"; this._optTab = tab;
+    var tabs = [["audio", "Audio"], ["match", "Partida"], ["controls", "Controles"], ["screen", "Pantalla"], ["keys", "Teclas"]]; tab = tab || this._optTab || "audio"; this._optTab = tab;
     var main = el("div", "pg-main"); main.style.flexDirection = "column";
     main.innerHTML = '<div class="pg-tabs">' + tabs.map(function(t){ return '<button class="pg-tab' + (t[0] === tab ? " on" : "") + '" data-t="' + t[0] + '">' + t[1] + '</button>'; }).join("") + '</div><div class="pg-opts"></div>' +
       '<div class="pg-row"><button class="pgb" id="o-back">Listo</button></div>';
@@ -986,6 +986,28 @@
       opt("Dificultad de la CPU", "Arcade y entrenamiento", seg(DIFF, S.get("difficulty") - 1, function(i){ S.set("difficulty", i + 1); self.sel.difficulty = i + 1; }));
       opt("Rondas para ganar", null, seg(["1", "2", "3"], S.get("roundsToWin") - 1, function(i){ S.set("roundsToWin", i + 1); }));
       var rt = S.get("roundTime"); opt("Tiempo por ronda", null, seg(["60 s", "99 s", "Sin límite"], rt === 60 ? 0 : rt === 99 ? 1 : 2, function(i){ S.set("roundTime", [60, 99, 5940][i]); }));
+    } else if (tab === "controls"){
+      // vista previa EN VIVO de los controles táctiles (los mismos de combate, montados sobre un controlador de prueba)
+      var prevBox = el("div", "pg-touchprev"); prevBox.innerHTML = '<div class="pg-touchprev-arena"><span>Arena</span></div><div class="pg-touchprev-pad"></div>';
+      function preview(){ if (!global.PGTouch || !global.PGInput) return; var host = prevBox.querySelector(".pg-touchprev-pad");
+        var ins = PGTouch.mount(host, new PGInput.Controller({}), { preview: true }).insets(), ar = prevBox.querySelector(".pg-touchprev-arena");
+        var imm = S.get("touchArena") === "immersive"; ar.style.left = (imm ? 0 : ins.l) + "px"; ar.style.right = (imm ? 0 : ins.r) + "px"; }
+      function pct(k, min, max, def, apply){ var w = el("div", "pg-range"), inp = el("input"), out = el("output"); inp.type = "range"; inp.min = min; inp.max = max; inp.step = 5;
+        inp.value = Math.round((S.get(k) == null ? def : S.get(k)) * 100); out.textContent = inp.value + " %"; inp.setAttribute("aria-label", k);
+        inp.addEventListener("input", function(){ S.set(k, inp.value / 100); out.textContent = inp.value + " %"; if (apply) apply(); });
+        w.appendChild(inp); w.appendChild(out); return w; }
+      var tp = S.get("touchPad"); opt("Controles táctiles", "Automático = solo en pantallas táctiles", seg(["Automático", "Siempre", "Ocultos"], tp === "on" ? 1 : tp === "off" ? 2 : 0, function(i){ S.set("touchPad", ["auto", "on", "off"][i]); }));
+      opt("Arena", "Despejada = los luchadores quedan entre los controles, nunca debajo. Inmersiva = pantalla completa", seg(["Despejada", "Inmersiva"], S.get("touchArena") === "immersive" ? 1 : 0, function(i){ S.set("touchArena", i ? "immersive" : "clear"); preview(); }));
+      opt("Tamaño de botones", null, pct("touchScale", 70, 140, 1, preview));
+      opt("Opacidad", null, pct("touchOpacity", 30, 100, 0.85, preview));
+      opt("Joystick", "Flotante = aparece donde apoyes el pulgar (recomendado)", seg(["Flotante", "Fijo"], S.get("touchStick") === "fixed" ? 1 : 0, function(i){ S.set("touchStick", i ? "fixed" : "float"); preview(); }));
+      opt("Mano", "Zurdo = botones a la izquierda", seg(["Diestro", "Zurdo"], S.get("touchLefty") ? 1 : 0, function(i){ S.set("touchLefty", !!i); preview(); }));
+      var tl = S.get("touchLayout") || "classic"; opt("Etiquetas", null, seg(["P · K · ESP · SÚP", "A · B · C · D"], tl === "arcade" ? 1 : 0, function(i){ S.set("touchLayout", i === 1 ? "arcade" : "classic"); preview(); }));
+      var dz = S.get("touchDeadZone") || 0.30; opt("Zona muerta del joystick", "Pequeña = responde antes", seg(["Pequeña", "Normal", "Amplia"], dz <= 0.22 ? 0 : dz >= 0.38 ? 2 : 1, function(i){ S.set("touchDeadZone", [0.20, 0.30, 0.40][i]); preview(); }));
+      var rr = el("div", "pg-opt"); rr.appendChild(prevBox); box.appendChild(rr); preview();
+      var rsT = el("button", "pgb ghost", "Restablecer controles"); rsT.type = "button";
+      rsT.addEventListener("click", function(){ ["touchScale", "touchOpacity", "touchStick", "touchLefty", "touchArena", "touchLayout", "touchDeadZone", "touchPad"].forEach(function(k){ S.set(k, S.DEFAULTS[k]); }); self._sfx("ui"); self.options(back, "controls"); });
+      var r3 = el("div", "pg-row"); r3.appendChild(rsT); box.appendChild(r3);
     } else if (tab === "screen"){
       opt("Efectos de golpe", "Simples = sin sprites de efectos (más rápido en equipos modestos)", seg(["Completos", "Simples"], S.get("fxQuality") === "simple" ? 1 : 0, function(i){ S.set("fxQuality", i ? "simple" : "full"); }));
       // APK: vibración nativa por evento (AndroidBridge.playHaptic). Navegador: navigator.vibrate solo al recibir golpes.
@@ -993,9 +1015,6 @@
       opt(nativeVib ? "Vibración" : "Vibrar al recibir golpes",
           nativeVib ? "Golpes, guardias, K.O. y botones táctiles" : canVib ? "Solo en teléfonos" : "Este dispositivo no permite vibración",
           sw("vibrate", null, !canVib));
-      var tp = S.get("touchPad"); opt("Controles táctiles", "Automático = solo en pantallas táctiles", seg(["Automático", "Siempre", "Ocultos"], tp === "on" ? 1 : tp === "off" ? 2 : 0, function(i){ S.set("touchPad", ["auto", "on", "off"][i]); }));
-      var dz = S.get("touchDeadZone") || 0.30; opt("Zona muerta táctil", "Sensibilidad del joystick en pantalla", seg(["Pequeña", "Normal", "Amplia"], dz <= 0.22 ? 0 : dz >= 0.38 ? 2 : 1, function(i){ S.set("touchDeadZone", [0.20, 0.30, 0.40][i]); }));
-      var tl = S.get("touchLayout") || "classic"; opt("Distribución táctil", "Etiquetas y estilo de botones", seg(["Clásica (P/K)", "KOF (A/B/C/D)"], tl === "arcade" ? 1 : 0, function(i){ S.set("touchLayout", i === 1 ? "arcade" : "classic"); }));
       var sk = S.get("shake"), reduced = !!(global.matchMedia && global.matchMedia("(prefers-reduced-motion: reduce)").matches);
       if (sk == null) sk = reduced ? "soft" : "full";
       opt("Sacudida y destellos", "Suaves o apagados si los movimientos bruscos de la cámara te molestan", seg(["Normales", "Suaves", "Apagados"], sk === "off" ? 2 : sk === "soft" ? 1 : 0, function(i){ S.set("shake", ["full", "soft", "off"][i]); }));

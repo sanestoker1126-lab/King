@@ -311,7 +311,16 @@
     var coarse = !!(global.matchMedia && global.matchMedia("(pointer: coarse)").matches);
     return pref === "on" || (pref !== "off" && coarse);
   }
-  function showPad(on){ document.getElementById("pad").classList.toggle("hidden", !(on && padWanted())); }
+  function showPad(on){ document.getElementById("pad").classList.toggle("hidden", !(on && padWanted())); applySafe(); }
+  // pantalla "despejada" (por defecto): la arena va entre los controles táctiles; "inmersiva": pantalla completa con los
+  // controles encima. Sin controles visibles, siempre pantalla completa.
+  function applySafe(){
+    if (!G.render || !G.render.setSafe) return;
+    var shown = !document.getElementById("pad").classList.contains("hidden");
+    var ins = (shown && PGStore.get("touchArena") !== "immersive" && global.PGTouch) ? PGTouch.insets() : { l: 0, r: 0 };
+    G.render.setSafe(ins.l, ins.r);
+  }
+  window.addEventListener("pgtouch:insets", applySafe);
   // ---- estadísticas REALES del combate (para la pantalla de resultados) ----
   function resetStats(){ G.stats = [ {damage:0,maxCombo:0,specials:0,throws:0}, {damage:0,maxCombo:0,specials:0,throws:0} ]; G._prevHp=null; G._prevSt=["",""]; }
   function trackStats(m){
@@ -429,7 +438,9 @@
   }
   function nameOf(def){ var c = G.roster.characters.find(function(x){ return x.id===def.id; }); return c?c.name:(def.displayName||def.id); }
 
-  function resumeMatch(){ if (!G.match) return; G.paused=false; if (global.PGAudio) PGAudio.music(G.track || "fight"); document.getElementById("topbar").classList.remove("hidden"); showPad(true);
+  function resumeMatch(){ if (!G.match) return; G.paused=false;
+    if (global.PGTouch && G.p1ctl) PGTouch.mount(document.getElementById("pad"), G.p1ctl);   // aplica lo cambiado en Opciones › Controles
+    if (global.PGAudio) PGAudio.music(G.track || "fight"); document.getElementById("topbar").classList.remove("hidden"); showPad(true);
     if (G.render) G.render.debug = G.render.debug; }
   function pauseMatch(){ if (!G.running || G.resultShown) return; G.paused=true; showPad(false); G.fe.pause(); }
   function rematch(){

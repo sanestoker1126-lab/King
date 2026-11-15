@@ -244,7 +244,9 @@
     "jump": 0.004,
     "spaceBack": 0.02,
     "minGap": 52,
-    "mash": 0.08
+    "mash": 0.08,
+    "combo": 0.08,
+    "maxUse": 0
    },
    "2": {
     "react": 0.48,
@@ -253,7 +255,9 @@
     "jump": 0.01,
     "spaceBack": 0.05,
     "minGap": 58,
-    "mash": 0.15
+    "mash": 0.15,
+    "combo": 0.5,
+    "maxUse": 0
    },
    "3": {
     "react": 0.8,
@@ -262,7 +266,9 @@
     "jump": 0.02,
     "spaceBack": 0.1,
     "minGap": 62,
-    "mash": 0.25
+    "mash": 0.25,
+    "combo": 0.85,
+    "maxUse": 0.04
    }
   },
   "range": {
@@ -283,7 +289,8 @@
    "punch": 10,
    "kick": 12,
    "crushPunish": 6
-  }
+  },
+  "_docCombo": "combo: probabilidad de confirmar un golpe que conectó y cancelarlo (a especial; en difícil también a súper y, en MAX, a oculto). maxUse: probabilidad por decisión de activar MAX con media barra (solo difícil). Valores de DISEÑO: TODO: VERIFICAR jugando."
  },
  "guardCancel": {
   "_doc": "Rodada de cancelación de guardia (KOF): Puño+Patada durante el aturdimiento de guardia, en el suelo, cuesta 'cost' de barra (la súper cuesta 100, el MAX 50). Rodada invulnerable normal. Valor de DISEÑO.",
