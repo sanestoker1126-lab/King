@@ -45,6 +45,8 @@ Léelo primero en un chat nuevo. Detalle completo en `docs/CHANGELOG.md` y `docs
 
 9. **Selector con fichas de ingreso (2026-11-16).** Hoja de bustos `assets/ui/fichas.webp`: `python3 -I tools/build_fichas.py` (`--check`). Si cambias un `portrait.body` o agregas un personaje, vuelve a correrlo y luego `python3 -I tools/integrar_entregas_20261106.py` (lista offline).
 
+10. **APK de Android y Reto Bluetooth (2026-11-16).** Proyecto `android/` (nuevo; NO es el `ANDROID/` del usuario). Compilar: `ANDROID_HOME=… tools/build_android.sh` → `android/app/build/outputs/apk/release/app-release.apk`. Bluetooth en `engine/pg_net.js` + `android/.../BtLink.java`. **Pendiente: probarlo en dos teléfonos reales** (permisos, latencia; el retardo de entrada es `DELAY` en `pg_net.js`).
+
 ## Cómo probar (herramientas de este repo)
 ```bash
 cd legend-of-presos
@@ -59,6 +61,8 @@ node tools/qa_20261106/combo_audit.cjs . all           # cadenas cancelInto (540
 node tools/qa_20261106/frames1115_browser.cjs http://127.0.0.1:8000 <prefijo_capturas>
 node tools/qa_20261106/touch_browser.cjs http://127.0.0.1:8000 <prefijo>       # controles táctiles con toques reales
 node tools/qa_20261106/menu_flow_browser.cjs http://127.0.0.1:8000 <prefijo>   # menú -> pelea en teléfono y PC
+node tools/qa_20261106/net_browser.cjs http://127.0.0.1:8000 <prefijo> 5400       # reto en red entre dos pestañas (lockstep)
+node tools/qa_20261106/apk_bridge_browser.cjs <url_assets_del_apk> <prefijo> 3600 # contrato con BtLink.java (puente simulado)
 python3 -I tools/build_fichas.py --check                # hoja de fichas y fondo del selector al día
 node tools/qa_20261106/selector_perf.cjs http://127.0.0.1:8000   # MB al abrir la selección y fluidez del carrusel
 node tools/qa_20261106/ai_stats.cjs . 3 24                                     # qué hace la CPU (especiales, combos, súpers)
@@ -72,7 +76,7 @@ node tools/qa_20261106/vestia_real.cjs http://127.0.0.1:8000 <prefijo_capturas>
 - Qué pose del atlas Vestía va en cada golpe y qué chispa usa cada uno. Las tablas están en `MAP` y `HIT_VESTIA` dentro de `tools/build_sofi_vestia_real.py`.
 - Si los valores del jefe (×2.5 vida, ×1.7 daño) se quedan. Son de diseño, ajustar jugando.
 - La petición de "niveles al doble de ancho y alto, fondos en parallax, submarino y espacio con menos gravedad" **era de otro chat**. Aquí no se tocó nada de eso.
-- Lo de siempre: carpeta `ANDROID/`, los 22 WAV de audio, la lista de nombres y trama, y `sw.js` (falta; da un 404 en consola).
+- Lo de siempre: carpeta `ANDROID/` (ya hay un proyecto propio en `android/`; si quieres el tuyo, pásalo para conservar tu applicationId y tu firma), los 22 WAV de audio, la lista de nombres y trama, y `sw.js` (falta; da un 404 en consola).
 
 ## Pendiente: técnico
 - La pose de derribada Vestía está recostada (71 px de alto; la base, acostada, mide 37).

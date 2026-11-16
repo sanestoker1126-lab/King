@@ -900,3 +900,31 @@ button{font-family:inherit}
 #ui .pg-card .pg-card-face{filter:none}
 #ui .pg-cells .pg-cell{flex:0 0 var(--cw)!important;transform-style:flat;backface-visibility:visible;transform-origin:50% 100%}
 #ui .pg-cells{perspective:none;padding-inline:calc(50% - var(--cw)/2);scroll-padding-inline:calc(50% - var(--cw)/2);height:calc(var(--ch) + 18px)!important;max-height:none!important}
+
+/* ===== RETO BLUETOOTH (P.netMenu / P.netLobby / P.netPause) ===== */
+#ui .pg-menu3 .pg-m3-grid{grid-template-columns:repeat(4,1fr)}
+#ui .pg-menu3 .pg-m3-tile[data-m="bt"] svg{color:#5ab0ff}
+#ui .pg-net .pg-netmain{flex-direction:column;justify-content:space-between;gap:10px}
+.pg-netbox{display:flex;flex-direction:column;gap:12px;max-width:900px;width:100%;margin:0 auto}
+.pg-netbox h2{margin:0 0 6px;font:700 clamp(20px,2.4vw,28px)/1 var(--f-disp);text-transform:uppercase;color:#f3ece2}
+.pg-netbox p{margin:0 0 10px;color:#cfc7bb;font-size:14px;line-height:1.45}
+.pg-netgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pg-netgrid section{padding:14px;border:1px solid #2c3540;border-radius:10px;background:linear-gradient(135deg,#121820f2,#0a0d12f7);box-shadow:0 8px 20px #0009}
+.pg-netdev{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;max-height:30vh;overflow:auto}
+.pg-netdev .pgb{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left}
+.pg-netdev small{color:var(--acero-2);font-size:11px}
+.pg-netstate{padding:8px 12px;border-left:3px solid #5ab0ff;background:#0d1218;border-radius:4px;color:#d9d2c6}
+.pg-netstate.err{border-left-color:var(--alarma);color:#ffb3a8}
+.pg-netnotice{padding:8px 12px;border:1px solid var(--alarma);border-radius:6px;background:#2a0f12;color:#ffd5cd}
+.pg-netres{align-self:center;padding:6px 18px;border-radius:999px;font:700 22px/1.1 var(--f-disp);text-transform:uppercase;background:#1b232d;color:#f3ece2}
+.pg-netres.win{background:linear-gradient(135deg,#ffcf73,#f0a83a);color:#1a1004} .pg-netres.lose{background:#3a1218;color:#ffd5cd}
+.pg-netres small{font:600 13px var(--f-ui);margin-left:8px;opacity:.85}
+.pg-netwait{font-size:12px;color:#5ab0ff;font-weight:700;margin-right:6px}
+@media (max-height:440px){ .pg-netgrid section{padding:10px} .pg-netbox p{font-size:12.5px;margin-bottom:6px} .pg-netres{font-size:16px;padding:3px 12px} }
+@media (max-width:640px){ .pg-netgrid{grid-template-columns:1fr} }
+/* 7 tarjetas en 4 columnas: el título puede ir en dos líneas (sin partir palabras) y ajusta su tamaño al ancho */
+#ui .pg-menu3 .pg-m3-tile b{white-space:normal;overflow-wrap:normal;word-break:keep-all;line-height:1.02;font-size:clamp(13px,1.6vw,23px)}
+@media (max-height:440px){ #ui .pg-menu3 .pg-m3-tile b{font-size:clamp(13px,1.75vw,19px)} #ui .pg-menu3 .pg-m3-tile small{font-size:10.5px} }
+#ui .pg-menu3 .pg-m3-tile{padding-left:10px;padding-right:8px}
+#ui .pg-menu3 .pg-m3-tile[data-m="training"] b{font-size:clamp(12px,1.15vw,19px)}
+@media (max-height:440px){ #ui .pg-menu3 .pg-m3-tile[data-m="training"] b{font-size:clamp(12px,1.5vw,16px)} }

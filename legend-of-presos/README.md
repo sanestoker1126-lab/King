@@ -13,6 +13,13 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 Abrir `game.html` con doble clic no funciona: tiene que servirse por http(s).
 
+## Android (APK)
+
+```bash
+ANDROID_HOME=/ruta/al/sdk tools/build_android.sh     # -> android/app/build/outputs/apk/release/app-release.apk
+```
+Proyecto en `android/` (WebView + vibración + Reto Bluetooth nativo). Firma de prueba (`android/firma-prueba.keystore`): sirve para instalar a mano, no para Play Store. Instrucciones para el jugador en `COMO_JUGAR.txt`.
+
 ## De dónde salió esta carpeta
 
 Se armó el 2026-11-06 con los 4 ZIP que entregó el usuario (código + `assets.zip` + `combat.zip` + `combat_2.zip`), más las entregas de arte de ese día. Los SHA-256 de todo lo recibido están en `sources/entregas_2026-11-06/ORIGEN_SHA256.txt`.

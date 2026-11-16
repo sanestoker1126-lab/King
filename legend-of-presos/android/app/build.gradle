@@ -1,0 +1,44 @@
+// APK de Legend of Presos: el juego web (game.html + engine/ + data/ + styles/ + assets/) servido dentro de un WebView,
+// con vibración nativa y RETO BLUETOOTH (BtLink.java). El juego NO se copia al repo: la tarea copyGame lo toma de la
+// carpeta del proyecto (legend-of-presos/) en cada compilación. Quedan fuera sources/ qa/ tools/ docs/ android/.
+plugins { id "com.android.application" }
+
+android {
+    namespace "mx.legendofpresos.juego"
+    compileSdk 35
+    defaultConfig {
+        applicationId "mx.legendofpresos.juego"   // NUEVO: no es el del proyecto ANDROID/ del usuario (no estaba en el repo)
+        minSdk 24
+        targetSdk 35
+        versionCode 1
+        versionName "2026.11.16"
+    }
+    // Firma de PRUEBA guardada en el repo (android/firma-prueba.keystore, la llave "debug" estándar de Android, contraseña
+    // "android"): así cada APK que se compile, en cualquier máquina, ACTUALIZA al anterior sin desinstalar. No es secreta
+    // y no sirve para Play Store; para publicar hace falta una llave propia que NO se suba al repo.
+    signingConfigs {
+        prueba { storeFile file("../firma-prueba.keystore"); storePassword "android"; keyAlias "androiddebugkey"; keyPassword "android" }
+    }
+    buildTypes {
+        release { minifyEnabled false; signingConfig signingConfigs.prueba }
+        debug { signingConfig signingConfigs.prueba }
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    sourceSets { main { assets.srcDirs += ["$buildDir/game"] } }
+    packagingOptions { resources { excludes += ["META-INF/*.kotlin_module"] } }
+    aaptOptions { noCompress "png", "webp", "wav", "jpg" }   // ya vienen comprimidos: no se recomprimen
+}
+
+def gameRoot = file("../..")
+tasks.register("copyGame", Sync) {
+    from(gameRoot) {
+        include "game.html", "manifest.webmanifest"
+        include "engine/**", "data/**", "styles/**", "assets/**"
+        exclude "**/*.md", "**/.DS_Store"
+    }
+    into "$buildDir/game"
+}
+preBuild.dependsOn("copyGame")
+
+// sin dependencias externas (todo con la API de Android): no hace falta Maven Central para compilar
+

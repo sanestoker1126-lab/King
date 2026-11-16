@@ -30,9 +30,11 @@
 
 - Controles táctiles v2 con arena despejada, IA con comandos/combos/MAX/ocultos, menú con Pelea rápida y selección lista para pelear (2026-11-15, segunda entrega). Sin probar en Android físico.
 
+- APK compilado aquí (`android/`, 71.5 MB, firma de prueba) y Reto Bluetooth (lockstep). Verificado en navegador y con el puente simulado; **sin probar en teléfonos reales** (2026-11-16).
+
 ## Qué NO se pudo verificar
 - `tools/test_sim.js` (la "huella" de 197 pruebas), `tools/validate_data.py` y `tools/run_regression.sh` no venían en los ZIP y no se corrieron.
-- Android: no hay carpeta `ANDROID/` y no se compiló ningún APK.
+- Android: el APK de `android/` se compiló y se verificó (firma, permisos, archivos), pero no se ejecutó en un emulador ni en un teléfono.
 - El "feel": daños, tiempos y cajas de El Paisa son **DISEÑO**, hay que ajustarlos jugando.
 - Fidelidad del arte: los manifests de Wasirris y Personaje 08 dicen que sus poses nuevas son generativas, hechas desde JPEG de baja resolución, con "revisión artística pendiente".
 

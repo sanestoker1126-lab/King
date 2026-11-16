@@ -61,6 +61,11 @@
     window.__PGGAME = G; window.__READY = true;
   }
 
+  // RETO BLUETOOTH: si el otro teléfono se desconecta o la pelea pierde la sincronía, se corta el combate y se avisa
+  if (global.PGNet){
+    PGNet.on("state", function(d){ if ((d.state === "closed" || d.state === "error") && G.mode === "net" && G.match){ PGNet.end(); stopMatch(); G.fe.netMenu({ notice: d.state === "error" ? (d.message || "Error de Bluetooth") : (d.bye ? "Tu rival abandonó el reto." : "Se perdió la conexión con tu rival.") }); } });
+    PGNet.on("desync", function(d){ if (G.mode === "net" && G.match){ PGNet.close(); stopMatch(); G.fe.netMenu({ notice: "La pelea perdió la sincronía en el cuadro " + d.frame + " y se detuvo. Vuelvan a conectarse." }); } });
+  }
   // ---- acciones emitidas por el front-end ----
   function onFE(action, payload){
     if (action==="start") startMatch(payload);
@@ -72,6 +77,8 @@
     else if (action==="tournamentNext") tournamentNextMatch();
     else if (action==="tournamentRetry") tournamentNextMatch();
     else if (action==="arcadeStart") arcadeStart(payload);
+    else if (action==="netStart") startMatch(payload);
+    else if (action==="netLeave"){ PGNet.end(); stopMatch(); }
     else if (action==="arcadeNext") arcadeNextMatch();
     else if (action==="arcadeRetry") arcadeRetry();
     else if (action==="arcadeEnding") arcadeEnding();
@@ -216,6 +223,7 @@
   function matchOpts(teams){ var o = {}; if (teams) o.teams = teams; if (G.mods) o.mods = G.mods; return (o.teams || o.mods) ? o : null; }
   function matchConfig(){
     var cfg = buildConfig();
+    if (G.mode==="net" && G.netCfg){ cfg.timing.roundsToWin = G.netCfg.roundsToWin; cfg.timing.roundTime = G.netCfg.roundTime; }   // reglas del anfitrión
     if (G.mode==="training" && cfg.training){ cfg.timing.roundTime = cfg.training.roundTime; cfg.fighters.minHp = cfg.training.minHp;
       if (cfg.stun) cfg.stun.enabled = !!G.trainDizzy; }   // reloj ∞, sin K.O., mareo solo si se activa en la pausa
     return cfg;
@@ -266,12 +274,15 @@
     var p0 = pre.p0, p1 = pre.p1;
     G.defs = [p0.def, p1.def];
     G.names = [pre.c1.name, pre.c2.name]; G.ids = [pre.c1.id, pre.c2.id];
+    if (sel.mode === "net"){ G.netCfg = sel.cfg || null; G.names[sel.side] += " (Tú)"; } else G.netCfg = null;
     // EQUIPOS: luchadores ya cargados de cada lado, en orden; el integrante activo lo dice el MatchState (teams[s].cur)
     G.teams = pre.teams ? pre.teams.map(function(ids){ return ids.map(function(id){ return { id:id, name:pre.byId[id].name, ch:pre.chars[id] }; }); }) : null;
     G.teamCur = [0, 0];
 
     var cfg = matchConfig();
-    G.match = PGSim.createMatch((Math.random()*1e9)>>>0, cfg, matchOpts(pre.teams));
+    // RETO BLUETOOTH: la semilla y las reglas las manda el anfitrión (los dos teléfonos simulan exactamente lo mismo)
+    G.match = PGSim.createMatch(sel.mode === "net" ? (sel.seed >>> 0) : (Math.random()*1e9)>>>0, cfg, matchOpts(pre.teams));
+    if (sel.mode === "net"){ G.netSide = sel.side; PGNet.begin(sel.side); }
     // FX de sprite: solo las páginas que usan estos dos luchadores + hitsparks genéricos (memoria acotada en Android)
     G.render = new PGRender(G.app, [p0, p1], { targetFrameH: (cfg.render&&cfg.render.targetFrameH)||180, stageDef: pre.stageDef, stageTex: pre.stageTex, fx: pre.fx,
       names: G.names, cpu: G.mode==="arcade" || G.mode==="training" || (G.mode==="team" && !G.teamVs), touch: padWanted(), fxK: shakeFactor(),
@@ -352,7 +363,9 @@
       if (!G.paused){
         G.acc += now - G.last;
         var steps = 0;
-        while (G.acc >= STEP_MS && steps < MAX_STEPS){ simStep(); G.acc -= STEP_MS; steps++; }
+        while (G.acc >= STEP_MS && steps < MAX_STEPS){
+          if (simStep() === false){ G.acc = Math.min(G.acc, STEP_MS * 2); break; }   // RETO BLUETOOTH: falta la entrada del rival
+          G.acc -= STEP_MS; steps++; }
         if (steps === MAX_STEPS) G.acc = 0;
       } else { G.last = now; }
       G.last = now;
@@ -364,6 +377,11 @@
 
   function simStep(){
     var m = G.match; if (!m) return;
+    if (G.mode === "net"){   // lockstep: cada teléfono simula todo; solo se intercambian los botones de cada cuadro
+      return PGNet.tick(function(){ return mergeInputs(G.p1ctl.snapshot(), global.PGGamepad ? PGGamepad.snapshot(0) : null, 0); },
+        function(i0, i1){ PGSim.step(m, G.defs, [i0, i1]); trackStats(m);
+          if (m.events.length){ if (global.PGAudio) PGAudio.events(m.events); m.events.length = 0; } }, m);
+    }
     // P1
     var in0 = mergeInputs(G.p1ctl.snapshot(), global.PGGamepad?PGGamepad.snapshot(0):null, 0);
     // P2
@@ -391,6 +409,12 @@
     if (m.phase==="ko" && m.phaseT>0) return;
     G.resultShown = true;
     var w = m.winner;
+    if (G.mode==="net"){   // RETO BLUETOOTH: resultado y de vuelta a la sala (la conexión sigue abierta para la revancha)
+      var st = PGNet.stats(), you = G.netSide, nm = G.names.slice();
+      PGNet.end(); stopMatch();
+      G.fe.netLobby({ result: { winner: w, you: you, wins: m.wins.slice(), names: nm, frames: st ? st.frame : 0, stalls: st ? st.stalls : 0, desync: st ? st.desync : -1 } });
+      return;
+    }
     // CAMPAÑA ARCADE: el jugador es el lado 0; conserva el estado entre combates
     if (G.arcadeCampaign){
       var A=G.arcadeCampaign, battle=A.battles[A.idx], campaignData={ index:A.idx, total:A.length, boss:!!(battle&&battle.boss), opponent:battle&&(battle.opponent || (battle.opponentTeam&&battle.opponentTeam[0])), complete:false };
@@ -443,7 +467,8 @@
     if (global.PGTouch && G.p1ctl) PGTouch.mount(document.getElementById("pad"), G.p1ctl);   // aplica lo cambiado en Opciones › Controles
     if (global.PGAudio) PGAudio.music(G.track || "fight"); document.getElementById("topbar").classList.remove("hidden"); showPad(true);
     if (G.render) G.render.debug = G.render.debug; }
-  function pauseMatch(){ if (!G.running || G.resultShown) return; G.paused=true; showPad(false); G.fe.pause(); }
+  // en el RETO BLUETOOTH no se congela la pelea (el otro teléfono seguiría esperando): se ofrece seguir o abandonar
+  function pauseMatch(){ if (!G.running || G.resultShown) return; if (G.mode==="net"){ G.fe.netPause(); return; } G.paused=true; showPad(false); G.fe.pause(); }
   function rematch(){
     if (!G.match){ if (G.lastSel) return startMatch(G.lastSel); return; }   // desde Resultados el combate ya se cerró
     var T = G.match.teams;   // equipos: la revancha empieza otra vez con los primeros de cada equipo

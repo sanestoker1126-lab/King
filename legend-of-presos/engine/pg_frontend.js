@@ -25,6 +25,7 @@
     torneo:   { t: "Torneo", m: "3, 5 o 7 rivales", d: "Encadena combates contra rivales al azar que se vuelven más difíciles. Si pierdes uno, puedes reintentarlo.", facts: [["Jugadores", "1 contra la CPU"], ["Rivales", "3, 5 o 7"]] },
     versus:   { t: "Versus", m: "2 jugadores", d: "Dos jugadores en el mismo dispositivo, con teclado o con dos mandos.", facts: [["Jugadores", "2 locales"], ["Teclas", "P1 WASD · P2 flechas"]] },
     training: { t: "Entrenamiento", m: "ventaja al frame", d: "Practica contra un maniquí que no cae K.O.; arriba ves la ventaja al frame de cada intercambio. El maniquí se ajusta en la pausa.", facts: [["Jugadores", "1 contra maniquí"], ["Tiempo", "sin límite"], ["Medición", "ventaja al frame"]] },
+    bt:       { t: "Reto Bluetooth", m: "2 teléfonos", d: "Pelea contra un amigo, cada quien en su teléfono, conectados por Bluetooth. Uno crea la sala y el otro la busca.", facts: [] },
     options:  { t: "Opciones", m: "audio · partida · teclas", d: "Audio, reglas de la partida, pantalla y teclas.", facts: [["Se guarda", "en este dispositivo"]] }
   };
 
@@ -425,6 +426,9 @@
       case "commands": this._sfx("cancel"); (this._cmdBack || this.title.bind(this))(); break;
       case "options": this._sfx("cancel"); this.emit("optionsChanged"); (this._optBack || this.title.bind(this))(); break;
       case "pause": this._sfx("cancel"); this.hide(); this.emit("resume"); break;
+      case "netpause": this._sfx("cancel"); this.hide(); break;
+      case "netmenu": this._sfx("cancel"); if (global.PGNet) PGNet.close(); this.title(); break;
+      case "netlobby": break;   // salir de la sala solo con el botón (corta la conexión)
       case "trainOpts": this._sfx("cancel"); this.pause(); break;
       case "results": case "tourChampion": case "campaignEnding": this._sfx("cancel"); this.title(); break;
       default: break;
@@ -506,6 +510,7 @@
     torneo:   '<path d="M3 5h5v4h4M3 15h5v-4M12 9v6h4M3 19h5v-4M21 12h-5"/>',
     versus:   '<path d="M4 4l9 9M4 4h4M4 4v4M20 4l-9 9M20 4h-4M20 4v4M6 18l3-3M18 18l-3-3M4 20l3-3M20 20l-3-3"/>',
     training: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/>',
+    bt:       '<path d="M7 7l10 10-5 5V2l5 5L7 17"/>',
     options:  '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>'
   };
   function icon(n){ return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICON[n] || "") + '</svg>'; }
@@ -525,7 +530,7 @@
       '<nav class="pg-m3-grid" aria-label="Modos de juego"></nav><p class="pg-m3-desc"></p>';
     scr.appendChild(wrap);
     var grid = wrap.querySelector(".pg-m3-grid"), desc = wrap.querySelector(".pg-m3-desc");
-    var rows = ["arcade", "team", "torneo", "versus", "training", "options"].map(function(m){ return { m: m, t: MODES[m].t, meta: MODES[m].m, d: MODES[m].d }; });
+    var rows = ["arcade", "team", "torneo", "versus", "bt", "training", "options"].map(function(m){ return { m: m, t: MODES[m].t, meta: MODES[m].m, d: MODES[m].d }; });
     var byM = { quick: { d: "Un toque y a pelear: " + q1.name + " contra " + q2.name + " (CPU " + diff + "). Cambia de luchadores en Arcade o Versus." } };
     rows.forEach(function(r){ byM[r.m] = r;
       var b = el("button", "pg-mode pg-m3-tile", icon(r.m) + "<b>" + esc(r.t) + "</b><small>" + esc(r.meta) + "</small>"); b.dataset.m = r.m;
@@ -536,11 +541,16 @@
       if (m !== "quick") self.store.set("lastMode", m);
       if (m === "options") return self.options("title");
       if (m === "torneo") return self.tournamentSetup();
+      if (m === "bt") return self.netMenu();
       if (m === "team"){ self.sel.mode = "team"; return self.teamSelect(); }
       if (m === "quick"){ self.sel.mode = "arcade"; self.sel.p1 = q1.id; self.sel.p2 = q2.id; self.sel.slot = 1; self.store.merge({ lastP1: q1.id, lastP2: q2.id }); return self.vs(); }
       self.sel.mode = m; self.sel.p1 = null; self.sel.p2 = null; self.sel.slot = 0; self.select();
     }
     wrap.querySelectorAll(".pg-mode").forEach(function(b){ b.addEventListener("click", function(){ go(b.dataset.m); }); });
+    // títulos de las tarjetas: si una palabra larga ("Entrenamiento") no cabe en su tarjeta, se achica hasta que quepa
+    function fitTitles(){ grid.querySelectorAll(".pg-m3-tile b").forEach(function(t){ t.style.fontSize = "";
+      var fs = parseFloat(getComputedStyle(t).fontSize) || 16; while (t.scrollWidth > t.clientWidth + 1 && fs > 10){ fs -= 0.5; t.style.fontSize = fs + "px"; } }); }
+    fitTitles(); if (global.ResizeObserver) new global.ResizeObserver(fitTitles).observe(grid);
     this._hints(scr, ["nav", "ok", "back"]);
     this._onFocus = function(e){ var r = byM[e.dataset.m]; if (r) desc.textContent = r.m === "arcade" ? r.d + " Al mejor de " + (rounds * 2 - 1) + "." : r.d; };
     this._armFocus('.pg-m3-quick');
@@ -581,6 +591,127 @@
       if (global.ResizeObserver && !box._pgFit){ box._pgFit = new global.ResizeObserver(function(){ fitDossier(box); }); box._pgFit.observe(box); }
     }).catch(function(e){ box.insertAdjacentHTML("beforeend", '<p class="pg-empty">' + esc(e.message) + '</p>'); });
   };
+  // ======================================================== RETO BLUETOOTH (pg_net.js)
+  // Pantalla 1: crear sala o buscar rival. Pantalla 2 (sala): cada quien elige luchador; el anfitrión elige escenario y
+  // reglas; cuando los dos están listos, el anfitrión manda la semilla y arrancan juntos (lockstep).
+  P._netListen = function(){
+    var self = this; if (this._netOff) return; var offs = [];
+    offs.push(PGNet.on("state", function(d){
+      if (d.state === "connected" && (self._scene === "netmenu")) { self._sfx("confirm"); return self.netLobby(); }
+      // desde la SALA se vuelve a la pantalla de conexión con el aviso; en la pantalla de conexión solo cambia el estado
+      if ((d.state === "closed" || d.state === "error") && self._scene === "netlobby")
+        return self.netMenu({ notice: d.state === "error" ? (d.message || "Error de Bluetooth.") : (d.bye ? "Tu rival salió de la sala." : "Se cerró la conexión.") });
+      if (self._scene === "netmenu" && self._netPaint) self._netPaint(d);
+    }));
+    offs.push(PGNet.on("device", function(d){ if (self._scene === "netmenu" && self._netDev) self._netDev(d); }));
+    offs.push(PGNet.on("scanDone", function(){ if (self._scene === "netmenu" && self._netPaint) self._netPaint({ state: "scanDone" }); }));
+    offs.push(PGNet.on("permission", function(d){ if (self._scene === "netmenu" && self._netPaint) self._netPaint({ state: "error", message: d.message || "Hace falta el permiso de Bluetooth." }); }));
+    offs.push(PGNet.on("version", function(d){ global.alert && console.warn("Versiones distintas del juego: " + d.mine + " / " + d.theirs); }));
+    offs.push(PGNet.on("msg", function(m){ if (self._netMsg) self._netMsg(m); }));
+    this._netOff = function(){ offs.forEach(function(f){ f(); }); };
+  };
+  P.netMenu = function(opts){
+    opts = opts || {}; var self = this;
+    var scr = this._mount("netmenu", { title: "Reto Bluetooth", ctx: "Dos teléfonos · uno contra otro", cls: "pg-sel pg-net" });
+    var main = el("div", "pg-main pg-netmain"); scr.appendChild(main);
+    if (!global.PGNet || !PGNet.available()){
+      main.innerHTML = '<div class="pg-netbox"><h2>Solo en la app de Android</h2><p>El reto por Bluetooth necesita el APK del juego: un navegador no puede conectar dos teléfonos por Bluetooth.</p>' +
+        '<p>Instala el APK en los dos teléfonos, abre <b>Reto Bluetooth</b> en ambos: uno toca <b>Crear sala</b> y el otro <b>Buscar rival</b>.</p></div>' +
+        '<div class="pg-bar"><div class="pg-bar-actions"><button class="pgb prim" id="n-back">Volver</button></div></div>';
+      this._click(main, "#n-back", function(){ self._sfx("cancel"); self.title(); }); this._armFocus("#n-back"); return;
+    }
+    this._netListen();
+    main.innerHTML = '<div class="pg-netbox">' + (opts.notice ? '<p class="pg-netnotice">' + esc(opts.notice) + '</p>' : '') +
+      '<div class="pg-netgrid"><section><h2>Crear sala</h2><p>Tu teléfono queda visible por Bluetooth y espera al rival. Serás <b>1P</b>.</p><button class="pgb prim" id="n-host">Crear sala</button></section>' +
+      '<section><h2>Buscar rival</h2><p>Busca la sala que creó tu amigo y toca su teléfono. Serás <b>2P</b>.</p><button class="pgb" id="n-scan">Buscar rival</button><ul class="pg-netdev" aria-label="Teléfonos encontrados"></ul></section></div>' +
+      '<p class="pg-netstate" aria-live="polite">Activa el Bluetooth en los dos teléfonos.</p></div>' +
+      '<div class="pg-bar"><div class="pg-bar-actions"><button class="pgb ghost" id="n-back">Volver</button></div></div>';
+    var stEl = main.querySelector(".pg-netstate"), list = main.querySelector(".pg-netdev"), seen = {};
+    this._netPaint = function(d){
+      var t = { starting: "Preparando la sala…", hosting: "Sala abierta" + (d.name ? " como «" + d.name + "»" : "") + ". Esperando a tu rival…", scanning: "Buscando teléfonos cerca…",
+        scanDone: Object.keys(seen).length ? "Toca el teléfono de tu rival." : "No apareció ninguna sala. Pide a tu amigo que toque «Crear sala» y vuelve a buscar.",
+        connecting: "Conectando…", error: "Error: " + (d.message || "Bluetooth no disponible."), idle: "Activa el Bluetooth en los dos teléfonos.", closed: "Conexión cerrada." }[d.state];
+      if (t) stEl.textContent = t; stEl.classList.toggle("err", d.state === "error"); };
+    this._netDev = function(d){ if (!d.address || seen[d.address]) return; seen[d.address] = 1;
+      var li = el("li"), b = el("button", "pgb ghost", '<b>' + esc(d.name || "Teléfono sin nombre") + '</b><small>' + esc(d.address) + (d.bonded ? " · vinculado" : "") + '</small>'); b.type = "button";
+      b.addEventListener("click", function(){ self._sfx("confirm"); PGNet.connect(d.address); }); li.appendChild(b); list.appendChild(li); self._armFocus(); };
+    this._click(main, "#n-host", function(){ self._sfx("confirm"); PGNet.host(); });
+    this._click(main, "#n-scan", function(){ self._sfx("ui"); seen = {}; list.innerHTML = ""; PGNet.scan(); });
+    this._click(main, "#n-back", function(){ self._sfx("cancel"); PGNet.close(); self.title(); });
+    this._netPaint({ state: PGNet.session.state });
+    this._armFocus("#n-host");
+  };
+  // SALA: misma estética que la selección. lado propio: anfitrión = 1P (0), invitado = 2P (1)
+  P.netLobby = function(opts){
+    opts = opts || {}; var self = this;
+    if (!global.PGNet || PGNet.session.state !== "connected") return this.netMenu(opts);
+    this._netListen();
+    var me = PGNet.session.host ? 0 : 1, them = 1 - me, L = this._netL = this._netL || { pick: [null, null], ready: [false, false], stage: this.sel.stage || 0 };
+    L.ready = [false, false];
+    var scr = this._mount("netlobby", { title: "Sala Bluetooth", ctx: "Contra " + esc(PGNet.session.peerName || "tu rival"), cls: "pg-sel" });
+    var main = el("div", "pg-main");
+    var res = opts.result, banner = "";
+    if (res){ var won = res.winner === res.you, draw = res.winner < 0;
+      banner = '<div class="pg-netres ' + (draw ? "" : won ? "win" : "lose") + '">' + (draw ? "Empate" : won ? "¡Ganaste!" : "Perdiste") + ' <small>' + res.wins.join(" – ") +
+        (res.desync >= 0 ? " · se perdió la sincronía" : "") + '</small></div>'; }
+    main.innerHTML = banner + '<div class="pg-duel">' + this._fileHTML(0, me === 0 ? "1P · TÚ" : "1P") + '<div class="pg-vsmark">VS</div>' + this._fileHTML(1, me === 1 ? "2P · TÚ" : "2P") + '</div>' +
+      '<div class="pg-roster-head"><b>ELIGE TU LUCHADOR</b><small>DESLIZA · TOCA PARA ELEGIR</small></div><div class="pg-cells"></div>' +
+      '<div class="pg-bar"><div class="pg-field pg-stagecyc">Escenario <div class="pg-cyc" id="s-stage">' + (me === 0 ? '<button class="pgb ghost pg-cyc-b" data-d="-1" aria-label="Escenario anterior">‹</button>' : '') +
+      '<span class="pg-cyc-v"></span>' + (me === 0 ? '<button class="pgb ghost pg-cyc-b" data-d="1" aria-label="Escenario siguiente">›</button>' : '') + '</div></div>' +
+      '<div class="pg-bar-actions"><span class="pg-netwait"></span><button class="pgb ghost" id="n-leave">Salir</button><button class="pgb prim" id="s-go">¡Listo!</button></div></div>';
+    scr.appendChild(main);
+    var files = main.querySelectorAll(".pg-file"), prev = [new Preview(files[0].querySelector("canvas")), new Preview(files[1].querySelector("canvas"), { flip: true })];
+    Loop.add(function(t){ prev[0].draw(t); prev[1].draw(t); });
+    var playable = this._playable(), cells = main.querySelector(".pg-cells"), wait = main.querySelector(".pg-netwait"), go = main.querySelector("#s-go");
+    if (!L.pick[me]) L.pick[me] = (playable.find(function(c){ return c.id === self.store.get("lastP1"); }) || playable[0]).id;
+    enableRosterRail(cells, null);
+    playable.forEach(function(c){ var b = el("button", "pg-cell", ""); b.dataset.id = c.id; makeFighterCard(b, c);
+      b.addEventListener("click", function(){ if (L.ready[me]) return; self._sfx("ui"); L.pick[me] = c.id; centerRosterCard(cells, c.id, true); PGNet.send({ t: "pick", id: c.id }); paint(); }); cells.appendChild(b); });
+    var shown = [undefined, undefined];
+    function paint(){
+      [0, 1].forEach(function(s){ var id = L.pick[s]; if (shown[s] !== id){ shown[s] = id; var ch = id ? self._char(id) : null; prev[s].set(ch); self._fillDossier(files[s].querySelector(".pg-dossier"), ch); }
+        files[s].classList.toggle("active", s === me); });
+      cells.querySelectorAll(".pg-cell").forEach(function(c){ c.classList.toggle(me === 0 ? "pick1" : "pick2", c.dataset.id === L.pick[me]); });
+      var st = STAGES[L.stage] || STAGES[0]; main.querySelector("#s-stage .pg-cyc-v").innerHTML = '<i class="pg-swatch" style="background:' + st.c + '"></i>' + esc(st.n);
+      go.textContent = L.ready[me] ? "Cancelar" : "¡Listo!"; go.classList.toggle("prim", !L.ready[me]);
+      wait.textContent = !L.pick[them] ? "Tu rival está eligiendo…" : L.ready[them] ? "Tu rival está listo" : L.ready[me] ? "Esperando a tu rival…" : "";
+    }
+    main.querySelectorAll("#s-stage .pg-cyc-b").forEach(function(b){ b.addEventListener("click", function(){ L.stage = (L.stage + (+b.dataset.d) + STAGES.length) % STAGES.length; PGNet.send({ t: "stage", i: L.stage }); self._sfx("ui"); paint(); }); });
+    this._click(main, "#n-leave", function(){ self._sfx("cancel"); PGNet.close(); self._netL = null; self.title(); });
+    go.addEventListener("click", function(){ self._sfx("confirm"); L.ready[me] = !L.ready[me]; PGNet.send({ t: "ready", on: L.ready[me], id: L.pick[me] }); paint(); maybeStart(); });
+    function maybeStart(){
+      if (me !== 0 || !L.ready[0] || !L.ready[1] || !L.pick[0] || !L.pick[1]) return;
+      var start = { t: "start", seed: (Math.random() * 4294967296) >>> 0, p1: L.pick[0], p2: L.pick[1], stage: L.stage,
+        cfg: { roundsToWin: self.store.get("roundsToWin") || 2, roundTime: self.store.get("roundTime") || 99 } };
+      PGNet.send(start); launch(start);
+    }
+    function launch(m){
+      self.store.set("lastP1", L.pick[me]); L.ready = [false, false];
+      self.sel.mode = "net"; self.sel.p1 = m.p1; self.sel.p2 = m.p2; self.sel.stage = m.stage; self.sel.seed = m.seed; self.sel.netCfg = m.cfg; self.sel.side = me;
+      self._netMsg = null; self.vs();
+    }
+    this._netMsg = function(m){
+      if (m.t === "pick"){ L.pick[them] = m.id; paint(); }
+      else if (m.t === "ready"){ L.ready[them] = !!m.on; if (m.id) L.pick[them] = m.id; paint(); maybeStart(); }
+      else if (m.t === "stage" && me === 1){ L.stage = m.i; paint(); }
+      else if (m.t === "start" && me === 1) launch(m);
+      else if (m.t === "hi"){ PGNet.send({ t: "pick", id: L.pick[me] }); if (me === 0) PGNet.send({ t: "stage", i: L.stage }); }
+    };
+    PGNet.send({ t: "pick", id: L.pick[me] }); if (me === 0) PGNet.send({ t: "stage", i: L.stage }); PGNet.send({ t: "hi" });
+    paint(); centerRosterCard(cells, L.pick[me], false);
+    this._armFocus("#s-go");
+  };
+  // pausa en red: la pelea NO se congela (el otro teléfono esperaría); se puede seguir o abandonar
+  P.netPause = function(){
+    var self = this, scr = this._mount("netpause", { title: "Reto Bluetooth", ctx: "La pelea sigue corriendo", over: true, cls: "pg-pause" });
+    var main = el("div", "pg-main"); main.style.flexDirection = "column";
+    main.innerHTML = '<p class="pg-empty">En el reto la pelea no se pausa: tu rival sigue jugando.</p><div class="pg-row"><button class="pgb prim" id="np-go">Seguir peleando</button><button class="pgb ghost" id="np-quit">Abandonar reto</button></div>';
+    scr.appendChild(main);
+    this._click(main, "#np-go", function(){ self._sfx("ui"); self.hide(); });
+    this._click(main, "#np-quit", function(){ self._sfx("cancel"); PGNet.close(); self.emit("netLeave"); self._netL = null; self.title(); });
+    this._armFocus("#np-go");
+  };
+
   P.select = function(){
     var self = this, mode = this.sel.mode, arcade = mode === "arcade", cpu = arcade || mode === "training";
     var ctx = { arcade: "Arcade", versus: "Versus", training: "Entrenamiento" }[mode];
@@ -906,7 +1037,8 @@
     this.sel.tag = null; this.sel.track = null; this.sel.mods = null;
     this.hide(); if (this.audio) this.audio.music(track || "fight");
     this.emit("start", { mode: this.sel.mode, p1: this.sel.p1, p2: this.sel.p2, team1: this.sel.team1, team2: this.sel.team2, teamVs: this.sel.teamVs,
-      difficulty: this.sel.difficulty, stage: this.sel.stage, preloaded: !!this.preload, tag: tag, track: track, mods: mods });
+      difficulty: this.sel.difficulty, stage: this.sel.stage, preloaded: !!this.preload, tag: tag, track: track, mods: mods,
+      seed: this.sel.seed, cfg: this.sel.netCfg, side: this.sel.side });   // (seed/cfg/side: solo el reto Bluetooth)
   };
 
   // ======================================================== PAUSA

@@ -1,11 +1,32 @@
 LEGEND OF PRESOS — EL ESCAPE DE PUENTE GRANDE
-Cómo jugar en la PC
+Cómo jugar (Android y PC)
 ====================================================
 
-IMPORTANTE: el juego NO se abre con doble clic en "game.html".
+IMPORTANTE (en PC): el juego NO se abre con doble clic en "game.html".
 Si lo haces, verás una pantalla en blanco o un aviso. Eso es normal:
 estos juegos necesitan arrancar desde un pequeño servidor. Por eso se
 incluye un lanzador que lo hace por ti.
+
+--------------------------------------------------
+ANDROID (teléfono)
+--------------------------------------------------
+1) Copia "Legend_of_Presos.apk" al teléfono (o descárgalo ahí).
+2) Tócalo para instalarlo. Si Android lo bloquea: permite "Instalar
+   apps desconocidas" para la app con la que lo abriste (Archivos,
+   Chrome, WhatsApp...). Es normal con juegos que no vienen de Play Store.
+3) Abre "Legend of Presos". Se juega en horizontal, con los controles
+   en pantalla. Atrás = pausa / volver.
+   Tamaño, opacidad, joystick fijo o flotante y zurdo:
+   Opciones > Controles.
+
+RETO BLUETOOTH (dos teléfonos):
+   - Instala el APK en los DOS teléfonos y enciende el Bluetooth.
+   - En los dos: menú > Reto Bluetooth.
+   - Uno toca "Crear sala" (será 1P). Acepta que el teléfono quede
+     visible y el permiso de "Dispositivos cercanos".
+   - El otro toca "Buscar rival" y elige el teléfono de su amigo.
+   - En la sala cada quien elige su luchador y toca "¡Listo!".
+   - Pónganse cerca (mismo cuarto). Si se corta, vuelvan a conectarse.
 
 --------------------------------------------------
 WINDOWS
@@ -42,6 +63,7 @@ CONTROLES (teclado)
 Moverse: A / D o flechas       Saltar: W o flecha arriba
 Agacharse: S o flecha abajo    Golpe: J     Patada: K
 Especial: L     Súper: U       Guardia: Shift     Pausa: Esc
+(Puedes cambiar las teclas en Opciones > Teclas.)
 
 Sofi: al bajar su vida a la mitad se transforma SOLA en Modo Vestía.
 

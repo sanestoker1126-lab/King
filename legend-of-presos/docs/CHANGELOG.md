@@ -2,6 +2,36 @@
 
 > Los ZIP recibidos el 2026-11-06 no traían `docs/`, así que **el historial anterior no está aquí**. Si tienes el `docs/CHANGELOG.md` completo, pega esta entrada al principio del tuyo.
 
+## 2026-11-16 (2) — APK de Android compilado y RETO BLUETOOTH (dos teléfonos)
+
+Pedido del usuario: el juego con todas las mejoras, listo para Android, y la opción de retar por Bluetooth.
+
+### APK (compilado aquí, verificado; NO probado en un teléfono)
+- Proyecto nuevo `android/` (Gradle, AGP 8.7.3, compileSdk/targetSdk 35, minSdk 24 = Android 7). **No es el proyecto `ANDROID/` del usuario** (no está en el repo): `applicationId` nuevo `mx.legendofpresos.juego` y firma propia, así que se instala APARTE de cualquier versión anterior y no la actualiza.
+- `MainActivity.java`: WebView a pantalla completa, horizontal, pantalla siempre encendida, modo inmersivo. Sirve el juego desde los assets del APK con origen `https://appassets.androidplatform.net/assets/` (equivalente a WebViewAssetLoader, sin dependencias externas: Maven Central respondía 429). Botón Atrás = Esc del juego. `AndroidBridge.playHaptic` = vibración nativa por tipo de golpe.
+- `BtLink.java`: Bluetooth clásico RFCOMM. Anfitrión visible 120 s con socket inseguro (sin vinculación) y seguro a la vez; invitado: vinculados + búsqueda; conexión con reintento seguro; una línea JSON por mensaje; escritura en un hilo aparte. Permisos de "dispositivos cercanos" (Android 12+) o ubicación (Android 7–11), pedidos al usarlos.
+- El juego NO se copia al repo: la tarea `copyGame` lo toma de la carpeta del proyecto en cada compilación (fuera: sources/ qa/ tools/ docs/ android/). Compilar: `ANDROID_HOME=… tools/build_android.sh`.
+- Firma de PRUEBA guardada en `android/firma-prueba.keystore` (la llave debug estándar de Android, contraseña "android"): cualquier APK compilado después actualiza a este sin desinstalar. **No es secreta y no sirve para Play Store.**
+- Verificado: `apksigner verify` OK; `aapt2 dump badging` (paquete, SDK y permisos); los **368 archivos del juego dentro del APK son idénticos** (SHA-256) a los del proyecto. Tamaño: 71.5 MB.
+- **No se pudo ejecutar** en un emulador (este equipo no tiene virtualización `/dev/kvm`) ni en un teléfono.
+
+### Reto Bluetooth (`engine/pg_net.js`, `engine/pg_game.js`, `engine/pg_frontend.js`)
+- Menú › **Reto Bluetooth**: "Crear sala" (1P) o "Buscar rival" (2P) → **sala** con la estética del selector: cada quien elige su luchador, el anfitrión el escenario; "¡Listo!" en los dos → arrancan juntos con la semilla y las reglas del anfitrión.
+- **Lockstep**: la simulación es determinista, así que cada teléfono simula la pelea completa y solo se mandan los botones de cada cuadro (un entero). Retardo de entrada: 3 cuadros (50 ms). Si la entrada del rival no ha llegado, se espera (no se adivina). Cada 60 cuadros se compara una huella del estado; si difiere, se corta la pelea y se avisa (no se oculta).
+- En red la pausa NO congela (el otro seguiría esperando): ofrece seguir o abandonar. Desconexión o abandono: se corta y se avisa ("Tu rival abandonó el reto.", "Se perdió la conexión…"). Al terminar, resultado y de vuelta a la sala para la revancha.
+- En el navegador (sin APK) el modo explica que necesita la app de Android: un navegador no puede conectar dos teléfonos por Bluetooth.
+- Arreglado de paso: el menú ahora tiene 7 tarjetas; los títulos largos se achican solos hasta caber (medido en 6 tamaños de pantalla).
+
+### Pruebas (salida real)
+- `tools/qa_20261106/net_browser.cjs`: dos pestañas con el transporte de prueba (`game.html?net=test`), cada lado jugado por la IA a través de la red. Pelea COMPLETA: **1960 cuadros comparados, 0 distintos**; resultados coherentes (una vio "Perdiste 0–2" y la otra "¡Ganaste! 0–2"); aviso al desconectarse.
+- `tools/qa_20261106/apk_bridge_browser.cjs`: los archivos EXTRAÍDOS del APK servidos en `/assets/game.html` (la misma ruta del WebView) + un `AndroidBridge` simulado que se comporta como `BtLink.java`. El juego usa el transporte "bt"; **3495 cuadros comparados, 0 distintos**; vibración llamada; Atrás en pelea abre la pausa del reto; abandono avisado.
+- Regresión: menú→pelea (teléfono y PC), controles táctiles, entrega 2026-11-15, ocultos 12/12, combos 540/546, jefes OK, IA sin errores, generadores al día.
+
+### Límites (honestos)
+- **Bluetooth real sin probar**: falta probarlo con dos teléfonos. Puntos de riesgo: permisos según la marca, la búsqueda que algunos teléfonos limitan, la latencia real (si se siente "pesado" se sube el retardo de 3 cuadros) y teléfonos con versiones de WebView muy distintas (la huella avisaría de una desincronización).
+- El reto es 1 contra 1 por rondas (no Equipos).
+- En el transporte de prueba hubo esperas frecuentes porque las dos pestañas compartían la CPU de este equipo; no es una medición del Bluetooth.
+
 ## 2026-11-16 — Selector: fichas de ingreso, carrusel ligero y estética de Puente Grande / Guadalajara
 
 Pedido del usuario: cartas y selector más profesionales, optimizados, fluidos, con estética de calle peligrosa y oscura, Jalisco, el penal de Puente Grande y el crimen organizado de la región.
