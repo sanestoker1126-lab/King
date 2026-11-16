@@ -43,6 +43,8 @@ Léelo primero en un chat nuevo. Detalle completo en `docs/CHANGELOG.md` y `docs
 
 8. **Controles táctiles v2, IA y menús (2026-11-15).** Joystick flotante + botones en arco + arena despejada (Opciones › Controles). La CPU hace comandos reales, combos, MAX y ocultos. Menú con "Pelea rápida" y selección con fichas ya llenas. Detalle en el CHANGELOG. Pendiente: probarlo en el Android del usuario.
 
+9. **Selector con fichas de ingreso (2026-11-16).** Hoja de bustos `assets/ui/fichas.webp`: `python3 -I tools/build_fichas.py` (`--check`). Si cambias un `portrait.body` o agregas un personaje, vuelve a correrlo y luego `python3 -I tools/integrar_entregas_20261106.py` (lista offline).
+
 ## Cómo probar (herramientas de este repo)
 ```bash
 cd legend-of-presos
@@ -57,6 +59,8 @@ node tools/qa_20261106/combo_audit.cjs . all           # cadenas cancelInto (540
 node tools/qa_20261106/frames1115_browser.cjs http://127.0.0.1:8000 <prefijo_capturas>
 node tools/qa_20261106/touch_browser.cjs http://127.0.0.1:8000 <prefijo>       # controles táctiles con toques reales
 node tools/qa_20261106/menu_flow_browser.cjs http://127.0.0.1:8000 <prefijo>   # menú -> pelea en teléfono y PC
+python3 -I tools/build_fichas.py --check                # hoja de fichas y fondo del selector al día
+node tools/qa_20261106/selector_perf.cjs http://127.0.0.1:8000   # MB al abrir la selección y fluidez del carrusel
 node tools/qa_20261106/ai_stats.cjs . 3 24                                     # qué hace la CPU (especiales, combos, súpers)
 node tools/qa_20261106/bosses_check.cjs <copia_anterior> .   # determinismo + mods por integrante
 node tools/qa_20261106/determinism.cjs <copia_anterior> . sofi tobi 777 9000

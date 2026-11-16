@@ -781,3 +781,122 @@ button{font-family:inherit}
 @media (max-height:440px){ #ui .pg-menu3 .pg-m3-tile b{font-size:clamp(16px,2.3vw,22px)} }
 #ui .pg-menu3 .pg-m3-tile b{font-size:clamp(14px,1.55vw,24px);overflow-wrap:normal;white-space:nowrap;letter-spacing:0}
 @media (max-height:440px){ #ui .pg-menu3 .pg-m3-tile b{font-size:clamp(14px,2vw,20px)} }
+
+/* =====================================================================
+   SELECTOR v4 — "expedientes del CEFERESO de Puente Grande, Jalisco": calle de Guadalajara de noche, luz de sodio,
+   cinta de peligro, fichas de ingreso con regla de estatura. Sin filtros CSS ni sombras grandes animadas (Android).
+   Cartas en todos los selectores (#ui .pg-card); el resto, solo en la selección 1 vs 1 (.pg-sel).
+   ===================================================================== */
+#ui .pg-sel{background:#07090c url("../assets/ui/selector_fondo.webp") center/cover no-repeat}
+#ui .pg-sel::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(120% 90% at 50% 0%,#f0a83a14 0,transparent 55%),linear-gradient(180deg,#05070acc 0,#05070a55 30%,#05070a99 70%,#05070af2 100%),
+  repeating-linear-gradient(0deg,#ffffff05 0 1px,transparent 1px 3px)}
+#ui .pg-sel>*{position:relative;z-index:1}
+#ui .pg-sel .pg-head{border-bottom:0;padding-bottom:0}
+#ui .pg-sel .pg-h{font:700 clamp(18px,2.2vw,26px)/1 var(--f-disp);text-transform:uppercase;letter-spacing:.04em;color:#f3ece2}
+#ui .pg-sel .pg-h::before{content:"CEFERESO N.º 2 · PUENTE GRANDE, JALISCO";display:block;margin-bottom:5px;font:800 10px/1 var(--f-ui);letter-spacing:.3em;color:var(--alarma)}
+
+/* ---- expedientes 1P / 2P ---- */
+#ui .pg-sel .pg-file{border-radius:10px;border:1px solid #2c3540;background:
+  linear-gradient(180deg,#ffffff08,transparent 30%),linear-gradient(135deg,#121820f2,#0a0d12f7);box-shadow:0 10px 24px #000a;overflow:hidden}
+#ui .pg-sel .pg-file::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;pointer-events:none;
+  background:repeating-linear-gradient(-45deg,#f0c13a 0 8px,#121212 8px 16px);opacity:.55}
+#ui .pg-sel .pg-file.p1{--sel:var(--alarma)} #ui .pg-sel .pg-file.p2{--sel:var(--sodio)}
+#ui .pg-sel .pg-file.active{border-color:var(--sel);box-shadow:0 0 0 1px var(--sel),0 10px 24px #000a}
+#ui .pg-sel .pg-file.active::after{opacity:1}
+#ui .pg-sel .pg-tagp{background:var(--sel);color:#0b0b0b;font:800 12px/1 var(--f-ui);letter-spacing:.1em;padding:5px 9px;border-radius:0 0 8px 0}
+#ui .pg-sel .pg-file.p2 .pg-tagp{border-radius:0 0 0 8px}
+#ui .pg-sel .pg-booth{background:
+  repeating-linear-gradient(0deg,transparent 0 19px,#ffffff10 19px 20px),
+  repeating-linear-gradient(0deg,transparent 0 99px,#f0a83a30 99px 101px),
+  radial-gradient(80% 70% at 50% 100%,#f0a83a1c,transparent 70%),linear-gradient(180deg,#151b23,#0b0f14)}
+#ui .pg-sel .pg-name{font:700 clamp(22px,3vw,40px)/.95 var(--f-disp);text-transform:uppercase;letter-spacing:.01em;color:#f6efe6}
+#ui .pg-sel .pg-alias{color:var(--sel,var(--sodio));font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:12px}
+#ui .pg-sel .pg-trait{display:inline-flex;align-items:center;gap:5px;padding:3px 8px 3px 6px;border:1px solid #3a4655;border-radius:999px;background:#0d1218;font-size:11px;font-weight:700;color:#d9d2c6}
+#ui .pg-sel .pg-trait svg{width:13px;height:13px;color:var(--sodio)}
+#ui .pg-sel .pg-vsmark{font:700 clamp(40px,6vw,80px)/1 var(--f-disp);color:var(--alarma);transform:skewX(-10deg);text-shadow:0 0 0 #000,3px 3px 0 #000,0 0 22px #ff294f55}
+
+/* ---- carrusel ---- */
+#ui .pg-cells{scroll-snap-type:x mandatory;scroll-padding-inline:50%;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;
+  padding-inline:calc(50% - var(--cw,118px)/2);gap:10px;align-items:end}
+#ui .pg-sel .pg-cells{--cw:clamp(96px,10.5vw,138px);grid-auto-columns:var(--cw);padding-block:10px 6px}
+
+/* ---- CARTA: ficha de ingreso ---- */
+#ui .pg-card{--accent:#3a4655;position:relative;display:block;aspect-ratio:3/4;height:auto;width:100%;padding:0;overflow:hidden;isolation:isolate;
+  scroll-snap-align:center;border-radius:9px;border:1px solid #2e3844;background:#0b0f14;color:#f2ece2;text-align:left;
+  box-shadow:0 6px 14px #0009;transform:translateY(6px) scale(.9);opacity:.62;transition:transform .18s var(--ease),opacity .18s,border-color .15s,box-shadow .15s}
+#ui .pg-card.pg-near{transform:translateY(3px) scale(.95);opacity:.85}
+#ui .pg-card.pg-center,#ui .pg-card.pg-focus,#ui .pg-card:hover{transform:none;opacity:1;border-color:var(--sodio);box-shadow:0 0 0 1px var(--sodio),0 10px 22px #000c,0 0 18px #f0a83a40}
+#ui .pg-card::before,#ui .pg-card::after{content:none}
+/* regla de estatura (foto de filiación) */
+#ui .pg-card .pg-card-ruler{position:absolute;inset:0;z-index:0;background:
+  linear-gradient(180deg,#0b0f14 0,#0b0f1400 22%),
+  repeating-linear-gradient(0deg,transparent 0 9px,#ffffff16 9px 10px),
+  repeating-linear-gradient(0deg,transparent 0 49px,#f0a83a40 49px 51px),
+  linear-gradient(180deg,#1b232d,#10151c)}
+#ui .pg-card .pg-card-face{position:absolute;z-index:1;left:0;right:0;top:12%;bottom:22%;background-repeat:no-repeat;background-color:transparent;
+  transition:transform .2s var(--ease);transform-origin:50% 100%}
+#ui .pg-card .pg-card-face::after{content:none}
+#ui .pg-card.pg-center .pg-card-face,#ui .pg-card:hover .pg-card-face{transform:scale(1.04)}
+#ui .pg-card .pg-card-top{position:absolute;z-index:3;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:4px 6px;
+  background:linear-gradient(90deg,#b3121f,#7d0d16);font:800 8px/1 var(--f-ui);letter-spacing:.12em;color:#fff3ee}
+#ui .pg-card .pg-card-top i{font-style:normal} #ui .pg-card .pg-card-top em{font-style:normal;font-variant-numeric:tabular-nums;opacity:.9}
+#ui .pg-card .pg-card-stamp{position:absolute;z-index:4;top:22%;right:-4px;padding:3px 7px;transform:rotate(-12deg);border:2px solid currentColor;border-radius:3px;
+  font:800 9px/1 var(--f-ui);letter-spacing:.14em;background:#0b0f14cc}
+#ui .pg-card .pg-card-stamp.pg-prov{color:#f0c13a} #ui .pg-card .pg-card-stamp.pg-secret{color:#c18bff}
+/* placa de filiación */
+#ui .pg-card .pg-card-plate{position:absolute;z-index:3;left:5px;right:5px;bottom:5px;display:flex;flex-direction:column;gap:2px;padding:5px 6px 5px;
+  background:#050608f0;border:1px solid #2a2f36;border-top:2px solid var(--sodio);border-radius:4px}
+#ui .pg-card .pg-card-name{font:700 clamp(12px,1.25vw,16px)/1 var(--f-disp);text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#ui .pg-card .pg-card-alias{font:700 8.5px/1.1 var(--f-ui);color:var(--sodio);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#ui .pg-card .pg-card-traits{display:flex;gap:3px;min-height:12px;margin-top:1px}
+#ui .pg-card .pg-card-traits i{display:inline-flex;width:14px;height:14px;padding:1px;border-radius:3px;background:#f0a83a1f;color:var(--sodio-2)}
+#ui .pg-card .pg-card-traits svg{width:100%;height:100%}
+/* elegido: marca 1P / CPU / 2P */
+#ui .pg-card.pick1{border-color:var(--alarma);box-shadow:0 0 0 2px var(--alarma),0 8px 18px #000c}
+#ui .pg-card.pick2{border-color:var(--sodio);box-shadow:0 0 0 2px var(--sodio),0 8px 18px #000c}
+#ui .pg-card .pg-mk{position:absolute;z-index:5;top:18px;left:5px;padding:2px 6px;border-radius:3px;font:800 10px/1.2 var(--f-ui);letter-spacing:.06em}
+#ui .pg-card .pg-mk.a{background:var(--alarma);color:#fff} #ui .pg-card .pg-mk.b{background:var(--sodio);color:#1a1004}
+#ui .pg-card.pg-err .pg-card-face{background:repeating-linear-gradient(45deg,#2a1216 0 6px,#140a0c 6px 12px)}
+
+/* ---- barra inferior: asfalto + cinta de peligro ---- */
+#ui .pg-sel .pg-bar{border-top:0;position:relative;padding-top:8px}
+#ui .pg-sel .pg-bar::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:repeating-linear-gradient(-45deg,#f0c13a 0 10px,#151515 10px 20px);opacity:.8}
+
+/* ---- teléfono horizontal ---- */
+@media (max-height:440px){
+  #ui .pg-sel .pg-cells{--cw:clamp(78px,11.5vh*2.4,104px);padding-block:6px 2px}
+  #ui .pg-card .pg-card-top{font-size:7px;padding:3px 5px}
+  #ui .pg-card .pg-card-plate{padding:4px 5px;left:4px;right:4px;bottom:4px}
+  #ui .pg-card .pg-card-traits{display:none}
+  #ui .pg-sel .pg-vsmark{font-size:44px}
+}
+@media (prefers-reduced-motion:reduce){ #ui .pg-card,#ui .pg-card .pg-card-face{transition:none} }
+/* carta: el tamaño sale del ALTO disponible (--ch); el ancho es 3:4 de él. El carril mide exactamente eso (antes la
+   carta era más alta que el carril y se cortaba arriba). La cara ocupa la parte alta de la carta en 3:4. */
+#ui .pg-cells{--ch:180px;--cw:calc(var(--ch)*.75);grid-auto-columns:var(--cw);height:calc(var(--ch) + 18px);min-height:calc(var(--ch) + 18px);align-items:center}
+#ui .pg-sel .pg-cells{--ch:clamp(150px,27vh,230px);--cw:calc(var(--ch)*.75);grid-auto-columns:var(--cw);flex:0 0 auto}
+#ui .pg-card{height:var(--ch);width:var(--cw);aspect-ratio:auto}
+#ui .pg-card .pg-card-face{top:13px;bottom:auto;left:6%;width:88%;height:auto;aspect-ratio:3/4}
+#ui .pg-card.pg-center{z-index:3}
+#ui .pg-card.pg-center::after{content:"";position:absolute;z-index:6;inset:0;border-radius:inherit;pointer-events:none;box-shadow:inset 0 0 0 2px var(--sodio)}
+@media (max-height:440px){
+  #ui .pg-sel .pg-cells{--ch:clamp(104px,34vh,132px)}
+  #ui .pg-sel .pg-duel{min-height:0}
+}
+#ui .pg-card{transform:translateY(8px) scale(.86);opacity:.5}
+#ui .pg-card.pg-near{transform:translateY(4px) scale(.93);opacity:.78}
+#ui .pg-card.pg-center,#ui .pg-card.pg-focus,#ui .pg-card:hover{transform:none;opacity:1}
+#ui .pg-card .pg-card-face{top:15px;left:0;right:0;width:auto;bottom:30%;aspect-ratio:auto;animation:none!important}
+#ui .pg-card .pg-card-top{white-space:nowrap}
+#ui .pg-card .pg-card-top i,#ui .pg-card .pg-card-top em{overflow:hidden;text-overflow:clip}
+@media (max-height:440px){ #ui .pg-card .pg-card-face{top:12px;bottom:34%} }
+#ui .pg-card .pg-card-top{gap:4px}
+@media (max-height:440px){ #ui .pg-card .pg-card-top i{display:none} #ui .pg-card .pg-card-top{justify-content:flex-end} }
+#ui .pg-card .pg-mk{top:0;left:0;border-radius:0 0 5px 0;padding:3px 7px;font-size:10px}
+/* anula restos de la capa anterior: cartas solapadas (margen negativo), ancho extra y filtros por carta (caros en Android) */
+#ui .pg-cells .pg-cell,#ui .pg-cells .pg-cell + .pg-cell{margin:0;min-width:0;max-width:none;filter:none;will-change:auto}
+#ui .pg-card{width:var(--cw)!important;height:var(--ch)!important}
+#ui .pg-card .pg-card-face{filter:none}
+#ui .pg-cells .pg-cell{flex:0 0 var(--cw)!important;transform-style:flat;backface-visibility:visible;transform-origin:50% 100%}
+#ui .pg-cells{perspective:none;padding-inline:calc(50% - var(--cw)/2);scroll-padding-inline:calc(50% - var(--cw)/2);height:calc(var(--ch) + 18px)!important;max-height:none!important}

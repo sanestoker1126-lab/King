@@ -2,6 +2,33 @@
 
 > Los ZIP recibidos el 2026-11-06 no traían `docs/`, así que **el historial anterior no está aquí**. Si tienes el `docs/CHANGELOG.md` completo, pega esta entrada al principio del tuyo.
 
+## 2026-11-16 — Selector: fichas de ingreso, carrusel ligero y estética de Puente Grande / Guadalajara
+
+Pedido del usuario: cartas y selector más profesionales, optimizados, fluidos, con estética de calle peligrosa y oscura, Jalisco, el penal de Puente Grande y el crimen organizado de la región.
+
+### Lo que estaba mal (medido)
+- **Cada carta descargaba el atlas completo de su personaje** para recortar una cara de ~38 px escalada a 112 (borrosa): **20.3 MB** al abrir la selección.
+- **El carrusel reescribía 4 variables de estilo en las 33 cartas en cada cuadro** de desplazamiento (más perspectiva 3D, cartas solapadas con margen negativo y `filter` en cada cara).
+- **La carta mostraba "ENERGÍA 1050 / 300"** con el campo `vida` del char.json, pero **el simulador no lo usa**: todos pelean con `fighters.hp` = 300. Era un dato falso.
+
+### Cambios
+- **`tools/build_fichas.py`** (nuevo, `--check`): una sola hoja `assets/ui/fichas.webp` (33 bustos 3:4, 257 KB) + `assets/ui/fichas.json`. El busto es la mitad superior de `portrait.body` (la silueta del idle ya medida), sin salirse de ella (nunca entra el cuadro vecino del atlas). Escalado nítido para pixel art (vecino más cercano a múltiplo entero, luego Lanczos). También genera `assets/ui/selector_fondo.webp` (13 KB): la calle del OXXO de Guadalajara, desenfocada y oscurecida de antemano (sin filtros CSS en el teléfono).
+- **Carta = ficha de ingreso del CEFERESO**: regla de estatura de foto de filiación de fondo, busto, franja roja "CEFERESO · N.º de reo", placa negra con nombre y alias, sello solo si el roster dice PROVISIONAL o SECRETO, e **iconos de rasgos reales** leídos de sus datos (arrojadizo, antiaéreo, llave de comando, golpe bajo, oculto en MAX). Se quitó la "energía" falsa.
+- **Carrusel** (`enableRosterRail`): desplazamiento nativo con imán al centro; solo cambian dos clases (`pg-center` / `pg-near`) en la carta del centro y sus vecinas. El expediente grande se actualiza cuando el carrusel se detiene (110 ms), no por cada carta que pasa. Las vistas previas ya no miden su lienzo en cada cuadro (`ResizeObserver`). Corregido: en Equipos/Torneo la carta del centro no se marcaba (se pintaba antes de que existieran las cartas).
+- `setMug` (caras de Equipos, Torneo, VS, HUD de equipos) usa la misma hoja, encajando la celda sin deformarla.
+- **Estética del selector**: fondo de calle de Guadalajara de noche con luz de sodio y líneas de monitor; cabecera "CEFERESO N.º 2 · PUENTE GRANDE, JALISCO"; expedientes 1P/2P con pestaña de color y cinta de peligro amarilla y negra; VS inclinado; barra inferior de asfalto con cinta de peligro.
+- **No se usó ninguna insignia, logo ni nombre de una organización criminal real**: la ambientación es el penal, la calle y la región (Guadalajara, Jalisco), como en el resto del juego.
+
+### Medido (`tools/qa_20261106/selector_perf.cjs`, Pixel 7 emulado; deslizar 2 s con CPU ×4 más lenta; varía entre corridas)
+- Descarga al abrir la selección: **20.3 MB → 1.7–2.8 MB**. Hasta ver todas las caras: ~700 ms → ~90 ms.
+- Deslizar: **50–52 fps → 58 fps**; recálculo de estilos **455–481 ms → 89–123 ms**. El peor cuadro sigue variando entre 33 y 67 ms en las dos versiones (es una medición ruidosa); no lo doy por resuelto.
+- `menu_flow_browser.cjs` (teléfono y PC), `touch_browser.cjs` y las capturas de Selección, Equipos y Torneo: sin errores. Evidencia: `qa/entrega_20261106/selector_fichas_antes_despues.jpg`.
+
+### Límites
+- Los bustos salen del idle de cada personaje: los de pose muy abierta (Personaje 08, Mecánico) quedan más chicos en su ficha.
+- Las cartas de Personaje 08 y otros sin perfil muestran "S/N" (sin número de reo): no se inventaron números.
+- No probado en un Android físico.
+
 ## 2026-11-15 (2) — Controles táctiles v2, IA con comandos reales, menú y selección rehechos
 
 Pedido del usuario: mejores controles para Android sin que los botones estorben, ajuste de escala, IA que haga combos y especiales, y un menú/selector más compacto, estético y fácil para empezar a pelear.

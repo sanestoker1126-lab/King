@@ -318,5 +318,8 @@
   "assets/stages/puente_grande_penal_background.png",
   "assets/stages/puente_grande_penal_crowd.png",
   "assets/stages/puente_grande_penal_foreground.png",
-  "assets/stages/puente_grande_penal_midground.png"
+  "assets/stages/puente_grande_penal_midground.png",
+  "assets/ui/fichas.json",
+  "assets/ui/fichas.webp",
+  "assets/ui/selector_fondo.webp"
 ]

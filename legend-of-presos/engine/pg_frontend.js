@@ -52,35 +52,55 @@
       });
     }));
   }
-  function setMug(node, ch){
-    mugURL(ch).then(function(u){ node.style.backgroundImage = "url(" + u + ")"; })
-      .catch(function(e){ node.classList.add("pg-err"); node.title = e.message; console.error(e.message); });
+  // HOJA DE FICHAS (assets/ui/fichas.webp, tools/build_fichas.py): un solo archivo pequeño con el busto de cada luchador.
+  // Antes cada carta descargaba el atlas COMPLETO de su personaje (21.6 MB entre los 33) para recortar la cara.
+  var FICHAS = null;
+  function fichas(){ return FICHAS || (FICHAS = fetch("assets/ui/fichas.json").then(function(r){ if (!r.ok) throw new Error("fichas.json " + r.status); return r.json(); })
+    .catch(function(e){ console.warn("Hoja de fichas no disponible (" + e.message + "): se recorta del atlas."); return null; })); }
+  // encaja la celda del busto en el elemento SIN deformarla (como background-size: cover de una sola celda), sea la
+  // carta 3:4 o un círculo pequeño; se recalcula si el elemento cambia de tamaño
+  function fitFicha(node){
+    var f = node._ficha; if (!f) return; var F = f.F, W = node.clientWidth, H = node.clientHeight; if (!W || !H) return;
+    var k = Math.max(W / F.cell[0], H / F.cell[1]), cw = F.cell[0] * k, chh = F.cell[1] * k;
+    node.style.backgroundSize = Math.round(F.cols * cw) + "px " + Math.round(F.rows * chh) + "px";
+    node.style.backgroundPosition = Math.round(-f.c * cw + (W - cw) / 2) + "px " + Math.round(-f.r * chh) + "px";   // centrado y desde ARRIBA: la cabeza siempre se ve
   }
+  var RO = null;
+  function fichaRO(){ return RO || (RO = global.ResizeObserver ? new global.ResizeObserver(function(es){ es.forEach(function(e){ fitFicha(e.target); }); }) : { observe: function(){} }); }
+  function setMug(node, ch){
+    fichas().then(function(F){
+      var i = F && F.index ? F.index[ch.id] : undefined;
+      if (i != null){ node._ficha = { F: F, c: i % F.cols, r: Math.floor(i / F.cols) };
+        node.style.backgroundImage = "url(" + F.file + ")"; node.classList.add("pg-ficha"); fitFicha(node); fichaRO().observe(node); return; }
+      return mugURL(ch).then(function(u){ node.style.backgroundImage = "url(" + u + ")"; });
+    }).catch(function(e){ node.classList.add("pg-err"); node.title = e.message; console.error(e.message); });
+  }
+  // CARRUSEL: desplazamiento nativo con imán (scroll-snap) y solo dos clases que cambian (pg-center / pg-near) en la
+  // carta del centro y sus vecinas. Antes se reescribían 4 variables de estilo en las 33 cartas en CADA cuadro de
+  // desplazamiento (recalcular estilos de toda la fila), lo que en teléfonos se sentía trabado.
   function enableRosterRail(cells, onCenter){
-    var raf = 0, observer = null, lastCenter = null;
+    var raf = 0, observer = null, lastCenter = null, cur = -1, settle = 0;
     var header = cells.previousElementSibling, hint = header && header.querySelector("small");
     if (hint) hint.textContent = "DESLIZA · TOCA PARA ELEGIR";
     function paint(){
       raf = 0;
       var cards = cells.querySelectorAll(".pg-card"); if (!cards.length) return;
-      var stride = cards.length > 1 ? Math.abs(cards[1].offsetLeft - cards[0].offsetLeft) : cards[0].offsetWidth;
-      var center = cells.scrollLeft + cells.clientWidth / 2; stride = Math.max(1, stride || cards[0].offsetWidth);
-      var nearest = null, nearestDistance = Infinity;
-      Array.prototype.forEach.call(cards, function(card){
-        var offset = card.offsetLeft + card.offsetWidth / 2 - center, distance = Math.abs(offset) / stride;
-        if (distance < nearestDistance){ nearestDistance = distance; nearest = card; }
-        var depth = Math.min(distance, 2), lift = distance < .48 ? -7 : depth * 7;
-        card.style.setProperty("--stack-y", Math.round(lift) + "px");
-        card.style.setProperty("--stack-scale", (1 - depth * .085).toFixed(3));
-        card.style.setProperty("--stack-rot", Math.max(-22, Math.min(22, offset / stride * 12)).toFixed(2) + "deg");
-        card.style.setProperty("--stack-opacity", Math.max(.24, 1 - Math.max(0, distance - .35) * .25).toFixed(3));
-        card.style.zIndex = String(100 - Math.min(99, Math.round(distance * 12)));
-        card.classList.toggle("pg-center", distance < .48);
-        card.classList.toggle("pg-near", distance < 1.8);
-      });
-      if (onCenter && nearest && nearest.dataset.id !== "?" && nearest.dataset.id !== lastCenter){
-        lastCenter = nearest.dataset.id; onCenter(lastCenter);
+      var c0 = cards[0], stride = cards.length > 1 ? (cards[1].offsetLeft - c0.offsetLeft) : c0.offsetWidth; stride = Math.max(1, stride);
+      var mid = cells.scrollLeft + cells.clientWidth / 2;
+      var k = Math.max(0, Math.min(cards.length - 1, Math.round((mid - c0.offsetLeft - c0.offsetWidth / 2) / stride)));
+      if (k !== cur || !cards[k].classList.contains("pg-center")){   // (también si las cartas se rehicieron y perdieron la marca)
+        var old = cells.querySelectorAll(".pg-center,.pg-near");
+        for (var o = 0; o < old.length; o++){ old[o].classList.remove("pg-center"); old[o].classList.remove("pg-near"); }
+        cards[k].classList.add("pg-center");
+        if (cards[k - 1]) cards[k - 1].classList.add("pg-near"); if (cards[k + 1]) cards[k + 1].classList.add("pg-near");
+        cur = k;
       }
+      // el expediente grande se actualiza cuando el carrusel SE DETIENE (110 ms sin cambiar de carta), no por cada carta que
+      // pasa bajo el dedo: rehacerlo (vista previa + lista de golpes) en pleno deslizamiento era lo que trababa los cuadros
+      var nearest = cards[k];
+      if (onCenter && nearest && nearest.dataset.id !== "?" && nearest.dataset.id !== lastCenter){
+        if (settle) clearTimeout(settle);
+        settle = setTimeout(function(){ settle = 0; var id = nearest.dataset.id; if (id !== lastCenter){ lastCenter = id; onCenter(id); } }, lastCenter === null ? 0 : 110); }
     }
     function schedule(){ if (!raf) raf = global.requestAnimationFrame(paint); }
     cells.addEventListener("wheel", function(e){
@@ -90,9 +110,10 @@
     cells.addEventListener("scroll", schedule, { passive: true });
     if (global.ResizeObserver){ observer = new global.ResizeObserver(schedule); observer.observe(cells); }
     else global.addEventListener("resize", schedule);
+    cells._pgRailPaint = schedule;   // centerRosterCard lo llama: si el desplazamiento no cambia no hay evento "scroll" y no se pintaba el centro
     cells._pgRailCleanup = function(){
       if (observer) observer.disconnect(); else global.removeEventListener("resize", schedule);
-      if (raf) global.cancelAnimationFrame(raf); raf = 0;
+      if (raf) global.cancelAnimationFrame(raf); raf = 0; if (settle) clearTimeout(settle); settle = 0;
     };
     schedule();
   }
@@ -103,6 +124,7 @@
     var left = card.offsetLeft - (cells.clientWidth - card.offsetWidth) / 2;
     left = Math.max(0, Math.min(left, cells.scrollWidth - cells.clientWidth));
     if (smooth && !REDUCED) cells.scrollTo({ left: left, behavior: "smooth" }); else cells.scrollLeft = left;
+    if (cells._pgRailPaint) cells._pgRailPaint();
   }
   function disposeRosterRails(root){
     var rails = root.querySelectorAll(".pg-cells");
@@ -114,25 +136,41 @@
   // etiqueta de la cinta de la carta: la del roster (badge), PROVISIONAL (datos sin verificar jugando), SECRETO (oculto
   // desbloqueado) o la cinta decorativa de siempre
   function cardBadge(ch){ return ch.badge || (ch.provisional ? "PROVISIONAL" : ch.hidden ? "SECRETO" : null); }
+  // rasgos REALES del personaje (de sus datos de combate), para la carta y el expediente
+  function traitsOf(def){
+    var mv = Object.keys(def.moves).map(function(k){ return def.moves[k]; }), t = [];
+    if (mv.some(function(m){ return m.spawns; })) t.push(["proj", "Arrojadizo"]);
+    if (mv.some(function(m){ return m.invuln && m.launcher && !m.super; })) t.push(["anti", "Antiaéreo"]);
+    if (mv.some(function(m){ return m.type === "command_grab"; })) t.push(["grab", "Llave de comando"]);
+    if (mv.some(function(m){ return m.special && m.guardType === "low"; })) t.push(["low", "Golpe bajo"]);
+    if ((def.inputs.hidden || []).length) t.push(["hid", "Súper oculto en MAX"]);
+    return t;
+  }
+  var TRAIT_ICON = {
+    proj: '<circle cx="15" cy="12" r="5"/><path d="M3 9h6M2 12h7M3 15h6"/>',
+    anti: '<path d="M12 21V7M7 11l5-5 5 5M5 21h14"/>',
+    grab: '<path d="M7 11V6a2 2 0 0 1 4 0v5M11 10V5a2 2 0 0 1 4 0v6M15 10a2 2 0 0 1 4 0v3a7 7 0 0 1-7 7h-1a6 6 0 0 1-6-6v-2a2 2 0 0 1 4 0"/>',
+    low:  '<path d="M3 20h18M6 16l5-5 3 3 5-5"/>',
+    hid:  '<path d="M12 2l2.6 6.4L21 9l-5 4.3L17.5 20 12 16.6 6.5 20 8 13.3 3 9l6.4-.6z"/>'
+  };
+  function traitIcon(k){ return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (TRAIT_ICON[k] || "") + '</svg>'; }
+  // CARTA = FICHA DE INGRESO del penal: regla de estatura de fondo (como una foto de filiación), busto del luchador,
+  // cabecera del CEFERESO y placa negra con nombre, alias y número de reo. Sello solo si el roster lo marca
+  // (provisional / secreto). Abajo, iconos de rasgos reales leídos de sus datos.
   function makeFighterCard(node, ch){
     var pf = ch.perfil || {}, badge = cardBadge(ch);
     node.classList.add("pg-card");
     node.setAttribute("aria-label", ch.name + (pf.alias ? ", " + pf.alias : "") + (pf.reo ? ", reo " + pf.reo : "") + (badge ? ", " + badge.toLowerCase() : ""));
-    node.innerHTML = '<span class="pg-card-face" aria-hidden="true"></span>' +
-      '<span class="pg-card-brand">PG · FICHA</span>' + (badge ? '<span class="pg-card-warning ' + (ch.provisional ? "pg-prov" : "pg-secret") + '">' + esc(badge) + '</span>' : '<span class="pg-card-warning">PRECAUCIÓN</span>') +
-      '<span class="pg-card-data"><b class="pg-card-name">' + esc(ch.name) + '</b>' +
-      '<small class="pg-card-alias">' + esc(pf.alias || "Expediente sin alias") + '</small>' +
-      '<small class="pg-card-profile">' + (pf.reo ? "REO " + esc(pf.reo) : "PERFIL EN REVISIÓN") + (pf.celda ? " · " + esc(pf.celda) : "") + '</small>' +
-      '<span class="pg-card-energy" role="progressbar" aria-valuemin="0" hidden><i></i><small>ENERGÍA <b></b></small></span></span>';
+    node.innerHTML = '<span class="pg-card-ruler" aria-hidden="true"></span><span class="pg-card-face" aria-hidden="true"></span>' +
+      '<span class="pg-card-top" aria-hidden="true"><i>CEFERESO</i><em>' + (pf.reo ? "N.º " + esc(pf.reo) : "S/N") + '</em></span>' +
+      (badge ? '<span class="pg-card-stamp ' + (ch.provisional ? "pg-prov" : "pg-secret") + '">' + esc(badge) + '</span>' : '') +
+      '<span class="pg-card-plate"><b class="pg-card-name">' + esc(ch.name) + '</b>' +
+      '<small class="pg-card-alias">' + esc(pf.alias || "sin alias") + '</small>' +
+      '<span class="pg-card-traits" aria-hidden="true"></span></span>';
     setMug(node.querySelector(".pg-card-face"), ch);
     loadDef(ch).then(function(def){
-      var hp = node.querySelector(".pg-card-energy"), number = hp && hp.querySelector("b");
-      if (!hp || !number || typeof def.vida !== "number" || !isFinite(def.vida)) return;
-      number.textContent = String(def.vida);
-      hp.hidden = false;
-      hp.setAttribute("aria-label", "Energía inicial: " + def.vida);
-      hp.setAttribute("aria-valuenow", String(def.vida));
-      hp.setAttribute("aria-valuemax", String(def.vida));
+      var tr = node.querySelector(".pg-card-traits"); if (!tr) return;
+      tr.innerHTML = traitsOf(def).map(function(t){ return '<i title="' + t[1] + '">' + traitIcon(t[0]) + '</i>'; }).join("");
     }).catch(function(e){ console.error("Datos de carta " + ch.id + ": " + e.message); });
   }
   // rects de los frames de un clip (rejilla con celda propia por atlas o coordsFile)
@@ -165,8 +203,12 @@
     // se re-agenda ANTES de llamar a las escenas: si una lanza un error (que sí sale en consola), el bucle de la
     // interfaz no muere con ella (antes un fallo de vista previa congelaba la pantalla VS y nunca empezaba el combate)
     tick: function(t){ Loop.id = Loop.fns.length ? requestAnimationFrame(Loop.tick) : 0; for (var i = 0; i < Loop.fns.length; i++) Loop.fns[i](t); } };
+  // tamaño del lienzo: lo informa un ResizeObserver (antes getBoundingClientRect en CADA cuadro forzaba recalcular la
+  // maquetación de la página entera mientras se deslizaba el carrusel)
+  var CVRO = global.ResizeObserver ? new global.ResizeObserver(function(es){ es.forEach(function(e){ var r = e.contentRect; e.target._sz = { width: r.width, height: r.height }; }); }) : null;
   function fitCanvas(cv, maxDpr){
-    var r = cv.getBoundingClientRect(), d = Math.min(global.devicePixelRatio || 1, maxDpr || 1.5);
+    if (CVRO && !cv._szObs){ cv._szObs = true; CVRO.observe(cv); }
+    var r = (CVRO && cv._sz) || cv.getBoundingClientRect(), d = Math.min(global.devicePixelRatio || 1, maxDpr || 1.5);
     var w = Math.max(1, Math.round(r.width * d)), h = Math.max(1, Math.round(r.height * d));
     if (cv.width !== w || cv.height !== h){ cv.width = w; cv.height = h; return true; } return false;
   }
@@ -534,13 +576,7 @@
         .concat((def.inputs.supers || []).slice(0, 1).map(function(s){ return [def.moves[s.move], s, "★ "]; }));
       ul.innerHTML = rows.filter(function(r){ return r[0]; }).map(function(r){
         return '<li><b>' + (r[2] || "") + esc(moveLabel(r[1].move, r[0])) + '</b><span class="pg-in">' + (MOTION[r[1].motion] || "") + " " + (BTN[r[1].button] || "") + '</span></li>'; }).join("");
-      var mv = Object.keys(def.moves).map(function(k){ return def.moves[k]; }), traits = [];
-      if (mv.some(function(m){ return m.spawns; })) traits.push("Arrojadizo");
-      if (mv.some(function(m){ return m.invuln && m.launcher && !m.super; })) traits.push("Antiaéreo");
-      if (def.moves.command_grab) traits.push("Llave de comando");
-      if (mv.some(function(m){ return m.special && m.guardType === "low"; })) traits.push("Golpe bajo");
-      if ((def.inputs.hidden || []).length) traits.push("Súper oculto en MAX");
-      tr.innerHTML = traits.map(function(t){ return '<span class="pg-trait">' + t + '</span>'; }).join("");
+      tr.innerHTML = traitsOf(def).map(function(t){ return '<span class="pg-trait">' + traitIcon(t[0]) + t[1] + '</span>'; }).join("");
       fitDossier(box);
       if (global.ResizeObserver && !box._pgFit){ box._pgFit = new global.ResizeObserver(function(){ fitDossier(box); }); box._pgFit.observe(box); }
     }).catch(function(e){ box.insertAdjacentHTML("beforeend", '<p class="pg-empty">' + esc(e.message) + '</p>'); });
