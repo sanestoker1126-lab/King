@@ -5,7 +5,7 @@
 ## Qué funciona (comprobado hoy)
 - `game.html` carga en Chromium y se puede pelear. Consola limpia salvo el aviso de PWA por `sw.js` 404 (el archivo no venía en el ZIP).
 - 32 personajes jugables (31 de antes + El Paisa Sistem) y 10 escenarios (8 de antes + Oxxo 2 y Pemex 2). No hay referencias rotas en atlas, clips, golpes ni comandos.
-- Wasirris: K.O., mareo y victoria con arte nuevo. Personaje 08: K.O. y victoria con arte nuevo.
+- Wasirris: K.O., mareo y victoria con arte nuevo. Cachorro (antes "Personaje 08"): K.O. y victoria con arte nuevo.
 - Jugabilidad intacta: las peleas CPU contra CPU con semilla fija dan el mismo resultado cuadro a cuadro que antes de esta entrega (`tools/qa_20261106/determinism.cjs`).
 
 ## Al 2026-11-08 (jefes y Sofi)
@@ -32,14 +32,16 @@
 
 - APK compilado aquí (`android/`, 71.5 MB, firma de prueba) y Reto Bluetooth (lockstep). Verificado en navegador y con el puente simulado; **sin probar en teléfonos reales** (2026-11-16).
 
+- Cachorro (personaje_08): nombre corregido y hojas sin sombra azul ni cuadrícula; rayas de piso flotantes quitadas en Bigotes, Cartel y Carmesí (2026-11-16).
+
 ## Qué NO se pudo verificar
 - `tools/test_sim.js` (la "huella" de 197 pruebas), `tools/validate_data.py` y `tools/run_regression.sh` no venían en los ZIP y no se corrieron.
 - Android: el APK de `android/` se compiló y se verificó (firma, permisos, archivos), pero no se ejecutó en un emulador ni en un teléfono.
 - El "feel": daños, tiempos y cajas de El Paisa son **DISEÑO**, hay que ajustarlos jugando.
-- Fidelidad del arte: los manifests de Wasirris y Personaje 08 dicen que sus poses nuevas son generativas, hechas desde JPEG de baja resolución, con "revisión artística pendiente".
+- Fidelidad del arte: los manifests de Wasirris y Cachorro (personaje_08) dicen que sus poses nuevas son generativas, hechas desde JPEG de baja resolución, con "revisión artística pendiente".
 
 ## Pendientes
-1. **Personaje 08: falta `dizzy`** (8 cuadros, según su manifest). Hoy usa el respaldo del motor.
+1. **Cachorro (personaje_08): falta `dizzy`** (8 cuadros, según su manifest). Hoy usa el respaldo del motor.
 2. **El Paisa Sistem: falta `dizzy`**. Además, el motor no usa 14 de sus animaciones (agachado, rodadas, burla, entrada, golpe recibido por altura); necesitarían soporte del motor.
 3. Jugar en Android y ajustar a El Paisa:
    - el súper usa una sola caja para sus 4 golpes (medida en el recto);

@@ -47,6 +47,8 @@ Léelo primero en un chat nuevo. Detalle completo en `docs/CHANGELOG.md` y `docs
 
 10. **APK de Android y Reto Bluetooth (2026-11-16).** Proyecto `android/` (nuevo; NO es el `ANDROID/` del usuario). Compilar: `ANDROID_HOME=… tools/build_android.sh` → `android/app/build/outputs/apk/release/app-release.apk`. Bluetooth en `engine/pg_net.js` + `android/.../BtLink.java`. **Pendiente: probarlo en dos teléfonos reales** (permisos, latencia; el retardo de entrada es `DELAY` en `pg_net.js`).
 
+11. **Cachorro = personaje_08 (2026-11-16).** Nombre "Cachorro" (el id no cambia). Hojas limpias: `python3 -I tools/limpiar_atlas_cachorro.py` (`--check`). Líneas sueltas del roster: `python3 -I tools/limpiar_lineas_atlas.py` (`--check`). Originales en `sources/atlas_originales_2026-11-16/`. Pendiente: las rayas de piso del personaje nuevo se corrigen en su propio generador.
+
 ## Cómo probar (herramientas de este repo)
 ```bash
 cd legend-of-presos
@@ -63,6 +65,9 @@ node tools/qa_20261106/touch_browser.cjs http://127.0.0.1:8000 <prefijo>       #
 node tools/qa_20261106/menu_flow_browser.cjs http://127.0.0.1:8000 <prefijo>   # menú -> pelea en teléfono y PC
 node tools/qa_20261106/net_browser.cjs http://127.0.0.1:8000 <prefijo> 5400       # reto en red entre dos pestañas (lockstep)
 node tools/qa_20261106/apk_bridge_browser.cjs <url_assets_del_apk> <prefijo> 3600 # contrato con BtLink.java (puente simulado)
+python3 -I tools/limpiar_atlas_cachorro.py --check     # hojas de Cachorro sin sombra ni cuadrícula
+python3 -I tools/limpiar_lineas_atlas.py --check        # líneas sueltas del roster
+python3 -I tools/qa_20261106/auditar_atlas.py --solo-usadas   # auditoría de hojas
 python3 -I tools/build_fichas.py --check                # hoja de fichas y fondo del selector al día
 node tools/qa_20261106/selector_perf.cjs http://127.0.0.1:8000   # MB al abrir la selección y fluidez del carrusel
 node tools/qa_20261106/ai_stats.cjs . 3 24                                     # qué hace la CPU (especiales, combos, súpers)

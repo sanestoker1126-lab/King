@@ -1,6 +1,6 @@
 {
   "id": "personaje_08",
-  "displayName": "Personaje 08",
+  "displayName": "Cachorro",
   "source": "personaje_08_runtime_listo (24 clips reales medidos + eventos)",
   "frameSize": {
     "w": 120,
@@ -378,8 +378,22 @@
         68,
         69,
         70,
-        71
-      ]
+        70
+      ],
+      "_vaciados": {
+        "frames": [
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71
+        ],
+        "_doc": "tools/limpiar_atlas_cachorro.py: estos cuadros solo dibujaban la silueta del rival y quedaron vacíos al quitarla; se repite el cuadro anterior"
+      }
     },
     "hurt": {
       "atlas": "base",
@@ -744,7 +758,7 @@
         50,
         51,
         52,
-        53,
+        52,
         54,
         55,
         56,
@@ -801,7 +815,39 @@
             17
           ]
         }
-      ]
+      ],
+      "_vaciados": {
+        "frames": [
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62
+        ],
+        "_doc": "tools/limpiar_atlas_cachorro.py: estos cuadros solo dibujaban la silueta del rival y quedaron vacíos al quitarla; se repite el cuadro anterior"
+      }
     },
     "ko_fall": {
       "atlas": "poses_extra",

@@ -2,6 +2,35 @@
 
 > Los ZIP recibidos el 2026-11-06 no traían `docs/`, así que **el historial anterior no está aquí**. Si tienes el `docs/CHANGELOG.md` completo, pega esta entrada al principio del tuyo.
 
+## 2026-11-16 (3) — Cachorro (antes "Personaje 08"): hojas sin sombra ni cuadrícula · líneas sueltas del roster
+
+Pedido del usuario: pulir los atlas, sobre todo el de 08, que en realidad se llama **Cachorro**; en algunas poses se veía la cuadrícula y tenía una sombra pintada.
+
+### Nombre
+- `data/roster.json` (`name`) y `displayName` del char.json: **Cachorro**. El id interno sigue siendo `personaje_08` (no cambian rutas, campañas ni guardados).
+
+### Hojas de Cachorro (`tools/limpiar_atlas_cachorro.py`, `--check`)
+- **Medido:** en `specials.png`, `personaje_08_hidden_specials.png` y `personaje_08_combo_sequences.png` había (1) una **silueta plana azul marino** detrás del personaje (en los agarres, el cuerpo del rival, que el juego ya dibuja) y (2) **líneas finas** del mismo azul y en tonos grises formando marcos dentro de las celdas (la cuadrícula). La base, golpes, resultados y poses nuevas estaban limpias.
+- Los remolinos de energía usan **la misma paleta** azul (~26 tonos), así que no se podía borrar por color. Se separa por **forma**: interior sólido del azul (apertura de 5 px), píxel por píxel, salvo lo que esté a menos de 5 px de un brillo de energía; más tramos rectos largos y delgados oscuros o grises.
+- Resultado: tramos de cuadrícula **392 → 9** en especiales, **18 → 0** en el oculto, **34 → 0** en combos; ~208 mil píxeles de sombra fuera.
+- Dos cuadros que **solo** dibujaban la silueta del rival quedaron vacíos (`spinning_throw[8]` = final del agarre de comando y `combo_body_grab[17]`): en su animación se repite el cuadro anterior (el original queda en `_vaciados` dentro del clip).
+- Originales intactos en `sources/atlas_originales_2026-11-16/` (`ORIGEN_SHA256.txt`); el script siempre parte de ellos.
+- Las hojas se guardan en el **mismo formato** que su original (`tools/_png_formato.py`): las de paleta siguen en paleta y solo cambia el índice de los píxeles borrados. Comprobado: en las 7 hojas los únicos píxeles distintos al original son los borrados, y todas pesan igual o menos que antes (en RGBA pesaban hasta 3 veces más).
+
+### Líneas sueltas en el resto del roster (`tools/limpiar_lineas_atlas.py`, `--check`)
+- Auditoría nueva `tools/qa_20261106/auditar_atlas.py` (146 hojas). Regla prudente: se borra un tramo recto oscuro y delgado solo si está **suelto** (nada del dibujo a 2 px), junto con sus puntas difuminadas en la misma franja.
+- Cambiaron 4 hojas: **Bigotes** (atlas y resultados), **Cartel** y **Carmesí**. Eran las rayas de "sombra de piso" pintadas bajo los pies en saltos y caídas, que en el juego **flotaban** con el personaje (el juego ya dibuja su propia sombra, que se achica con la altura).
+- No se tocaron: hojas de otros generadores (las que llevan `sha256`, El Paisa y el personaje nuevo) ni las rayas pegadas a los pies en poses de pie.
+
+### Verificado (salida real)
+- Navegador (`tools/qa_20261106/cachorro_browser.cjs`): súper, especial de energía y agarre de comando de Cachorro con comandos reales, congelando en cuadros concretos: sin sombra ni cuadrícula y con los remolinos intactos. Sin errores de página. Evidencia: `qa/entrega_20261106/cachorro_atlas_limpio.jpg`.
+- Generadores al día; las fichas del selector no cambiaron (el busto sale de la base, que no se tocó).
+
+### Pendiente / límites
+- Quedan 9 tramos en especiales de Cachorro: pegados al personaje o a los efectos; borrarlos arriesgaría cortar dibujo.
+- La auditoría marca "color plano" en hojas de Diego y Regente: es su ropa negra, no una sombra; no se tocó.
+- El personaje nuevo provisional tiene rayas de piso bajo los pies (63 tramos), pero su hoja sale de `tools/build_personaje_complementario.py`: hay que corregirlo ahí.
+
 ## 2026-11-16 (2) — APK de Android compilado y RETO BLUETOOTH (dos teléfonos)
 
 Pedido del usuario: el juego con todas las mejoras, listo para Android, y la opción de retar por Bluetooth.

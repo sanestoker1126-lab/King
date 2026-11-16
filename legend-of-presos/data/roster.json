@@ -26,7 +26,7 @@
   "characters": [
     {
       "id": "personaje_08",
-      "name": "Personaje 08",
+      "name": "Cachorro",
       "dir": "assets/combat/personaje_08/",
       "char": "personaje_08.char.json",
       "status": "playable",
