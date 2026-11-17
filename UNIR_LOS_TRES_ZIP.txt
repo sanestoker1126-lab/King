@@ -1,0 +1,29 @@
+LEGEND OF PRESOS — GOOGLE AI STUDIO — TRES ZIP
+FUENTE: https://github.com/sanestoker1126-lab/King/tree/ai-studio/legend-presos-ligero-20261116
+FECHA: 2026-11-16
+IMPORTANTE: los tres ZIP son PARTES COMPLEMENTARIAS DEL MISMO JUEGO.
+Ninguna parte por sí sola contiene el juego completo.
+
+1. Descarga y extrae los tres ZIP.
+2. GitHub extraerá cada ZIP en una carpeta diferente.
+3. Crea una carpeta llamada LEGEND_OF_PRESOS_COMPLETO.
+4. Copia el CONTENIDO de cada una de las tres carpetas extraídas a
+   LEGEND_OF_PRESOS_COMPLETO, aceptando fusionar la carpeta 'assets'.
+   No coloques las carpetas de cada parte una dentro de otra.
+5. Verifica que queden, en la MISMA RAÍZ:
+   index.html, game.html, package.json, server.mjs,
+   engine/, data/, styles/, assets/combat/, assets/fx/,
+   assets/audio/, assets/stages/, assets/ui/, assets/icons/.
+6. Ejecuta npm run dev en esa carpeta; se sirve en el puerto 3000 o PORT.
+7. Para importar en AI Studio, importa el proyecto REUNIDO (un único
+   proyecto), no tres proyectos independientes.
+8. No alteres rutas de recursos ni nombres de archivos.
+
+PARTE 1: motor + interfaz + configuraciones + audio, FX y escenarios.
+PARTE 2: atlas de 16 personajes (lote A).
+PARTE 3: atlas de 17 personajes (lote B).
+Para una distribución original idéntica usa la rama
+ai-studio/legend-presos-ligero-20261116.
+
+Recomendación: revisar la consola y que el selector cargue todos los
+personajes antes de comenzar a modificar el juego.
