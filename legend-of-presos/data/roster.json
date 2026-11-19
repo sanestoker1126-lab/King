@@ -13,9 +13,15 @@
     "tactico_sin_asignar": "tactico_purpura",
     "regente_jefe": "regente",
     "el_aedillo": "el_aedillo",
-    "gordo_tacos": "gordo",
-    "el_gordo_tacos": "gordo",
-    "el_gordo": "gordo"
+    "gordo_tacos": "personaje_complementario",
+    "el_gordo_tacos": "personaje_complementario",
+    "el_gordo": "personaje_complementario",
+    "el_fanta": "gordo",
+    "fanta": "gordo",
+    "toker": "tatuado",
+    "el_brayan": "cartel",
+    "brayan": "cartel",
+    "omar_harfuch": "luchador_v2"
   },
   "_nombres_notas": {
     "titanazul": "viste rojo/negro, no azul (el nombre engaña)",
@@ -240,7 +246,7 @@
     },
     {
       "id": "cartel",
-      "name": "El Cartel",
+      "name": "El Brayan",
       "dir": "assets/combat/cartel/",
       "char": "cartel.char.json",
       "status": "playable",
@@ -285,7 +291,7 @@
     },
     {
       "id": "tatuado",
-      "name": "El Tatuado",
+      "name": "Toker",
       "dir": "assets/combat/tatuado/",
       "char": "tatuado.char.json",
       "status": "playable",
@@ -390,7 +396,7 @@
     },
     {
       "id": "luchador_v2",
-      "name": "Luchador V2",
+      "name": "Omar Harfuch",
       "dir": "assets/combat/luchador_v2/",
       "char": "luchador_v2.char.json",
       "status": "playable",
@@ -405,12 +411,12 @@
     },
     {
       "id": "gordo",
-      "name": "El Gordo Tacos",
+      "name": "El Fanta",
       "dir": "assets/combat/gordo/",
       "char": "gordo.char.json",
       "status": "playable",
       "origen": "canonico",
-      "notes": "Recuperado de _excluidos (build-11): la hoja de 1 celda ya no desalinea (remapeo de indices por frameStart). Vestuario BASE (tank top). Nombre segun el usuario (2026-10-15). Frame-data=diseno TODO_VERIFICAR.",
+      "notes": "Recuperado de _excluidos (build-11): la hoja de 1 celda ya no desalinea (remapeo de indices por frameStart). Vestuario BASE (tank top). Nombre: \"El Gordo Tacos\" (usuario, 2026-10-15) -> \"El Fanta\" (usuario, 2026-11-19); \"El Gordo Tacos\" pasó a ser personaje_complementario. El perfil (reo 0888) viene de la referencia de ESTE arte. Frame-data=diseno TODO_VERIFICAR.",
       "perfil": {
         "reo": "0888",
         "celda": "Patio de carga",
@@ -522,18 +528,18 @@
     },
     {
       "id": "personaje_complementario",
-      "name": "Nuevo (sin nombre)",
+      "name": "El Gordo Tacos",
       "dir": "assets/combat/personaje_complementario/",
       "char": "personaje_complementario.char.json",
       "status": "playable",
       "provisional": true,
       "origen": "ZIP del usuario ATLAS_MAESTRO_PERSONAJE_COMPLEMENTARIO (sources/entregas_2026-11-13/); atlas y char.json de tools/build_personaje_complementario.py",
-      "notes": "Personaje NUEVO (2026-11-13), PROVISIONAL: el usuario confirmó que es nuevo pero falta su NOMBRE, ficha y lugar en la historia (TODO: VERIFICAR). Se puede elegir; no sale como rival automático. Frame-data y daños = DISEÑO. GENERADO por tools/build_personaje_complementario.py: no editar a mano.",
+      "notes": "Personaje NUEVO (2026-11-13), PROVISIONAL: nombre \"El Gordo Tacos\" dado por el usuario (2026-11-19); falta su ficha y lugar en la historia (TODO: VERIFICAR). Se puede elegir; no sale como rival automático. Frame-data y daños = DISEÑO. GENERADO por tools/build_personaje_complementario.py: no editar a mano.",
       "perfil": {
         "reo": null,
         "celda": null,
         "alias": null,
-        "src": "sin expediente (personaje nuevo, sin nombre todavía)"
+        "src": "sin expediente (personaje nuevo)"
       }
     }
   ],

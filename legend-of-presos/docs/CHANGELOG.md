@@ -2,6 +2,23 @@
 
 > Los ZIP recibidos el 2026-11-06 no traían `docs/`, así que **el historial anterior no está aquí**. Si tienes el `docs/CHANGELOG.md` completo, pega esta entrada al principio del tuyo.
 
+## 2026-11-19 — Nombres corregidos
+
+Pedido del usuario: corregir los nombres. Solo cambia el nombre que se ve; los ids internos (carpetas, partidas guardadas, campañas) quedan igual.
+
+| id | Antes | Ahora |
+|---|---|---|
+| `luchador_v2` | Luchador V2 | Omar Harfuch |
+| `gordo` | El Gordo Tacos | El Fanta |
+| `personaje_complementario` | Nuevo (sin nombre) | El Gordo Tacos |
+| `tatuado` | El Tatuado | Toker |
+| `cartel` | El Cartel | El Brayan |
+
+- `data/roster.json` (`name`) y `displayName` de cada `*.char.json`. El del personaje nuevo sale de `tools/build_personaje_complementario.py` (`NAME`), regenerado con el script (el atlas no cambió).
+- Alias de URL (`?p1=`): `gordo_tacos`, `el_gordo_tacos` y `el_gordo` ahora llevan al personaje nuevo; se agregaron `el_fanta`, `fanta`, `toker`, `el_brayan`, `brayan` y `omar_harfuch`.
+- Sin tocar (no se inventó nada): los apodos y expedientes de la referencia siguen con su arte — El Fanta conserva "Peso pesado" (reo 0888) y El Brayan "El patrón" (reo 0812); los golpes de El Fanta siguen llamándose "Taco Volador", etc. El Gordo Tacos sigue provisional: falta su ficha y su lugar en la historia.
+- Comprobado: en la selección se ven los 5 nombres nuevos y ninguno viejo; los alias resuelven; todos los `--check` de generadores al día; `MANIFEST_SHA256.txt` actualizado.
+
 ## 2026-11-19 — Poder nivelado, CPU y jefes más accesibles, Sofi seleccionable, Modo Vestía con carga
 
 Pedido del usuario: nivelar el poder de los personajes ("está muy difícil"), dejar a Sofi seleccionable y el Modo Vestía (modo bestia) como especial que se activa con carga.

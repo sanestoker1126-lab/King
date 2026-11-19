@@ -1,6 +1,6 @@
 {
   "id": "personaje_complementario",
-  "displayName": "Nuevo (sin nombre)",
+  "displayName": "El Gordo Tacos",
   "source": "ZIP del usuario ATLAS_MAESTRO_PERSONAJE_COMPLEMENTARIO (sources/entregas_2026-11-13/, sha256 1c56b85dca4bf99f7f8ba9473c560506a735a9f6109b49654e50bacc71b460c5): 165 cuadros 192x192 (10 de la imagen original + 155 generados, según su LEEME). Atlas = copia de los cuadros usados, sin reescalar.",
   "_generated": "GENERADO por tools/build_personaje_complementario.py: no editar a mano.",
   "_frame_data_status": "PROVISIONAL: nombre de relleno (el usuario no lo dio), golpes con nombres genéricos, tiempos y daños de DISEÑO. Sin puño fuerte, puño aéreo, agarre ni mareo propios (la fuente no trae esos cuadros). TODO: VERIFICAR.",

@@ -30,7 +30,7 @@ Léelo primero en un chat nuevo. Detalle completo en `docs/CHANGELOG.md` y `docs
    - Pendiente del usuario: la historia de la Toxi Familia (integrantes y trama). No hay nada en el repo y no se debe inventar.
 
 5. **Personaje nuevo provisional e historia (2026-11-13).**
-   - `personaje_complementario` ("Nuevo (sin nombre)"): generado por `python3 -I tools/build_personaje_complementario.py` (`--check`). Pendiente del usuario: nombre, ficha y si entra a la campaña. Para renombrarlo: `NAME` en el script (y, si cambia el id, `CID`).
+   - `personaje_complementario` ("El Gordo Tacos", nombre del usuario 2026-11-19): generado por `python3 -I tools/build_personaje_complementario.py` (`--check`). Pendiente del usuario: ficha y si entra a la campaña. Para renombrarlo: `NAME` en el script (y, si cambia el id, `CID`).
    - Historia entre combates: `data/story.json` (6 capítulos de relleno, ocultos en el juego normal; se ven con `game.html?story=draft`). Pendiente del usuario: los textos de la Toxi Familia.
    - Personaje del overol naranja: confirmado como nuevo; falta su atlas en ZIP y su nombre.
 
@@ -50,6 +50,8 @@ Léelo primero en un chat nuevo. Detalle completo en `docs/CHANGELOG.md` y `docs
 11. **Cachorro = personaje_08 (2026-11-16).** Nombre "Cachorro" (el id no cambia). Hojas limpias: `python3 -I tools/limpiar_atlas_cachorro.py` (`--check`). Líneas sueltas del roster: `python3 -I tools/limpiar_lineas_atlas.py` (`--check`). Originales en `sources/atlas_originales_2026-11-16/`. Pendiente: las rayas de piso del personaje nuevo se corrigen en su propio generador.
 
 12. **Equilibrio y dificultad (2026-11-19).** `data/config.json › balance` (poder por personaje, tope de súpers) y `ai.levels` (CPU más suave); jefes ×1.5/×1.3 y ×1.8/×1.3. Sofi seleccionable. Modo Vestía = súper con carga (`tools/sofi_vestia_carga.py`). Para recalibrar tras cambiar golpes: `node tools/qa_20261106/calibrar_balance.cjs . 3 > r.json` y copiar `chars` a `config.json`.
+
+13. **Nombres (2026-11-19).** luchador_v2 = Omar Harfuch · gordo = El Fanta · personaje_complementario = El Gordo Tacos · tatuado = Toker · cartel = El Brayan. Solo cambia `name`/`displayName`; los ids no. Alias de URL en `data/roster.json › aliases`.
 
 ## Cómo probar (herramientas de este repo)
 ```bash

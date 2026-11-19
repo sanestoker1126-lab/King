@@ -28,7 +28,7 @@ SRC_ZIP = os.path.join(ROOT, "sources/entregas_2026-11-13/ATLAS_MAESTRO_PERSONAJ
 SRC_SHA = "1c56b85dca4bf99f7f8ba9473c560506a735a9f6109b49654e50bacc71b460c5"
 PRE = "ATLAS_MAESTRO_PERSONAJE_COMPLEMENTARIO/"
 CID = "personaje_complementario"
-NAME = "Nuevo (sin nombre)"
+NAME = "El Gordo Tacos"   # nombre dado por el usuario (2026-11-19)
 TOOL = "tools/build_personaje_complementario.py"
 C, COLS, THR, TARGET_H = 192, 10, 40, 150
 
@@ -204,9 +204,9 @@ def main():
     rtxt0 = open(rp, encoding="utf-8").read(); R = json.loads(rtxt0)
     entry = {"id": CID, "name": NAME, "dir": "assets/combat/%s/" % CID, "char": CID + ".char.json", "status": "playable", "provisional": True,
              "origen": "ZIP del usuario ATLAS_MAESTRO_PERSONAJE_COMPLEMENTARIO (sources/entregas_2026-11-13/); atlas y char.json de " + TOOL,
-             "notes": "Personaje NUEVO (2026-11-13), PROVISIONAL: el usuario confirmó que es nuevo pero falta su NOMBRE, ficha y lugar en la historia "
-                      "(TODO: VERIFICAR). Se puede elegir; no sale como rival automático. Frame-data y daños = DISEÑO. GENERADO por %s: no editar a mano." % TOOL,
-             "perfil": {"reo": None, "celda": None, "alias": None, "src": "sin expediente (personaje nuevo, sin nombre todavía)"}}
+             "notes": "Personaje NUEVO (2026-11-13), PROVISIONAL: nombre \"El Gordo Tacos\" dado por el usuario (2026-11-19); falta su ficha y lugar en "
+                      "la historia (TODO: VERIFICAR). Se puede elegir; no sale como rival automático. Frame-data y daños = DISEÑO. GENERADO por %s: no editar a mano." % TOOL,
+             "perfil": {"reo": None, "celda": None, "alias": None, "src": "sin expediente (personaje nuevo)"}}
     R["characters"] = [c for c in R["characters"] if c["id"] != CID] + [entry]
     ind = 1 if json.dumps(json.loads(rtxt0), ensure_ascii=False, indent=1) + "\n" == rtxt0 else 2
     rtxt = json.dumps(R, ensure_ascii=False, indent=ind) + "\n"

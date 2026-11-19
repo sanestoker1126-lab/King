@@ -8,6 +8,9 @@
 - Wasirris: K.O., mareo y victoria con arte nuevo. Cachorro (antes "Personaje 08"): K.O. y victoria con arte nuevo.
 - Jugabilidad intacta: las peleas CPU contra CPU con semilla fija dan el mismo resultado cuadro a cuadro que antes de esta entrega (`tools/qa_20261106/determinism.cjs`).
 
+## Al 2026-11-19 (nombres)
+- Nombres corregidos por el usuario: Omar Harfuch (luchador_v2), El Fanta (gordo), El Gordo Tacos (personaje_complementario), Toker (tatuado), El Brayan (cartel). Ids sin cambio.
+
 ## Al 2026-11-08 (jefes y Sofi)
 - **Arcade**:
   - El jefe final (Garravas) nunca se salta: si lo eliges, es espejo.
