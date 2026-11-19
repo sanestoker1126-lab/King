@@ -104,7 +104,7 @@
     },
     {
       "id": "azul_nocturno",
-      "name": "Azul nocturno",
+      "name": "Pasillo de celdas",
       "swatch": "#3f7bb0",
       "theme": {
         "sky": 792358,
@@ -113,11 +113,19 @@
         "floor": 528412,
         "line": 4160432,
         "glow": 1323085
+      },
+      "art": {
+        "file": "assets/stages/impacto_interior.webp",
+        "w": 1260,
+        "h": 540,
+        "x": -150,
+        "y": 0,
+        "scale": 1
       }
     },
     {
       "id": "atardecer_cancha",
-      "name": "Atardecer en la cancha",
+      "name": "Carretera al atardecer",
       "swatch": "#b0693f",
       "theme": {
         "sky": 2757648,
@@ -126,11 +134,19 @@
         "floor": 1838344,
         "line": 11561279,
         "glow": 5057044
+      },
+      "art": {
+        "file": "assets/stages/impacto_carretera.webp",
+        "w": 1260,
+        "h": 540,
+        "x": -150,
+        "y": 0,
+        "scale": 1
       }
     },
     {
       "id": "patio_verde",
-      "name": "Patio verde",
+      "name": "Patio del penal",
       "swatch": "#3fb069",
       "theme": {
         "sky": 1055250,
@@ -139,11 +155,19 @@
         "floor": 531471,
         "line": 4173929,
         "glow": 1327135
+      },
+      "art": {
+        "file": "assets/stages/impacto_patio.webp",
+        "w": 1260,
+        "h": 540,
+        "x": -150,
+        "y": 0,
+        "scale": 1
       }
     },
     {
       "id": "patio_morado",
-      "name": "Patio de noche",
+      "name": "Mercado nocturno",
       "swatch": "#5a4780",
       "theme": {
         "sky": 1708839,
@@ -153,7 +177,15 @@
         "line": 5916544,
         "glow": 2759999
       },
-      "_doc": "El escenario procedural morado que antes se llamaba 'Puente Grande' (ese nombre ahora es el del arte real)."
+      "_doc": "El escenario procedural morado que antes se llamaba 'Puente Grande' (ese nombre ahora es el del arte real).",
+      "art": {
+        "file": "assets/stages/impacto_mercado.webp",
+        "w": 1260,
+        "h": 540,
+        "x": -150,
+        "y": 0,
+        "scale": 1
+      }
     },
     {
       "id": "pemex_guadalajara",
