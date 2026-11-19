@@ -4,3 +4,4 @@ test-results/
 playwright-report/
 *.log
 audit-output/
+__pycache__/
