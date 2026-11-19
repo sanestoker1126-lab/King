@@ -68,6 +68,16 @@
       },
       "source": "Reempaquetado determinista desde clips de combate existentes; rivales y FX separados.",
       "anchorsFile": "luchador_v2_combo_sequences_anchors.json"
+    },
+    "ataques_revisados": {
+      "file": "luchador_v2_ataques_revisados.png",
+      "columns": 5,
+      "rows": 2,
+      "cell": {
+        "w": 192,
+        "h": 192
+      },
+      "anchorsFile": "luchador_v2_ataques_revisados_anchors.json"
     }
   },
   "_hitbox_status": "TODO_VERIFICAR — clips/estados MEDIDOS del manifest de referencia; hitboxes, daño y timings son DISEÑO inicial (ajustar jugando en Android).",
@@ -552,6 +562,54 @@
           ]
         }
       ]
+    },
+    "ref_punch": {
+      "atlas": "ataques_revisados",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        2,
+        1,
+        2,
+        0
+      ]
+    },
+    "ref_kick": {
+      "atlas": "ataques_revisados",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        3,
+        5,
+        4,
+        0
+      ]
+    },
+    "ref_j_punch": {
+      "atlas": "ataques_revisados",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        6,
+        7,
+        1,
+        7,
+        6
+      ]
+    },
+    "ref_j_kick": {
+      "atlas": "ataques_revisados",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        6,
+        7,
+        8,
+        7,
+        6
+      ]
     }
   },
   "inputs": {
@@ -601,15 +659,15 @@
   },
   "moves": {
     "punch": {
-      "clip": "atk_light",
+      "clip": "ref_punch",
       "hitFrames": [
-        1
+        2
       ],
       "hitbox": {
-        "x": 34,
-        "y": -92,
-        "w": 52,
-        "h": 26
+        "x": 52,
+        "y": -130,
+        "w": 18,
+        "h": 18
       },
       "guardType": "high",
       "damage": 12,
@@ -633,8 +691,8 @@
         "recovery": 8
       },
       "activeIdx": [
-        1,
-        1
+        2,
+        2
       ],
       "cancelFrames": [
         5,
@@ -642,7 +700,7 @@
       ],
       "_clipTiming": {
         "hitFrames": [
-          1
+          2
         ],
         "hitstun": 14,
         "blockstun": 10,
@@ -672,15 +730,15 @@
       "_timing": "tools/build_frame_data.py clase normal:jab (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "kick": {
-      "clip": "atk_kick",
+      "clip": "ref_kick",
       "hitFrames": [
         2
       ],
       "hitbox": {
-        "x": 34,
-        "y": -50,
-        "w": 60,
-        "h": 26
+        "x": 67,
+        "y": -123,
+        "w": 18,
+        "h": 18
       },
       "guardType": "low",
       "damage": 16,
@@ -743,15 +801,15 @@
       "_timing": "tools/build_frame_data.py clase normal:kick (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "j_punch": {
-      "clip": "atk_airp",
+      "clip": "ref_j_punch",
       "hitFrames": [
-        1
+        2
       ],
       "hitbox": {
-        "x": 22,
-        "y": -92,
-        "w": 56,
-        "h": 40
+        "x": 52,
+        "y": -130,
+        "w": 18,
+        "h": 18
       },
       "guardType": "overhead",
       "damage": 13,
@@ -767,15 +825,15 @@
       "_doc": "Aereo de puno: diagonal hacia adelante a media altura. Antes: plantilla identica para ambos (x28,y-96,52x30). TODO: VERIFICAR jugando."
     },
     "j_kick": {
-      "clip": "atk_airk",
+      "clip": "ref_j_kick",
       "hitFrames": [
         2
       ],
       "hitbox": {
-        "x": 16,
-        "y": -64,
-        "w": 62,
-        "h": 52
+        "x": 65,
+        "y": -77,
+        "w": 18,
+        "h": 18
       },
       "guardType": "overhead",
       "damage": 13,

@@ -734,6 +734,30 @@
         8
       ],
       "_doc": "Ruge del golpe -> cabeza atrás (mareado) -> se encorva -> rodilla -> a gatas -> se desploma boca abajo."
+    },
+    "ref_punch": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        4,
+        26,
+        24,
+        25,
+        4
+      ]
+    },
+    "ref_kick": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        4,
+        15,
+        11,
+        15,
+        4
+      ]
     }
   },
   "inputs": {
@@ -793,12 +817,12 @@
   },
   "moves": {
     "punch": {
-      "clip": "atk_light",
+      "clip": "ref_punch",
       "hitbox": {
-        "x": 56,
-        "y": -126,
-        "w": 24,
-        "h": 39
+        "x": 59,
+        "y": -131,
+        "w": 18,
+        "h": 18
       },
       "guardType": "high",
       "damage": 12,
@@ -823,25 +847,27 @@
         "recovery": 8
       },
       "activeIdx": [
-        1,
+        2,
         2
       ],
       "cancelFrames": [
         5,
         8
       ],
-      "_normals": "tools/build_normals.py: frame de impacto [1, 2] y caja medidos del sprite (altura 0.7); tiempos de data/normals.json clase jab"
+      "hitFrames": [
+        2
+      ]
     },
     "kick": {
-      "clip": "atk_kick",
+      "clip": "ref_kick",
       "hitFrames": [
-        1
+        2
       ],
       "hitbox": {
-        "x": 34,
-        "y": -50,
-        "w": 60,
-        "h": 26
+        "x": 32,
+        "y": -34,
+        "w": 22,
+        "h": 22
       },
       "guardType": "low",
       "damage": 16,
@@ -866,8 +892,8 @@
         "recovery": 12
       },
       "activeIdx": [
-        1,
-        1
+        2,
+        2
       ],
       "cancelFrames": [
         7,
@@ -875,7 +901,7 @@
       ],
       "_clipTiming": {
         "hitFrames": [
-          1
+          2
         ],
         "hitstun": 16,
         "blockstun": 11,

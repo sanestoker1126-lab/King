@@ -554,6 +554,18 @@
           ]
         }
       ]
+    },
+    "ref_kick": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        36,
+        37,
+        38,
+        37,
+        36
+      ]
     }
   },
   "inputs": {
@@ -651,12 +663,12 @@
       "_normals": "tools/build_normals.py: frame de impacto [1] y caja medidos del sprite (altura 0.71); tiempos de data/normals.json clase jab"
     },
     "kick": {
-      "clip": "atk_kick",
+      "clip": "ref_kick",
       "hitbox": {
-        "x": 60,
-        "y": -118,
-        "w": 25,
-        "h": 47
+        "x": 65,
+        "y": -99,
+        "w": 18,
+        "h": 18
       },
       "guardType": "high",
       "damage": 16,
@@ -687,7 +699,9 @@
         7,
         11
       ],
-      "_normals": "tools/build_normals.py: frame de impacto [2] y caja medidos del sprite (altura 0.63); tiempos de data/normals.json clase kick"
+      "hitFrames": [
+        2
+      ]
     },
     "j_punch": {
       "clip": "atk_airp",

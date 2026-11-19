@@ -464,6 +464,30 @@
         5
       ],
       "_doc": "Carga en el piso (aro de grafiti) -> barrido -> guardia con grafiti -> golpe (sale la calavera) -> estallido en la mano -> puño arriba. Figuras: ['m0', 'm1', 'm2', 'm3', 'm4', 'm5']. GENERADO por tools/build_especiales_hojas.py."
+    },
+    "ref_punch": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        7,
+        15,
+        17,
+        15,
+        7
+      ]
+    },
+    "ref_kick": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        7,
+        25,
+        24,
+        25,
+        7
+      ]
     }
   },
   "inputs": {
@@ -521,12 +545,12 @@
   },
   "moves": {
     "punch": {
-      "clip": "atk_light",
+      "clip": "ref_punch",
       "hitbox": {
-        "x": 36,
-        "y": -136,
-        "w": 43,
-        "h": 28
+        "x": 55,
+        "y": -124,
+        "w": 18,
+        "h": 18
       },
       "guardType": "high",
       "damage": 12,
@@ -552,22 +576,24 @@
         "recovery": 8
       },
       "activeIdx": [
-        0,
+        2,
         2
       ],
       "cancelFrames": [
         5,
         8
       ],
-      "_normals": "tools/build_normals.py: frame de impacto [0, 1, 2] y caja medidos del sprite (altura 0.78); tiempos de data/normals.json clase jab"
+      "hitFrames": [
+        2
+      ]
     },
     "kick": {
-      "clip": "atk_kick",
+      "clip": "ref_kick",
       "hitbox": {
-        "x": 36,
-        "y": -123,
-        "w": 39,
-        "h": 48
+        "x": 55,
+        "y": -116,
+        "w": 18,
+        "h": 18
       },
       "guardType": "high",
       "damage": 16,
@@ -592,14 +618,16 @@
         "recovery": 12
       },
       "activeIdx": [
-        0,
+        2,
         2
       ],
       "cancelFrames": [
         7,
         11
       ],
-      "_normals": "tools/build_normals.py: frame de impacto [0, 1, 2] y caja medidos del sprite (altura 0.63); tiempos de data/normals.json clase kick"
+      "hitFrames": [
+        2
+      ]
     },
     "j_punch": {
       "clip": "atk_airp",

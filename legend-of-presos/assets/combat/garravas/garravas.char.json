@@ -68,6 +68,16 @@
       },
       "source": "Reempaquetado determinista desde clips de combate existentes; rivales y FX separados.",
       "anchorsFile": "garravas_combo_sequences_anchors.json"
+    },
+    "ataques_revisados": {
+      "file": "garravas_ataques_revisados.png",
+      "columns": 5,
+      "rows": 2,
+      "cell": {
+        "w": 160,
+        "h": 144
+      },
+      "anchorsFile": "garravas_ataques_revisados_anchors.json"
     }
   },
   "_hitbox_status": "TODO_VERIFICAR — clips/estados MEDIDOS del manifest de referencia; hitboxes, daño y timings son DISEÑO inicial (ajustar jugando en Android).",
@@ -772,6 +782,54 @@
           ]
         }
       ]
+    },
+    "ref_punch": {
+      "atlas": "ataques_revisados",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ]
+    },
+    "ref_kick": {
+      "atlas": "ataques_revisados",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        0,
+        3,
+        4,
+        5,
+        0
+      ]
+    },
+    "ref_j_punch": {
+      "atlas": "ataques_revisados",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        1,
+        3,
+        2,
+        3,
+        1
+      ]
+    },
+    "ref_j_kick": {
+      "atlas": "ataques_revisados",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        1,
+        5,
+        6,
+        5,
+        1
+      ]
     }
   },
   "inputs": {
@@ -824,12 +882,12 @@
   },
   "moves": {
     "punch": {
-      "clip": "atk_light",
+      "clip": "ref_punch",
       "hitbox": {
-        "x": 61,
-        "y": -122,
-        "w": 22,
-        "h": 30
+        "x": 64,
+        "y": -113,
+        "w": 18,
+        "h": 18
       },
       "guardType": "high",
       "damage": 12,
@@ -854,25 +912,27 @@
         "recovery": 8
       },
       "activeIdx": [
-        1,
-        1
+        2,
+        2
       ],
       "cancelFrames": [
         5,
         8
       ],
-      "_normals": "tools/build_normals.py: frame de impacto [1] y caja medidos del sprite (altura 0.73); tiempos de data/normals.json clase jab"
+      "hitFrames": [
+        2
+      ]
     },
     "kick": {
-      "clip": "atk_kick",
+      "clip": "ref_kick",
       "hitFrames": [
-        1
+        2
       ],
       "hitbox": {
-        "x": 34,
-        "y": -50,
-        "w": 60,
-        "h": 26
+        "x": 73,
+        "y": -109,
+        "w": 18,
+        "h": 18
       },
       "guardType": "low",
       "damage": 16,
@@ -896,8 +956,8 @@
         "recovery": 12
       },
       "activeIdx": [
-        1,
-        1
+        2,
+        2
       ],
       "cancelFrames": [
         7,
@@ -905,7 +965,7 @@
       ],
       "_clipTiming": {
         "hitFrames": [
-          1
+          2
         ],
         "hitstun": 16,
         "blockstun": 11,
@@ -935,12 +995,12 @@
       "_timing": "tools/build_frame_data.py clase normal:kick (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "j_punch": {
-      "clip": "atk_airp",
+      "clip": "ref_j_punch",
       "hitbox": {
-        "x": 61,
-        "y": -122,
-        "w": 22,
-        "h": 30
+        "x": 64,
+        "y": -113,
+        "w": 18,
+        "h": 18
       },
       "guardType": "overhead",
       "damage": 13,
@@ -960,18 +1020,20 @@
         "recovery": 3
       },
       "activeIdx": [
-        1,
-        1
+        2,
+        2
       ],
-      "_normals": "tools/build_normals.py: frame de impacto [1] y caja medidos del sprite (altura 0.73); tiempos de data/normals.json clase aire_p"
+      "hitFrames": [
+        2
+      ]
     },
     "j_kick": {
-      "clip": "atk_airk",
+      "clip": "ref_j_kick",
       "hitbox": {
-        "x": 61,
-        "y": -122,
-        "w": 30,
-        "h": 28
+        "x": 54,
+        "y": -109,
+        "w": 18,
+        "h": 18
       },
       "guardType": "overhead",
       "damage": 13,
@@ -991,10 +1053,12 @@
         "recovery": 3
       },
       "activeIdx": [
-        1,
-        1
+        2,
+        2
       ],
-      "_normals": "tools/build_normals.py: frame de impacto [1] y caja medidos del sprite (altura 0.73); tiempos de data/normals.json clase aire_k"
+      "hitFrames": [
+        2
+      ]
     },
     "fireball": {
       "clip": "atk_sp1",

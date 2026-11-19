@@ -519,6 +519,42 @@
           ]
         }
       ]
+    },
+    "ref_kick": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        16,
+        21,
+        19,
+        21,
+        16
+      ]
+    },
+    "ref_j_kick": {
+      "atlas": "base",
+      "fps": 15,
+      "loop": false,
+      "frames": [
+        13,
+        21,
+        27,
+        21,
+        13
+      ]
+    },
+    "ref_j_punch": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        13,
+        16,
+        17,
+        16,
+        13
+      ]
     }
   },
   "inputs": {
@@ -643,12 +679,12 @@
       "_timing": "tools/build_frame_data.py clase normal:jab (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "kick": {
-      "clip": "atk_kick",
+      "clip": "ref_kick",
       "hitbox": {
-        "x": 44,
-        "y": -22,
-        "w": 32,
-        "h": 22
+        "x": 64,
+        "y": -103,
+        "w": 18,
+        "h": 18
       },
       "guardType": "low",
       "damage": 16,
@@ -672,25 +708,27 @@
         "recovery": 12
       },
       "activeIdx": [
-        1,
-        1
+        2,
+        2
       ],
       "cancelFrames": [
         7,
         11
       ],
-      "_normals": "tools/build_normals.py: frame de impacto [1] y caja medidos del sprite (altura 0.08); tiempos de data/normals.json clase kick"
+      "hitFrames": [
+        2
+      ]
     },
     "j_punch": {
-      "clip": "atk_airp",
+      "clip": "ref_j_punch",
       "hitFrames": [
-        1
+        2
       ],
       "hitbox": {
-        "x": 22,
-        "y": -92,
-        "w": 56,
-        "h": 40
+        "x": 45,
+        "y": -19,
+        "w": 18,
+        "h": 18
       },
       "guardType": "overhead",
       "damage": 13,
@@ -706,15 +744,15 @@
       "_doc": "Aereo de puno: diagonal hacia adelante a media altura. Antes: plantilla identica para ambos (x28,y-96,52x30). TODO: VERIFICAR jugando."
     },
     "j_kick": {
-      "clip": "atk_airk",
+      "clip": "ref_j_kick",
       "hitFrames": [
-        1
+        2
       ],
       "hitbox": {
-        "x": 16,
-        "y": -64,
-        "w": 62,
-        "h": 52
+        "x": 49,
+        "y": -103,
+        "w": 18,
+        "h": 18
       },
       "guardType": "overhead",
       "damage": 13,

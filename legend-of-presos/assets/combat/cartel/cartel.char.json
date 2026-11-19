@@ -694,6 +694,18 @@
         5
       ],
       "_doc": "Corta cartucho con la pistola arriba -> cuatro cuadros disparando (fogonazo dibujado en el cuerpo) -> baja el arma. Figuras: ['g0', 'g1', 'g2', 'g3', 'g4', 'g5']. GENERADO por tools/build_especiales_hojas.py."
+    },
+    "ref_kick": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        50,
+        51,
+        52,
+        51,
+        50
+      ]
     }
   },
   "inputs": {
@@ -788,12 +800,12 @@
       "_normals": "tools/build_normals.py: frame de impacto [1] y caja medidos del sprite (altura 0.86); tiempos de data/normals.json clase jab"
     },
     "kick": {
-      "clip": "atk_kick",
+      "clip": "ref_kick",
       "hitbox": {
-        "x": 36,
-        "y": -128,
-        "w": 25,
-        "h": 40
+        "x": 42,
+        "y": -116,
+        "w": 18,
+        "h": 18
       },
       "guardType": "high",
       "damage": 16,
@@ -825,7 +837,9 @@
         7,
         11
       ],
-      "_normals": "tools/build_normals.py: frame de impacto [2] y caja medidos del sprite (altura 0.81); tiempos de data/normals.json clase kick"
+      "hitFrames": [
+        2
+      ]
     },
     "j_punch": {
       "clip": "atk_airp",

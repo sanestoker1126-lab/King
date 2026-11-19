@@ -494,6 +494,30 @@
           ]
         }
       ]
+    },
+    "ref_punch": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        33,
+        39,
+        40,
+        41,
+        33
+      ]
+    },
+    "ref_kick": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        33,
+        37,
+        45,
+        37,
+        33
+      ]
     }
   },
   "inputs": {
@@ -553,12 +577,12 @@
   },
   "moves": {
     "punch": {
-      "clip": "atk_light",
+      "clip": "ref_punch",
       "hitbox": {
-        "x": 34,
-        "y": -127,
-        "w": 50,
-        "h": 24
+        "x": 60,
+        "y": -124,
+        "w": 18,
+        "h": 18
       },
       "guardType": "high",
       "damage": 12,
@@ -583,22 +607,24 @@
         "recovery": 8
       },
       "activeIdx": [
-        0,
-        1
+        2,
+        2
       ],
       "cancelFrames": [
         5,
         8
       ],
-      "_normals": "tools/build_normals.py: frame de impacto [0, 1] y caja medidos del sprite (altura 0.76); tiempos de data/normals.json clase jab"
+      "hitFrames": [
+        2
+      ]
     },
     "kick": {
-      "clip": "atk_kick",
+      "clip": "ref_kick",
       "hitbox": {
-        "x": 34,
-        "y": -137,
-        "w": 48,
-        "h": 26
+        "x": 61,
+        "y": -106,
+        "w": 18,
+        "h": 18
       },
       "guardType": "high",
       "damage": 16,
@@ -623,14 +649,16 @@
         "recovery": 12
       },
       "activeIdx": [
-        0,
+        2,
         2
       ],
       "cancelFrames": [
         7,
         11
       ],
-      "_normals": "tools/build_normals.py: frame de impacto [0, 1, 2] y caja medidos del sprite (altura 0.82); tiempos de data/normals.json clase kick"
+      "hitFrames": [
+        2
+      ]
     },
     "j_punch": {
       "clip": "atk_airp",

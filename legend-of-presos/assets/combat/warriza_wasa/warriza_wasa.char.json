@@ -185,6 +185,19 @@
       ],
       "loop": false,
       "_doc": "palma abierta (29) -> palma a fondo con el cuerpo (30) -> guardia"
+    },
+    "ref_kick": {
+      "atlas": "base",
+      "fps": 14,
+      "frames": [
+        5,
+        21,
+        22,
+        23,
+        5
+      ],
+      "loop": false,
+      "_doc": "guardia -> rodillazo (23) -> guardia"
     }
   },
   "inputs": {
@@ -282,12 +295,12 @@
       "_measure": "tools/build_boss_chars.py: impacto en frame(s) [20] (clip atk_heavy idx 1-1); caja = extremidad fuera de la silueta de idle[0] (frame 2), altura 0.72; tiempos de data/normals.json clase fuerte"
     },
     "kick": {
-      "clip": "atk_kick",
+      "clip": "ref_kick",
       "hitbox": {
-        "x": 21,
-        "y": -114,
-        "w": 38,
-        "h": 76
+        "x": 89,
+        "y": -97,
+        "w": 18,
+        "h": 18
       },
       "frames": {
         "startup": 6,
@@ -295,8 +308,8 @@
         "recovery": 12
       },
       "activeIdx": [
-        1,
-        1
+        2,
+        2
       ],
       "hitstun": 17,
       "blockstun": 13,
@@ -316,7 +329,9 @@
       ],
       "name": "Rodillazo",
       "nameSrc": "generico",
-      "_measure": "tools/build_boss_chars.py: impacto en frame(s) [23] (clip atk_kick idx 1-1); caja = extremidad fuera de la silueta de idle[0] (frame 2), altura 0.51; tiempos de data/normals.json clase kick"
+      "hitFrames": [
+        2
+      ]
     },
     "heavy_kick": {
       "clip": "atk_kick2",

@@ -709,6 +709,30 @@
         8
       ],
       "_doc": "Golpe hacia atrás con humo rojo (4) -> rodilla -> sentada -> a gatas -> tendida."
+    },
+    "ref_punch": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    "ref_kick": {
+      "atlas": "base",
+      "fps": 14,
+      "loop": false,
+      "frames": [
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
     }
   },
   "inputs": {
@@ -773,15 +797,15 @@
   },
   "moves": {
     "punch": {
-      "clip": "atk_light",
+      "clip": "ref_punch",
       "hitFrames": [
-        1
+        3
       ],
       "hitbox": {
-        "x": 34,
-        "y": -92,
-        "w": 52,
-        "h": 26
+        "x": 56,
+        "y": -127,
+        "w": 18,
+        "h": 18
       },
       "guardType": "high",
       "damage": 12,
@@ -806,8 +830,8 @@
         "recovery": 8
       },
       "activeIdx": [
-        1,
-        1
+        3,
+        3
       ],
       "cancelFrames": [
         5,
@@ -815,7 +839,7 @@
       ],
       "_clipTiming": {
         "hitFrames": [
-          1
+          3
         ],
         "hitstun": 14,
         "blockstun": 10,
@@ -845,12 +869,12 @@
       "_timing": "tools/build_frame_data.py clase normal:jab (data/frame_data.json). DISEÑO: TODO VERIFICAR jugando"
     },
     "kick": {
-      "clip": "atk_kick",
+      "clip": "ref_kick",
       "hitbox": {
-        "x": 35,
-        "y": -108,
-        "w": 50,
-        "h": 22
+        "x": 65,
+        "y": -106,
+        "w": 18,
+        "h": 18
       },
       "guardType": "high",
       "damage": 16,
@@ -882,7 +906,9 @@
         7,
         11
       ],
-      "_normals": "tools/build_normals.py: frame de impacto [2] y caja medidos del sprite (altura 0.65); tiempos de data/normals.json clase kick"
+      "hitFrames": [
+        2
+      ]
     },
     "j_punch": {
       "clip": "atk_airp",

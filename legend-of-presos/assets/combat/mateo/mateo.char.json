@@ -265,6 +265,43 @@
         41
       ],
       "_doc": "espada atrás, vertical, arco, tajo al piso, espada en alto"
+    },
+    "ref_punch": {
+      "atlas": "base",
+      "fps": 14,
+      "frames": [
+        29,
+        25,
+        31,
+        25,
+        29
+      ],
+      "_doc": "estocada corta: guardia, espada al frente a la cintura, guardia"
+    },
+    "ref_kick": {
+      "atlas": "base",
+      "fps": 14,
+      "frames": [
+        29,
+        34,
+        52,
+        34,
+        29
+      ],
+      "_doc": "estocada a fondo: guardia abierta, estocada larga a media altura, guardia"
+    },
+    "ref_j_kick": {
+      "atlas": "base",
+      "fps": 12,
+      "frames": [
+        34,
+        54,
+        55,
+        54,
+        34
+      ],
+      "hold": true,
+      "_doc": "rodilla arriba y patada voladora"
     }
   },
   "inputs": {
@@ -318,12 +355,12 @@
   },
   "moves": {
     "punch": {
-      "clip": "atk_light",
+      "clip": "ref_punch",
       "hitbox": {
-        "x": 34,
-        "y": -66,
-        "w": 43,
-        "h": 14
+        "x": 44,
+        "y": -92,
+        "w": 73,
+        "h": 22
       },
       "frames": {
         "startup": 4,
@@ -331,8 +368,8 @@
         "recovery": 8
       },
       "activeIdx": [
-        1,
-        1
+        2,
+        2
       ],
       "hitstun": 13,
       "blockstun": 10,
@@ -358,7 +395,9 @@
       ],
       "name": "Estocada",
       "nameSrc": "provisional",
-      "_measure": "tools/build_seated_char.py: impacto en frame(s) [27] (clip atk_light idx 1-1); caja = extremidad fuera de la silueta de idle[0] (frame 0), altura 0.40; tiempos de data/normals.json clase jab"
+      "hitFrames": [
+        2
+      ]
     },
     "heavy_punch": {
       "clip": "atk_heavy",
@@ -402,11 +441,11 @@
       "_measure": "tools/build_seated_char.py: impacto en frame(s) [22] (clip atk_heavy idx 1-1); caja = extremidad fuera de la silueta de idle[0] (frame 0), altura 0.39; tiempos de data/normals.json clase fuerte"
     },
     "kick": {
-      "clip": "atk_kick",
+      "clip": "ref_kick",
       "hitbox": {
-        "x": 30,
-        "y": -83,
-        "w": 96,
+        "x": 49,
+        "y": -134,
+        "w": 18,
         "h": 18
       },
       "frames": {
@@ -415,8 +454,8 @@
         "recovery": 12
       },
       "activeIdx": [
-        1,
-        1
+        2,
+        2
       ],
       "hitstun": 17,
       "blockstun": 13,
@@ -440,15 +479,17 @@
       ],
       "name": "Estocada a fondo",
       "nameSrc": "provisional",
-      "_measure": "tools/build_seated_char.py: impacto en frame(s) [31] (clip atk_kick idx 1-1); caja = extremidad fuera de la silueta de atk_kick[0] (frame 32), altura 0.50; tiempos de data/normals.json clase kick"
+      "hitFrames": [
+        2
+      ]
     },
     "j_kick": {
-      "clip": "atk_airk",
+      "clip": "ref_j_kick",
       "hitbox": {
-        "x": 43,
+        "x": 70,
         "y": -76,
-        "w": 49,
-        "h": 31
+        "w": 18,
+        "h": 18
       },
       "frames": {
         "startup": 6,
@@ -456,8 +497,8 @@
         "recovery": 3
       },
       "activeIdx": [
-        1,
-        1
+        2,
+        2
       ],
       "hitstun": 15,
       "blockstun": 10,
@@ -471,7 +512,9 @@
       "cancelInto": [],
       "name": "Patada aérea",
       "nameSrc": "generico",
-      "_measure": "tools/build_seated_char.py: impacto en frame(s) [55] (clip atk_airk idx 1-1); caja = extremidad fuera de la silueta de atk_airk[0] (frame 52), altura 0.41; tiempos de data/normals.json clase aire_k"
+      "hitFrames": [
+        2
+      ]
     },
     "j_punch": {
       "clip": "atk_airp",
