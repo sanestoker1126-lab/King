@@ -636,6 +636,11 @@
         "motion": "qcf2",
         "button": "punch",
         "move": "super_festiva"
+      },
+      {
+        "motion": "qcf2",
+        "button": "kick",
+        "move": "modo_vestia"
       }
     ],
     "hidden": []
@@ -1021,7 +1026,7 @@
       "clip": "modo_vestia",
       "super": true,
       "hidden": true,
-      "meterCost": 0,
+      "meterCost": 100,
       "invuln": true,
       "invulnFrames": 80,
       "hitFrames": [
@@ -1057,7 +1062,9 @@
       "nameSrc": "paquete:ESPECIAL OCULTO MODO VESTÍA",
       "_doc": "Se activa SOLO (ver autoTransform): no tiene comando. invulnFrames 66 ≈ cubre activación+transformación (idx0-15 a 15fps). hitFrames en el ataque de garras (18,20,22) y el remate (25,28). Frame-data y caja = DISEÑO, TODO: VERIFICAR jugando. Al terminar, f.transformed=true: Sofi pelea con el moveset morado (*_vestia) y +20% de daño hasta el fin de la ronda.",
       "transformsInto": true,
-      "hitAnim": "vestia_garras"
+      "hitAnim": "vestia_garras",
+      "_meterCostAntes": 0,
+      "_docCarga": "2026-11-19 (tools/sofi_vestia_carga.py): súper con carga — ↓↘→↓↘→ + Patada con la barra llena, una vez por ronda. Antes se activaba solo a media vida (ver _autoTransformAntes)."
     }
   },
   "style": {
@@ -1191,11 +1198,11 @@
     }
   },
   "_generated": "GENERADO por tools/build_sofi.py desde tools/specs/sofi_spec.json: no editar a mano.",
-  "autoTransform": {
+  "_vestia_added": "2026-11-07: Modo Vestía añadido a mano (atlas vestia + clip/move modo_vestia + autoTransform) sobre el char.json generado por build_sofi.py. Si regeneras Sofi, reincorpora esto en tools/specs/sofi_spec.json + build_sofi.py.",
+  "_vestia_moveset": "2026-11-08: moveset REAL del Modo Vestía (atlas vestia_real, arte del usuario) en los clips *_vestia; lo genera tools/build_sofi_vestia_real.py (no editar a mano). Mismos frames/fps que el clip base (salvo walk/hurt, que no marcan golpes) -> el golpe dibujado cae en el mismo tick que en la simulación. Tras ejecutar modo_vestia, f.transformed=true y el render dibuja estos clips; buff de daño en engine/pg_sim.js (vestiaDamageMul). Asignación pose->golpe = TODO: VERIFICAR con el usuario.",
+  "_autoTransformAntes": {
     "move": "modo_vestia",
     "hpBelow": 0.5,
     "_doc": "2026-11-07: al caer al 50% de vida (o menos), Sofi ejecuta modo_vestia AUTOMÁTICAMENTE una vez. Implementado en engine/pg_sim.js (busca 'autoTransform')."
-  },
-  "_vestia_added": "2026-11-07: Modo Vestía añadido a mano (atlas vestia + clip/move modo_vestia + autoTransform) sobre el char.json generado por build_sofi.py. Si regeneras Sofi, reincorpora esto en tools/specs/sofi_spec.json + build_sofi.py.",
-  "_vestia_moveset": "2026-11-08: moveset REAL del Modo Vestía (atlas vestia_real, arte del usuario) en los clips *_vestia; lo genera tools/build_sofi_vestia_real.py (no editar a mano). Mismos frames/fps que el clip base (salvo walk/hurt, que no marcan golpes) -> el golpe dibujado cae en el mismo tick que en la simulación. Tras ejecutar modo_vestia, f.transformed=true y el render dibuja estos clips; buff de daño en engine/pg_sim.js (vestiaDamageMul). Asignación pose->golpe = TODO: VERIFICAR con el usuario."
+  }
 }

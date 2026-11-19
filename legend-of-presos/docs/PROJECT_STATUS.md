@@ -34,6 +34,8 @@
 
 - Cachorro (personaje_08): nombre corregido y hojas sin sombra azul ni cuadrícula; rayas de piso flotantes quitadas en Bigotes, Cartel y Carmesí (2026-11-16).
 
+- Poder nivelado (CPU difícil: 64–39 % de victorias, antes 84–0 %), CPU y jefes más accesibles, Sofi seleccionable, Modo Vestía con carga (2026-11-19). Medido con la IA: falta jugarlo.
+
 ## Qué NO se pudo verificar
 - `tools/test_sim.js` (la "huella" de 197 pruebas), `tools/validate_data.py` y `tools/run_regression.sh` no venían en los ZIP y no se corrieron.
 - Android: el APK de `android/` se compiló y se verificó (firma, permisos, archivos), pero no se ejecutó en un emulador ni en un teléfono.

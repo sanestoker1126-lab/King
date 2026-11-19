@@ -246,29 +246,32 @@
     "minGap": 52,
     "mash": 0.08,
     "combo": 0.08,
-    "maxUse": 0
+    "maxUse": 0,
+    "punish": 0
    },
    "2": {
-    "react": 0.48,
-    "aggro": 0.06,
-    "special": 0.025,
+    "react": 0.4,
+    "aggro": 0.05,
+    "special": 0.022,
     "jump": 0.01,
     "spaceBack": 0.05,
     "minGap": 58,
-    "mash": 0.15,
-    "combo": 0.5,
-    "maxUse": 0
+    "mash": 0.13,
+    "combo": 0.4,
+    "maxUse": 0,
+    "punish": 0.3
    },
    "3": {
-    "react": 0.8,
-    "aggro": 0.1,
-    "special": 0.05,
+    "react": 0.62,
+    "aggro": 0.08,
+    "special": 0.04,
     "jump": 0.02,
     "spaceBack": 0.1,
     "minGap": 62,
     "mash": 0.25,
-    "combo": 0.85,
-    "maxUse": 0.04
+    "combo": 0.7,
+    "maxUse": 0.03,
+    "punish": 0.7
    }
   },
   "range": {
@@ -290,7 +293,8 @@
    "kick": 12,
    "crushPunish": 6
   },
-  "_docCombo": "combo: probabilidad de confirmar un golpe que conectó y cancelarlo (a especial; en difícil también a súper y, en MAX, a oculto). maxUse: probabilidad por decisión de activar MAX con media barra (solo difícil). Valores de DISEÑO: TODO: VERIFICAR jugando."
+  "_docCombo": "combo: probabilidad de confirmar un golpe que conectó y cancelarlo (a especial; en difícil también a súper y, en MAX, a oculto). maxUse: probabilidad por decisión de activar MAX con media barra (solo difícil). Valores de DISEÑO: TODO: VERIFICAR jugando.",
+  "_docNiveles2026_11_19": "Niveles suavizados a pedido del usuario ('está muy difícil'), medidos con tools/qa_20261106/dificultad.cjs: un jugador 'intermedio' (la IA con los valores que tenía la CPU normal) gana ~72 % contra la normal y ~23 % contra la difícil; el 'novato' (IA nivel 1) ~48 % contra la fácil. punish = probabilidad (× react) de castigar un golpe fallado. DISEÑO: TODO: VERIFICAR jugando."
  },
  "guardCancel": {
   "_doc": "Rodada de cancelación de guardia (KOF): Puño+Patada durante el aturdimiento de guardia, en el suelo, cuesta 'cost' de barra (la súper cuesta 100, el MAX 50). Rodada invulnerable normal. Valor de DISEÑO.",
@@ -317,5 +321,46 @@
   "recoverMax": 0.25,
   "carryMeter": true,
   "_doc": "EQUIPOS (KOF): size = integrantes por equipo. Al caer uno entra el siguiente; el que gana se queda con la vida que le quedó MÁS una recuperación = vida máxima × recoverMax × (tiempo que sobró / tiempo de ronda). carryMeter: la barra de poder pasa al siguiente integrante (la barra es del equipo). Empate por tiempo o doble K.O.: caen los dos. Gana el equipo que deje al otro sin luchadores; si los dos se quedan sin luchadores a la vez, empate. recoverMax es valor de DISEÑO (TODO: VERIFICAR la fórmula exacta de KOF 2002)."
+ },
+ "balance": {
+  "_doc": "EQUILIBRIO (engine/pg_sim.js: charPow/charBal/moveCap). chars = 'poder' m de cada personaje: pega ×√m y recibe ÷√m (en un intercambio la proporción es m_A/m_B; así los números por golpe quedan normales). Compensa kits con poco alcance o pocos movimientos. superMax/hiddenMax = tope de daño TOTAL de un súper / súper oculto. Calibrado con tools/qa_20261106/calibrar_balance.cjs (torneos CPU contra CPU, nivel 3): es una aproximación con la IA, no con humanos. DISEÑO: TODO: VERIFICAR jugando.",
+  "enabled": true,
+  "superMax": 60,
+  "hiddenMax": 72,
+  "chars": {
+   "bigotes": 0.646,
+   "cadena": 0.659,
+   "calavera": 0.84,
+   "carmesi": 0.748,
+   "cartel": 1.097,
+   "cochibomba": 0.819,
+   "diego_cancha": 1.465,
+   "don_garras": 1.77,
+   "el_aedillo": 2.197,
+   "el_paisa_sistem": 1.175,
+   "garravas": 0.893,
+   "gasu_harlequin": 0.654,
+   "gordo": 0.697,
+   "luchador_v2": 0.74,
+   "mateo": 0.682,
+   "mecanico": 0.954,
+   "morado": 0.665,
+   "morado_urbano": 0.75,
+   "nadia": 1.128,
+   "negrito_nito": 0.751,
+   "personaje_08": 0.858,
+   "personaje_complementario": 1.392,
+   "pocheche": 0.775,
+   "pocheche_tijeras": 1.004,
+   "regente": 1.448,
+   "semillas": 1.494,
+   "sofi": 0.867,
+   "tatuado": 1.036,
+   "tobi": 0.918,
+   "valentina_niebla": 1.042,
+   "warriza_wasa": 2.197,
+   "wasirris": 1.009,
+   "wasita": 1.964
+  }
  }
 }

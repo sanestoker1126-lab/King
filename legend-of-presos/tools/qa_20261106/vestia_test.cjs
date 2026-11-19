@@ -7,8 +7,9 @@ const dSofi=def('sofi'),dR=def('personaje_08');
 const N=()=>({x:0,down:false,block:false,up:false,upPress:false,punchPress:false,kickPress:false,specialPress:false,superPress:false});
 for(const gap of [60,80,100]){
   const m=Sim.createMatch(123,JSON.parse(JSON.stringify(cfg)),null);while(m.phase!=='fight')Sim.step(m,[dSofi,dR],[N(),N()]);
-  const [f,o]=m.fighters; f.x=400;o.x=400+gap; f.hp=Math.floor(f.maxHp*0.49); const hp0=o.hp;
+  const [f,o]=m.fighters; f.x=400;o.x=400+gap; f.meter=f.maxMeter; const hp0=o.hp;   // (2026-11-19) Modo Vestía = súper con carga: barra llena + ↓↘→↓↘→+Patada
+  const CMD=[{down:1},{down:1,x:1},{x:1},{down:1},{down:1,x:1},{x:1,kickPress:1}];
   let hits=[],oAir=0;
-  for(let t=0;t<180;t++){const ph=o.hp,pg=o.grounded;Sim.step(m,[dSofi,dR],[N(),N()]); if(o.hp<ph){hits.push(o.hp-ph<0?ph-o.hp:0); if(!pg||!o.grounded)oAir++;}}
+  for(let t=0;t<180;t++){const ph=o.hp,pg=o.grounded;Sim.step(m,[dSofi,dR],[Object.assign(N(),CMD[t]||{}),N()]); if(o.hp<ph){hits.push(o.hp-ph<0?ph-o.hp:0); if(!pg||!o.grounded)oAir++;}}
   console.log(`rival a ${gap}px: golpes de garras/remate=${hits.length}, daño total=${hp0-o.hp}, golpes con rival en aire=${oAir}`);
 }

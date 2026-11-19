@@ -12,9 +12,9 @@ Léelo primero en un chat nuevo. Detalle completo en `docs/CHANGELOG.md` y `docs
 1. **Jefes.**
    - El jefe final (Garravas) nunca se salta en Arcade: si lo eliges, es espejo.
    - En Equipos solo Garravas lleva ×2.5 vida y ×1.7 daño (`memberMods` en `data/campaigns.json`; motor: `mods[lado].members` en `engine/pg_sim.js`).
-   - La sub-jefa Sofi (combate 4) tiene ×2 vida y ×2 daño, y se desbloquea al ganarle.
+   - La sub-jefa Sofi (combate 4) tiene ×1.5 vida y ×1.3 daño (desde 2026-11-19; antes ×2/×2). Sofi ya es seleccionable desde el inicio.
 2. **Sofi, Modo Vestía.**
-   - Se transforma sola a media vida, una vez por ronda, y pelea transformada.
+   - Se transforma con ↓↘→↓↘→ + Patada y la barra llena, una vez por ronda (desde 2026-11-19; antes, sola a media vida).
    - Moveset con el arte real del usuario: atlas `sofi_vestia_real.png`, desde el ZIP mal llamado `POCHECHE_ATLAS_MASTER_GAME_READY.zip`.
    - Chispas de impacto propias (`vestia_*`).
    - Todo lo genera `python3 -I tools/build_sofi_vestia_real.py` (comprobación: `--check`). No editar a mano los clips `*_vestia` ni las entradas `vestia_*`.
@@ -49,6 +49,8 @@ Léelo primero en un chat nuevo. Detalle completo en `docs/CHANGELOG.md` y `docs
 
 11. **Cachorro = personaje_08 (2026-11-16).** Nombre "Cachorro" (el id no cambia). Hojas limpias: `python3 -I tools/limpiar_atlas_cachorro.py` (`--check`). Líneas sueltas del roster: `python3 -I tools/limpiar_lineas_atlas.py` (`--check`). Originales en `sources/atlas_originales_2026-11-16/`. Pendiente: las rayas de piso del personaje nuevo se corrigen en su propio generador.
 
+12. **Equilibrio y dificultad (2026-11-19).** `data/config.json › balance` (poder por personaje, tope de súpers) y `ai.levels` (CPU más suave); jefes ×1.5/×1.3 y ×1.8/×1.3. Sofi seleccionable. Modo Vestía = súper con carga (`tools/sofi_vestia_carga.py`). Para recalibrar tras cambiar golpes: `node tools/qa_20261106/calibrar_balance.cjs . 3 > r.json` y copiar `chars` a `config.json`.
+
 ## Cómo probar (herramientas de este repo)
 ```bash
 cd legend-of-presos
@@ -68,6 +70,10 @@ node tools/qa_20261106/apk_bridge_browser.cjs <url_assets_del_apk> <prefijo> 360
 python3 -I tools/limpiar_atlas_cachorro.py --check     # hojas de Cachorro sin sombra ni cuadrícula
 python3 -I tools/limpiar_lineas_atlas.py --check        # líneas sueltas del roster
 python3 -I tools/qa_20261106/auditar_atlas.py --solo-usadas   # auditoría de hojas
+node tools/qa_20261106/balance_roster.cjs . 3          # % de victorias por personaje (todos contra todos)
+node tools/qa_20261106/dificultad.cjs . 60             # qué tan difícil es cada nivel de CPU
+node tools/qa_20261106/vestia_carga.cjs .              # Modo Vestía con carga
+python3 -I tools/sofi_vestia_carga.py --check
 python3 -I tools/build_fichas.py --check                # hoja de fichas y fondo del selector al día
 node tools/qa_20261106/selector_perf.cjs http://127.0.0.1:8000   # MB al abrir la selección y fluidez del carrusel
 node tools/qa_20261106/ai_stats.cjs . 3 24                                     # qué hace la CPU (especiales, combos, súpers)

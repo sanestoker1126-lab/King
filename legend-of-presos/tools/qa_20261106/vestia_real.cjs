@@ -14,8 +14,10 @@ const { chromium } = require('playwright');
   await page.waitForFunction(() => { const G = window.__PGGAME; return G.match && G.render && G.match.phase === 'fight'; }, { timeout: 30000 });
   // CPU también para Sofi + vida sostenida (que no termine la pelea) + muestreo de clips dibujados
   await page.evaluate(() => {
-    const G = window.__PGGAME; G.p1ctl.snapshot = () => PGAI.decide(G.match, G.match.fighters[0], G.match.fighters[1], 3, G.defs[0]);
-    G.match.fighters[0].hp = Math.floor(G.match.fighters[0].maxHp * 0.49);
+    // (2026-11-19) Modo Vestía = súper con carga: barra llena + ↓↘→↓↘→+Patada al empezar; luego juega la CPU
+    const G = window.__PGGAME, CMD = [{down:true},{down:true,x:1},{x:1},{down:true},{down:true,x:1},{x:1,kickPress:true}];
+    G.p1ctl.snapshot = () => CMD.length ? Object.assign({x:0}, CMD.shift()) : PGAI.decide(G.match, G.match.fighters[0], G.match.fighters[1], 3, G.defs[0]);
+    G.match.fighters[0].meter = G.match.fighters[0].maxMeter;
     window.__seen = {}; window.__fx = {}; window.__fxSet = new WeakSet(); window.__tex = null;
     const tick = () => { const m = G.match; if (m && G.render) { const f = m.fighters[0], ch = G.render.chars[0];
         let c = ch.clips[f.clip] ? f.clip : 'idle'; if (f.transformed && ch.clips[c + '_vestia']) c = c + '_vestia';

@@ -1275,16 +1275,27 @@
       var rows = ['<div class="pg-cmd-row head"><span>Movimiento</span><span>Comando</span><span>Daño</span></div>'];
       function tag(mv){ var t = mv.spawns ? "proyectil" : mv.type === "command_grab" ? "agarre" : mv.guardType === "overhead" ? "elevado" : mv.guardType === "low" ? "bajo" :
         mv.advance ? "avance" : (mv.invuln && mv.launcher && !mv.super) ? "antiaéreo" : (mv.multiHit ? "multigolpe" : ""); return t ? '<i class="pg-cmd-tag">' + t + '</i>' : ""; }
-      function dmg(mv){ if (mv.spawns) return (mv.spawns.damage || 0) * (mv.spawns.hits || 1); return mv.multiHit && mv.hitFrames ? (mv.damage || 0) * mv.hitFrames.length : (mv.damage || ""); }
+      // daño REAL (el de la pelea): con el equilibrio de config.balance (multiplicador del personaje y tope de súpers/ocultos)
+      var BAL = (global.__PGGAME && global.__PGGAME.cfgBase && global.__PGGAME.cfgBase.balance) || null, hidSet = {};
+      (def.inputs.hidden || []).forEach(function(h){ hidSet[h.move] = 1; });
+      function dmg(mv, name){
+        var raw = mv.spawns ? (mv.spawns.damage || 0) * (mv.spawns.hits || 1) : mv.multiHit && mv.hitFrames ? (mv.damage || 0) * mv.hitFrames.length : (mv.damage || 0);
+        if (!raw) return "";
+        if (BAL && BAL.enabled){
+          if (mv.super && !mv.spawns){ var cap = (mv.hidden || hidSet[name]) ? BAL.hiddenMax : BAL.superMax; if (cap && raw > cap) raw = cap; }
+          var k = BAL.chars && BAL.chars[def.id]; if (typeof k === "number" && k > 0) raw = raw * Math.sqrt(k);   // contra un rival de poder neutro (pg_sim: ×√m)
+        }
+        return Math.round(raw);
+      }
       function inp(s){ return '<span class="pg-cmd-in">' + (MOTION[s.motion] ? '<span>' + MOTION[s.motion] + '</span> +' : '') + key(BTN[s.button] || s.button) + '</span>'; }
       function grp(t){ rows.push('<div class="pg-cmd-row grp"><span>' + t + '</span></div>'); }
-      function line(s){ var mv = def.moves[s.move] || {}; rows.push('<div class="pg-cmd-row"><span class="pg-cmd-nm">' + esc(moveLabel(s.move, mv)) + tag(mv) + '</span>' + inp(s) + '<span class="pg-cmd-dm">' + dmg(mv) + '</span></div>'); }
+      function line(s){ var mv = def.moves[s.move] || {}; rows.push('<div class="pg-cmd-row"><span class="pg-cmd-nm">' + esc(moveLabel(s.move, mv)) + tag(mv) + '</span>' + inp(s) + '<span class="pg-cmd-dm">' + dmg(mv, s.move) + '</span></div>'); }
       // NORMALES con su frame data real (arranque y ventaja en guardia salen de mv.frames / blockstun: no se escriben a mano)
       function fd(mv){ if (!mv.frames) return ""; var F = mv.frames, adv = (mv.blockstun != null && !mv.air) ? mv.blockstun - (F.active - 1 + F.recovery) : null;   // en el aire la ventaja depende del aterrizaje: no se muestra
         return '<i class="pg-cmd-fd">arranque ' + F.startup + 'f' + (adv != null ? ' · en guardia ' + (adv > 0 ? "+" : "") + adv : '') + '</i>'; }
       function nline(label, keys, mvName){ var mv = def.moves[mvName]; if (!mv) return;
         var chain = mvName.indexOf("heavy_") === 0 && ((def.moves[mvName === "heavy_punch" ? "punch" : "kick"] || {}).cancelInto || []).indexOf(mvName) >= 0;
-        rows.push('<div class="pg-cmd-row"><span class="pg-cmd-nm">' + esc(label || moveLabel(mvName, mv)) + tag(mv) + (chain ? '<i class="pg-cmd-tag">cadena</i>' : '') + fd(mv) + '</span><span class="pg-cmd-in">' + keys + '</span><span class="pg-cmd-dm">' + dmg(mv) + '</span></div>'); }
+        rows.push('<div class="pg-cmd-row"><span class="pg-cmd-nm">' + esc(label || moveLabel(mvName, mv)) + tag(mv) + (chain ? '<i class="pg-cmd-tag">cadena</i>' : '') + fd(mv) + '</span><span class="pg-cmd-in">' + keys + '</span><span class="pg-cmd-dm">' + dmg(mv, mvName) + '</span></div>'); }
       var fw = def.inputs.forward || {};
       grp("Normales");
       nline("Puño", key(BTN.punch), "punch"); nline("Patada", key(BTN.kick), "kick");

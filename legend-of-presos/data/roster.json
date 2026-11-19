@@ -472,15 +472,13 @@
       "dir": "assets/combat/sofi/",
       "char": "sofi.char.json",
       "status": "playable",
-      "hidden": true,
-      "badge": "SECRETA",
       "origen": "Nina (arte de la base) + poses v5 con cuernos; atlas de tools/build_sofi.py",
-      "notes": "SECRETA (decisión del usuario 2026-10-24): no aparece en la selección hasta vencerla en su combate del Arcade (combate 4, sub-jefa con doble vida y doble daño; data/campaigns.json). Frame-data de especiales = DISEÑO, TODO: VERIFICAR jugando. GENERADO por tools/build_sofi.py desde tools/specs/sofi_spec.json: no editar a mano.",
+      "notes": "SELECCIONABLE desde el inicio (decisión del usuario 2026-11-19; antes SECRETA: no aparecía hasta vencerla en su combate del Arcade (combate 4, sub-jefa con doble vida y doble daño; data/campaigns.json). Frame-data de especiales = DISEÑO, TODO: VERIFICAR jugando. GENERADO por tools/build_sofi.py desde tools/specs/sofi_spec.json: no editar a mano.",
       "perfil": {
         "reo": null,
         "celda": null,
         "alias": null,
-        "src": "sin expediente (personaje secreto)"
+        "src": "sin expediente"
       }
     },
     {

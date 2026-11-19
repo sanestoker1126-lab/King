@@ -2,6 +2,76 @@
 
 > Los ZIP recibidos el 2026-11-06 no traían `docs/`, así que **el historial anterior no está aquí**. Si tienes el `docs/CHANGELOG.md` completo, pega esta entrada al principio del tuyo.
 
+## 2026-11-19 — Poder nivelado, CPU y jefes más accesibles, Sofi seleccionable, Modo Vestía con carga
+
+Pedido del usuario: nivelar el poder de los personajes ("está muy difícil"), dejar a Sofi seleccionable y el Modo Vestía (modo bestia) como especial que se activa con carga.
+
+### Lo medido primero
+- `tools/qa_20261106/balance_roster.cjs` (nuevo): torneo todos contra todos con la simulación real (CPU difícil en los dos lados, 1056 peleas). **Antes: de 84 % a 0 % de victorias** (desviación 24.8 puntos).
+- Causa (no era el daño, casi igual en todos: 12/16 por golpe): **alcance corto** (Semillas, El Aedillo, el personaje nuevo) o **kits mínimos** (Warriza, Wasita y Don Garras: 1 especial y ningún súper). Además había súpers de un solo golpe de 92–112 de 300.
+- `tools/qa_20261106/dificultad.cjs` (nuevo): un "novato" (IA nivel 1) y un "intermedio" (la IA con los valores que tenía la CPU normal) contra cada nivel. **La CPU normal ya le ganaba al novato el 98–100 % desde antes de esta serie.**
+
+### Equilibrio (`data/config.json › balance`, `engine/pg_sim.js`)
+- Cada personaje tiene un **poder m**: pega ×√m y recibe ÷√m (en un intercambio la proporción es m_A/m_B, pero los golpes quedan con números normales: el puño básico va de 10 a 18). Aplica a golpes, proyectiles, agarres y daño en guardia.
+- **Tope de súpers y ocultos**: 60 y 72 de daño total (todos sus golpes).
+- Calibrado automático (`tools/qa_20261106/calibrar_balance.cjs`): torneos repetidos que acercan a cada uno al 50 %, quedándose con la mejor vuelta medida.
+- **Resultado (CPU difícil): de 84–0 % a 64–39 %; desviación 24.8 → 6.8 puntos.** Con CPU normal (no calibrada ahí): 24.9 → 13.3.
+- La lista de comandos muestra el daño real (con el equilibrio, contra un rival neutro).
+
+| Personaje | Antes | Ahora |
+|---|---|---|
+| negrito_nito | 84 % | 59 % |
+| cadena | 83 % | 58 % |
+| bigotes | 81 % | 50 % |
+| garravas | 80 % | 64 % |
+| gasu_harlequin | 80 % | 55 % |
+| gordo | 77 % | 50 % |
+| personaje_08 | 75 % | 56 % |
+| mateo | 72 % | 44 % |
+| luchador_v2 | 72 % | 58 % |
+| morado | 67 % | 41 % |
+| carmesi | 66 % | 45 % |
+| pocheche | 64 % | 48 % |
+| sofi | 62 % | 50 % |
+| cochibomba | 61 % | 52 % |
+| morado_urbano | 58 % | 39 % |
+| wasirris | 56 % | 59 % |
+| tobi | 52 % | 39 % |
+| nadia | 50 % | 55 % |
+| calavera | 50 % | 42 % |
+| mecanico | 45 % | 52 % |
+| tatuado | 45 % | 45 % |
+| pocheche_tijeras | 42 % | 48 % |
+| cartel | 39 % | 55 % |
+| el_paisa_sistem | 38 % | 53 % |
+| valentina_niebla | 34 % | 39 % |
+| regente | 31 % | 61 % |
+| diego_cancha | 30 % | 47 % |
+| semillas | 22 % | 52 % |
+| personaje_complementario | 14 % | 53 % |
+| el_aedillo | 11 % | 47 % |
+| warriza_wasa | 5 % | 41 % |
+| wasita | 5 % | 41 % |
+| don_garras | 0 % | 53 % |
+
+### Dificultad
+- CPU (`data/config.json › ai.levels`, valor nuevo `punish` = cuánto castiga golpes fallados): normal react .48→.40, combos .5→.4, castigo .5→.3; difícil react .8→.62, combos .85→.7, castigo .9→.7, MAX .04→.03.
+- Medido: el "intermedio" gana **72 %** contra la normal (antes ~50 %, era su propio nivel) y **25 %** contra la difícil; el "novato" **47 %** contra la fácil. Contra la normal el "novato" sigue perdiendo: esa referencia es más pasiva que cualquier persona; para empezar está la CPU fácil.
+- **Jefes del Arcade**: sub-jefa Sofi ×2 vida ×2 daño → **×1.5 / ×1.3**; jefe final Garravas ×2.5 / ×1.7 → **×1.8 / ×1.3** (también en Equipos). `arcade_bosses.cjs` actualizado: TODO OK.
+
+### Sofi seleccionable
+- `data/roster.json`: sin `hidden` ni etiqueta SECRETA; aparece en la selección desde el primer arranque (verificado con el almacenamiento vacío). Su combate de sub-jefa en el Arcade sigue igual (con los modificadores nuevos).
+
+### Modo Vestía con carga (`tools/sofi_vestia_carga.py`, `--check`, `--revert`)
+- Antes se activaba **solo** a media vida. Ahora es un **súper**: ↓↘→↓↘→ + Patada con la **barra llena**, una vez por ronda (`engine/pg_sim.js`: un move `transformsInto` no se repite si ya está transformada). La CPU también puede usarlo.
+- `autoTransform` queda guardado en `_autoTransformAntes` (para revertir). Arte, golpes y chispas no cambian.
+- Pruebas: `vestia_carga.cjs` (nueva: sin barra no sale; con barra sí; no se repite; ya no se activa sola), y `vestia_test`, `vestia_seq` y `vestia_real` adaptadas a la activación con comando: se transforma y pelea con el moveset y las chispas Vestía.
+
+### Pendiente / límites
+- Todo el equilibrio se midió **con la IA**, no con personas: TODO: VERIFICAR jugando. Un personaje puede sentirse distinto en manos humanas (por ejemplo, el alcance pesa más contra la IA).
+- Warriza, Wasita y Don Garras siguen teniendo un kit mínimo (sin arte para más golpes): se compensan con poder, no con movimientos.
+- El Modo Vestía conecta 3 de sus 5 golpes de cerca (lanza al rival y los últimos pasan por debajo); ya ocurría antes.
+
 ## 2026-11-16 (3) — Cachorro (antes "Personaje 08"): hojas sin sombra ni cuadrícula · líneas sueltas del roster
 
 Pedido del usuario: pulir los atlas, sobre todo el de 08, que en realidad se llama **Cachorro**; en algunas poses se veía la cuadrícula y tenía una sombra pintada.

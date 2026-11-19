@@ -65,7 +65,8 @@ Agacharse: S o flecha abajo    Golpe: J     Patada: K
 Especial: L     Súper: U       Guardia: Shift     Pausa: Esc
 (Puedes cambiar las teclas en Opciones > Teclas.)
 
-Sofi: al bajar su vida a la mitad se transforma SOLA en Modo Vestía.
+Sofi: con la barra llena, abajo, abajo-adelante, adelante (dos veces)
++ Patada = Modo Vestía (una vez por ronda).
 
 --------------------------------------------------
 ¿Prefieres no instalar nada?

@@ -9,7 +9,10 @@ const { chromium } = require('playwright');
   await page.evaluate(() => { const G=window.__PGGAME, s=G.fe.sel; s.mode='versus'; s.p1='sofi'; s.p2='personaje_08'; s.stage=8; s.difficulty=1; G.fe._startMatch(); });
   await page.waitForFunction(() => { const G=window.__PGGAME; return G.match && G.render && G.match.phase==='fight'; }, { timeout: 30000 });
   await page.waitForTimeout(400);
-  await page.evaluate(() => { const m=window.__PGGAME.match; const [f,o]=m.fighters; f.x=410;o.x=510; f.hp=Math.floor(f.maxHp*0.49); });
+  // (2026-11-19) Modo Vestía = súper con carga: barra llena + ↓↘→↓↘→+Patada
+  await page.evaluate(() => { const G=window.__PGGAME, m=G.match; const [f,o]=m.fighters; f.x=410;o.x=510; f.meter=f.maxMeter;
+    const CMD=[{down:true},{down:true,x:1},{x:1},{down:true},{down:true,x:1},{x:1,kickPress:true}], orig=G.p1ctl.snapshot.bind(G.p1ctl);
+    G.p1ctl.snapshot=function(){ const s=orig(); return CMD.length ? Object.assign(s, CMD.shift()) : s; }; });
   // capturar cuando el clip alcanza idx objetivo
   async function capAt(idx, name){
     await page.waitForFunction((ti)=>{const G=window.__PGGAME;const f=G.match.fighters[0];if(f.move!=='modo_vestia')return false;const cl=G.defs[0].clips.modo_vestia;const ci=G.PGSim?G.PGSim.clipFrameIndex(cl,f.clipTime):-1;return ci>=ti;}, idx, {timeout:6000}).catch(()=>logs.push('no alcanzó idx '+idx));

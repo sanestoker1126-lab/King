@@ -306,7 +306,7 @@
       f._throw.tossed=true;
       var dmg=d.damage!=null?d.damage:CFG.grab.damage;
       if(f.maxMode) dmg=Math.round(dmg*CFG.max.throwDamageMul);
-      dmg=Math.round(dmg*dmgMul(match,f.side));
+      dmg=Math.round(dmg*dmgMul(match,f.side)*charBal(f.side,opp.side));
       opp.hp=Math.max(CFG.fighters.minHp||0, opp.hp-dmg); addStun(opp, dmg*CFG.stun.throwMul/CFG.stun.mul);
       opp.state=S.LAUNCHED; opp.stateFrame=0; opp.clip='damage_fall'; opp.clipTime=0;
       opp.grounded=false; opp.vy=d.tossY!=null?d.tossY:CFG.grab.tossY; opp.vx=f.facing*(d.tossX!=null?d.tossX:CFG.grab.tossX);
@@ -337,6 +337,7 @@
       const cur=defs.moves[f.move];
       if(!(cur && cur.cancelInto && cur.cancelInto.indexOf(name)>=0 && inCancelWindow(f,defs))) return false;
     }
+    if(mv.transformsInto && f.transformed) return false;   // Modo Vestía: una vez por ronda (ya transformada, no se repite)
     if(mv.meterCost){ if(f.meter<mv.meterCost) return false; f.meter-=mv.meterCost; }
     f.move=name; f.moveFrame=0; f.clip=mv.clip; f.clipTime=0; f.contact=false; clearBuffer(f);
     // GOLPE DE COMANDO (adelante + botón, inputs.forward): ese "adelante" ya se usó. Se vacía el historial de direcciones
@@ -395,7 +396,7 @@
     const base = mv.damage||D.damage, heavy = base>=H.heavyDamage;
     if(blocking){
       def.guard=Math.max(0, def.guard-(mv.guardDamage!=null ? mv.guardDamage : Math.max(G.damageMin, Math.round(base*G.damageMul)))); def.guardT=0;
-      if(mv.chipDamage) def.hp=Math.max(1, def.hp-Math.round(mv.chipDamage*dmgMul(match,att.side)));   // chip: nunca mata (regla KOF por defecto)
+      if(mv.chipDamage) def.hp=Math.max(1, def.hp-Math.round(mv.chipDamage*dmgMul(match,att.side)*charBal(att.side,def.side)));   // chip: nunca mata (regla KOF por defecto)
       const pb = mv.pushBlock||D.pushBlock;
       if(def.guard<=0){   // GUARDIA ROTA: queda vulnerable crushStun frames y la barra se rellena
         def.guard=def.maxGuard; setState(def,S.GUARD_CRUSH); def.crushT=G.crushStun; def.vx=fdir*pb;
@@ -425,7 +426,7 @@
     { const dd=STEP_DEFS&&STEP_DEFS[def.side];
       if(dd && (def.state===S.ATTACK||def.state===S.AIR_ATTACK||def.state===S.SPECIAL||def.state===S.SUPER)) counter = inStartupOrActive(def, dd); }
     const C=CFG.counter;
-    let dmg=Math.round(base*mult*(counter?C.damageMul:1)*dmgMul(match,att.side)*(att.transformed?(CFG.vestiaDamageMul||1.2):1));   // × modificador de batalla; ×1.2 en Modo Vestía (DISEÑO)
+    let dmg=Math.round(base*mult*(counter?C.damageMul:1)*dmgMul(match,att.side)*charBal(att.side,def.side)*moveCap(mv,att.side)*(att.transformed?(CFG.vestiaDamageMul||1.2):1));   // × modificador de batalla; ×1.2 en Modo Vestía (DISEÑO)
     const atk = att.comboRef||att;
     if(atk.comboCount>0) dmg=Math.round(dmg*Math.max(CFG.combo.minScale,1-atk.comboCount*CFG.combo.decay));
     if(!def.grounded) dmg=Math.round(dmg*Math.max(0.1,1-def.juggle*CFG.combo.juggleDecay));
@@ -533,6 +534,21 @@
     }
     decideOver(match);
   }
+  // EQUILIBRIO (config.balance, DISEÑO calibrado con tools/qa_20261106/balance_roster.cjs): multiplicador de daño por
+  // personaje (compensa kits con poco alcance o pocos movimientos) y tope de daño TOTAL de súpers y ocultos (había súpers
+  // de un golpe que quitaban 92-112 de 300). Lo usan todos los daños: golpe, proyectil, agarre y daño en guardia.
+  // el multiplicador m del personaje se REPARTE entre ataque y defensa: pega ×√m y recibe ÷√m. En un intercambio la proporción
+  // es la misma que con m entero (m_A/m_B), pero los números por golpe quedan normales (un puño ya no quita 27 ni 7).
+  function charPow(side){ const B=CFG.balance, dd=STEP_DEFS&&STEP_DEFS[side]; if(!B || !B.enabled || !dd) return 1;
+    const v=B.chars&&B.chars[dd.id]; return (typeof v==="number" && v>0) ? Math.sqrt(v) : 1; }
+  function charBal(att, def){ return charPow(att)/charPow(def); }
+  const CAP_CACHE = new WeakMap();
+  function moveCap(mv, side){ const B=CFG.balance; if(!B || !B.enabled || !mv || !mv.super) return 1;
+    let c=CAP_CACHE.get(mv); if(c!=null) return c;
+    const dd=STEP_DEFS&&STEP_DEFS[side], hid=!!(mv.hidden || (dd && (dd.inputs.hidden||[]).some(function(h){ return dd.moves[h.move]===mv; })));
+    const hits=(mv.multiHit && mv.hitFrames && mv.hitFrames.length) ? mv.hitFrames.length : 1, total=(mv.damage||0)*hits;
+    const cap=hid ? (B.hiddenMax||9999) : (B.superMax||9999);
+    c = total>cap ? cap/total : 1; CAP_CACHE.set(mv, c); return c; }
   function dmgMul(match, side){ const M=match.mods; if(!(M && M[side])) return 1;
     return modFor(M, side, match.teams ? match.teams[side].cur : null).damage; }
   function resetRound(match){

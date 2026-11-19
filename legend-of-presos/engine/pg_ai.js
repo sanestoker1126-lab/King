@@ -14,9 +14,9 @@
 
   // Parámetros: data/config.json -> "ai" (levels / range / cool). DEF_AI es el respaldo SOLO si la config no los trae.
   var DEF_AI = {
-    levels: { 1: { react:0.22, aggro:0.030, special:0.010, jump:0.004, spaceBack:0.02, minGap:52, mash:0.08, combo:0.08, maxUse:0 },
-              2: { react:0.48, aggro:0.060, special:0.025, jump:0.010, spaceBack:0.05, minGap:58, mash:0.15, combo:0.50, maxUse:0 },
-              3: { react:0.80, aggro:0.100, special:0.050, jump:0.020, spaceBack:0.10, minGap:62, mash:0.25, combo:0.85, maxUse:0.04 } },
+    levels: { 1: { react:0.22, aggro:0.03, special:0.01, jump:0.004, spaceBack:0.02, minGap:52, mash:0.08, combo:0.08, maxUse:0, punish:0 },
+              2: { react:0.4, aggro:0.05, special:0.022, jump:0.01, spaceBack:0.05, minGap:58, mash:0.13, combo:0.4, maxUse:0, punish:0.3 },
+              3: { react:0.62, aggro:0.08, special:0.04, jump:0.02, spaceBack:0.1, minGap:62, mash:0.25, combo:0.7, maxUse:0.03, punish:0.7 } },
     range: { inRange:92, close:130, airKick:120, airApproach:40, projectileReact:170, projectileJump:110, antiAir:96, zoning:220, downApproach:110, ukemiHeight:40 },
     cool: { zoning:40, special:22, punch:10, kick:12, crushPunish:6 }
   };
@@ -61,7 +61,7 @@
     if (mem.pi >= mem.plan.length) mem.plan = null;
     return true;
   }
-  function affordable(me, mv){ return !mv.meterCost || me.meter >= mv.meterCost; }
+  function affordable(me, mv){ return (!mv.meterCost || me.meter >= mv.meterCost) && !(mv.transformsInto && me.transformed); }   // (Modo Vestía: una vez)
   function isHidden(defs, name){ var H = (defs.inputs && defs.inputs.hidden) || []; for (var i = 0; i < H.length; i++) if (H[i].move === name) return true; return false; }
   // ¿qué cancelar tras un golpe que CONECTÓ? Según el nivel: súper (si hay barra) > oculto (en MAX) > especial.
   // Respeta las reglas del juego: especial -> súper solo en MAX (config hit.superCancel), ocultos solo en MAX.
@@ -192,7 +192,7 @@
     var oAtk = opp.state === "ATTACK" || opp.state === "SPECIAL" || opp.state === "SUPER";
     if (!oAtk) mem.oAct = null; else if (opp.hitId) mem.oAct = opp.move;
     var whiff = oAtk && mem.oAct === opp.move && !opp.contact && !opp.hitId;
-    if (whiff && level >= 2 && dist < RG.close && mem.cool === 0 && r < T.react * (level >= 3 ? 0.9 : 0.5)){
+    if (whiff && level >= 2 && dist < RG.close && mem.cool === 0 && r < T.react * (T.punish != null ? T.punish : (level >= 3 ? 0.9 : 0.5))){   // punish: data/config.json ai.levels
       var sups = R.supers.filter(function(n){ return affordable(me, defs.moves[n]); }).concat(me.maxMode ? R.hidden.filter(function(n){ return affordable(me, defs.moves[n]); }) : []);
       var pun = pick(sups, r) || pick(R.anti.concat(R.rush), r); mem.cool = CL.special;
       if (pun && startPlan(mem, planFor(defs, pun), "castigo")){ runPlan(mem, snap, me, towards); return snap; }
